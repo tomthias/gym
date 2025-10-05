@@ -3560,10 +3560,10 @@
                 { id: 'a-fisio1', name: 'Heel Raises', key: 'heelraises', sets: 2, reps: 15, recovery: 60 },
                 { id: 'a-fisio2', name: 'Box Bridge', key: 'boxbridge', sets: 3, reps: 10, recovery: 60 },
                 { id: 'a-fisio3', name: 'Hip Thrust', key: 'hipthrust', sets: 3, reps: 12, recovery: 0, superset: true, supersetPair: 'ss1', supersetPartner: 'a-fisio4', supersetColor: '#FF6B35' },
-                { id: 'a-fisio4', name: 'Side Walk', key: 'sidewalk', sets: 2, reps: 20, recovery: 60, superset: true, supersetPair: 'ss1', supersetPartner: 'a-fisio3', supersetColor: '#FF6B35' },
+                { id: 'a-fisio4', name: 'Side Walk', key: 'sidewalk', sets: 3, reps: 20, recovery: 60, superset: true, supersetPair: 'ss1', supersetPartner: 'a-fisio3', supersetColor: '#FF6B35' },
                 { id: 'a-fisio5', name: 'Elvis', key: 'elvis', sets: 2, reps: 15, recovery: 60 },
                 { id: 'a-push1', name: 'Panca Piana Manubri', key: 'pancapiana', sets: 4, reps: 8, recovery: 90 },
-                { id: 'a-push2', name: 'Croci Panca Inclinata', key: 'croci', sets: 3, reps: 20, recovery: 120, superset: true, supersetPair: 'ss2', supersetColor: '#9B59B6' },
+                { id: 'a-push2', name: 'Croci Panca Inclinata', key: 'croci', sets: 3, reps: 20, recovery: 120 },
                 { id: 'a-push3', name: 'Military Press', key: 'militarypress', sets: 4, reps: 10, recovery: 90 },
                 { id: 'a-push4', name: 'Alzate Laterali', key: 'alzatelaterali', sets: 3, reps: 15, recovery: 60 },
                 { id: 'a-push5', name: 'Push Down', key: 'pushdown', sets: 3, reps: 12, recovery: 60 },
@@ -3987,9 +3987,11 @@
                     startExerciseState();
                 } else {
                     // Just completed second exercise (B), check if more sets needed
-                    if (workoutFlowState.currentSet < exercise.sets) {
+                    // Use max sets to handle cases where exercises have different set counts
+                    const maxSets = Math.max(exercise.sets || 0, partner.sets || 0);
+                    if (workoutFlowState.currentSet < maxSets) {
                         // More sets to do, take rest then go back to first exercise (A)
-                        console.log('Superset: completing set', workoutFlowState.currentSet, ', starting rest');
+                        console.log('Superset: completing set', workoutFlowState.currentSet, 'of', maxSets, ', starting rest');
                         workoutFlowState.currentSet++;
                         workoutFlowState.currentExerciseIndex = partnerIndex; // Set to go back to first exercise after rest
                         startRestState(exercise.recovery);
