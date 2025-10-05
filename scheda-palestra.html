@@ -1162,6 +1162,10 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
+        .superset-badge.hidden {
+            display: none;
+        }
+
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.85; transform: scale(1.02); }
@@ -1867,7 +1871,7 @@
                         <div class="checkbox" id="a-fisio3"></div>
                         <div class="exercise-info">
                             <div class="exercise-name">Hip Thrust</div>
-                            <div class="exercise-details">3×12 • 30 KG • SS con Side Walk</div>
+                            <div class="exercise-details">3×12 • 30 KG</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('hipthrust')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12C2.25 6.61522 6.61522 2.25 12 2.25ZM12 3.75C7.44365 3.75 3.75 7.44365 3.75 12C3.75 16.5563 7.44365 20.25 12 20.25C16.5563 20.25 20.25 16.5563 20.25 12C20.25 7.44365 16.5563 3.75 12 3.75Z" fill="white"/>
@@ -2209,7 +2213,7 @@
                         <div class="checkbox" id="b-fisio1"></div>
                         <div class="exercise-info">
                             <div class="exercise-name">Plank + Estensione Anca Alternata</div>
-                            <div class="exercise-details">4×45" • SS con L-Sit</div>
+                            <div class="exercise-details">4×45"</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('plankestensione')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12C2.25 6.61522 6.61522 2.25 12 2.25ZM12 3.75C7.44365 3.75 3.75 7.44365 3.75 12C3.75 16.5563 7.44365 20.25 12 20.25C16.5563 20.25 20.25 16.5563 20.25 12C20.25 7.44365 16.5563 3.75 12 3.75Z" fill="white"/>
@@ -2245,7 +2249,7 @@
                         <div class="checkbox" id="b-fisio3"></div>
                         <div class="exercise-info">
                             <div class="exercise-name">Squat Tempo</div>
-                            <div class="exercise-details">3×8 • 20 KG • SS con Wall Sit</div>
+                            <div class="exercise-details">3×8 • 20 KG</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('squattempo')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12C2.25 6.61522 6.61522 2.25 12 2.25ZM12 3.75C7.44365 3.75 3.75 7.44365 3.75 12C3.75 16.5563 7.44365 20.25 12 20.25C16.5563 20.25 20.25 16.5563 20.25 12C20.25 7.44365 16.5563 3.75 12 3.75Z" fill="white"/>
@@ -4001,7 +4005,8 @@
                             workoutFlowState.exercises.findIndex(ex => ex.id === partner.id)
                         ) + 1;
 
-                        workoutFlowState.currentExerciseIndex = nextIndex;
+                        // Set to the last superset exercise, moveToNextExercise will increment to nextIndex
+                        workoutFlowState.currentExerciseIndex = nextIndex - 1;
                         workoutFlowState.currentSet = 1;
 
                         if (nextIndex >= workoutFlowState.exercises.length) {
