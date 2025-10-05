@@ -1534,13 +1534,52 @@
         svg.hidden {
             display: none;
         }
+
+        /* Squat Tempo Metronome */
+        .metronome-toggle {
+            display: none;
+            margin: 24px auto 0;
+            padding: 12px 24px;
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            color: var(--color-text-primary);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .metronome-toggle.visible {
+            display: flex;
+        }
+
+        .metronome-toggle.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(29, 107, 149, 0.3);
+        }
+
+        .metronome-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .metronome-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
     </style>
 </head>
 <body>
     <!-- Vista Home -->
     <div id="homeView" class="home-view">
         <header>
-            <h1>Scheda Allenamento - oct55</h1>
+            <h1>Scheda Allenamento</h1>
         </header>
 
         <div class="workout-card">
@@ -1696,6 +1735,14 @@
                     <p id="flowExerciseInstructions">Pedalare sulla cyclette a intensità moderata...</p>
                 </div>
             </div>
+
+            <button id="squatTempoMetronome" class="metronome-toggle" onclick="toggleSquatTempoMetronome()">
+                <svg class="metronome-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3L13.5 8H19L14.5 11.5L16 17L12 13.5L8 17L9.5 11.5L5 8H10.5L12 3Z" fill="currentColor"/>
+                    <path d="M12 13.5V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span id="metronomeLabel">Attiva Metronomo 3-3-3</span>
+            </button>
 
             <div class="sections-container" id="flowExerciseSections">
                 <!-- Sections will be inserted here by JavaScript -->
@@ -3479,13 +3526,11 @@
                             if (navigator.vibrate) navigator.vibrate(200);
 
                             if (tabataPhase === 'work') {
+                                // Just finished work phase, go to rest
                                 tabataPhase = 'rest';
                                 tabataTime = 10;
-                                tabataExerciseIndex++;
-                                if (tabataExerciseIndex >= tabataExercises.length) {
-                                    tabataExerciseIndex = 0;
-                                }
                             } else {
+                                // Just finished rest phase, start new work round
                                 tabataPhase = 'work';
                                 tabataTime = 20;
                                 tabataRound++;
@@ -3494,6 +3539,12 @@
                                     stopTabata();
                                     alert('Tabata completato! Grande lavoro!');
                                     return;
+                                }
+
+                                // Change exercise at the START of new work round
+                                tabataExerciseIndex++;
+                                if (tabataExerciseIndex >= tabataExercises.length) {
+                                    tabataExerciseIndex = 0;
                                 }
                             }
                             updateTabataUI();
@@ -3544,6 +3595,75 @@
             try {
                 beepSound.play().catch(() => {});
             } catch (e) {}
+        }
+
+        // Squat Tempo Metronome (3-3-3 tempo: 1 beep per second)
+        let squatTempoMetronomeInterval = null;
+        let squatTempoMetronomeActive = false;
+
+        function startSquatTempoMetronome() {
+            if (squatTempoMetronomeInterval) return;
+
+            squatTempoMetronomeActive = true;
+            const metronomeBtn = document.getElementById('squatTempoMetronome');
+            const metronomeLabel = document.getElementById('metronomeLabel');
+
+            metronomeBtn.classList.add('active');
+            metronomeLabel.textContent = 'Disattiva Metronomo';
+
+            // Beep every 1 second
+            squatTempoMetronomeInterval = setInterval(() => {
+                playMetronomeBeep();
+            }, 1000);
+
+            // Play first beep immediately
+            playMetronomeBeep();
+        }
+
+        function stopSquatTempoMetronome() {
+            if (squatTempoMetronomeInterval) {
+                clearInterval(squatTempoMetronomeInterval);
+                squatTempoMetronomeInterval = null;
+            }
+
+            squatTempoMetronomeActive = false;
+            const metronomeBtn = document.getElementById('squatTempoMetronome');
+            const metronomeLabel = document.getElementById('metronomeLabel');
+
+            if (metronomeBtn) {
+                metronomeBtn.classList.remove('active');
+                metronomeLabel.textContent = 'Attiva Metronomo 3-3-3';
+            }
+        }
+
+        function toggleSquatTempoMetronome() {
+            if (squatTempoMetronomeActive) {
+                stopSquatTempoMetronome();
+            } else {
+                startSquatTempoMetronome();
+            }
+        }
+
+        function playMetronomeBeep() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator.frequency.value = 800;  // 800Hz for clear beep
+                oscillator.type = 'sine';
+
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
+            } catch (err) {
+                console.log('Metronome beep not available:', err);
+            }
         }
 
         // Recovery Timer
@@ -3777,25 +3897,22 @@
         }
 
         function startExerciseState() {
+            console.log('>>> startExerciseState called');
+            console.log('State at START:', {
+                exerciseIndex: workoutFlowState.currentExerciseIndex,
+                currentSet: workoutFlowState.currentSet
+            });
+
             let exercise = workoutFlowState.exercises[workoutFlowState.currentExerciseIndex];
             if (!exercise) {
                 console.error('No exercise found at index:', workoutFlowState.currentExerciseIndex);
                 return;
             }
 
-            // FIX: If starting a superset, ensure we begin with the first exercise (recovery: 0)
-            if (exercise.superset && exercise.supersetPartner && exercise.recovery > 0) {
-                // This is the second exercise of a superset, switch to the first one
-                const partnerIndex = workoutFlowState.exercises.findIndex(ex => ex.id === exercise.supersetPartner);
-                if (partnerIndex !== -1) {
-                    const partner = workoutFlowState.exercises[partnerIndex];
-                    if (partner.recovery === 0) {
-                        console.log('Superset correction: switching from', exercise.name, 'to', partner.name);
-                        workoutFlowState.currentExerciseIndex = partnerIndex;
-                        exercise = partner; // Update reference to the correct exercise
-                    }
-                }
-            }
+            console.log('Exercise:', exercise.name, 'Superset:', exercise.superset, 'Recovery:', exercise.recovery);
+
+            // Note: Removed superset correction logic - it was interfering with normal superset flow
+            // The exercise order in workoutExercises array ensures we always start with the first exercise
 
             const exerciseInfo = exercise.key ? exerciseData[exercise.key] : null;
 
@@ -3813,6 +3930,18 @@
                 categoryElement.style.display = ''; // Show category badge
                 categoryElement.style.backgroundColor = ''; // Reset to default
                 supersetBadge.classList.add('hidden');
+            }
+
+            // Show/hide Squat Tempo metronome (ONLY for squattempo exercise)
+            const metronomeToggle = document.getElementById('squatTempoMetronome');
+            if (exercise.key === 'squattempo') {
+                metronomeToggle.classList.add('visible');
+            } else {
+                metronomeToggle.classList.remove('visible');
+                // Stop metronome if it was active and we're changing exercise
+                if (squatTempoMetronomeActive) {
+                    stopSquatTempoMetronome();
+                }
             }
 
             document.getElementById('flowExerciseName').textContent = exercise.name || 'Esercizio';
@@ -3989,7 +4118,11 @@
         }
 
         function completeCurrentExercise() {
-            console.log('completeCurrentExercise called');
+            console.log('=== completeCurrentExercise called ===');
+            console.log('Current state BEFORE:', {
+                exerciseIndex: workoutFlowState.currentExerciseIndex,
+                currentSet: workoutFlowState.currentSet
+            });
             stopExerciseTimer();
 
             const exercise = workoutFlowState.exercises[workoutFlowState.currentExerciseIndex];
@@ -3998,7 +4131,7 @@
                 return;
             }
 
-            console.log('Exercise:', exercise.name, 'Sets:', exercise.sets, 'CurrentSet:', workoutFlowState.currentSet);
+            console.log('Exercise:', exercise.name, 'ID:', exercise.id, 'Sets:', exercise.sets, 'CurrentSet:', workoutFlowState.currentSet, 'Superset:', exercise.superset, 'Recovery:', exercise.recovery);
 
             // Check if this is a superset exercise
             if (exercise.superset && exercise.supersetPartner) {
@@ -4011,19 +4144,32 @@
 
                 if (isFirstInPair) {
                     // Just completed first exercise (A), go immediately to second (B)
-                    console.log('Superset: moving from', exercise.name, 'to', partner.name);
+                    console.log('SUPERSET FLOW: First exercise done, moving to second');
+                    console.log('From:', exercise.name, 'To:', partner.name, 'CurrentSet:', workoutFlowState.currentSet);
                     workoutFlowState.currentExerciseIndex = partnerIndex;
-                    workoutFlowState.currentSet = workoutFlowState.currentSet; // Keep same set number
+                    // currentSet stays the same - we're in the middle of the same set
+                    console.log('State AFTER switch:', {
+                        exerciseIndex: workoutFlowState.currentExerciseIndex,
+                        currentSet: workoutFlowState.currentSet
+                    });
                     startExerciseState();
                 } else {
                     // Just completed second exercise (B), check if more sets needed
                     // Use max sets to handle cases where exercises have different set counts
                     const maxSets = Math.max(exercise.sets || 0, partner.sets || 0);
+                    console.log('SUPERSET FLOW: Second exercise done');
+                    console.log('Current set:', workoutFlowState.currentSet, 'Max sets:', maxSets);
                     if (workoutFlowState.currentSet < maxSets) {
                         // More sets to do, take rest then go back to first exercise (A)
-                        console.log('Superset: completing set', workoutFlowState.currentSet, 'of', maxSets, ', starting rest');
+                        console.log('SUPERSET FLOW: More sets needed, going to rest');
+                        console.log('Incrementing currentSet from', workoutFlowState.currentSet, 'to', workoutFlowState.currentSet + 1);
                         workoutFlowState.currentSet++;
                         workoutFlowState.currentExerciseIndex = partnerIndex; // Set to go back to first exercise after rest
+                        console.log('State BEFORE rest:', {
+                            exerciseIndex: workoutFlowState.currentExerciseIndex,
+                            currentSet: workoutFlowState.currentSet,
+                            willRestartWith: partner.name
+                        });
                         startRestState(exercise.recovery);
                     } else {
                         // All sets complete for this superset
@@ -4363,6 +4509,11 @@
             // Stop all timers
             stopExerciseTimer();
             stopRestTimer();
+
+            // Stop Squat Tempo metronome if active
+            if (squatTempoMetronomeActive) {
+                stopSquatTempoMetronome();
+            }
 
             // Release Wake Lock
             releaseWakeLock();
