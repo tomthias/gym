@@ -701,42 +701,49 @@
 
         .timer-controls {
             display: flex;
-            gap: 24px;
+            gap: 32px;
             justify-content: center;
             align-items: center;
         }
 
         .timer-btn {
-            background: var(--color-bg-button);
+            background: transparent;
             color: var(--color-text-primary);
-            border: 2px solid var(--color-border);
+            border: none;
             width: 64px;
             height: 64px;
             border-radius: 50%;
-            font-size: 16px;
-            font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
+            position: relative;
+        }
+
+        .timer-btn svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--color-text-primary);
+            transition: fill 0.2s;
         }
 
         .timer-btn:active {
-            transform: scale(0.95);
+            transform: scale(0.92);
         }
 
-        .timer-btn:not(.secondary) {
-            background: var(--color-primary);
-            border-color: var(--color-primary);
+        .timer-btn.primary {
             width: 80px;
             height: 80px;
-            font-size: 18px;
-            box-shadow: 0 8px 24px rgba(29, 107, 149, 0.4);
         }
 
-        .timer-btn:not(.secondary):active {
-            box-shadow: 0 4px 12px rgba(29, 107, 149, 0.3);
+        .timer-btn.primary svg {
+            fill: var(--color-primary);
+            filter: drop-shadow(0 4px 12px rgba(29, 107, 149, 0.3));
+        }
+
+        .timer-btn.stop svg {
+            fill: #ef4444;
         }
 
         /* Workout Assistant */
@@ -2733,8 +2740,23 @@
             <div class="timer-rounds" id="timerRounds">Round 1/8</div>
 
             <div class="timer-controls">
-                <button class="timer-btn secondary" onclick="stopTabata()">Stop</button>
-                <button class="timer-btn" id="timerPlayPause" onclick="toggleTabata()">Pausa</button>
+                <button class="timer-btn stop" onclick="stopTabata()" aria-label="Stop">
+                    <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="26" cy="26" r="24" stroke="currentColor" stroke-width="3" fill="none"/>
+                        <rect x="18" y="18" width="16" height="16" rx="2" fill="currentColor"/>
+                    </svg>
+                </button>
+                <button class="timer-btn primary" id="timerPlayPause" onclick="toggleTabata()" aria-label="Pausa">
+                    <svg id="tabataPauseIcon" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="26" cy="26" r="24" stroke="currentColor" stroke-width="3" fill="none"/>
+                        <rect x="18" y="16" width="5" height="20" rx="1" fill="currentColor"/>
+                        <rect x="29" y="16" width="5" height="20" rx="1" fill="currentColor"/>
+                    </svg>
+                    <svg id="tabataPlayIcon" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                        <circle cx="26" cy="26" r="24" stroke="currentColor" stroke-width="3" fill="none"/>
+                        <path d="M21 16 L21 36 L36 26 Z" fill="currentColor"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
@@ -3501,8 +3523,16 @@
 
         function toggleTabata() {
             tabataPaused = !tabataPaused;
-            const btn = document.getElementById('timerPlayPause');
-            btn.textContent = tabataPaused ? 'Riprendi' : 'Pausa';
+            const pauseIcon = document.getElementById('tabataPauseIcon');
+            const playIcon = document.getElementById('tabataPlayIcon');
+
+            if (tabataPaused) {
+                pauseIcon.style.display = 'none';
+                playIcon.style.display = 'block';
+            } else {
+                pauseIcon.style.display = 'block';
+                playIcon.style.display = 'none';
+            }
         }
 
         function stopTabata() {
