@@ -67,6 +67,7 @@ let workoutFlowState = {
     restInterval: null,
     restRunning: false,
     isTransitionRest: false, // Flag to track if it's transition rest between exercises
+    exerciseStarted: false, // Flag to track if exercise timer has been manually started
     exercises: []
 };
 
@@ -430,14 +431,54 @@ function startExerciseState() {
     }
     updateExerciseTimerDisplay();
 
-    // Start timer automatically
-    startExerciseTimer();
+    // Reset exercise started flag - user needs to press play
+    workoutFlowState.exerciseStarted = false;
+
+    // Update main button to show Play icon
+    updateMainExerciseButton();
 
     // Build sections
     buildFlowSections('flowExerciseSections', workoutFlowState.workoutId);
 
     // Show exercise state
     setWorkoutFlowState('exercise');
+}
+
+function updateMainExerciseButton() {
+    const mainButton = document.querySelector('.action-btn-main');
+    if (!mainButton) return;
+
+    if (!workoutFlowState.exerciseStarted) {
+        // Show Play icon
+        mainButton.innerHTML = `
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="26" cy="26" r="24" stroke="white" stroke-width="3"/>
+                <path d="M20 16L36 26L20 36V16Z" fill="white"/>
+            </svg>
+        `;
+        mainButton.setAttribute('aria-label', 'Start');
+    } else {
+        // Show Check icon
+        mainButton.innerHTML = `
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="26" cy="26" r="24" stroke="white" stroke-width="3"/>
+                <path d="M16 26L23 33L36 20" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        `;
+        mainButton.setAttribute('aria-label', 'Complete');
+    }
+}
+
+function handleMainExerciseButtonClick() {
+    if (!workoutFlowState.exerciseStarted) {
+        // First click - start the exercise
+        workoutFlowState.exerciseStarted = true;
+        startExerciseTimer();
+        updateMainExerciseButton();
+    } else {
+        // Second click - complete the exercise
+        completeCurrentExercise();
+    }
 }
 
 function startExerciseTimer() {
@@ -1019,6 +1060,7 @@ function exitWorkoutFlow() {
         restInterval: null,
         restRunning: false,
         isTransitionRest: false,
+        exerciseStarted: false,
         exercises: []
     };
 
@@ -1073,6 +1115,7 @@ window.beginFirstExercise = beginFirstExercise;
 window.toggleExerciseTimer = toggleExerciseTimer;
 window.resetExerciseTimer = resetExerciseTimer;
 window.completeCurrentExercise = completeCurrentExercise;
+window.handleMainExerciseButtonClick = handleMainExerciseButtonClick;
 window.toggleHowTo = toggleHowTo;
 window.toggleRestTimer = toggleRestTimer;
 window.skipRest = skipRest;
