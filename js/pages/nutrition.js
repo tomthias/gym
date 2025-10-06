@@ -1,6 +1,6 @@
 // ========== NUTRITION PAGE LOGIC ==========
 
-import { nutritionData } from '../data/nutrition.js';
+import { nutritionRecipes } from '../data/nutrition.js';
 
 // Stato nutrizionale
 let currentDayType = 'workout'; // 'workout' o 'rest'
@@ -29,7 +29,7 @@ function loadMeals() {
     const container = document.getElementById('mealsContainer');
     if (!container) return;
 
-    const meals = nutritionData[currentDayType];
+    const meals = nutritionRecipes[currentDayType];
     const today = new Date().toLocaleDateString('it-IT');
 
     let html = '';
@@ -71,7 +71,7 @@ function toggleMeal(mealId) {
 
 // Mostra dettagli pasto
 function showMealDetail(dayType, mealKey) {
-    const meal = nutritionData[dayType][mealKey];
+    const meal = nutritionRecipes[dayType][mealKey];
     const modal = document.getElementById('mealModal');
     const title = document.getElementById('mealModalTitle');
     const body = document.getElementById('mealModalBody');
@@ -129,9 +129,28 @@ function showNutritionHistory() {
 
 // Initialize on page load if on nutrition page
 document.addEventListener('DOMContentLoaded', function() {
-    const nutritionView = document.getElementById('nutritionView');
-    if (nutritionView) {
-        loadMeals();
+    // Load initial meals
+    loadMeals();
+
+    // Add event listeners for day type buttons
+    const btnWorkout = document.getElementById('btnWorkout');
+    const btnRest = document.getElementById('btnRest');
+
+    if (btnWorkout) {
+        btnWorkout.addEventListener('click', () => switchDayType('workout'));
+    }
+    if (btnRest) {
+        btnRest.addEventListener('click', () => switchDayType('rest'));
+    }
+
+    // Close modal when clicking outside
+    const modal = document.getElementById('mealModal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeMealModal();
+            }
+        });
     }
 });
 

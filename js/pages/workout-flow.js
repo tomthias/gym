@@ -3,6 +3,7 @@
 import { getUrlParameter, initCheckboxes, toggleSection } from '../shared.js';
 import { exerciseData } from '../data/exercises.js';
 import { playCountdownBeep, stopSquatTempoMetronome, isSquatTempoMetronomeActive, toggleSquatTempoMetronome } from '../utils/timers.js';
+import { showExerciseDetail } from '../utils/modal.js';
 
 // Workout exercises database
 const workoutExercises = {
@@ -178,18 +179,68 @@ function buildFlowSections(containerId, workoutId) {
     if (!container) return;
     container.innerHTML = '';
 
-    // Get workout element to copy sections from
-    const workoutEl = document.getElementById(workoutId);
-    if (!workoutEl) return;
+    const exercises = workoutExercises[workoutId];
+    if (!exercises) return;
 
-    const sections = workoutEl.querySelectorAll('.section');
-    sections.forEach(section => {
-        const clone = section.cloneNode(true);
-        container.appendChild(clone);
+    // Group exercises by category
+    const grouped = {};
+    exercises.forEach(ex => {
+        const category = getCategoryForExercise(ex.id);
+        if (!grouped[category]) grouped[category] = [];
+        grouped[category].push(ex);
     });
 
-    // Update section counters after cloning
-    updateSectionCounters(container);
+    // Generate HTML for each section
+    Object.keys(grouped).forEach(category => {
+        const exList = grouped[category];
+        let html = `<div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <div class="section-title">${category}</div>
+                <div class="section-duration">${exList.length} esercizi</div>
+            </div>
+            <div class="section-content">`;
+
+        exList.forEach(ex => {
+            const exData = exerciseData[ex.key];
+            const details = exData && exData.series ? exData.series + (exData.recupero ? ' • Rec ' + exData.recupero : '') : '';
+
+            html += `<div class="exercise-item" onclick="event.stopPropagation(); toggleCheck('${ex.id}')">
+                <div class="exercise-header">
+                    <div class="checkbox" id="${ex.id}"></div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">${ex.name}</div>
+                        ${details ? `<div class="exercise-details">${details}</div>` : ''}
+                    </div>
+                    <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('${ex.key}')">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12C2.25 6.61522 6.61522 2.25 12 2.25ZM12 3.75C7.44365 3.75 3.75 7.44365 3.75 12C3.75 16.5563 7.44365 20.25 12 20.25C16.5563 20.25 20.25 16.5563 20.25 12C20.25 7.44365 16.5563 3.75 12 3.75Z" fill="white"/>
+                            <path d="M13.31 14.75C13.7242 14.75 14.06 15.0858 14.06 15.5C14.06 15.8797 13.7778 16.1935 13.4118 16.2432L13.31 16.25H11C10.5858 16.25 10.25 15.9142 10.25 15.5C10.25 15.1203 10.5322 14.8065 10.8982 14.7568L11 14.75H13.31Z" fill="white"/>
+                            <path d="M12.159 10.5C12.5387 10.5 12.8525 10.7822 12.9022 11.1482L12.909 11.25V15.5C12.909 15.9142 12.5732 16.25 12.159 16.25C11.7793 16.25 11.4655 15.9678 11.4158 15.6018L11.409 15.5V12H11.009C10.6293 12 10.3155 11.7178 10.2658 11.3518L10.259 11.25C10.259 10.8703 10.5412 10.5565 10.9072 10.5068L11.009 10.5H12.159Z" fill="white"/>
+                            <path d="M11.85 7.24726C12.0916 7.24726 12.3066 7.36152 12.4437 7.53896L12.489 7.607L12.5583 7.65353C12.7104 7.7711 12.8161 7.94581 12.8432 8.14549L12.85 8.24726C12.85 8.79954 12.4023 9.24726 11.85 9.24726C11.2977 9.24726 10.85 8.79954 10.85 8.24726C10.85 7.69498 11.2977 7.24726 11.85 7.24726Z" fill="white"/>
+                            <path d="M11.85 7.24726C12.4023 7.24726 12.85 7.69498 12.85 8.24726C12.85 8.66147 12.5142 8.99726 12.1 8.99726C11.8584 8.99726 11.6434 8.883 11.5063 8.70556L11.46 8.636L11.3917 8.59099C11.2396 8.47342 11.1339 8.29871 11.1068 8.09903L11.1 7.99726C11.1 7.58305 11.4358 7.24726 11.85 7.24726Z" fill="white"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>`;
+        });
+
+        html += `</div></div>`;
+        container.innerHTML += html;
+    });
+
+    // Initialize checkboxes
+    initCheckboxes();
+}
+
+// Helper to get category name from exercise ID
+function getCategoryForExercise(id) {
+    if (id.includes('warm')) return 'Riscaldamento';
+    if (id.includes('fisio')) return 'Fisioterapia';
+    if (id.includes('push')) return 'Push';
+    if (id.includes('pull')) return 'Pull';
+    if (id.includes('spalle')) return 'Spalle';
+    if (id.includes('core') || id.includes('cardio')) return 'Core/Cardio';
+    return 'Esercizi';
 }
 
 function beginFirstExercise() {
@@ -367,17 +418,6 @@ function startExerciseState() {
 
     // Show exercise state
     setWorkoutFlowState('exercise');
-}
-
-function getCategoryForExercise(exerciseId) {
-    if (exerciseId.includes('warm')) return 'Riscaldamento';
-    if (exerciseId.includes('fisio')) return 'Fisioterapia';
-    if (exerciseId.includes('push')) return 'Push Exercises';
-    if (exerciseId.includes('pull')) return 'Pull Exercises';
-    if (exerciseId.includes('core')) return 'Core';
-    if (exerciseId.includes('spalle')) return 'Spalle';
-    if (exerciseId.includes('cardio')) return 'Cardio';
-    return 'Esercizio';
 }
 
 function startExerciseTimer() {
@@ -635,19 +675,6 @@ function updateFlowSectionsCheckbox(exerciseId) {
             });
             // Update section counters
             updateSectionCounters(container);
-        }
-    });
-}
-
-function updateSectionCounters(container) {
-    const sections = container.querySelectorAll('.section');
-    sections.forEach(section => {
-        const checkboxes = section.querySelectorAll('.checkbox');
-        const checked = section.querySelectorAll('.checkbox.checked').length;
-        const total = checkboxes.length;
-        const counter = section.querySelector('.section-counter');
-        if (counter && total > 0) {
-            counter.textContent = `(${checked}/${total})`;
         }
     });
 }
@@ -955,6 +982,38 @@ document.addEventListener('DOMContentLoaded', function() {
         initCheckboxes();
         startFullWorkout(workoutId);
     }
+
+    // Add event listeners for flow buttons
+    const btnStartWorkout = document.getElementById('btnStartWorkout');
+    if (btnStartWorkout) {
+        btnStartWorkout.addEventListener('click', beginFirstExercise);
+    }
+
+    const btnCompleteExercise = document.getElementById('btnCompleteExercise');
+    if (btnCompleteExercise) {
+        btnCompleteExercise.addEventListener('click', completeCurrentExercise);
+    }
+
+    const btnSkipExercise = document.getElementById('btnSkipExercise');
+    if (btnSkipExercise) {
+        btnSkipExercise.addEventListener('click', () => {
+            workoutFlowState.currentExerciseIndex++;
+            startExerciseState();
+        });
+    }
+
+    const btnSkipRest = document.getElementById('btnSkipRest');
+    if (btnSkipRest) {
+        btnSkipRest.addEventListener('click', skipRest);
+    }
+
+    const btnAddTime = document.getElementById('btnAddTime');
+    if (btnAddTime) {
+        btnAddTime.addEventListener('click', () => {
+            workoutFlowState.restSeconds += 30;
+            updateRestTimerDisplay();
+        });
+    }
 });
 
 // Expose functions to window for onclick handlers
@@ -970,3 +1029,11 @@ window.skipTransitionRest = skipTransitionRest;
 window.exitWorkoutFlow = exitWorkoutFlow;
 window.toggleSquatTempoMetronome = toggleSquatTempoMetronome;
 window.toggleSection = toggleSection;
+window.showExerciseDetail = showExerciseDetail;
+window.toggleCheck = (id) => {
+    const checkbox = document.getElementById(id);
+    if (checkbox) {
+        checkbox.classList.toggle('checked');
+        // Save to localStorage if needed
+    }
+};
