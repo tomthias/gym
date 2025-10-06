@@ -1,0 +1,3639 @@
+{
+  "workout": {
+    "colazione": {
+      "name": "Colazione Pre-Workout",
+      "time": "8:00-8:30",
+      "description": "Colazione leggera per energia senza appesantire prima dell'allenamento",
+      "isImportant": false,
+      "recipes": [
+        {
+          "id": "porridge-mela-cannella",
+          "name": "Porridge Proteico Mela e Cannella",
+          "difficulty": "facile",
+          "time": 10,
+          "category": "dolce",
+          "tags": [
+            "veloce",
+            "pre-workout",
+            "proteico"
+          ],
+          "ingredients": [
+            "50g fiocchi d'avena",
+            "200ml latte (o bevanda vegetale)",
+            "1 mela tagliata a cubetti",
+            "1 cucchiaino cannella in polvere",
+            "15g mandorle spezzettate",
+            "1 cucchiaio miele"
+          ],
+          "steps": [
+            "Scalda il latte in un pentolino a fuoco medio",
+            "Aggiungi l'avena e cuoci mescolando per 5 minuti",
+            "Aggiungi i cubetti di mela e la cannella, mescola bene",
+            "Servi in una ciotola e guarnisci con mandorle e miele"
+          ],
+          "macros": {
+            "protein": "18g",
+            "carbs": "52g",
+            "fats": "12g",
+            "calories": "380 kcal"
+          },
+          "tips": "Puoi preparare l'avena la sera prima con il metodo overnight oats (avena + latte in frigo)"
+        },
+        {
+          "id": "toast-avocado-uova",
+          "name": "Toast Avocado e Uova Strapazzate",
+          "difficulty": "facile",
+          "time": 8,
+          "category": "salato",
+          "tags": [
+            "veloce",
+            "proteico",
+            "salato"
+          ],
+          "ingredients": [
+            "2 fette pane integrale (60g totali)",
+            "1 uovo intero + 100g albume",
+            "1/2 avocado maturo",
+            "Sale, pepe q.b.",
+            "1 cucchiaino olio d'oliva"
+          ],
+          "steps": [
+            "Tosta le fette di pane",
+            "Sbatti uovo e albume insieme, cuoci in padella antiaderente con poco olio",
+            "Schiaccia l'avocado con una forchetta, condisci con sale e pepe",
+            "Spalma l'avocado sul toast e aggiungi le uova strapazzate sopra"
+          ],
+          "macros": {
+            "protein": "25g",
+            "carbs": "40g",
+            "fats": "14g",
+            "calories": "390 kcal"
+          }
+        },
+        {
+          "id": "yogurt-greco-frutti-rossi",
+          "name": "Yogurt Greco Bowl con Frutti Rossi e Granola",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "category": "dolce",
+          "tags": [
+            "velocissimo",
+            "freddo",
+            "proteico"
+          ],
+          "ingredients": [
+            "170g yogurt greco magro",
+            "40g granola (o cereali integrali)",
+            "80g frutti rossi misti (fragole, mirtilli, lamponi)",
+            "10 noci spezzettate",
+            "1 cucchiaino miele"
+          ],
+          "steps": [
+            "Versa lo yogurt greco in una bowl",
+            "Aggiungi la granola e i frutti rossi",
+            "Sbriciola le noci sopra",
+            "Finisci con un filo di miele"
+          ],
+          "macros": {
+            "protein": "20g",
+            "carbs": "48g",
+            "fats": "10g",
+            "calories": "360 kcal"
+          }
+        },
+        {
+          "id": "pancake-proteici-avena",
+          "name": "Pancake Proteici all'Avena",
+          "difficulty": "media",
+          "time": 15,
+          "category": "dolce",
+          "tags": [
+            "proteico",
+            "dolce"
+          ],
+          "ingredients": [
+            "50g fiocchi d'avena tritati",
+            "1 uovo intero + 50g albume",
+            "100ml latte",
+            "1 cucchiaino lievito per dolci",
+            "Marmellata o miele per guarnire",
+            "15g mandorle"
+          ],
+          "steps": [
+            "Frulla l'avena fino a ottenere una farina grossolana",
+            "Mescola avena, uovo, albume, latte e lievito fino a ottenere un composto liscio",
+            "Cuoci i pancake in padella antiaderente (2-3 minuti per lato)",
+            "Servi con marmellata e mandorle"
+          ],
+          "macros": {
+            "protein": "22g",
+            "carbs": "45g",
+            "fats": "12g",
+            "calories": "380 kcal"
+          }
+        },
+        {
+          "id": "fette-biscottate-ricotta-miele",
+          "name": "Fette Biscottate con Ricotta e Miele",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "category": "dolce",
+          "tags": [
+            "velocissimo",
+            "dolce"
+          ],
+          "ingredients": [
+            "40g fette biscottate integrali",
+            "100g ricotta magra",
+            "1 cucchiaio miele",
+            "15g noci tritate",
+            "Cannella in polvere"
+          ],
+          "steps": [
+            "Spalma la ricotta sulle fette biscottate",
+            "Aggiungi un filo di miele",
+            "Guarnisci con noci tritate e una spolverata di cannella"
+          ],
+          "macros": {
+            "protein": "18g",
+            "carbs": "48g",
+            "fats": "11g",
+            "calories": "370 kcal"
+          }
+        },
+        {
+          "id": "smoothie-bowl-frutti-rossi",
+          "name": "Smoothie Bowl Energetico ai Frutti Rossi",
+          "difficulty": "facile",
+          "time": 8,
+          "category": "dolce",
+          "tags": [
+            "veloce",
+            "freddo",
+            "energetico"
+          ],
+          "ingredients": [
+            "125g yogurt greco",
+            "100g frutti rossi surgelati",
+            "100ml latte",
+            "1 cucchiaio miele",
+            "30g granola",
+            "15g mandorle affettate"
+          ],
+          "steps": [
+            "Frulla yogurt, frutti rossi, latte e miele fino a ottenere una crema densa",
+            "Versa in una bowl",
+            "Guarnisci con granola e mandorle"
+          ],
+          "macros": {
+            "protein": "20g",
+            "carbs": "50g",
+            "fats": "13g",
+            "calories": "400 kcal"
+          }
+        },
+        {
+          "id": "pane-burro-arachidi-miele",
+          "name": "Pane Integrale con Burro di Arachidi e Miele",
+          "difficulty": "facilissimo",
+          "time": 3,
+          "category": "dolce",
+          "tags": [
+            "velocissimo",
+            "energetico"
+          ],
+          "ingredients": [
+            "90g pane integrale (2 fette)",
+            "2 cucchiai burro di arachidi 100%",
+            "1 cucchiaio miele",
+            "Cannella in polvere (opzionale)"
+          ],
+          "steps": [
+            "Tosta leggermente il pane",
+            "Spalma il burro di arachidi",
+            "Aggiungi un filo di miele e una spolverata di cannella"
+          ],
+          "macros": {
+            "protein": "16g",
+            "carbs": "52g",
+            "fats": "14g",
+            "calories": "400 kcal"
+          }
+        },
+        {
+          "id": "gallette-salmone-avocado",
+          "name": "Gallette con Salmone Affumicato e Avocado",
+          "difficulty": "facile",
+          "time": 5,
+          "category": "salato",
+          "tags": [
+            "veloce",
+            "salato",
+            "proteico"
+          ],
+          "ingredients": [
+            "40g gallette di riso/mais",
+            "70g salmone affumicato",
+            "1/2 avocado",
+            "Succo di limone",
+            "Pepe nero"
+          ],
+          "steps": [
+            "Schiaccia l'avocado e condiscilo con limone e pepe",
+            "Spalma l'avocado sulle gallette",
+            "Adagia il salmone affumicato sopra"
+          ],
+          "macros": {
+            "protein": "22g",
+            "carbs": "45g",
+            "fats": "15g",
+            "calories": "400 kcal"
+          }
+        },
+        {
+          "id": "uova-pane-integrale",
+          "name": "Uova Strapazzate su Pane Integrale",
+          "difficulty": "facile",
+          "time": 10,
+          "category": "salato",
+          "tags": [
+            "proteico",
+            "salato"
+          ],
+          "ingredients": [
+            "1 uovo + 100g albume",
+            "90g pane integrale",
+            "1 cucchiaio olio d'oliva",
+            "Sale, pepe, erba cipollina",
+            "10g parmigiano grattugiato"
+          ],
+          "steps": [
+            "Sbatti uovo e albume con sale, pepe ed erba cipollina",
+            "Cuoci in padella con poco olio a fuoco medio-basso mescolando delicatamente",
+            "Tosta il pane",
+            "Servi le uova sul pane tostato, guarnisci con parmigiano"
+          ],
+          "macros": {
+            "protein": "28g",
+            "carbs": "48g",
+            "fats": "12g",
+            "calories": "420 kcal"
+          }
+        },
+        {
+          "id": "muesli-latte-frutta",
+          "name": "Muesli con Latte e Frutta Fresca",
+          "difficulty": "facilissimo",
+          "time": 3,
+          "category": "dolce",
+          "tags": [
+            "velocissimo",
+            "dolce"
+          ],
+          "ingredients": [
+            "50g muesli (o cereali integrali)",
+            "250ml latte (o bevanda vegetale)",
+            "1 mela a cubetti",
+            "15g mandorle",
+            "1 cucchiaino miele"
+          ],
+          "steps": [
+            "Versa il muesli in una ciotola",
+            "Aggiungi il latte",
+            "Guarnisci con cubetti di mela, mandorle e miele"
+          ],
+          "macros": {
+            "protein": "18g",
+            "carbs": "55g",
+            "fats": "13g",
+            "calories": "410 kcal"
+          }
+        },
+        {
+          "id": "toast-ricotta-miele-noci",
+          "name": "Toast Ricotta, Miele e Noci",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "category": "dolce",
+          "tags": [
+            "veloce",
+            "dolce"
+          ],
+          "ingredients": [
+            "90g pane integrale",
+            "100g ricotta magra",
+            "1 cucchiaio miele",
+            "15g noci tritate",
+            "Cannella"
+          ],
+          "steps": [
+            "Tosta il pane",
+            "Spalma la ricotta",
+            "Aggiungi miele, noci e cannella"
+          ],
+          "macros": {
+            "protein": "20g",
+            "carbs": "50g",
+            "fats": "14g",
+            "calories": "410 kcal"
+          }
+        },
+        {
+          "id": "bresaola-pane-olio",
+          "name": "Pane con Bresaola e Olio",
+          "difficulty": "facilissimo",
+          "time": 3,
+          "category": "salato",
+          "tags": [
+            "velocissimo",
+            "salato",
+            "proteico"
+          ],
+          "ingredients": [
+            "90g pane integrale",
+            "90g bresaola (o fesa di tacchino)",
+            "1 cucchiaio olio d'oliva",
+            "Rucola fresca",
+            "Limone"
+          ],
+          "steps": [
+            "Taglia il pane a fette",
+            "Condisci con olio d'oliva",
+            "Aggiungi bresaola e rucola",
+            "Spruzza limone"
+          ],
+          "macros": {
+            "protein": "25g",
+            "carbs": "48g",
+            "fats": "10g",
+            "calories": "390 kcal"
+          }
+        }
+      ]
+    },
+    "spuntino": {
+      "name": "Spuntino Pre-Workout",
+      "time": "10:30",
+      "description": "Opzionale - Solo se hai fame prima dell'allenamento",
+      "isImportant": false,
+      "recipes": [
+        {
+          "id": "mela-mandorle",
+          "name": "Mela e Mandorle",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "velocissimo"
+          ],
+          "ingredients": [
+            "1 mela",
+            "10 mandorle"
+          ],
+          "steps": [
+            "Taglia la mela a spicchi",
+            "Accompagna con le mandorle"
+          ],
+          "macros": {
+            "protein": "3g",
+            "carbs": "25g",
+            "fats": "6g",
+            "calories": "160 kcal"
+          }
+        },
+        {
+          "id": "barretta-energetica",
+          "name": "Barretta Energetica",
+          "difficulty": "facilissimo",
+          "time": 1,
+          "tags": [
+            "velocissimo",
+            "pratico"
+          ],
+          "ingredients": [
+            "1 barretta energetica ai cereali"
+          ],
+          "steps": [
+            "Apri e mangia"
+          ],
+          "macros": {
+            "protein": "4g",
+            "carbs": "30g",
+            "fats": "5g",
+            "calories": "180 kcal"
+          }
+        },
+        {
+          "id": "pane-miele",
+          "name": "Fetta di Pane con Miele",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "velocissimo"
+          ],
+          "ingredients": [
+            "1 fetta pane (45g)",
+            "1 cucchiaio miele"
+          ],
+          "steps": [
+            "Spalma il miele sul pane"
+          ],
+          "macros": {
+            "protein": "3g",
+            "carbs": "35g",
+            "fats": "1g",
+            "calories": "160 kcal"
+          }
+        },
+        {
+          "id": "frutta-secca-mix",
+          "name": "Mix Frutta Secca",
+          "difficulty": "facilissimo",
+          "time": 1,
+          "tags": [
+            "velocissimo"
+          ],
+          "ingredients": [
+            "10g mandorle",
+            "10g noci",
+            "10g nocciole"
+          ],
+          "steps": [
+            "Mescola e mangia"
+          ],
+          "macros": {
+            "protein": "5g",
+            "carbs": "5g",
+            "fats": "18g",
+            "calories": "200 kcal"
+          }
+        },
+        {
+          "id": "cracker-frutta",
+          "name": "Cracker e Frutta",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce"
+          ],
+          "ingredients": [
+            "20g cracker integrali",
+            "1 pera"
+          ],
+          "steps": [
+            "Accompagna i cracker con la pera"
+          ],
+          "macros": {
+            "protein": "3g",
+            "carbs": "32g",
+            "fats": "3g",
+            "calories": "160 kcal"
+          }
+        },
+        {
+          "id": "yogurt-magro",
+          "name": "Yogurt Magro",
+          "difficulty": "facilissimo",
+          "time": 1,
+          "tags": [
+            "velocissimo"
+          ],
+          "ingredients": [
+            "125g yogurt bianco magro",
+            "1 cucchiaino miele"
+          ],
+          "steps": [
+            "Mescola yogurt e miele"
+          ],
+          "macros": {
+            "protein": "5g",
+            "carbs": "18g",
+            "fats": "1g",
+            "calories": "100 kcal"
+          }
+        },
+        {
+          "id": "gallette-marmellata",
+          "name": "Gallette con Marmellata",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce"
+          ],
+          "ingredients": [
+            "20g gallette di riso",
+            "1 cucchiaio marmellata"
+          ],
+          "steps": [
+            "Spalma la marmellata sulle gallette"
+          ],
+          "macros": {
+            "protein": "2g",
+            "carbs": "28g",
+            "fats": "1g",
+            "calories": "130 kcal"
+          }
+        },
+        {
+          "id": "kiwi-noci",
+          "name": "Kiwi e Noci",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce",
+            "fresco"
+          ],
+          "ingredients": [
+            "2 kiwi",
+            "10 noci"
+          ],
+          "steps": [
+            "Sbuccia i kiwi",
+            "Accompagna con le noci"
+          ],
+          "macros": {
+            "protein": "3g",
+            "carbs": "22g",
+            "fats": "9g",
+            "calories": "180 kcal"
+          }
+        }
+      ]
+    },
+    "pranzo": {
+      "name": "Pranzo Post-Workout",
+      "time": "13:00-13:30",
+      "description": "PASTO FONDAMENTALE - Proteine + Carboidrati per recupero muscolare",
+      "isImportant": true,
+      "recipes": [
+        {
+          "id": "poke-bowl-salmone",
+          "name": "Poke Bowl Salmone e Edamame",
+          "difficulty": "facile",
+          "time": 15,
+          "category": "post-workout",
+          "tags": [
+            "proteico",
+            "pesce",
+            "completo",
+            "meal-prep"
+          ],
+          "where": "Comprabile (poke bar) o Meal Prep",
+          "ingredients": [
+            "130g riso bianco (o precotto)",
+            "150g salmone fresco a cubetti",
+            "50g edamame",
+            "1/2 avocado",
+            "Cetriolo, carote julienne",
+            "Semi di sesamo",
+            "Salsa soia, olio sesamo"
+          ],
+          "steps": [
+            "Cuoci il riso (oppure usa precotto da supermercato)",
+            "Taglia il salmone a cubetti di 2cm",
+            "Componi la bowl: riso come base, aggiungi salmone, edamame, verdure e avocado",
+            "Guarnisci con sesamo e condisci con salsa soia e olio di sesamo"
+          ],
+          "macros": {
+            "protein": "38g",
+            "carbs": "58g",
+            "fats": "20g",
+            "calories": "540 kcal"
+          },
+          "tips": "Puoi preparare il riso la sera prima. Comprabile pronto nei poke bar."
+        },
+        {
+          "id": "pasta-pesto-pollo",
+          "name": "Pasta al Pesto con Pollo Grigliato",
+          "difficulty": "facile",
+          "time": 20,
+          "category": "post-workout",
+          "tags": [
+            "proteico",
+            "italiano",
+            "meal-prep"
+          ],
+          "where": "Meal Prep (prepara in anticipo)",
+          "ingredients": [
+            "130g pasta (penne, fusilli)",
+            "150g petto di pollo",
+            "2 cucchiai pesto genovese",
+            "1 zucchina",
+            "Parmigiano grattugiato",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Cuoci la pasta al dente",
+            "Taglia il pollo a strisce e griglialo in padella",
+            "Salta le zucchine a rondelle in padella",
+            "Scola la pasta, mescola con pesto, pollo e zucchine",
+            "Guarnisci con parmigiano"
+          ],
+          "macros": {
+            "protein": "42g",
+            "carbs": "62g",
+            "fats": "18g",
+            "calories": "590 kcal"
+          }
+        },
+        {
+          "id": "insalatona-caesar",
+          "name": "Insalatona Caesar Proteica",
+          "difficulty": "facile",
+          "time": 10,
+          "category": "post-workout",
+          "tags": [
+            "proteico",
+            "fresco",
+            "veloce"
+          ],
+          "where": "Comprabile (bar/ristorante) o Veloce",
+          "ingredients": [
+            "Lattuga romana 200g",
+            "150g pollo grigliato",
+            "40g crostini di pane",
+            "30g parmigiano a scaglie",
+            "Salsa caesar light",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Lava e taglia la lattuga romana",
+            "Aggiungi il pollo tagliato a strisce",
+            "Aggiungi crostini e scaglie di parmigiano",
+            "Condisci con salsa caesar e olio"
+          ],
+          "macros": {
+            "protein": "38g",
+            "carbs": "45g",
+            "fats": "16g",
+            "calories": "480 kcal"
+          }
+        },
+        {
+          "id": "wrap-tacchino-hummus",
+          "name": "Wrap Integrale Tacchino e Hummus",
+          "difficulty": "facilissimo",
+          "time": 8,
+          "category": "post-workout",
+          "tags": [
+            "proteico",
+            "velocissimo",
+            "pratico"
+          ],
+          "where": "Preparabile ovunque (anche in ufficio)",
+          "ingredients": [
+            "1 piadina integrale (100g)",
+            "100g fesa di tacchino",
+            "3 cucchiai hummus",
+            "Lattuga, pomodoro, cetriolo",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Spalma l'hummus sulla piadina",
+            "Aggiungi tacchino e verdure fresche",
+            "Arrotola stretto",
+            "Taglia a metà"
+          ],
+          "macros": {
+            "protein": "32g",
+            "carbs": "48g",
+            "fats": "14g",
+            "calories": "450 kcal"
+          }
+        },
+        {
+          "id": "riso-venere-gamberetti",
+          "name": "Riso Venere con Gamberetti e Zucchine",
+          "difficulty": "media",
+          "time": 25,
+          "category": "post-workout",
+          "tags": [
+            "proteico",
+            "gourmet",
+            "pesce",
+            "meal-prep"
+          ],
+          "where": "Meal Prep (domenica)",
+          "ingredients": [
+            "130g riso venere",
+            "180g gamberetti sgusciati",
+            "2 zucchine",
+            "Aglio, prezzemolo",
+            "Olio d'oliva, limone"
+          ],
+          "steps": [
+            "Cuoci il riso venere (20 minuti)",
+            "Salta i gamberetti in padella con aglio",
+            "Aggiungi le zucchine a rondelle",
+            "Mescola con il riso, aggiungi limone e prezzemolo"
+          ],
+          "macros": {
+            "protein": "35g",
+            "carbs": "60g",
+            "fats": "12g",
+            "calories": "500 kcal"
+          }
+        },
+        {
+          "id": "pasta-tonno-pomodorini",
+          "name": "Pasta con Tonno e Pomodorini",
+          "difficulty": "facile",
+          "time": 15,
+          "category": "post-workout",
+          "tags": [
+            "proteico",
+            "veloce",
+            "italiano"
+          ],
+          "where": "Veloce a casa",
+          "ingredients": [
+            "130g pasta",
+            "180g tonno al naturale",
+            "200g pomodorini",
+            "Aglio, basilico",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Cuoci la pasta",
+            "Salta i pomodorini tagliati a metà con aglio e olio",
+            "Aggiungi il tonno sgocciolato",
+            "Mescola con la pasta e aggiungi basilico fresco"
+          ],
+          "macros": {
+            "protein": "40g",
+            "carbs": "65g",
+            "fats": "15g",
+            "calories": "550 kcal"
+          }
+        },
+        {
+          "id": "quinoa-pollo-verdure",
+          "name": "Quinoa con Pollo e Verdure Grigliate",
+          "difficulty": "facile",
+          "time": 25,
+          "category": "post-workout",
+          "tags": [
+            "proteico",
+            "completo",
+            "meal-prep"
+          ],
+          "where": "Meal Prep",
+          "ingredients": [
+            "130g quinoa",
+            "150g petto di pollo",
+            "Zucchine, peperoni, melanzane",
+            "Olio d'oliva",
+            "Erbe aromatiche"
+          ],
+          "steps": [
+            "Cuoci la quinoa secondo istruzioni (15 min)",
+            "Griglia il pollo tagliato a cubetti",
+            "Griglia le verdure",
+            "Componi il piatto mescolando tutto, condisci con olio ed erbe"
+          ],
+          "macros": {
+            "protein": "42g",
+            "carbs": "60g",
+            "fats": "18g",
+            "calories": "570 kcal"
+          }
+        },
+        {
+          "id": "panino-bresaola-rucola",
+          "name": "Panino Bresaola, Rucola e Grana",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "category": "post-workout",
+          "tags": [
+            "velocissimo",
+            "pratico"
+          ],
+          "where": "Comprabile (bar)",
+          "ingredients": [
+            "100g pane integrale",
+            "100g bresaola",
+            "Rucola fresca",
+            "30g grana a scaglie",
+            "Olio d'oliva, limone"
+          ],
+          "steps": [
+            "Taglia il pane a metà",
+            "Condisci l'interno con olio e limone",
+            "Aggiungi bresaola, rucola e grana",
+            "Chiudi il panino"
+          ],
+          "macros": {
+            "protein": "35g",
+            "carbs": "50g",
+            "fats": "14g",
+            "calories": "470 kcal"
+          }
+        },
+        {
+          "id": "riso-pollo-curry",
+          "name": "Riso con Pollo al Curry",
+          "difficulty": "facile",
+          "time": 25,
+          "category": "post-workout",
+          "tags": [
+            "proteico",
+            "speziato",
+            "meal-prep"
+          ],
+          "where": "Meal Prep",
+          "ingredients": [
+            "130g riso basmati",
+            "150g petto di pollo",
+            "100ml latte di cocco light",
+            "1 cucchiaio curry in polvere",
+            "Cipolla, zucchine",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Cuoci il riso basmati",
+            "Salta cipolla e pollo a cubetti in padella",
+            "Aggiungi curry e latte di cocco, cuoci 10 minuti",
+            "Aggiungi zucchine, servi con il riso"
+          ],
+          "macros": {
+            "protein": "38g",
+            "carbs": "62g",
+            "fats": "16g",
+            "calories": "540 kcal"
+          }
+        },
+        {
+          "id": "pasta-salmone-zucchine",
+          "name": "Pasta con Salmone e Zucchine",
+          "difficulty": "facile",
+          "time": 20,
+          "category": "post-workout",
+          "tags": [
+            "proteico",
+            "pesce"
+          ],
+          "where": "Veloce a casa",
+          "ingredients": [
+            "130g pasta",
+            "120g salmone fresco",
+            "2 zucchine",
+            "Limone, aneto",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Cuoci la pasta",
+            "Taglia il salmone a cubetti e cuoci in padella 4-5 minuti",
+            "Salta le zucchine a rondelle",
+            "Mescola pasta, salmone e zucchine, aggiungi limone e aneto"
+          ],
+          "macros": {
+            "protein": "35g",
+            "carbs": "62g",
+            "fats": "18g",
+            "calories": "550 kcal"
+          }
+        },
+        {
+          "id": "insalata-riso-tonno",
+          "name": "Insalata di Riso con Tonno",
+          "difficulty": "facile",
+          "time": 15,
+          "category": "post-workout",
+          "tags": [
+            "fresco",
+            "meal-prep"
+          ],
+          "where": "Meal Prep (perfetto d'estate)",
+          "ingredients": [
+            "130g riso",
+            "180g tonno al naturale",
+            "Pomodorini, cetrioli, olive",
+            "Basilico",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Cuoci il riso e fallo raffreddare",
+            "Taglia pomodorini e cetrioli",
+            "Mescola riso, tonno, verdure e olive",
+            "Condisci con olio e basilico fresco"
+          ],
+          "macros": {
+            "protein": "38g",
+            "carbs": "60g",
+            "fats": "16g",
+            "calories": "530 kcal"
+          }
+        },
+        {
+          "id": "couscous-pollo-verdure",
+          "name": "Couscous con Pollo e Verdure",
+          "difficulty": "facile",
+          "time": 15,
+          "category": "post-workout",
+          "tags": [
+            "veloce",
+            "completo"
+          ],
+          "where": "Veloce",
+          "ingredients": [
+            "130g couscous",
+            "150g petto di pollo",
+            "Peperoni, zucchine",
+            "Spezie (paprika, cumino)",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Prepara il couscous con acqua bollente (5 minuti)",
+            "Taglia pollo a cubetti e cuoci con le spezie",
+            "Salta le verdure",
+            "Mescola couscous, pollo e verdure"
+          ],
+          "macros": {
+            "protein": "40g",
+            "carbs": "58g",
+            "fats": "14g",
+            "calories": "520 kcal"
+          }
+        },
+        {
+          "id": "bowl-farro-tacchino",
+          "name": "Bowl di Farro con Tacchino e Hummus",
+          "difficulty": "facile",
+          "time": 25,
+          "category": "post-workout",
+          "tags": [
+            "proteico",
+            "completo",
+            "meal-prep"
+          ],
+          "where": "Meal Prep",
+          "ingredients": [
+            "130g farro",
+            "150g fesa di tacchino a cubetti",
+            "3 cucchiai hummus",
+            "Pomodorini, cetrioli, rucola",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Cuoci il farro (20 minuti)",
+            "Griglia il tacchino a cubetti",
+            "Componi la bowl: farro, tacchino, verdure, hummus",
+            "Condisci con olio"
+          ],
+          "macros": {
+            "protein": "38g",
+            "carbs": "62g",
+            "fats": "16g",
+            "calories": "540 kcal"
+          }
+        },
+        {
+          "id": "pasta-broccoli-acciughe",
+          "name": "Pasta con Broccoli e Acciughe",
+          "difficulty": "facile",
+          "time": 20,
+          "category": "post-workout",
+          "tags": [
+            "italiano",
+            "proteico"
+          ],
+          "where": "Casa",
+          "ingredients": [
+            "130g pasta",
+            "200g broccoli",
+            "6 filetti di acciughe",
+            "Aglio, peperoncino",
+            "Olio d'oliva",
+            "Parmigiano"
+          ],
+          "steps": [
+            "Cuoci i broccoli a vapore o lessali",
+            "Cuoci la pasta",
+            "Salta aglio, acciughe e peperoncino in olio",
+            "Aggiungi broccoli, schiaccia leggermente, mescola con la pasta",
+            "Guarnisci con parmigiano"
+          ],
+          "macros": {
+            "protein": "28g",
+            "carbs": "65g",
+            "fats": "18g",
+            "calories": "530 kcal"
+          }
+        },
+        {
+          "id": "riso-pollo-verdure-salsa-soia",
+          "name": "Riso alla Cantonese con Pollo",
+          "difficulty": "facile",
+          "time": 20,
+          "category": "post-workout",
+          "tags": [
+            "veloce",
+            "completo"
+          ],
+          "where": "Casa",
+          "ingredients": [
+            "130g riso",
+            "150g petto di pollo",
+            "1 uovo",
+            "Piselli, carote",
+            "Salsa di soia",
+            "Olio di sesamo"
+          ],
+          "steps": [
+            "Cuoci il riso e fallo raffreddare (meglio se avanzato)",
+            "Taglia il pollo a cubetti e cuocilo in padella",
+            "Sbatti l'uovo e fai una frittata, tagliala a striscioline",
+            "In un wok, salta riso, pollo, verdure, uovo",
+            "Condisci con salsa di soia e olio di sesamo"
+          ],
+          "macros": {
+            "protein": "42g",
+            "carbs": "60g",
+            "fats": "16g",
+            "calories": "560 kcal"
+          }
+        },
+        {
+          "id": "orzo-verdure-feta",
+          "name": "Insalata di Orzo con Verdure e Feta",
+          "difficulty": "facile",
+          "time": 20,
+          "category": "post-workout",
+          "tags": [
+            "fresco",
+            "vegetariano",
+            "meal-prep"
+          ],
+          "where": "Meal Prep",
+          "ingredients": [
+            "130g orzo perlato",
+            "125g feta a cubetti",
+            "Pomodorini, cetrioli, olive",
+            "Basilico, origano",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Cuoci l'orzo e fallo raffreddare",
+            "Taglia verdure e feta a cubetti",
+            "Mescola orzo, verdure, feta e olive",
+            "Condisci con olio, basilico e origano"
+          ],
+          "macros": {
+            "protein": "22g",
+            "carbs": "62g",
+            "fats": "18g",
+            "calories": "500 kcal"
+          }
+        },
+        {
+          "id": "piadina-pollo-verdure",
+          "name": "Piadina con Pollo Grigliato e Verdure",
+          "difficulty": "facile",
+          "time": 15,
+          "category": "post-workout",
+          "tags": [
+            "veloce",
+            "pratico"
+          ],
+          "where": "Casa o Comprabile",
+          "ingredients": [
+            "1 piadina (120g)",
+            "150g pollo grigliato",
+            "Insalata, pomodori",
+            "Maionese light o yogurt greco",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Scalda leggermente la piadina",
+            "Aggiungi pollo a strisce",
+            "Aggiungi verdure fresche",
+            "Condisci con maionese light o yogurt greco",
+            "Arrotola e taglia a metà"
+          ],
+          "macros": {
+            "protein": "40g",
+            "carbs": "55g",
+            "fats": "16g",
+            "calories": "530 kcal"
+          }
+        },
+        {
+          "id": "burger-tacchino-patate",
+          "name": "Burger di Tacchino con Patate al Forno",
+          "difficulty": "media",
+          "time": 30,
+          "category": "post-workout",
+          "tags": [
+            "proteico",
+            "completo"
+          ],
+          "where": "Casa",
+          "ingredients": [
+            "150g macinato di tacchino",
+            "1 panino integrale (90g)",
+            "150g patate",
+            "Insalata, pomodoro",
+            "Senape, ketchup",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Forma un burger con il tacchino macinato, cuoci in padella",
+            "Taglia le patate a spicchi, condisci con olio e cuoci al forno 200°C per 25 minuti",
+            "Tosta il panino",
+            "Componi il burger con verdure e salse",
+            "Servi con le patate"
+          ],
+          "macros": {
+            "protein": "38g",
+            "carbs": "62g",
+            "fats": "16g",
+            "calories": "550 kcal"
+          }
+        }
+      ]
+    },
+    "merenda": {
+      "name": "Merenda Pomeridiana",
+      "time": "16:00",
+      "description": "Snack leggero per mantenere energia",
+      "isImportant": false,
+      "recipes": [
+        {
+          "id": "yogurt-cocco",
+          "name": "Yogurt Greco con Cocco Disidratato",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "velocissimo"
+          ],
+          "ingredients": [
+            "125g yogurt greco magro",
+            "20g cocco disidratato"
+          ],
+          "steps": [
+            "Mescola yogurt e cocco"
+          ],
+          "macros": {
+            "protein": "12g",
+            "carbs": "18g",
+            "fats": "8g",
+            "calories": "190 kcal"
+          }
+        },
+        {
+          "id": "frutta-mandorle",
+          "name": "Frutta Fresca e Mandorle",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce"
+          ],
+          "ingredients": [
+            "1 frutto (mela, pera, arancia)",
+            "15g mandorle"
+          ],
+          "steps": [
+            "Accompagna la frutta con le mandorle"
+          ],
+          "macros": {
+            "protein": "4g",
+            "carbs": "22g",
+            "fats": "9g",
+            "calories": "180 kcal"
+          }
+        },
+        {
+          "id": "barretta-proteica",
+          "name": "Barretta Proteica",
+          "difficulty": "facilissimo",
+          "time": 1,
+          "tags": [
+            "velocissimo",
+            "pratico"
+          ],
+          "ingredients": [
+            "1 barretta proteica"
+          ],
+          "steps": [
+            "Apri e mangia"
+          ],
+          "macros": {
+            "protein": "20g",
+            "carbs": "20g",
+            "fats": "8g",
+            "calories": "230 kcal"
+          }
+        },
+        {
+          "id": "crackers-hummus",
+          "name": "Crackers con Hummus",
+          "difficulty": "facilissimo",
+          "time": 3,
+          "tags": [
+            "veloce"
+          ],
+          "ingredients": [
+            "30g crackers integrali",
+            "3 cucchiai hummus"
+          ],
+          "steps": [
+            "Spalma l'hummus sui crackers"
+          ],
+          "macros": {
+            "protein": "6g",
+            "carbs": "25g",
+            "fats": "8g",
+            "calories": "190 kcal"
+          }
+        },
+        {
+          "id": "frullato-proteico",
+          "name": "Frullato Proteico",
+          "difficulty": "facile",
+          "time": 5,
+          "tags": [
+            "veloce",
+            "proteico"
+          ],
+          "ingredients": [
+            "20g proteine in polvere",
+            "200ml latte",
+            "1 frutto"
+          ],
+          "steps": [
+            "Frulla tutti gli ingredienti"
+          ],
+          "macros": {
+            "protein": "25g",
+            "carbs": "20g",
+            "fats": "3g",
+            "calories": "210 kcal"
+          }
+        },
+        {
+          "id": "pane-cioccolato",
+          "name": "Fetta di Pane con Cioccolato Fondente",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce",
+            "dolce"
+          ],
+          "ingredients": [
+            "45g pane integrale",
+            "20g cioccolato fondente 85%"
+          ],
+          "steps": [
+            "Sciogli leggermente il cioccolato e spalma sul pane"
+          ],
+          "macros": {
+            "protein": "4g",
+            "carbs": "28g",
+            "fats": "8g",
+            "calories": "200 kcal"
+          }
+        },
+        {
+          "id": "ricotta-miele",
+          "name": "Ricotta con Miele",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce",
+            "proteico"
+          ],
+          "ingredients": [
+            "100g ricotta magra",
+            "1 cucchiaio miele",
+            "Cannella"
+          ],
+          "steps": [
+            "Mescola ricotta, miele e cannella"
+          ],
+          "macros": {
+            "protein": "11g",
+            "carbs": "16g",
+            "fats": "5g",
+            "calories": "150 kcal"
+          }
+        },
+        {
+          "id": "smoothie-frutti-rossi",
+          "name": "Smoothie ai Frutti Rossi",
+          "difficulty": "facile",
+          "time": 5,
+          "tags": [
+            "veloce",
+            "fresco"
+          ],
+          "ingredients": [
+            "100g frutti rossi misti",
+            "125g yogurt greco",
+            "100ml latte"
+          ],
+          "steps": [
+            "Frulla tutti gli ingredienti"
+          ],
+          "macros": {
+            "protein": "12g",
+            "carbs": "22g",
+            "fats": "3g",
+            "calories": "160 kcal"
+          }
+        },
+        {
+          "id": "toast-burro-arachidi",
+          "name": "Toast con Burro di Arachidi",
+          "difficulty": "facilissimo",
+          "time": 3,
+          "tags": [
+            "veloce"
+          ],
+          "ingredients": [
+            "1 fetta pane (45g)",
+            "1 cucchiaio burro arachidi 100%"
+          ],
+          "steps": [
+            "Tosta il pane",
+            "Spalma il burro di arachidi"
+          ],
+          "macros": {
+            "protein": "6g",
+            "carbs": "22g",
+            "fats": "8g",
+            "calories": "180 kcal"
+          }
+        },
+        {
+          "id": "noci-frutta-secca",
+          "name": "Mix Noci e Frutta Secca",
+          "difficulty": "facilissimo",
+          "time": 1,
+          "tags": [
+            "velocissimo"
+          ],
+          "ingredients": [
+            "15g noci",
+            "15g uvetta"
+          ],
+          "steps": [
+            "Mescola e mangia"
+          ],
+          "macros": {
+            "protein": "3g",
+            "carbs": "18g",
+            "fats": "10g",
+            "calories": "170 kcal"
+          }
+        }
+      ]
+    },
+    "cena": {
+      "name": "Cena",
+      "time": "20:00",
+      "description": "Pasto leggero - Focus proteine e verdure",
+      "isImportant": false,
+      "recipes": [
+        {
+          "id": "pesce-verdure",
+          "name": "Pesce al Forno con Verdure",
+          "difficulty": "facile",
+          "time": 30,
+          "tags": [
+            "proteico",
+            "leggero",
+            "pesce"
+          ],
+          "ingredients": [
+            "200g pesce magro (merluzzo, orata, branzino)",
+            "60g pane integrale",
+            "Verdure miste (zucchine, pomodorini, peperoni)",
+            "Limone, erbe aromatiche",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Condisci il pesce con limone, sale, pepe ed erbe",
+            "Taglia le verdure",
+            "Disponi pesce e verdure in teglia, condisci con olio",
+            "Inforna a 180°C per 20-25 minuti",
+            "Servi con pane integrale"
+          ],
+          "macros": {
+            "protein": "40g",
+            "carbs": "30g",
+            "fats": "18g",
+            "calories": "440 kcal"
+          }
+        },
+        {
+          "id": "pollo-patate-verdure",
+          "name": "Petto di Pollo con Patate al Forno",
+          "difficulty": "facile",
+          "time": 35,
+          "tags": [
+            "proteico",
+            "completo"
+          ],
+          "ingredients": [
+            "200g petto di pollo",
+            "150g patate",
+            "Verdure grigliate (zucchine, melanzane)",
+            "Rosmarino, aglio",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Taglia le patate a spicchi, condisci con olio, rosmarino e aglio",
+            "Inforna le patate a 200°C per 15 minuti",
+            "Griglia il pollo in padella 6-7 minuti per lato",
+            "Griglia le verdure",
+            "Servi insieme"
+          ],
+          "macros": {
+            "protein": "42g",
+            "carbs": "35g",
+            "fats": "16g",
+            "calories": "460 kcal"
+          }
+        },
+        {
+          "id": "frittata-spinaci-ricotta",
+          "name": "Frittata di Albumi con Spinaci e Ricotta",
+          "difficulty": "facile",
+          "time": 15,
+          "tags": [
+            "proteico",
+            "veloce",
+            "vegetariano"
+          ],
+          "ingredients": [
+            "2 uova + 150g albume",
+            "100g spinaci freschi",
+            "50g ricotta magra",
+            "Parmigiano grattugiato",
+            "Insalata mista",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Salta gli spinaci in padella",
+            "Sbatti uova e albume, aggiungi spinaci e ricotta",
+            "Versa in padella antiaderente, cuoci 8-10 minuti a fuoco basso",
+            "Guarnisci con parmigiano",
+            "Servi con insalata mista"
+          ],
+          "macros": {
+            "protein": "40g",
+            "carbs": "8g",
+            "fats": "16g",
+            "calories": "340 kcal"
+          }
+        },
+        {
+          "id": "salmone-insalata",
+          "name": "Salmone Grigliato con Insalata",
+          "difficulty": "facile",
+          "time": 15,
+          "tags": [
+            "proteico",
+            "leggero",
+            "pesce"
+          ],
+          "ingredients": [
+            "200g salmone",
+            "Insalata mista abbondante",
+            "60g pane integrale",
+            "Limone, aneto",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Griglia il salmone 4-5 minuti per lato",
+            "Condisci con limone e aneto",
+            "Prepara l'insalata mista",
+            "Servi insieme al pane"
+          ],
+          "macros": {
+            "protein": "45g",
+            "carbs": "32g",
+            "fats": "20g",
+            "calories": "490 kcal"
+          }
+        },
+        {
+          "id": "tacchino-verdure-grigliate",
+          "name": "Tacchino ai Ferri con Verdure Grigliate",
+          "difficulty": "facile",
+          "time": 20,
+          "tags": [
+            "proteico",
+            "leggero"
+          ],
+          "ingredients": [
+            "200g fesa di tacchino",
+            "Zucchine, peperoni, melanzane",
+            "60g pane integrale",
+            "Erbe aromatiche",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Griglia il tacchino in padella o piastra",
+            "Griglia le verdure tagliate a fette",
+            "Condisci con olio ed erbe aromatiche",
+            "Servi con pane integrale"
+          ],
+          "macros": {
+            "protein": "45g",
+            "carbs": "34g",
+            "fats": "14g",
+            "calories": "450 kcal"
+          }
+        },
+        {
+          "id": "vellutata-vitello",
+          "name": "Vellutata di Verdure con Vitello",
+          "difficulty": "media",
+          "time": 35,
+          "tags": [
+            "comfort",
+            "completo"
+          ],
+          "ingredients": [
+            "200g vitello magro",
+            "200g zucca",
+            "150g patate",
+            "Carote, sedano",
+            "Brodo vegetale",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Taglia verdure a cubetti, cuoci in brodo 20 minuti",
+            "Frulla fino a ottenere una vellutata",
+            "Cuoci il vitello in padella",
+            "Servi la vellutata con il vitello"
+          ],
+          "macros": {
+            "protein": "44g",
+            "carbs": "32g",
+            "fats": "16g",
+            "calories": "460 kcal"
+          }
+        },
+        {
+          "id": "omelette-verdure",
+          "name": "Omelette con Verdure e Formaggio",
+          "difficulty": "facile",
+          "time": 12,
+          "tags": [
+            "veloce",
+            "proteico"
+          ],
+          "ingredients": [
+            "2 uova + 100g albume",
+            "Zucchine, peperoni",
+            "30g formaggio light",
+            "Insalata",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Salta le verdure in padella",
+            "Sbatti uova e albume, versa in padella",
+            "Aggiungi verdure e formaggio, piega a metà",
+            "Servi con insalata"
+          ],
+          "macros": {
+            "protein": "38g",
+            "carbs": "12g",
+            "fats": "18g",
+            "calories": "370 kcal"
+          }
+        },
+        {
+          "id": "branzino-forno",
+          "name": "Branzino al Forno con Patate",
+          "difficulty": "media",
+          "time": 40,
+          "tags": [
+            "pesce",
+            "completo"
+          ],
+          "ingredients": [
+            "250g branzino",
+            "200g patate",
+            "Limone, rosmarino",
+            "Verdure di contorno",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Pulisci il branzino, condisci con limone e rosmarino",
+            "Taglia le patate a spicchi",
+            "Disponi in teglia branzino e patate, condisci con olio",
+            "Inforna a 180°C per 30 minuti",
+            "Servi con verdure"
+          ],
+          "macros": {
+            "protein": "48g",
+            "carbs": "38g",
+            "fats": "16g",
+            "calories": "500 kcal"
+          }
+        },
+        {
+          "id": "burger-pollo-insalata",
+          "name": "Burger di Pollo con Insalata",
+          "difficulty": "facile",
+          "time": 20,
+          "tags": [
+            "proteico",
+            "veloce"
+          ],
+          "ingredients": [
+            "150g macinato di pollo",
+            "1 panino integrale (60g)",
+            "Insalata, pomodoro",
+            "Senape, yogurt greco",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Forma un burger con il pollo macinato",
+            "Cuoci in padella 5-6 minuti per lato",
+            "Tosta il panino",
+            "Componi con verdure e salse"
+          ],
+          "macros": {
+            "protein": "40g",
+            "carbs": "32g",
+            "fats": "14g",
+            "calories": "420 kcal"
+          }
+        },
+        {
+          "id": "tonno-fagioli-insalata",
+          "name": "Tonno con Insalata Mista",
+          "difficulty": "facilissimo",
+          "time": 10,
+          "tags": [
+            "velocissimo",
+            "leggero"
+          ],
+          "ingredients": [
+            "200g tonno al naturale",
+            "Insalata mista abbondante",
+            "Pomodorini, cetrioli",
+            "60g pane integrale",
+            "Olio d'oliva, limone"
+          ],
+          "steps": [
+            "Prepara l'insalata con verdure fresche",
+            "Sgocciola il tonno e aggiungi all'insalata",
+            "Condisci con olio e limone",
+            "Servi con pane"
+          ],
+          "macros": {
+            "protein": "42g",
+            "carbs": "30g",
+            "fats": "15g",
+            "calories": "430 kcal"
+          }
+        },
+        {
+          "id": "polpette-tacchino-zucchine",
+          "name": "Polpette di Tacchino con Zucchine",
+          "difficulty": "media",
+          "time": 30,
+          "tags": [
+            "proteico"
+          ],
+          "ingredients": [
+            "200g macinato tacchino",
+            "1 uovo",
+            "Pangrattato, parmigiano",
+            "3 zucchine",
+            "Salsa di pomodoro",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Impasta tacchino, uovo, pangrattato e parmigiano",
+            "Forma polpette e cuoci in padella",
+            "Taglia zucchine a spaghetti o rondelle, salta in padella",
+            "Aggiungi salsa di pomodoro",
+            "Servi polpette con zucchine"
+          ],
+          "macros": {
+            "protein": "46g",
+            "carbs": "18g",
+            "fats": "18g",
+            "calories": "430 kcal"
+          }
+        },
+        {
+          "id": "merluzzo-vapore-verdure",
+          "name": "Merluzzo al Vapore con Verdure",
+          "difficulty": "facile",
+          "time": 25,
+          "tags": [
+            "leggero",
+            "pesce"
+          ],
+          "ingredients": [
+            "250g merluzzo",
+            "Broccoli, carote, fagiolini",
+            "60g pane integrale",
+            "Limone, prezzemolo",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Cuoci il merluzzo al vapore 12-15 minuti",
+            "Cuoci le verdure al vapore",
+            "Condisci pesce e verdure con olio, limone e prezzemolo",
+            "Servi con pane"
+          ],
+          "macros": {
+            "protein": "48g",
+            "carbs": "32g",
+            "fats": "12g",
+            "calories": "440 kcal"
+          }
+        },
+        {
+          "id": "petto-pollo-limone",
+          "name": "Petto di Pollo al Limone con Insalata",
+          "difficulty": "facile",
+          "time": 20,
+          "tags": [
+            "veloce",
+            "leggero"
+          ],
+          "ingredients": [
+            "200g petto di pollo",
+            "Limone, timo",
+            "Insalata mista",
+            "60g pane integrale",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Marina il pollo con limone e timo 10 minuti",
+            "Cuoci in padella 6-7 minuti per lato",
+            "Prepara insalata mista",
+            "Servi insieme al pane"
+          ],
+          "macros": {
+            "protein": "44g",
+            "carbs": "32g",
+            "fats": "14g",
+            "calories": "440 kcal"
+          }
+        },
+        {
+          "id": "uova-verdure",
+          "name": "Uova al Tegamino con Verdure",
+          "difficulty": "facile",
+          "time": 15,
+          "tags": [
+            "veloce",
+            "proteico"
+          ],
+          "ingredients": [
+            "2 uova + 150g albume",
+            "Spinaci, pomodorini",
+            "60g pane integrale",
+            "Parmigiano",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Salta spinaci e pomodorini in padella",
+            "Crea spazi nella padella e aggiungi uova e albume",
+            "Cuoci fino a quando l'albume è rappreso",
+            "Guarnisci con parmigiano",
+            "Servi con pane"
+          ],
+          "macros": {
+            "protein": "42g",
+            "carbs": "34g",
+            "fats": "16g",
+            "calories": "460 kcal"
+          }
+        },
+        {
+          "id": "sogliola-griglia-verdure",
+          "name": "Sogliola alla Griglia con Verdure",
+          "difficulty": "facile",
+          "time": 20,
+          "tags": [
+            "pesce",
+            "leggero"
+          ],
+          "ingredients": [
+            "250g sogliola",
+            "Zucchine, melanzane grigliate",
+            "60g pane integrale",
+            "Limone, prezzemolo",
+            "Olio d'oliva"
+          ],
+          "steps": [
+            "Griglia la sogliola 4-5 minuti per lato",
+            "Griglia le verdure",
+            "Condisci con limone, prezzemolo e olio",
+            "Servi con pane"
+          ],
+          "macros": {
+            "protein": "46g",
+            "carbs": "32g",
+            "fats": "14g",
+            "calories": "450 kcal"
+          }
+        }
+      ]
+    }
+  },
+  "rest": {
+    "colazione": {
+      "name": "Colazione",
+      "time": "8:00-9:00",
+      "description": "Colazione completa e bilanciata",
+      "isImportant": false,
+      "recipes": [
+        {
+          "id": "latte-pane-marmellata",
+          "name": "Latte con Pane Integrale e Marmellata",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "category": "dolce",
+          "tags": [
+            "veloce",
+            "dolce"
+          ],
+          "ingredients": [
+            "250ml latte (o bevanda vegetale)",
+            "90g pane integrale",
+            "2 cucchiai marmellata",
+            "20 mandorle"
+          ],
+          "steps": [
+            "Scalda il latte",
+            "Tosta leggermente il pane",
+            "Spalma la marmellata sul pane",
+            "Accompagna con le mandorle"
+          ],
+          "macros": {
+            "protein": "20g",
+            "carbs": "65g",
+            "fats": "15g",
+            "calories": "480 kcal"
+          }
+        },
+        {
+          "id": "yogurt-cereali-noci",
+          "name": "Yogurt con Cereali e Noci",
+          "difficulty": "facilissimo",
+          "time": 3,
+          "category": "dolce",
+          "tags": [
+            "velocissimo",
+            "dolce"
+          ],
+          "ingredients": [
+            "125g yogurt bianco magro",
+            "50g cereali integrali",
+            "10 noci tritate"
+          ],
+          "steps": [
+            "Versa lo yogurt in una bowl",
+            "Aggiungi cereali e noci",
+            "Mescola"
+          ],
+          "macros": {
+            "protein": "18g",
+            "carbs": "55g",
+            "fats": "12g",
+            "calories": "400 kcal"
+          }
+        },
+        {
+          "id": "pane-bresaola-olio",
+          "name": "Pane Integrale con Bresaola e Olio",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "category": "salato",
+          "tags": [
+            "veloce",
+            "salato",
+            "proteico"
+          ],
+          "ingredients": [
+            "90g pane integrale",
+            "90g bresaola (o fesa tacchino)",
+            "1 cucchiaio olio d'oliva",
+            "Rucola"
+          ],
+          "steps": [
+            "Condisci il pane con olio",
+            "Aggiungi bresaola e rucola"
+          ],
+          "macros": {
+            "protein": "25g",
+            "carbs": "50g",
+            "fats": "10g",
+            "calories": "410 kcal"
+          }
+        },
+        {
+          "id": "gallette-ricotta-miele-noci",
+          "name": "Gallette con Ricotta, Miele e Noci",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "category": "dolce",
+          "tags": [
+            "veloce",
+            "dolce"
+          ],
+          "ingredients": [
+            "40g gallette di riso",
+            "100g ricotta magra",
+            "1 cucchiaio miele",
+            "15g noci"
+          ],
+          "steps": [
+            "Spalma la ricotta sulle gallette",
+            "Aggiungi miele e noci tritate"
+          ],
+          "macros": {
+            "protein": "20g",
+            "carbs": "48g",
+            "fats": "14g",
+            "calories": "400 kcal"
+          }
+        },
+        {
+          "id": "cappuccino-fette-biscottate",
+          "name": "Cappuccino con Fette Biscottate",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "category": "dolce",
+          "tags": [
+            "veloce",
+            "dolce"
+          ],
+          "ingredients": [
+            "200ml latte per cappuccino",
+            "Caffe",
+            "40g fette biscottate",
+            "Marmellata",
+            "15g mandorle"
+          ],
+          "steps": [
+            "Prepara il cappuccino",
+            "Spalma marmellata sulle fette biscottate",
+            "Accompagna con mandorle"
+          ],
+          "macros": {
+            "protein": "16g",
+            "carbs": "52g",
+            "fats": "12g",
+            "calories": "380 kcal"
+          }
+        },
+        {
+          "id": "pancake-proteici-riposo",
+          "name": "Pancake Proteici con Frutta",
+          "difficulty": "media",
+          "time": 15,
+          "category": "dolce",
+          "tags": [
+            "proteico",
+            "dolce"
+          ],
+          "ingredients": [
+            "120g mix pancake proteici",
+            "Miele o marmellata",
+            "Frutti rossi",
+            "15g noci"
+          ],
+          "steps": [
+            "Prepara i pancake secondo istruzioni",
+            "Guarnisci con miele e frutti rossi",
+            "Aggiungi noci"
+          ],
+          "macros": {
+            "protein": "25g",
+            "carbs": "50g",
+            "fats": "14g",
+            "calories": "430 kcal"
+          }
+        },
+        {
+          "id": "pane-uova-salmone",
+          "name": "Pane con Uova e Salmone Affumicato",
+          "difficulty": "facile",
+          "time": 10,
+          "category": "salato",
+          "tags": [
+            "proteico",
+            "salato",
+            "gourmet"
+          ],
+          "ingredients": [
+            "60g pane integrale",
+            "1 uovo + 100g albume",
+            "70g salmone affumicato",
+            "Erba cipollina"
+          ],
+          "steps": [
+            "Tosta il pane",
+            "Prepara uova strapazzate",
+            "Adagia salmone e uova sul pane",
+            "Guarnisci con erba cipollina"
+          ],
+          "macros": {
+            "protein": "32g",
+            "carbs": "42g",
+            "fats": "16g",
+            "calories": "450 kcal"
+          }
+        },
+        {
+          "id": "porridge-mirtilli",
+          "name": "Porridge con Mirtilli e Mandorle",
+          "difficulty": "facile",
+          "time": 10,
+          "category": "dolce",
+          "tags": [
+            "dolce",
+            "energetico"
+          ],
+          "ingredients": [
+            "50g avena",
+            "200ml latte",
+            "80g mirtilli",
+            "20g mandorle",
+            "Miele"
+          ],
+          "steps": [
+            "Cuoci avena nel latte 5-7 minuti",
+            "Aggiungi mirtilli",
+            "Guarnisci con mandorle e miele"
+          ],
+          "macros": {
+            "protein": "18g",
+            "carbs": "58g",
+            "fats": "14g",
+            "calories": "430 kcal"
+          }
+        },
+        {
+          "id": "toast-avocado-uova-riposo",
+          "name": "Toast Avocado e Uova",
+          "difficulty": "facile",
+          "time": 10,
+          "category": "salato",
+          "tags": [
+            "salato",
+            "proteico"
+          ],
+          "ingredients": [
+            "90g pane integrale",
+            "1/2 avocado",
+            "1 uovo + 50g albume",
+            "Sale, pepe, limone"
+          ],
+          "steps": [
+            "Tosta il pane",
+            "Schiaccia avocado con limone",
+            "Prepara uova strapazzate o al tegamino",
+            "Componi il toast"
+          ],
+          "macros": {
+            "protein": "22g",
+            "carbs": "52g",
+            "fats": "16g",
+            "calories": "450 kcal"
+          }
+        },
+        {
+          "id": "smoothie-bowl-riposo",
+          "name": "Smoothie Bowl Completo",
+          "difficulty": "facile",
+          "time": 10,
+          "category": "dolce",
+          "tags": [
+            "dolce",
+            "fresco"
+          ],
+          "ingredients": [
+            "170g yogurt greco",
+            "100g frutti rossi",
+            "30g granola",
+            "15g mandorle",
+            "Miele"
+          ],
+          "steps": [
+            "Frulla yogurt e metà dei frutti rossi",
+            "Versa in bowl",
+            "Guarnisci con granola, mandorle, frutti rossi e miele"
+          ],
+          "macros": {
+            "protein": "22g",
+            "carbs": "54g",
+            "fats": "14g",
+            "calories": "430 kcal"
+          }
+        },
+        {
+          "id": "pane-hummus-verdure",
+          "name": "Pane con Hummus e Verdure",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "category": "salato",
+          "tags": [
+            "veloce",
+            "salato",
+            "vegetariano"
+          ],
+          "ingredients": [
+            "90g pane integrale",
+            "4 cucchiai hummus",
+            "Pomodori, cetrioli",
+            "Rucola"
+          ],
+          "steps": [
+            "Tosta il pane",
+            "Spalma hummus",
+            "Aggiungi verdure fresche"
+          ],
+          "macros": {
+            "protein": "16g",
+            "carbs": "56g",
+            "fats": "12g",
+            "calories": "400 kcal"
+          }
+        },
+        {
+          "id": "muesli-yogurt-frutta",
+          "name": "Muesli con Yogurt e Frutta",
+          "difficulty": "facilissimo",
+          "time": 3,
+          "category": "dolce",
+          "tags": [
+            "velocissimo",
+            "dolce"
+          ],
+          "ingredients": [
+            "50g muesli",
+            "170g yogurt greco",
+            "1 mela a cubetti",
+            "10 noci"
+          ],
+          "steps": [
+            "Mescola muesli e yogurt",
+            "Aggiungi mela e noci"
+          ],
+          "macros": {
+            "protein": "20g",
+            "carbs": "60g",
+            "fats": "13g",
+            "calories": "440 kcal"
+          }
+        },
+        {
+          "id": "cornflakes-latte-frutta",
+          "name": "Cornflakes con Latte e Frutta",
+          "difficulty": "facilissimo",
+          "time": 3,
+          "category": "dolce",
+          "tags": [
+            "velocissimo",
+            "dolce"
+          ],
+          "ingredients": [
+            "50g cornflakes semplici",
+            "250ml latte",
+            "1 kiwi a fette",
+            "15g mandorle"
+          ],
+          "steps": [
+            "Versa cornflakes e latte in una bowl",
+            "Aggiungi kiwi e mandorle"
+          ],
+          "macros": {
+            "protein": "18g",
+            "carbs": "58g",
+            "fats": "14g",
+            "calories": "430 kcal"
+          }
+        },
+        {
+          "id": "toast-ricotta-miele-riposo",
+          "name": "Toast con Ricotta e Miele",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "category": "dolce",
+          "tags": [
+            "veloce",
+            "dolce"
+          ],
+          "ingredients": [
+            "90g pane integrale",
+            "100g ricotta magra",
+            "2 cucchiai miele",
+            "15g noci",
+            "Cannella"
+          ],
+          "steps": [
+            "Tosta il pane",
+            "Spalma ricotta",
+            "Aggiungi miele, noci e cannella"
+          ],
+          "macros": {
+            "protein": "22g",
+            "carbs": "60g",
+            "fats": "15g",
+            "calories": "470 kcal"
+          }
+        }
+      ]
+    },
+    "spuntino": {
+      "name": "Spuntino Mattina",
+      "time": "11:00",
+      "description": "Snack leggero meta mattina",
+      "isImportant": false,
+      "recipes": [
+        {
+          "id": "cracker-frutta-riposo",
+          "name": "Cracker e Frutta",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce"
+          ],
+          "ingredients": [
+            "40g cracker integrali",
+            "1 mela"
+          ],
+          "steps": [
+            "Accompagna i cracker con la frutta"
+          ],
+          "macros": {
+            "protein": "4g",
+            "carbs": "38g",
+            "fats": "4g",
+            "calories": "200 kcal"
+          }
+        },
+        {
+          "id": "gallette-frutta",
+          "name": "Gallette e Frutta",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce"
+          ],
+          "ingredients": [
+            "40g gallette di riso",
+            "1 pera"
+          ],
+          "steps": [
+            "Accompagna le gallette con la frutta"
+          ],
+          "macros": {
+            "protein": "3g",
+            "carbs": "40g",
+            "fats": "2g",
+            "calories": "190 kcal"
+          }
+        },
+        {
+          "id": "parmigiano-verdure",
+          "name": "Parmigiano e Verdure Crude",
+          "difficulty": "facilissimo",
+          "time": 3,
+          "tags": [
+            "veloce",
+            "proteico"
+          ],
+          "ingredients": [
+            "20g parmigiano a cubetti",
+            "Finocchi, carote, sedano"
+          ],
+          "steps": [
+            "Taglia verdure a bastoncini",
+            "Accompagna con parmigiano"
+          ],
+          "macros": {
+            "protein": "8g",
+            "carbs": "6g",
+            "fats": "6g",
+            "calories": "110 kcal"
+          }
+        },
+        {
+          "id": "cioccolato-fondente-frutta",
+          "name": "Cioccolato Fondente e Frutta",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce",
+            "dolce"
+          ],
+          "ingredients": [
+            "30g cioccolato fondente 85%",
+            "1 arancia"
+          ],
+          "steps": [
+            "Accompagna il cioccolato con l'arancia"
+          ],
+          "macros": {
+            "protein": "3g",
+            "carbs": "28g",
+            "fats": "12g",
+            "calories": "230 kcal"
+          }
+        },
+        {
+          "id": "frutta-guscio-frutta-riposo",
+          "name": "Frutta a Guscio e Frutta Fresca",
+          "difficulty": "facilissimo",
+          "time": 1,
+          "tags": [
+            "velocissimo"
+          ],
+          "ingredients": [
+            "10g mandorle o noci",
+            "1 kiwi"
+          ],
+          "steps": [
+            "Accompagna frutta secca con frutta fresca"
+          ],
+          "macros": {
+            "protein": "3g",
+            "carbs": "18g",
+            "fats": "6g",
+            "calories": "130 kcal"
+          }
+        },
+        {
+          "id": "yogurt-cocco-riposo",
+          "name": "Yogurt con Cocco",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce"
+          ],
+          "ingredients": [
+            "125g yogurt magro",
+            "20g cocco disidratato"
+          ],
+          "steps": [
+            "Mescola yogurt e cocco"
+          ],
+          "macros": {
+            "protein": "5g",
+            "carbs": "20g",
+            "fats": "8g",
+            "calories": "170 kcal"
+          }
+        },
+        {
+          "id": "verdure-crude-pinzimonio",
+          "name": "Verdure Crude in Pinzimonio",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "tags": [
+            "veloce",
+            "leggero"
+          ],
+          "ingredients": [
+            "Finocchi, carote, sedano, peperoni",
+            "Olio, sale"
+          ],
+          "steps": [
+            "Taglia verdure a bastoncini",
+            "Prepara pinzimonio con olio e sale"
+          ],
+          "macros": {
+            "protein": "2g",
+            "carbs": "8g",
+            "fats": "5g",
+            "calories": "80 kcal"
+          }
+        },
+        {
+          "id": "lupini-verdure",
+          "name": "Lupini e Verdure Crude",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce",
+            "proteico"
+          ],
+          "ingredients": [
+            "90g lupini",
+            "Finocchi, carote"
+          ],
+          "steps": [
+            "Accompagna lupini con verdure"
+          ],
+          "macros": {
+            "protein": "10g",
+            "carbs": "8g",
+            "fats": "2g",
+            "calories": "90 kcal"
+          }
+        },
+        {
+          "id": "barretta-proteica-riposo",
+          "name": "Barretta Proteica",
+          "difficulty": "facilissimo",
+          "time": 1,
+          "tags": [
+            "velocissimo"
+          ],
+          "ingredients": [
+            "1 barretta proteica"
+          ],
+          "steps": [
+            "Apri e mangia"
+          ],
+          "macros": {
+            "protein": "20g",
+            "carbs": "20g",
+            "fats": "8g",
+            "calories": "230 kcal"
+          }
+        },
+        {
+          "id": "pizza-farcita",
+          "name": "Trancio di Pizza Farcita",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce"
+          ],
+          "ingredients": [
+            "130g pizza farcita (verdure, prosciutto)"
+          ],
+          "steps": [
+            "Scalda e mangia"
+          ],
+          "macros": {
+            "protein": "12g",
+            "carbs": "45g",
+            "fats": "10g",
+            "calories": "320 kcal"
+          }
+        },
+        {
+          "id": "pane-affettato",
+          "name": "Panino con Affettato Magro",
+          "difficulty": "facilissimo",
+          "time": 3,
+          "tags": [
+            "veloce",
+            "proteico"
+          ],
+          "ingredients": [
+            "60g pane",
+            "50g bresaola o fesa tacchino"
+          ],
+          "steps": [
+            "Componi il panino"
+          ],
+          "macros": {
+            "protein": "18g",
+            "carbs": "32g",
+            "fats": "4g",
+            "calories": "240 kcal"
+          }
+        },
+        {
+          "id": "frutta-secca-uvetta",
+          "name": "Mix Frutta Secca e Uvetta",
+          "difficulty": "facilissimo",
+          "time": 1,
+          "tags": [
+            "velocissimo"
+          ],
+          "ingredients": [
+            "10g mandorle",
+            "10g noci",
+            "20g uvetta"
+          ],
+          "steps": [
+            "Mescola e mangia"
+          ],
+          "macros": {
+            "protein": "3g",
+            "carbs": "22g",
+            "fats": "8g",
+            "calories": "170 kcal"
+          }
+        }
+      ]
+    },
+    "pranzo": {
+      "name": "Pranzo",
+      "time": "13:00-14:00",
+      "description": "Pasto completo: Proteine + Carboidrati + Verdure + Grassi",
+      "isImportant": false,
+      "recipes": [
+        {
+          "id": "pasta-tonno-verdure",
+          "name": "Pasta con Tonno e Verdure",
+          "difficulty": "facile",
+          "time": 15,
+          "tags": [
+            "veloce",
+            "completo"
+          ],
+          "ingredients": [
+            "130g pasta",
+            "180g tonno al naturale",
+            "Verdure miste (zucchine, pomodorini)",
+            "20g olio d'oliva"
+          ],
+          "steps": [
+            "Cuoci la pasta",
+            "Salta le verdure in padella",
+            "Aggiungi tonno sgocciolato",
+            "Mescola con la pasta e condisci con olio"
+          ],
+          "macros": {
+            "protein": "40g",
+            "carbs": "65g",
+            "fats": "20g",
+            "calories": "590 kcal"
+          }
+        },
+        {
+          "id": "riso-legumi-verdure",
+          "name": "Riso e Hummus con Verdure",
+          "difficulty": "facile",
+          "time": 20,
+          "tags": [
+            "vegetariano",
+            "completo"
+          ],
+          "ingredients": [
+            "130g riso",
+            "4 cucchiai hummus",
+            "Verdure miste grigliate",
+            "20g olio d'oliva"
+          ],
+          "steps": [
+            "Cuoci il riso",
+            "Griglia le verdure",
+            "Servi riso con hummus e verdure",
+            "Condisci con olio"
+          ],
+          "macros": {
+            "protein": "14g",
+            "carbs": "70g",
+            "fats": "20g",
+            "calories": "520 kcal"
+          }
+        },
+        {
+          "id": "quinoa-pollo-verdure-riposo",
+          "name": "Quinoa con Pollo e Verdure",
+          "difficulty": "facile",
+          "time": 25,
+          "tags": [
+            "completo",
+            "proteico"
+          ],
+          "ingredients": [
+            "130g quinoa",
+            "150g pollo",
+            "Verdure miste",
+            "20g olio"
+          ],
+          "steps": [
+            "Cuoci quinoa",
+            "Griglia pollo",
+            "Griglia verdure",
+            "Componi il piatto"
+          ],
+          "macros": {
+            "protein": "42g",
+            "carbs": "60g",
+            "fats": "20g",
+            "calories": "580 kcal"
+          }
+        },
+        {
+          "id": "pane-tacchino-finocchi",
+          "name": "Pane con Fesa di Tacchino e Finocchi",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "tags": [
+            "velocissimo",
+            "proteico"
+          ],
+          "ingredients": [
+            "90g pane integrale",
+            "100g fesa tacchino",
+            "Finocchi freschi",
+            "20g olio"
+          ],
+          "steps": [
+            "Componi panino con tacchino",
+            "Accompagna con finocchi",
+            "Condisci con olio"
+          ],
+          "macros": {
+            "protein": "28g",
+            "carbs": "50g",
+            "fats": "15g",
+            "calories": "460 kcal"
+          }
+        },
+        {
+          "id": "insalata-riso-pollo",
+          "name": "Insalata di Riso con Pollo",
+          "difficulty": "facile",
+          "time": 20,
+          "tags": [
+            "fresco",
+            "completo"
+          ],
+          "ingredients": [
+            "130g riso",
+            "150g pollo",
+            "Verdure miste (pomodori, cetrioli, olive)",
+            "20g olio"
+          ],
+          "steps": [
+            "Cuoci riso e fallo raffreddare",
+            "Griglia pollo e taglialo a cubetti",
+            "Mescola riso, pollo e verdure",
+            "Condisci con olio"
+          ],
+          "macros": {
+            "protein": "40g",
+            "carbs": "62g",
+            "fats": "20g",
+            "calories": "580 kcal"
+          }
+        },
+        {
+          "id": "pasta-verdure-parmigiano",
+          "name": "Pasta con Verdure e Parmigiano",
+          "difficulty": "facile",
+          "time": 15,
+          "tags": [
+            "vegetariano",
+            "veloce"
+          ],
+          "ingredients": [
+            "130g pasta",
+            "50g parmigiano grattugiato",
+            "Verdure miste (zucchine, pomodorini)",
+            "20g olio"
+          ],
+          "steps": [
+            "Cuoci pasta",
+            "Salta verdure",
+            "Mescola con parmigiano e olio"
+          ],
+          "macros": {
+            "protein": "26g",
+            "carbs": "65g",
+            "fats": "22g",
+            "calories": "550 kcal"
+          }
+        },
+        {
+          "id": "piadina-pollo-verdure-riposo",
+          "name": "Piadina con Pollo e Verdure",
+          "difficulty": "facile",
+          "time": 15,
+          "tags": [
+            "veloce",
+            "pratico"
+          ],
+          "ingredients": [
+            "1 piadina (120g)",
+            "150g pollo grigliato",
+            "Insalata, pomodori",
+            "Yogurt greco o hummus"
+          ],
+          "steps": [
+            "Scalda piadina",
+            "Aggiungi pollo e verdure",
+            "Condisci con yogurt o hummus",
+            "Arrotola"
+          ],
+          "macros": {
+            "protein": "38g",
+            "carbs": "58g",
+            "fats": "18g",
+            "calories": "540 kcal"
+          }
+        },
+        {
+          "id": "focaccia-verdure-mozzarella",
+          "name": "Focaccia con Verdure e Mozzarella",
+          "difficulty": "facile",
+          "time": 10,
+          "tags": [
+            "veloce",
+            "vegetariano"
+          ],
+          "ingredients": [
+            "200g focaccia",
+            "125g mozzarella magra",
+            "Verdure grigliate",
+            "Olio"
+          ],
+          "steps": [
+            "Taglia focaccia a metà",
+            "Farcisci con mozzarella e verdure",
+            "Scalda leggermente"
+          ],
+          "macros": {
+            "protein": "30g",
+            "carbs": "70g",
+            "fats": "22g",
+            "calories": "600 kcal"
+          }
+        },
+        {
+          "id": "pasta-salmone-affumicato",
+          "name": "Pasta con Salmone Affumicato",
+          "difficulty": "facile",
+          "time": 15,
+          "tags": [
+            "veloce",
+            "pesce"
+          ],
+          "ingredients": [
+            "130g pasta",
+            "100g salmone affumicato",
+            "Panna light o yogurt greco",
+            "Erba cipollina",
+            "Olio"
+          ],
+          "steps": [
+            "Cuoci pasta",
+            "Prepara salsa con yogurt ed erba cipollina",
+            "Aggiungi salmone a pezzetti",
+            "Mescola con la pasta"
+          ],
+          "macros": {
+            "protein": "32g",
+            "carbs": "62g",
+            "fats": "18g",
+            "calories": "530 kcal"
+          }
+        },
+        {
+          "id": "riso-pesce-verdure",
+          "name": "Riso con Pesce e Verdure",
+          "difficulty": "media",
+          "time": 25,
+          "tags": [
+            "completo",
+            "pesce"
+          ],
+          "ingredients": [
+            "130g riso",
+            "150g pesce magro",
+            "Verdure miste",
+            "20g olio"
+          ],
+          "steps": [
+            "Cuoci riso",
+            "Cuoci pesce al vapore o in padella",
+            "Salta verdure",
+            "Servi insieme"
+          ],
+          "macros": {
+            "protein": "38g",
+            "carbs": "62g",
+            "fats": "20g",
+            "calories": "560 kcal"
+          }
+        },
+        {
+          "id": "bowl-farro-verdure-feta",
+          "name": "Bowl di Farro con Verdure e Feta",
+          "difficulty": "facile",
+          "time": 25,
+          "tags": [
+            "completo",
+            "vegetariano"
+          ],
+          "ingredients": [
+            "130g farro",
+            "125g feta",
+            "Verdure grigliate",
+            "20g olio",
+            "Olive"
+          ],
+          "steps": [
+            "Cuoci farro",
+            "Griglia verdure",
+            "Componi bowl con farro, verdure, feta e olive",
+            "Condisci con olio"
+          ],
+          "macros": {
+            "protein": "28g",
+            "carbs": "60g",
+            "fats": "24g",
+            "calories": "560 kcal"
+          }
+        },
+        {
+          "id": "panino-tonno-verdure",
+          "name": "Panino con Tonno e Verdure",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "tags": [
+            "velocissimo"
+          ],
+          "ingredients": [
+            "90g pane",
+            "180g tonno al naturale",
+            "Insalata, pomodori",
+            "Olio"
+          ],
+          "steps": [
+            "Componi panino con tonno e verdure",
+            "Condisci con olio"
+          ],
+          "macros": {
+            "protein": "38g",
+            "carbs": "50g",
+            "fats": "15g",
+            "calories": "490 kcal"
+          }
+        },
+        {
+          "id": "couscous-verdure-hummus",
+          "name": "Couscous con Verdure e Hummus",
+          "difficulty": "facile",
+          "time": 15,
+          "tags": [
+            "veloce",
+            "vegetariano"
+          ],
+          "ingredients": [
+            "130g couscous",
+            "4 cucchiai hummus",
+            "Verdure grigliate",
+            "20g olio"
+          ],
+          "steps": [
+            "Prepara couscous",
+            "Griglia verdure",
+            "Servi con hummus",
+            "Condisci con olio"
+          ],
+          "macros": {
+            "protein": "16g",
+            "carbs": "68g",
+            "fats": "22g",
+            "calories": "530 kcal"
+          }
+        },
+        {
+          "id": "patate-pesce-verdure",
+          "name": "Patate al Forno con Pesce",
+          "difficulty": "media",
+          "time": 35,
+          "tags": [
+            "completo",
+            "pesce"
+          ],
+          "ingredients": [
+            "300g patate",
+            "150g pesce magro",
+            "Verdure",
+            "20g olio"
+          ],
+          "steps": [
+            "Cuoci patate al forno",
+            "Cuoci pesce",
+            "Prepara verdure",
+            "Servi insieme"
+          ],
+          "macros": {
+            "protein": "35g",
+            "carbs": "58g",
+            "fats": "20g",
+            "calories": "540 kcal"
+          }
+        },
+        {
+          "id": "insalata-pollo-avocado",
+          "name": "Insalatona con Pollo e Avocado",
+          "difficulty": "facile",
+          "time": 15,
+          "tags": [
+            "fresco",
+            "proteico"
+          ],
+          "ingredients": [
+            "150g pollo grigliato",
+            "1 avocado",
+            "Insalata mista abbondante",
+            "40g pane",
+            "Olio, limone"
+          ],
+          "steps": [
+            "Taglia pollo a strisce",
+            "Taglia avocado a cubetti",
+            "Componi insalata",
+            "Condisci con olio e limone",
+            "Accompagna con pane"
+          ],
+          "macros": {
+            "protein": "38g",
+            "carbs": "42g",
+            "fats": "24g",
+            "calories": "540 kcal"
+          }
+        },
+        {
+          "id": "pasta-ricotta-verdure",
+          "name": "Pasta con Ricotta e Verdure",
+          "difficulty": "facile",
+          "time": 15,
+          "tags": [
+            "veloce",
+            "vegetariano"
+          ],
+          "ingredients": [
+            "130g pasta",
+            "100g ricotta magra",
+            "Spinaci o zucchine",
+            "Parmigiano",
+            "Olio"
+          ],
+          "steps": [
+            "Cuoci pasta",
+            "Salta verdure",
+            "Mescola pasta, ricotta e verdure",
+            "Guarnisci con parmigiano"
+          ],
+          "macros": {
+            "protein": "26g",
+            "carbs": "64g",
+            "fats": "18g",
+            "calories": "520 kcal"
+          }
+        }
+      ]
+    },
+    "merenda": {
+      "name": "Merenda Pomeriggio",
+      "time": "16:30",
+      "description": "Snack pomeridiano",
+      "isImportant": false,
+      "recipes": [
+        {
+          "id": "yogurt-cocco-pom",
+          "name": "Yogurt con Cocco",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce"
+          ],
+          "ingredients": [
+            "125g yogurt magro",
+            "20g cocco disidratato"
+          ],
+          "steps": [
+            "Mescola yogurt e cocco"
+          ],
+          "macros": {
+            "protein": "5g",
+            "carbs": "20g",
+            "fats": "8g",
+            "calories": "170 kcal"
+          }
+        },
+        {
+          "id": "frutta-noci-pom",
+          "name": "Frutta e Noci",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce"
+          ],
+          "ingredients": [
+            "10g noci",
+            "1 frutto"
+          ],
+          "steps": [
+            "Accompagna frutta con noci"
+          ],
+          "macros": {
+            "protein": "3g",
+            "carbs": "20g",
+            "fats": "6g",
+            "calories": "140 kcal"
+          }
+        },
+        {
+          "id": "lupini-verdure-pom",
+          "name": "Lupini con Verdure",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "proteico"
+          ],
+          "ingredients": [
+            "90g lupini",
+            "Verdure crude"
+          ],
+          "steps": [
+            "Accompagna lupini con verdure"
+          ],
+          "macros": {
+            "protein": "10g",
+            "carbs": "8g",
+            "fats": "2g",
+            "calories": "90 kcal"
+          }
+        },
+        {
+          "id": "pizza-farcita-pom",
+          "name": "Trancio Pizza",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "veloce"
+          ],
+          "ingredients": [
+            "130g pizza farcita"
+          ],
+          "steps": [
+            "Scalda e mangia"
+          ],
+          "macros": {
+            "protein": "12g",
+            "carbs": "45g",
+            "fats": "10g",
+            "calories": "320 kcal"
+          }
+        },
+        {
+          "id": "barretta-pom",
+          "name": "Barretta Proteica",
+          "difficulty": "facilissimo",
+          "time": 1,
+          "tags": [
+            "velocissimo"
+          ],
+          "ingredients": [
+            "1 barretta proteica"
+          ],
+          "steps": [
+            "Apri e mangia"
+          ],
+          "macros": {
+            "protein": "20g",
+            "carbs": "20g",
+            "fats": "8g",
+            "calories": "230 kcal"
+          }
+        },
+        {
+          "id": "crackers-formaggio",
+          "name": "Crackers con Formaggio",
+          "difficulty": "facilissimo",
+          "time": 3,
+          "tags": [
+            "veloce"
+          ],
+          "ingredients": [
+            "30g crackers",
+            "30g formaggio magro"
+          ],
+          "steps": [
+            "Accompagna crackers con formaggio"
+          ],
+          "macros": {
+            "protein": "10g",
+            "carbs": "22g",
+            "fats": "8g",
+            "calories": "200 kcal"
+          }
+        },
+        {
+          "id": "frutta-cioccolato-pom",
+          "name": "Frutta e Cioccolato",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "dolce"
+          ],
+          "ingredients": [
+            "1 frutto",
+            "20g cioccolato fondente"
+          ],
+          "steps": [
+            "Accompagna frutta con cioccolato"
+          ],
+          "macros": {
+            "protein": "2g",
+            "carbs": "28g",
+            "fats": "8g",
+            "calories": "190 kcal"
+          }
+        },
+        {
+          "id": "pane-marmellata-pom",
+          "name": "Pane con Marmellata",
+          "difficulty": "facilissimo",
+          "time": 3,
+          "tags": [
+            "veloce",
+            "dolce"
+          ],
+          "ingredients": [
+            "45g pane",
+            "2 cucchiai marmellata"
+          ],
+          "steps": [
+            "Spalma marmellata sul pane"
+          ],
+          "macros": {
+            "protein": "3g",
+            "carbs": "38g",
+            "fats": "2g",
+            "calories": "180 kcal"
+          }
+        },
+        {
+          "id": "smoothie-pom",
+          "name": "Smoothie Frutta e Yogurt",
+          "difficulty": "facile",
+          "time": 5,
+          "tags": [
+            "fresco"
+          ],
+          "ingredients": [
+            "125g yogurt",
+            "100g frutta mista",
+            "Latte"
+          ],
+          "steps": [
+            "Frulla tutti gli ingredienti"
+          ],
+          "macros": {
+            "protein": "8g",
+            "carbs": "25g",
+            "fats": "3g",
+            "calories": "160 kcal"
+          }
+        },
+        {
+          "id": "toast-hummus-pom",
+          "name": "Toast con Hummus",
+          "difficulty": "facilissimo",
+          "time": 3,
+          "tags": [
+            "veloce"
+          ],
+          "ingredients": [
+            "45g pane",
+            "3 cucchiai hummus"
+          ],
+          "steps": [
+            "Tosta pane",
+            "Spalma hummus"
+          ],
+          "macros": {
+            "protein": "7g",
+            "carbs": "30g",
+            "fats": "8g",
+            "calories": "220 kcal"
+          }
+        }
+      ]
+    },
+    "cena": {
+      "name": "Cena",
+      "time": "20:00-20:30",
+      "description": "Proteine + Verdure + Carboidrati moderati",
+      "isImportant": false,
+      "recipes": [
+        {
+          "id": "orata-patate-verdure",
+          "name": "Orata al Forno con Patate",
+          "difficulty": "media",
+          "time": 35,
+          "tags": [
+            "pesce",
+            "completo"
+          ],
+          "ingredients": [
+            "200g orata",
+            "300g patate",
+            "Verdure",
+            "20g olio"
+          ],
+          "steps": [
+            "Condisci orata con limone ed erbe",
+            "Taglia patate a spicchi",
+            "Inforna insieme a 180°C per 30 minuti",
+            "Aggiungi verdure"
+          ],
+          "macros": {
+            "protein": "45g",
+            "carbs": "50g",
+            "fats": "20g",
+            "calories": "560 kcal"
+          }
+        },
+        {
+          "id": "tacchino-verdure-pane",
+          "name": "Tacchino ai Ferri con Verdure",
+          "difficulty": "facile",
+          "time": 20,
+          "tags": [
+            "proteico",
+            "veloce"
+          ],
+          "ingredients": [
+            "250g tacchino",
+            "60g pane integrale",
+            "Verdure grigliate",
+            "20g olio"
+          ],
+          "steps": [
+            "Griglia tacchino",
+            "Griglia verdure",
+            "Servi con pane"
+          ],
+          "macros": {
+            "protein": "50g",
+            "carbs": "30g",
+            "fats": "20g",
+            "calories": "500 kcal"
+          }
+        },
+        {
+          "id": "minestrone-verdure-patate",
+          "name": "Minestrone di Verdure con Patate",
+          "difficulty": "media",
+          "time": 35,
+          "tags": [
+            "vegetariano",
+            "comfort"
+          ],
+          "ingredients": [
+            "Verdure miste abbondanti",
+            "200g patate",
+            "100g hummus (come fonte proteica)",
+            "20g olio"
+          ],
+          "steps": [
+            "Taglia verdure e patate",
+            "Cuoci in brodo 25 minuti",
+            "Servi con hummus a parte",
+            "Condisci con olio"
+          ],
+          "macros": {
+            "protein": "12g",
+            "carbs": "45g",
+            "fats": "20g",
+            "calories": "400 kcal"
+          }
+        },
+        {
+          "id": "vellutata-patate-zucca-vitello",
+          "name": "Vellutata di Patate e Zucca con Vitello",
+          "difficulty": "media",
+          "time": 40,
+          "tags": [
+            "comfort",
+            "completo"
+          ],
+          "ingredients": [
+            "250g vitello",
+            "200g zucca",
+            "100g patate",
+            "Brodo",
+            "20g olio"
+          ],
+          "steps": [
+            "Cuoci zucca e patate in brodo",
+            "Frulla per ottenere vellutata",
+            "Cuoci vitello in padella",
+            "Servi insieme"
+          ],
+          "macros": {
+            "protein": "48g",
+            "carbs": "35g",
+            "fats": "20g",
+            "calories": "520 kcal"
+          }
+        },
+        {
+          "id": "pollo-insalata-riposo",
+          "name": "Pollo Grigliato con Insalata Mista",
+          "difficulty": "facile",
+          "time": 20,
+          "tags": [
+            "leggero",
+            "proteico"
+          ],
+          "ingredients": [
+            "250g pollo",
+            "Insalata mista abbondante",
+            "60g pane",
+            "20g olio"
+          ],
+          "steps": [
+            "Griglia pollo",
+            "Prepara insalata",
+            "Condisci con olio",
+            "Servi con pane"
+          ],
+          "macros": {
+            "protein": "52g",
+            "carbs": "32g",
+            "fats": "20g",
+            "calories": "520 kcal"
+          }
+        },
+        {
+          "id": "salmone-verdure-riposo",
+          "name": "Salmone al Forno con Verdure",
+          "difficulty": "facile",
+          "time": 25,
+          "tags": [
+            "pesce",
+            "completo"
+          ],
+          "ingredients": [
+            "200g salmone",
+            "Verdure miste",
+            "60g pane",
+            "20g olio"
+          ],
+          "steps": [
+            "Condisci salmone",
+            "Disponi verdure in teglia",
+            "Inforna 20 minuti a 180°C",
+            "Servi con pane"
+          ],
+          "macros": {
+            "protein": "44g",
+            "carbs": "32g",
+            "fats": "24g",
+            "calories": "520 kcal"
+          }
+        },
+        {
+          "id": "frittata-verdure-insalata",
+          "name": "Frittata di Verdure con Insalata",
+          "difficulty": "facile",
+          "time": 15,
+          "tags": [
+            "vegetariano",
+            "veloce"
+          ],
+          "ingredients": [
+            "2 uova + 150g albume",
+            "Zucchine, peperoni",
+            "Insalata",
+            "60g pane",
+            "Olio"
+          ],
+          "steps": [
+            "Salta verdure",
+            "Prepara frittata",
+            "Servi con insalata e pane"
+          ],
+          "macros": {
+            "protein": "40g",
+            "carbs": "34g",
+            "fats": "18g",
+            "calories": "460 kcal"
+          }
+        },
+        {
+          "id": "pesce-vapore-patate",
+          "name": "Pesce al Vapore con Patate",
+          "difficulty": "facile",
+          "time": 25,
+          "tags": [
+            "leggero",
+            "pesce"
+          ],
+          "ingredients": [
+            "250g pesce bianco",
+            "200g patate",
+            "Verdure al vapore",
+            "20g olio"
+          ],
+          "steps": [
+            "Cuoci pesce al vapore",
+            "Cuoci patate",
+            "Cuoci verdure al vapore",
+            "Condisci con olio e limone"
+          ],
+          "macros": {
+            "protein": "48g",
+            "carbs": "42g",
+            "fats": "20g",
+            "calories": "540 kcal"
+          }
+        },
+        {
+          "id": "hamburger-manzo-verdure",
+          "name": "Hamburger di Manzo con Verdure",
+          "difficulty": "media",
+          "time": 25,
+          "tags": [
+            "proteico"
+          ],
+          "ingredients": [
+            "200g manzo magro macinato",
+            "1 panino integrale (60g)",
+            "Verdure grigliate",
+            "Insalata"
+          ],
+          "steps": [
+            "Forma hamburger",
+            "Griglia 5-6 minuti per lato",
+            "Griglia verdure",
+            "Componi burger"
+          ],
+          "macros": {
+            "protein": "46g",
+            "carbs": "34g",
+            "fats": "20g",
+            "calories": "510 kcal"
+          }
+        },
+        {
+          "id": "spiedini-pollo-verdure",
+          "name": "Spiedini di Pollo e Verdure",
+          "difficulty": "media",
+          "time": 25,
+          "tags": [
+            "proteico",
+            "completo"
+          ],
+          "ingredients": [
+            "250g pollo a cubetti",
+            "Peperoni, zucchine, cipolle",
+            "60g pane",
+            "20g olio"
+          ],
+          "steps": [
+            "Prepara spiedini alternando pollo e verdure",
+            "Griglia o cuoci in forno",
+            "Servi con pane"
+          ],
+          "macros": {
+            "protein": "50g",
+            "carbs": "32g",
+            "fats": "20g",
+            "calories": "510 kcal"
+          }
+        },
+        {
+          "id": "tonno-insalata-patate",
+          "name": "Tonno con Insalata e Patate",
+          "difficulty": "facile",
+          "time": 25,
+          "tags": [
+            "completo",
+            "veloce"
+          ],
+          "ingredients": [
+            "200g tonno al naturale",
+            "200g patate lesse",
+            "Insalata mista",
+            "20g olio"
+          ],
+          "steps": [
+            "Lessa patate",
+            "Prepara insalata",
+            "Sgocciola tonno",
+            "Componi piatto e condisci"
+          ],
+          "macros": {
+            "protein": "42g",
+            "carbs": "40g",
+            "fats": "20g",
+            "calories": "510 kcal"
+          }
+        },
+        {
+          "id": "ricotta-verdure-pane",
+          "name": "Ricotta con Verdure e Pane",
+          "difficulty": "facile",
+          "time": 15,
+          "tags": [
+            "vegetariano",
+            "leggero"
+          ],
+          "ingredients": [
+            "125g ricotta magra",
+            "Verdure grigliate abbondanti",
+            "60g pane",
+            "20g olio"
+          ],
+          "steps": [
+            "Griglia verdure",
+            "Servi ricotta con verdure",
+            "Accompagna con pane",
+            "Condisci con olio"
+          ],
+          "macros": {
+            "protein": "20g",
+            "carbs": "36g",
+            "fats": "22g",
+            "calories": "420 kcal"
+          }
+        },
+        {
+          "id": "branzino-verdure",
+          "name": "Branzino al Forno con Verdure",
+          "difficulty": "media",
+          "time": 35,
+          "tags": [
+            "pesce",
+            "completo"
+          ],
+          "ingredients": [
+            "250g branzino",
+            "Verdure miste",
+            "60g pane",
+            "20g olio"
+          ],
+          "steps": [
+            "Pulisci branzino",
+            "Disponi con verdure in teglia",
+            "Inforna 30 minuti",
+            "Servi con pane"
+          ],
+          "macros": {
+            "protein": "48g",
+            "carbs": "32g",
+            "fats": "20g",
+            "calories": "500 kcal"
+          }
+        },
+        {
+          "id": "polpette-verdure-sugo",
+          "name": "Polpette al Sugo con Verdure",
+          "difficulty": "media",
+          "time": 30,
+          "tags": [
+            "proteico",
+            "comfort"
+          ],
+          "ingredients": [
+            "200g carne macinata magra",
+            "Salsa pomodoro",
+            "Verdure",
+            "60g pane"
+          ],
+          "steps": [
+            "Prepara polpette",
+            "Cuoci in salsa di pomodoro",
+            "Prepara verdure",
+            "Servi con pane"
+          ],
+          "macros": {
+            "protein": "44g",
+            "carbs": "36g",
+            "fats": "20g",
+            "calories": "510 kcal"
+          }
+        },
+        {
+          "id": "uova-verdure-pane-riposo",
+          "name": "Uova con Verdure e Pane",
+          "difficulty": "facile",
+          "time": 15,
+          "tags": [
+            "veloce",
+            "proteico"
+          ],
+          "ingredients": [
+            "2 uova + 150g albume",
+            "Verdure miste",
+            "60g pane",
+            "20g olio"
+          ],
+          "steps": [
+            "Salta verdure",
+            "Prepara uova (strapazzate o al tegamino)",
+            "Servi con pane"
+          ],
+          "macros": {
+            "protein": "42g",
+            "carbs": "34g",
+            "fats": "20g",
+            "calories": "490 kcal"
+          }
+        }
+      ]
+    }
+  }
+}

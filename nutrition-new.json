@@ -1,0 +1,467 @@
+{
+  "colazioni_yogurt_greco_base": [
+    {
+      "id": "yogurt-greco-marmellata-crusca",
+      "name": "Yogurt Greco con Marmellata e Crusca di Avena",
+      "difficulty": "facilissimo",
+      "time": 3,
+      "category": "dolce",
+      "tags": [
+        "velocissimo",
+        "proteico",
+        "ricco-fibre"
+      ],
+      "ingredients": [
+        "170g yogurt greco magro",
+        "2 cucchiai marmellata (circa 30g)",
+        "15g crusca di avena",
+        "10g noci spezzettate",
+        "5g miele (opzionale)"
+      ],
+      "steps": [
+        "Versa lo yogurt greco in una bowl",
+        "Aggiungi la marmellata e mescola leggermente per creare delle striature",
+        "Cospargi con crusca di avena",
+        "Guarnisci con noci spezzettate",
+        "Aggiungi un filo di miele se desideri più dolcezza"
+      ],
+      "macros": {
+        "protein": "18g",
+        "carbs": "38g",
+        "fats": "8g",
+        "calories": "300 kcal"
+      }
+    },
+    {
+      "id": "yogurt-greco-riso-soffiato-cocco",
+      "name": "Bowl Yogurt Greco con Riso Soffiato e Cocco",
+      "difficulty": "facilissimo",
+      "time": 5,
+      "category": "dolce",
+      "tags": [
+        "veloce",
+        "proteico",
+        "croccante"
+      ],
+      "ingredients": [
+        "170g yogurt greco magro",
+        "30g riso soffiato",
+        "15g cocco disidratato",
+        "1 cucchiaio marmellata",
+        "15g mandorle affettate",
+        "1 cucchiaino miele"
+      ],
+      "steps": [
+        "Disponi lo yogurt greco come base nella bowl",
+        "Crea uno strato di riso soffiato su metà dello yogurt",
+        "Aggiungi la marmellata dall'altro lato",
+        "Cospargi con cocco disidratato e mandorle affettate",
+        "Completa con un filo di miele"
+      ],
+      "macros": {
+        "protein": "20g",
+        "carbs": "42g",
+        "fats": "12g",
+        "calories": "350 kcal"
+      }
+    },
+    {
+      "id": "yogurt-greco-frutta-secca-miele",
+      "name": "Yogurt Greco con Mix Frutta Secca e Miele",
+      "difficulty": "facilissimo",
+      "time": 3,
+      "category": "dolce",
+      "tags": [
+        "velocissimo",
+        "proteico",
+        "energetico"
+      ],
+      "ingredients": [
+        "170g yogurt greco magro",
+        "10g mandorle tritate",
+        "10g noci spezzettate",
+        "10g nocciole tritate",
+        "2 cucchiai miele",
+        "5g crusca (opzionale)"
+      ],
+      "steps": [
+        "Versa lo yogurt in una bowl",
+        "Mescola 1 cucchiaio di miele direttamente nello yogurt",
+        "Aggiungi il mix di frutta secca tritata",
+        "Completa con l'altro cucchiaio di miele sopra",
+        "Cospargi con crusca se desideri più fibre"
+      ],
+      "macros": {
+        "protein": "22g",
+        "carbs": "35g",
+        "fats": "16g",
+        "calories": "380 kcal"
+      }
+    }
+  ],
+  "colazioni_con_proteine_in_polvere": [
+    {
+      "id": "yogurt-greco-proteine-marmellata",
+      "name": "Yogurt Greco Proteico con Marmellata",
+      "difficulty": "facilissimo",
+      "time": 3,
+      "category": "dolce",
+      "tags": [
+        "velocissimo",
+        "proteico",
+        "post-workout"
+      ],
+      "ingredients": [
+        "170g yogurt greco magro",
+        "25g proteine in polvere (vaniglia o neutro)",
+        "2 cucchiai marmellata",
+        "15g crusca di avena",
+        "10g mandorle tritate",
+        "100-150ml acqua o latte"
+      ],
+      "steps": [
+        "Mescola le proteine in polvere con poca acqua fino a scioglierle",
+        "Incorpora il composto allo yogurt greco mescolando bene",
+        "Aggiungi la marmellata creando striature",
+        "Completa con crusca e mandorle tritate"
+      ],
+      "macros": {
+        "protein": "38g",
+        "carbs": "42g",
+        "fats": "8g",
+        "calories": "380 kcal"
+      }
+    },
+    {
+      "id": "yogurt-greco-proteine-riso-soffiato",
+      "name": "Bowl Proteica con Yogurt, Riso Soffiato e Cocco",
+      "difficulty": "facilissimo",
+      "time": 4,
+      "category": "dolce",
+      "tags": [
+        "proteico",
+        "croccante",
+        "saziante"
+      ],
+      "ingredients": [
+        "170g yogurt greco magro",
+        "25g proteine in polvere",
+        "30g riso soffiato",
+        "15g cocco disidratato",
+        "1 cucchiaio miele",
+        "10g noci spezzettate",
+        "Cannella in polvere"
+      ],
+      "steps": [
+        "Sciogli le proteine in polvere con poca acqua",
+        "Mescola con lo yogurt greco fino ad ottenere una crema liscia",
+        "Disponi riso soffiato e cocco sulla superficie",
+        "Completa con noci, miele e cannella"
+      ],
+      "macros": {
+        "protein": "40g",
+        "carbs": "45g",
+        "fats": "12g",
+        "calories": "420 kcal"
+      }
+    },
+    {
+      "id": "protein-smoothie-yogurt-frutta",
+      "name": "Smoothie Proteico Yogurt e Frutta Secca",
+      "difficulty": "facile",
+      "time": 5,
+      "category": "dolce",
+      "tags": [
+        "proteico",
+        "cremoso",
+        "veloce"
+      ],
+      "ingredients": [
+        "100g yogurt greco",
+        "25g proteine in polvere",
+        "200ml latte (o vegetale)",
+        "15g mandorle",
+        "1 cucchiaio miele",
+        "5g crusca di avena",
+        "Ghiaccio"
+      ],
+      "steps": [
+        "Frulla tutti gli ingredienti insieme per 1-2 minuti",
+        "Aggiungi ghiaccio se desideri una consistenza più fredda",
+        "Versa in un bicchiere alto",
+        "Guarnisci con mandorle tritate sopra"
+      ],
+      "macros": {
+        "protein": "42g",
+        "carbs": "35g",
+        "fats": "14g",
+        "calories": "420 kcal"
+      }
+    },
+    {
+      "id": "protein-shake-banana-cocco",
+      "name": "Protein Shake Banana e Cocco",
+      "difficulty": "facilissimo",
+      "time": 3,
+      "category": "dolce",
+      "tags": [
+        "vegano-option",
+        "proteico",
+        "energetico"
+      ],
+      "ingredients": [
+        "30g proteine in polvere",
+        "1 banana media",
+        "250ml latte vegetale (mandorla/cocco)",
+        "15g cocco disidratato",
+        "1 cucchiaio miele (o sciroppo d'agave)",
+        "Ghiaccio",
+        "Cannella"
+      ],
+      "steps": [
+        "Frulla banana, proteine, latte vegetale e miele",
+        "Aggiungi cocco e ghiaccio, frulla ancora",
+        "Versa nel bicchiere",
+        "Spolverizza con cannella e cocco"
+      ],
+      "macros": {
+        "protein": "32g",
+        "carbs": "38g",
+        "fats": "8g",
+        "calories": "340 kcal"
+      }
+    },
+    {
+      "id": "porridge-proteico-crusca-noci",
+      "name": "Porridge Proteico con Crusca e Noci",
+      "difficulty": "facile",
+      "time": 8,
+      "category": "dolce",
+      "tags": [
+        "proteico",
+        "saziante",
+        "caldo"
+      ],
+      "ingredients": [
+        "40g fiocchi d'avena",
+        "25g proteine in polvere",
+        "200ml latte (o vegetale)",
+        "15g crusca di avena",
+        "15g noci tritate",
+        "1 cucchiaio miele",
+        "Cannella"
+      ],
+      "steps": [
+        "Cuoci l'avena nel latte per 5 minuti",
+        "Lascia intiepidire e aggiungi le proteine mescolando bene",
+        "Incorpora crusca, noci e miele",
+        "Servi caldo con cannella sopra"
+      ],
+      "macros": {
+        "protein": "35g",
+        "carbs": "48g",
+        "fats": "16g",
+        "calories": "460 kcal"
+      },
+      "tips": "Aggiungi le proteine quando il porridge non è bollente per evitare grumi"
+    },
+    {
+      "id": "protein-parfait-riso-soffiato",
+      "name": "Parfait Proteico con Riso Soffiato",
+      "difficulty": "facile",
+      "time": 7,
+      "category": "dolce",
+      "tags": [
+        "proteico",
+        "stratificato",
+        "instagrammabile"
+      ],
+      "ingredients": [
+        "100g yogurt greco",
+        "25g proteine in polvere",
+        "25g riso soffiato",
+        "2 cucchiai marmellata",
+        "10g mandorle a lamelle",
+        "10g cocco disidratato",
+        "1 cucchiaio miele"
+      ],
+      "steps": [
+        "Mescola yogurt con proteine in polvere e un po' d'acqua",
+        "In un bicchiere alto stratifica: metà yogurt proteico",
+        "Aggiungi marmellata e riso soffiato",
+        "Completa con resto yogurt e guarnizioni",
+        "Finisci con miele, mandorle e cocco"
+      ],
+      "macros": {
+        "protein": "36g",
+        "carbs": "52g",
+        "fats": "10g",
+        "calories": "420 kcal"
+      }
+    },
+    {
+      "id": "smoothie-proteico-vegano-spinaci",
+      "name": "Smoothie Verde Proteico con Spinaci",
+      "difficulty": "facile",
+      "time": 5,
+      "category": "vegano",
+      "tags": [
+        "vegano",
+        "proteico",
+        "detox"
+      ],
+      "ingredients": [
+        "30g proteine vegetali in polvere",
+        "1 banana",
+        "1 manciata spinaci freschi",
+        "250ml latte di mandorla",
+        "1 cucchiaio burro di mandorle",
+        "10g cocco disidratato",
+        "Ghiaccio"
+      ],
+      "steps": [
+        "Frulla tutti gli ingredienti per 2 minuti",
+        "Aggiungi ghiaccio per consistenza desiderata",
+        "Versa nel bicchiere",
+        "Guarnisci con cocco e un po' di spinaci"
+      ],
+      "macros": {
+        "protein": "34g",
+        "carbs": "35g",
+        "fats": "12g",
+        "calories": "380 kcal"
+      }
+    },
+    {
+      "id": "overnight-oats-proteici",
+      "name": "Overnight Oats Proteici (da preparare la sera)",
+      "difficulty": "facilissimo",
+      "time": 120,
+      "category": "dolce",
+      "tags": [
+        "meal-prep",
+        "proteico",
+        "overnight"
+      ],
+      "ingredients": [
+        "40g fiocchi d'avena",
+        "25g proteine in polvere",
+        "200ml latte vegetale",
+        "15g semi di chia",
+        "1 cucchiaio marmellata",
+        "10g noci tritate",
+        "Miele q.b."
+      ],
+      "steps": [
+        "Mescola avena, proteine e latte in un barattolo",
+        "Aggiungi semi di chia e mescola bene",
+        "Chiudi e metti in frigo per tutta la notte",
+        "La mattina aggiungi marmellata, noci e miele",
+        "Mescola e gusta freddo"
+      ],
+      "macros": {
+        "protein": "32g",
+        "carbs": "45g",
+        "fats": "14g",
+        "calories": "420 kcal"
+      },
+      "tips": "Prepara 3-4 barattoli la domenica per tutta la settimana"
+    }
+  ],
+  "ricette_vegane_vegetariane": [
+    {
+      "id": "bowl-quinoa-hummus-verdure",
+      "name": "Bowl di Quinoa con Hummus e Verdure Grigliate",
+      "difficulty": "facile",
+      "time": 25,
+      "category": "vegano",
+      "tags": [
+        "vegano",
+        "proteico",
+        "completo"
+      ],
+      "ingredients": [
+        "100g quinoa",
+        "4 cucchiai hummus di ceci",
+        "1 zucchina",
+        "1 peperone rosso",
+        "20g olio d'oliva",
+        "Rucola fresca"
+      ],
+      "steps": [
+        "Cuoci la quinoa secondo istruzioni (15 min)",
+        "Griglia zucchine e peperoni tagliati a fette",
+        "Componi la bowl con quinoa, verdure, hummus",
+        "Condisci con olio e rucola"
+      ],
+      "macros": {
+        "protein": "18g",
+        "carbs": "65g",
+        "fats": "18g",
+        "calories": "490 kcal"
+      }
+    },
+    {
+      "id": "tofu-marinato-verdure",
+      "name": "Tofu Marinato con Verdure al Forno",
+      "difficulty": "media",
+      "time": 35,
+      "category": "vegano",
+      "tags": [
+        "vegano",
+        "proteico",
+        "leggero"
+      ],
+      "ingredients": [
+        "200g tofu affumicato",
+        "Zucchine, melanzane, peperoni",
+        "3 cucchiai salsa di soia",
+        "1 cucchiaio olio di sesamo",
+        "60g pane integrale"
+      ],
+      "steps": [
+        "Marina il tofu a cubetti con soia e sesamo (20 min)",
+        "Taglia verdure a pezzi grossi",
+        "Inforna verdure e tofu a 200°C per 25 minuti",
+        "Servi con pane integrale"
+      ],
+      "macros": {
+        "protein": "26g",
+        "carbs": "35g",
+        "fats": "16g",
+        "calories": "380 kcal"
+      }
+    },
+    {
+      "id": "wrap-hummus-verdure",
+      "name": "Wrap Integrale con Hummus e Verdure Crude",
+      "difficulty": "facilissimo",
+      "time": 8,
+      "category": "vegano",
+      "tags": [
+        "vegano",
+        "velocissimo",
+        "crudo"
+      ],
+      "ingredients": [
+        "1 piadina integrale (100g)",
+        "4 cucchiai hummus",
+        "Lattuga, pomodori, cetrioli",
+        "1/2 avocado",
+        "Semi di girasole"
+      ],
+      "steps": [
+        "Spalma l'hummus sulla piadina",
+        "Disponi verdure crude e avocado a fette",
+        "Cospargi con semi di girasole",
+        "Arrotola stretto e taglia a metà"
+      ],
+      "macros": {
+        "protein": "14g",
+        "carbs": "52g",
+        "fats": "16g",
+        "calories": "400 kcal"
+      }
+    }
+  ]
+}

@@ -158,8 +158,11 @@ h1 {
     background: var(--color-bg-card-alt);
     margin: 20px;
     border-radius: 16px;
-    padding: 32px 24px;
     animation: slideUp 0.3s;
+    max-height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 @keyframes slideUp {
@@ -177,7 +180,15 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 20px;
+    padding: 24px 24px 16px 24px;
+    flex-shrink: 0;
+}
+
+#mealModalBody,
+#modalBody {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 24px 24px 24px;
 }
 
 .modal-title {
