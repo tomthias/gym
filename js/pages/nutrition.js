@@ -8,6 +8,23 @@ let currentMealKey = null;
 let currentMeal = null;
 let allRecipes = [];
 let filteredRecipes = [];
+
+// Check and reset selections if new day
+function checkAndResetDaily() {
+    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+    const lastResetDate = localStorage.getItem('lastResetDate');
+
+    if (lastResetDate !== today) {
+        // New day! Reset selections
+        localStorage.setItem('selectedRecipes', '{}');
+        localStorage.setItem('lastResetDate', today);
+        console.log('🔄 Daily reset: recipe selections cleared for new day');
+    }
+}
+
+// Initialize and check for daily reset
+checkAndResetDaily();
+
 let selectedRecipes = JSON.parse(localStorage.getItem('selectedRecipes') || '{}');
 let completedMeals = JSON.parse(localStorage.getItem('completedMeals') || '{}');
 
