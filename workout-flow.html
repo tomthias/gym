@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Allenamento - Scheda Mattia</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/workout-flow.css">
+</head>
+<body>
+    <div id="workoutFlowView">
+        <!-- Start State -->
+        <div id="flowStateStart" class="flow-state">
+            <header>
+                <h1 id="flowWorkoutTitle">Allenamento</h1>
+                <div class="subtitle" id="flowWorkoutSubtitle"></div>
+            </header>
+            <div id="flowStartSections"></div>
+            <button class="btn-primary btn-start-workout" id="btnStartWorkout">Inizia Allenamento</button>
+        </div>
+
+        <!-- Exercise State -->
+        <div id="flowStateExercise" class="flow-state">
+            <div class="flow-exercise-header">
+                <div class="flow-progress-indicator" id="flowProgressIndicator"></div>
+                <h2 id="flowExerciseName"></h2>
+                <div id="flowExerciseDetails" class="flow-exercise-details"></div>
+            </div>
+            <div id="flowExerciseContent" class="flow-exercise-content"></div>
+            <div class="flow-actions">
+                <button class="btn-secondary" id="btnPrevExercise">Precedente</button>
+                <button class="btn-primary" id="btnCompleteExercise">Completato</button>
+                <button class="btn-secondary" id="btnSkipExercise">Salta</button>
+            </div>
+        </div>
+
+        <!-- Rest State -->
+        <div id="flowStateRest" class="flow-state">
+            <div class="rest-container">
+                <h2>Recupero</h2>
+                <div id="restTimer" class="rest-timer"></div>
+                <div id="restNextExercise" class="rest-next-exercise"></div>
+                <div class="flow-actions">
+                    <button class="btn-secondary" id="btnSkipRest">Salta Recupero</button>
+                    <button class="btn-primary" id="btnAddTime">+30s</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Workout Assistant Modal -->
+    <div id="workoutAssistant" class="modal">
+        <div class="modal-content">
+            <div class="assistant-header">
+                <h3 id="assistantExerciseName"></h3>
+                <button class="close-btn" id="btnCloseAssistant">&times;</button>
+            </div>
+            <div id="assistantContent" class="assistant-content"></div>
+            <div class="assistant-actions">
+                <button class="assistant-btn primary" id="assistantActionBtn"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabata Timer Modal -->
+    <div id="tabataModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Timer Tabata</h3>
+                <button class="close-btn" id="btnCloseTabata">&times;</button>
+            </div>
+            <div class="tabata-container">
+                <div id="tabataStatus" class="tabata-status"></div>
+                <div id="tabataTimer" class="tabata-timer"></div>
+                <div id="tabataRound" class="tabata-round"></div>
+                <div class="tabata-controls">
+                    <button class="btn-icon" id="btnTabataPlayPause">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M8 5v14l11-7L8 5z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                    <button class="btn-icon" id="btnTabataReset">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Squat Tempo Metronome Modal -->
+    <div id="squatTempoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Metronomo Squat</h3>
+                <button class="close-btn" id="btnCloseSquatTempo">&times;</button>
+            </div>
+            <div class="squat-tempo-container">
+                <div id="squatPhase" class="squat-phase"></div>
+                <div id="squatTimer" class="squat-timer"></div>
+                <div id="squatReps" class="squat-reps"></div>
+                <div class="squat-controls">
+                    <button class="btn-icon" id="btnSquatPlayPause">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M8 5v14l11-7L8 5z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                    <button class="btn-icon" id="btnSquatReset">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-bottom" id="navBottom">
+        <button class="nav-btn" data-view="home" title="Allenamenti">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25.935 17.1064C26.2729 17.4443 26.2728 17.9921 25.935 18.33L18.3301 25.9349C17.9922 26.2728 17.4445 26.2728 17.1065 25.9349L14.0647 22.8931C13.7269 22.5551 13.7268 22.0074 14.0647 21.6694L21.6696 14.0646C22.0075 13.7268 22.5553 13.7268 22.8932 14.0646L25.935 17.1064ZM22.2814 15.9L15.9001 22.2813L17.7176 24.0987L24.0989 17.7175L22.2814 15.9Z" fill="currentColor"/>
+                <path d="M21.7128 28.0939C22.2825 28.6637 22.2824 29.5873 21.7128 30.1572L20.2709 31.599C19.701 32.1686 18.7774 32.1687 18.2076 31.599L8.40065 21.7921C7.83108 21.2222 7.83113 20.2986 8.40065 19.7287L9.84249 18.2869C10.4123 17.7173 11.336 17.7173 11.9058 18.2869L21.7128 28.0939ZM10.8748 19.7032L9.81694 20.7611L19.2386 30.1827L20.2965 29.1248L10.8748 19.7032Z" fill="currentColor"/>
+                <path d="M17.1505 28.095C17.7202 28.6649 17.7201 29.5885 17.1505 30.1584L15.7087 31.6002C15.1388 32.1697 14.2152 32.1698 13.6454 31.6002L8.40077 26.3556C7.8312 25.7858 7.83125 24.8621 8.40077 24.2923L9.84261 22.8504C10.4124 22.2808 11.3361 22.2808 11.9059 22.8504L17.1505 28.095ZM10.875 24.2653L9.81775 25.3226L14.6777 30.1825L15.7349 29.1253L10.875 24.2653Z" fill="currentColor"/>
+                <path d="M18.2869 11.907C17.7171 11.3371 17.7172 10.4135 18.2869 9.84364L19.7287 8.4018C20.2986 7.83224 21.2222 7.83209 21.792 8.4018L31.599 18.2088C32.1686 18.7786 32.1685 19.7022 31.599 20.2721L30.1571 21.7139C29.5873 22.2835 28.6637 22.2835 28.0938 21.7139L18.2869 11.907ZM29.1248 20.2976L30.182 19.2404L20.7604 9.81878L19.7032 10.876L29.1248 20.2976Z" fill="currentColor"/>
+                <path d="M22.8497 11.905C22.2801 11.3351 22.2801 10.4115 22.8497 9.84164L24.2915 8.39981C24.8614 7.83028 25.7851 7.83021 26.3549 8.39981L31.5995 13.6444C32.169 14.2142 32.169 15.1379 31.5995 15.7077L30.1576 17.1496C29.5878 17.7192 28.6642 17.7192 28.0943 17.1496L22.8497 11.905ZM29.1253 15.7347L30.1825 14.6775L25.3225 9.81747L24.2653 10.8747L29.1253 15.7347Z" fill="currentColor"/>
+            </svg>
+        </button>
+        <button class="nav-btn" data-view="nutrition" title="Nutrizione">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.4248 8.09024C24.6749 8.23399 28.5671 10.5235 30.758 14.1749L31.0012 14.5801C31.0349 14.6395 31.0922 14.682 31.1294 14.6905C32.7884 14.996 34.013 16.4116 34.0766 18.0974C34.14 19.7832 33.0249 21.2875 31.3933 21.7167C30.1326 22.0483 28.8243 21.6699 27.929 20.7714L27.8622 20.6977L27.6919 20.8681C27.0955 21.4228 26.3203 21.767 25.4889 21.8249L25.238 21.8333C24.3126 21.8333 23.4402 21.4786 22.7781 20.8558L22.6231 20.6993L22.4535 20.8681C21.8572 21.4228 21.0819 21.767 20.2506 21.8249L19.9997 21.8333C19.0742 21.8333 18.2019 21.4786 17.5397 20.8558L17.3847 20.6993L17.2152 20.8681C16.6189 21.4227 15.8442 21.7669 15.013 21.8249L14.7613 21.8333C13.836 21.8332 12.9635 21.4786 12.3014 20.8558L12.1456 20.6993L12.0244 20.8259C11.1939 21.6274 10.0087 21.9974 8.83931 21.7712L8.60529 21.7182C6.97338 21.2891 5.85782 19.7843 5.92128 18.0981C5.98488 16.4118 7.21107 14.9949 8.84085 14.6959C8.90758 14.6814 8.96532 14.6389 9.01196 14.557L9.24138 14.1749C11.5088 10.3959 15.5926 8.08336 19.9997 8.08333L20.4248 8.09024ZM19.9997 10.0476C16.2826 10.0477 12.838 11.9981 10.9256 15.1855L10.7092 15.5453C10.3998 16.0934 9.87039 16.4829 9.22527 16.6218C8.47062 16.7607 7.91375 17.405 7.88479 18.1718C7.85587 18.9386 8.36268 19.6232 9.1048 19.8184C9.84698 20.0136 10.6258 19.6674 10.9594 19.0235C11.1728 18.5623 11.6344 18.267 12.1425 18.2669C12.6507 18.2669 13.1129 18.5621 13.3073 18.9844C13.5887 19.5277 14.1494 19.8689 14.7613 19.869C15.3733 19.869 15.9345 19.5279 16.1969 19.0235C16.4104 18.5623 16.8727 18.2669 17.3809 18.2669C17.889 18.267 18.3513 18.5622 18.5456 18.9844C18.8271 19.5277 19.3877 19.869 19.9997 19.869C20.6117 19.869 21.1729 19.528 21.4353 19.0235C21.6487 18.5624 22.1104 18.2671 22.6185 18.2669C23.1267 18.2669 23.5888 18.5621 23.7832 18.9844C24.0647 19.5279 24.626 19.869 25.238 19.869C25.85 19.869 26.4113 19.528 26.6736 19.0235C26.8871 18.5623 27.3487 18.267 27.8568 18.2669C28.365 18.2669 28.8268 18.5622 29.0216 18.9851C29.3737 19.6666 30.1519 20.012 30.8938 19.8169C31.6356 19.6217 32.1425 18.9383 32.1138 18.1718C32.085 17.4053 31.5282 16.7614 30.7442 16.6165C30.1292 16.4835 29.6003 16.0937 29.304 15.5683L29.0738 15.1855C27.226 12.1058 23.9434 10.1747 20.3757 10.0538L19.9997 10.0476Z" fill="currentColor"/>
+                <path d="M15.3766 12.9544C15.7602 12.5708 16.382 12.5708 16.7656 12.9544C17.1143 13.3031 17.146 13.8487 16.8607 14.2332L16.7656 14.3433L16.1108 14.9981C15.7273 15.3816 15.1054 15.3816 14.7219 14.9981C14.3732 14.6494 14.3415 14.1038 14.6268 13.7193L14.7219 13.6091L15.3766 12.9544Z" fill="currentColor"/>
+                <path d="M19.9997 12.6667C20.4969 12.6667 20.9079 13.0362 20.9729 13.5156L20.9819 13.6488V14.3036C20.9819 14.846 20.5421 15.2858 19.9997 15.2858C19.5025 15.2858 19.0916 14.9163 19.0265 14.4369L19.0176 14.3036V13.6488C19.0176 13.1064 19.4573 12.6667 19.9997 12.6667Z" fill="currentColor"/>
+                <path d="M23.2338 12.9544C23.5825 12.6057 24.1281 12.574 24.5126 12.8593L24.6228 12.9544L25.2775 13.6091C25.6611 13.9927 25.6611 14.6145 25.2775 14.9981C24.9289 15.3468 24.3832 15.3785 23.9987 15.0932L23.8886 14.9981L23.2338 14.3433C22.8503 13.9598 22.8503 13.3379 23.2338 12.9544Z" fill="currentColor"/>
+                <path d="M9.37421 19.8805C9.86565 19.8049 10.328 20.1076 10.4651 20.5715L10.4943 20.7018L11.392 26.5373C11.6021 27.9028 12.7288 28.9287 14.0878 29.0278L14.3042 29.0357H25.6957C27.0773 29.0357 28.2626 28.0781 28.5672 26.75L28.6079 26.5373L29.5052 20.705C29.5877 20.1688 30.0892 19.8011 30.6253 19.8836C31.1167 19.9592 31.4667 20.3869 31.4581 20.8706L31.4467 21.0036L30.5494 26.836C30.194 29.1461 28.2646 30.8729 25.954 30.9933L25.6957 31H14.3042C11.967 31 9.96686 29.3557 9.49649 27.0902L9.45058 26.836L8.55283 21.0005C8.47035 20.4644 8.83809 19.9629 9.37421 19.8805Z" fill="currentColor"/>
+            </svg>
+        </button>
+        <button class="nav-btn" data-view="history" title="Storico">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 7C20.5062 7 20.9246 7.37621 20.9909 7.86431L21 8V19.6573C21 19.864 20.936 20.0643 20.8187 20.2315L20.7209 20.3503L12.2356 29.1783C11.8529 29.5765 11.2198 29.589 10.8217 29.2063C10.4597 28.8584 10.4164 28.3036 10.6991 27.9064L10.7937 27.7924L19 19.2533V8C19 7.49374 19.3762 7.07535 19.8643 7.00913L20 7Z" fill="currentColor"/>
+                <path d="M8.28866 14.3616C8.49713 13.9002 9.01224 13.6738 9.48431 13.8145L9.61172 13.862L20.4117 18.742C20.915 18.9695 21.1387 19.5618 20.9112 20.0651C20.7028 20.5265 20.1877 20.7528 19.7156 20.6122L19.5882 20.5646L8.78819 15.6846C8.28489 15.4572 8.06125 14.8649 8.28866 14.3616Z" fill="currentColor"/>
+                <path d="M10.8079 10.8078C15.8847 5.73102 24.1158 5.731 29.1926 10.8078C34.2692 15.8846 34.2693 24.1159 29.1926 29.1926C24.1159 34.2693 15.8847 34.2692 10.8079 29.1926C5.73104 24.1158 5.73104 15.8846 10.8079 10.8078ZM27.5061 11.9592C23.1932 7.92818 16.4282 8.01563 12.2219 12.2219C7.92616 16.5176 7.92615 23.4827 12.2219 27.7785C16.5177 32.0741 23.4829 32.0742 27.7786 27.7785C31.9848 23.5723 32.0723 16.8063 28.0413 12.4934L27.7786 12.2219L27.5061 11.9592Z" fill="currentColor"/>
+            </svg>
+        </button>
+    </div>
+
+    <script type="module" src="js/shared.js"></script>
+    <script type="module" src="js/pages/workout-flow.js"></script>
+</body>
+</html>

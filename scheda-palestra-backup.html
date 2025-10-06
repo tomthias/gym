@@ -1058,6 +1058,11 @@
             padding: 12px;
             border-top: 1px solid var(--color-border-light);
             z-index: 500;
+            transition: transform 0.3s ease-out;
+        }
+
+        .nav-bottom.hidden {
+            transform: translateY(100%);
         }
 
         .nav-btn {
@@ -1538,7 +1543,7 @@
         /* Squat Tempo Metronome */
         .metronome-toggle {
             display: none;
-            margin: 24px auto 0;
+            margin-bottom: 24px;
             padding: 12px 24px;
             background: var(--color-bg-card);
             border: 2px solid var(--color-border);
@@ -1551,6 +1556,7 @@
             gap: 8px;
             align-items: center;
             justify-content: center;
+            width: 100%;
         }
 
         .metronome-toggle.visible {
@@ -1572,6 +1578,225 @@
             width: 20px;
             height: 20px;
             fill: currentColor;
+        }
+
+        /* Nutrizione Styles */
+        .nutrition-view {
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .nutrition-view.visible {
+            display: block;
+        }
+
+        .day-type-selector {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding: 0 4px;
+        }
+
+        .day-type-btn {
+            flex: 1;
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-border-light);
+            color: var(--color-text-muted);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .day-type-btn.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 135, 95, 0.3);
+        }
+
+        .day-type-btn:active {
+            transform: scale(0.95);
+        }
+
+        .meal-card {
+            background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-card-alt) 100%);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-card);
+            transition: transform 0.2s;
+        }
+
+        .meal-card.completed {
+            opacity: 0.7;
+            border: 2px solid var(--color-primary);
+        }
+
+        .meal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .meal-time {
+            font-size: 14px;
+            color: var(--color-text-dim);
+            font-weight: 500;
+        }
+
+        .meal-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .meal-description {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            margin-bottom: 12px;
+        }
+
+        .meal-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .meal-option-tag {
+            background: var(--color-bg-button);
+            color: var(--color-text-secondary);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .meal-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .meal-btn {
+            flex: 1;
+            background: var(--color-bg-button);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-primary);
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .meal-btn.primary {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+        }
+
+        .meal-btn:active {
+            transform: scale(0.95);
+        }
+
+        .meal-macro-pills {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .macro-pill {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--color-bg-button);
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .macro-pill.protein {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+        }
+
+        .macro-pill.carbs {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .macro-pill.fats {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+        }
+
+        .meal-detail-section {
+            margin-bottom: 20px;
+        }
+
+        .meal-detail-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--color-primary);
+        }
+
+        .meal-detail-option {
+            background: var(--color-bg-card-alt);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .meal-detail-option:hover {
+            background: var(--color-bg-button);
+            transform: translateX(4px);
+        }
+
+        .meal-detail-option-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .meal-detail-option-desc {
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        .workout-day-badge {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.2);
+            color: #FF6B35;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .checkbox-meal {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .checkbox-meal.checked {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
         }
     </style>
 </head>
@@ -1987,7 +2212,7 @@
                     <div class="exercise-header">
                         <div class="checkbox" id="a-push1"></div>
                         <div class="exercise-info">
-                            <div class="exercise-name">A1 - Panca Piana Manubri</div>
+                            <div class="exercise-name">Panca Piana Manubri</div>
                             <div class="exercise-details">4×8 • Rec 1'30"</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('pancapiana')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2005,7 +2230,7 @@
                     <div class="exercise-header">
                         <div class="checkbox" id="a-push2"></div>
                         <div class="exercise-info">
-                            <div class="exercise-name">A2 - Croci Panca Inclinata 32°</div>
+                            <div class="exercise-name">Croci Panca Inclinata 32°</div>
                             <div class="exercise-details">3×20 iso 2" • Rec 2'</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('croci')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2023,7 +2248,7 @@
                     <div class="exercise-header">
                         <div class="checkbox" id="a-push3"></div>
                         <div class="exercise-info">
-                            <div class="exercise-name">B1 - Military Press Manubri</div>
+                            <div class="exercise-name">Military Press Manubri</div>
                             <div class="exercise-details">3×10 • Rec 1'30"</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('militarypress')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2041,7 +2266,7 @@
                     <div class="exercise-header">
                         <div class="checkbox" id="a-push4"></div>
                         <div class="exercise-info">
-                            <div class="exercise-name">B2 - Alzate Laterali</div>
+                            <div class="exercise-name">Alzate Laterali</div>
                             <div class="exercise-details">3×12 • Rec 1'</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('alzatelaterali')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2059,7 +2284,7 @@
                     <div class="exercise-header">
                         <div class="checkbox" id="a-push5"></div>
                         <div class="exercise-info">
-                            <div class="exercise-name">C1 - Push Down Corda</div>
+                            <div class="exercise-name">Push Down Corda</div>
                             <div class="exercise-details">3×12 • Rec 1'30"</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('pushdown')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2077,7 +2302,7 @@
                     <div class="exercise-header">
                         <div class="checkbox" id="a-push6"></div>
                         <div class="exercise-info">
-                            <div class="exercise-name">C2 - Dips tra Sedie</div>
+                            <div class="exercise-name">Dips tra Sedie</div>
                             <div class="exercise-details">3× max • Rec 1'30"</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('dips')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2365,7 +2590,7 @@
                     <div class="exercise-header">
                         <div class="checkbox" id="b-pull1"></div>
                         <div class="exercise-info">
-                            <div class="exercise-name">A1 - Trazioni</div>
+                            <div class="exercise-name">Trazioni</div>
                             <div class="exercise-details">4×6 • Rec 1' • (o Lat Machine 4×10)</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('trazioni')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2383,7 +2608,7 @@
                     <div class="exercise-header">
                         <div class="checkbox" id="b-pull2"></div>
                         <div class="exercise-info">
-                            <div class="exercise-name">A2 - Pulley/Rematore Cavo</div>
+                            <div class="exercise-name">Pulley/Rematore Cavo</div>
                             <div class="exercise-details">3×12 • Rec 1'</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('pulley')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2401,7 +2626,7 @@
                     <div class="exercise-header">
                         <div class="checkbox" id="b-pull3"></div>
                         <div class="exercise-info">
-                            <div class="exercise-name">B1 - Curl Panca 59° Manubri</div>
+                            <div class="exercise-name">Curl Panca 59° Manubri</div>
                             <div class="exercise-details">3×10 • Rec 2'</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('curlpanca')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2419,7 +2644,7 @@
                     <div class="exercise-header">
                         <div class="checkbox" id="b-pull4"></div>
                         <div class="exercise-info">
-                            <div class="exercise-name">B2 - Hammer Curl</div>
+                            <div class="exercise-name">Hammer Curl</div>
                             <div class="exercise-details">3×10 iso 2" • Rec 2'</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('hammercurl')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2437,7 +2662,7 @@
                     <div class="exercise-header">
                         <div class="checkbox" id="b-pull5"></div>
                         <div class="exercise-info">
-                            <div class="exercise-name">C1 - Curl Polsi</div>
+                            <div class="exercise-name">Curl Polsi</div>
                             <div class="exercise-details">3×15 • Rec 1'</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('curlpolsi')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2455,7 +2680,7 @@
                     <div class="exercise-header">
                         <div class="checkbox" id="b-pull6"></div>
                         <div class="exercise-info">
-                            <div class="exercise-name">C2 - Reverse Curl</div>
+                            <div class="exercise-name">Reverse Curl</div>
                             <div class="exercise-details">3×12 • Rec 1'</div>
                         </div>
                         <div class="info-icon" onclick="event.stopPropagation(); showExerciseDetail('reversecurl')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2859,6 +3084,72 @@
         <div id="historyList"></div>
     </div>
 
+    <!-- Pagina Nutrizione -->
+    <div id="nutritionView" class="nutrition-view">
+        <header>
+            <h1>Piano Nutrizionale</h1>
+            <div class="subtitle" id="nutritionSubtitle">Oggi</div>
+        </header>
+
+        <!-- Tipo Giornata -->
+        <div class="day-type-selector">
+            <button class="day-type-btn active" onclick="switchDayType('workout')" id="btnWorkout">
+                💪 Giorno Allenamento
+            </button>
+            <button class="day-type-btn" onclick="switchDayType('rest')" id="btnRest">
+                🛋️ Giorno Riposo
+            </button>
+        </div>
+
+        <!-- Pasti del giorno -->
+        <div id="mealsContainer"></div>
+
+    </div>
+
+    <!-- Modale Dettaglio Pasto -->
+    <div id="mealModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="mealModalTitle"></div>
+                <button class="close-button" onclick="closeMealModal()">×</button>
+            </div>
+            <div id="mealModalBody"></div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="nav-bottom">
+        <button class="nav-btn active" onclick="switchView('home')" title="Allenamenti">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25.935 17.1064C26.2729 17.4443 26.2728 17.9921 25.935 18.33L18.3301 25.9349C17.9922 26.2728 17.4445 26.2728 17.1065 25.9349L14.0647 22.8931C13.7269 22.5551 13.7268 22.0074 14.0647 21.6694L21.6696 14.0646C22.0075 13.7268 22.5553 13.7268 22.8932 14.0646L25.935 17.1064ZM22.2814 15.9L15.9001 22.2813L17.7176 24.0987L24.0989 17.7175L22.2814 15.9Z" fill="white"/>
+                <path d="M21.7128 28.0939C22.2825 28.6637 22.2824 29.5873 21.7128 30.1572L20.2709 31.599C19.701 32.1686 18.7774 32.1687 18.2076 31.599L8.40065 21.7921C7.83108 21.2222 7.83113 20.2986 8.40065 19.7287L9.84249 18.2869C10.4123 17.7173 11.336 17.7173 11.9058 18.2869L21.7128 28.0939ZM10.8748 19.7032L9.81694 20.7611L19.2386 30.1827L20.2965 29.1248L10.8748 19.7032Z" fill="white"/>
+                <path d="M17.1505 28.095C17.7202 28.6649 17.7201 29.5885 17.1505 30.1584L15.7087 31.6002C15.1388 32.1697 14.2152 32.1698 13.6454 31.6002L8.40077 26.3556C7.8312 25.7858 7.83125 24.8621 8.40077 24.2923L9.84261 22.8504C10.4124 22.2808 11.3361 22.2808 11.9059 22.8504L17.1505 28.095ZM10.875 24.2653L9.81775 25.3226L14.6777 30.1825L15.7349 29.1253L10.875 24.2653Z" fill="white"/>
+                <path d="M18.2869 11.907C17.7171 11.3371 17.7172 10.4135 18.2869 9.84364L19.7287 8.4018C20.2986 7.83224 21.2222 7.83209 21.792 8.4018L31.599 18.2088C32.1686 18.7786 32.1685 19.7022 31.599 20.2721L30.1571 21.7139C29.5873 22.2835 28.6637 22.2835 28.0938 21.7139L18.2869 11.907ZM29.1248 20.2976L30.182 19.2404L20.7604 9.81878L19.7032 10.876L29.1248 20.2976Z" fill="white"/>
+                <path d="M22.8497 11.905C22.2801 11.3351 22.2801 10.4115 22.8497 9.84164L24.2915 8.39981C24.8614 7.83028 25.7851 7.83021 26.3549 8.39981L31.5995 13.6444C32.169 14.2142 32.169 15.1379 31.5995 15.7077L30.1576 17.1496C29.5878 17.7192 28.6642 17.7192 28.0943 17.1496L22.8497 11.905ZM29.1253 15.7347L30.1825 14.6775L25.3225 9.81747L24.2653 10.8747L29.1253 15.7347Z" fill="white"/>
+                </svg>
+                
+                
+                
+        </button>
+        <button class="nav-btn" onclick="switchView('nutrition')" title="Nutrizione">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.4248 8.09024C24.6749 8.23399 28.5671 10.5235 30.758 14.1749L31.0012 14.5801C31.0349 14.6395 31.0922 14.682 31.1294 14.6905C32.7884 14.996 34.013 16.4116 34.0766 18.0974C34.14 19.7832 33.0249 21.2875 31.3933 21.7167C30.1326 22.0483 28.8243 21.6699 27.929 20.7714L27.8622 20.6977L27.6919 20.8681C27.0955 21.4228 26.3203 21.767 25.4889 21.8249L25.238 21.8333C24.3126 21.8333 23.4402 21.4786 22.7781 20.8558L22.6231 20.6993L22.4535 20.8681C21.8572 21.4228 21.0819 21.767 20.2506 21.8249L19.9997 21.8333C19.0742 21.8333 18.2019 21.4786 17.5397 20.8558L17.3847 20.6993L17.2152 20.8681C16.6189 21.4227 15.8442 21.7669 15.013 21.8249L14.7613 21.8333C13.836 21.8332 12.9635 21.4786 12.3014 20.8558L12.1456 20.6993L12.0244 20.8259C11.1939 21.6274 10.0087 21.9974 8.83931 21.7712L8.60529 21.7182C6.97338 21.2891 5.85782 19.7843 5.92128 18.0981C5.98488 16.4118 7.21107 14.9949 8.84085 14.6959C8.90758 14.6814 8.96532 14.6389 9.01196 14.557L9.24138 14.1749C11.5088 10.3959 15.5926 8.08336 19.9997 8.08333L20.4248 8.09024ZM19.9997 10.0476C16.2826 10.0477 12.838 11.9981 10.9256 15.1855L10.7092 15.5453C10.3998 16.0934 9.87039 16.4829 9.22527 16.6218C8.47062 16.7607 7.91375 17.405 7.88479 18.1718C7.85587 18.9386 8.36268 19.6232 9.1048 19.8184C9.84698 20.0136 10.6258 19.6674 10.9594 19.0235C11.1728 18.5623 11.6344 18.267 12.1425 18.2669C12.6507 18.2669 13.1129 18.5621 13.3073 18.9844C13.5887 19.5277 14.1494 19.8689 14.7613 19.869C15.3733 19.869 15.9345 19.5279 16.1969 19.0235C16.4104 18.5623 16.8727 18.2669 17.3809 18.2669C17.889 18.267 18.3513 18.5622 18.5456 18.9844C18.8271 19.5277 19.3877 19.869 19.9997 19.869C20.6117 19.869 21.1729 19.528 21.4353 19.0235C21.6487 18.5624 22.1104 18.2671 22.6185 18.2669C23.1267 18.2669 23.5888 18.5621 23.7832 18.9844C24.0647 19.5279 24.626 19.869 25.238 19.869C25.85 19.869 26.4113 19.528 26.6736 19.0235C26.8871 18.5623 27.3487 18.267 27.8568 18.2669C28.365 18.2669 28.8268 18.5622 29.0216 18.9851C29.3737 19.6666 30.1519 20.012 30.8938 19.8169C31.6356 19.6217 32.1425 18.9383 32.1138 18.1718C32.085 17.4053 31.5282 16.7614 30.7442 16.6165C30.1292 16.4835 29.6003 16.0937 29.304 15.5683L29.0738 15.1855C27.226 12.1058 23.9434 10.1747 20.3757 10.0538L19.9997 10.0476Z" fill="white"/>
+                <path d="M15.3766 12.9544C15.7602 12.5708 16.382 12.5708 16.7656 12.9544C17.1143 13.3031 17.146 13.8487 16.8607 14.2332L16.7656 14.3433L16.1108 14.9981C15.7273 15.3816 15.1054 15.3816 14.7219 14.9981C14.3732 14.6494 14.3415 14.1038 14.6268 13.7193L14.7219 13.6091L15.3766 12.9544Z" fill="white"/>
+                <path d="M19.9997 12.6667C20.4969 12.6667 20.9079 13.0362 20.9729 13.5156L20.9819 13.6488V14.3036C20.9819 14.846 20.5421 15.2858 19.9997 15.2858C19.5025 15.2858 19.0916 14.9163 19.0265 14.4369L19.0176 14.3036V13.6488C19.0176 13.1064 19.4573 12.6667 19.9997 12.6667Z" fill="white"/>
+                <path d="M23.2338 12.9544C23.5825 12.6057 24.1281 12.574 24.5126 12.8593L24.6228 12.9544L25.2775 13.6091C25.6611 13.9927 25.6611 14.6145 25.2775 14.9981C24.9289 15.3468 24.3832 15.3785 23.9987 15.0932L23.8886 14.9981L23.2338 14.3433C22.8503 13.9598 22.8503 13.3379 23.2338 12.9544Z" fill="white"/>
+                <path d="M9.37421 19.8805C9.86565 19.8049 10.328 20.1076 10.4651 20.5715L10.4943 20.7018L11.392 26.5373C11.6021 27.9028 12.7288 28.9287 14.0878 29.0278L14.3042 29.0357H25.6957C27.0773 29.0357 28.2626 28.0781 28.5672 26.75L28.6079 26.5373L29.5052 20.705C29.5877 20.1688 30.0892 19.8011 30.6253 19.8836C31.1167 19.9592 31.4667 20.3869 31.4581 20.8706L31.4467 21.0036L30.5494 26.836C30.194 29.1461 28.2646 30.8729 25.954 30.9933L25.6957 31H14.3042C11.967 31 9.96686 29.3557 9.49649 27.0902L9.45058 26.836L8.55283 21.0005C8.47035 20.4644 8.83809 19.9629 9.37421 19.8805Z" fill="white"/>
+                </svg>
+                
+        </button>
+        <button class="nav-btn" onclick="switchView('history')" title="Storico">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 7C20.5062 7 20.9246 7.37621 20.9909 7.86431L21 8V19.6573C21 19.864 20.936 20.0643 20.8187 20.2315L20.7209 20.3503L12.2356 29.1783C11.8529 29.5765 11.2198 29.589 10.8217 29.2063C10.4597 28.8584 10.4164 28.3036 10.6991 27.9064L10.7937 27.7924L19 19.2533V8C19 7.49374 19.3762 7.07535 19.8643 7.00913L20 7Z" fill="white"/>
+                <path d="M8.28866 14.3616C8.49713 13.9002 9.01224 13.6738 9.48431 13.8145L9.61172 13.862L20.4117 18.742C20.915 18.9695 21.1387 19.5618 20.9112 20.0651C20.7028 20.5265 20.1877 20.7528 19.7156 20.6122L19.5882 20.5646L8.78819 15.6846C8.28489 15.4572 8.06125 14.8649 8.28866 14.3616Z" fill="white"/>
+                <path d="M10.8079 10.8078C15.8847 5.73102 24.1158 5.731 29.1926 10.8078C34.2692 15.8846 34.2693 24.1159 29.1926 29.1926C24.1159 34.2693 15.8847 34.2692 10.8079 29.1926C5.73104 24.1158 5.73104 15.8846 10.8079 10.8078ZM27.5061 11.9592C23.1932 7.92818 16.4282 8.01563 12.2219 12.2219C7.92616 16.5176 7.92615 23.4827 12.2219 27.7785C16.5177 32.0741 23.4829 32.0742 27.7786 27.7785C31.9848 23.5723 32.0723 16.8063 28.0413 12.4934L27.7786 12.2219L27.5061 11.9592Z" fill="white"/>
+                </svg>
+                
+        </button>
+    </div>
 
     <script>
         // Database esercizi con tutte le info dal PDF
@@ -3302,6 +3593,337 @@
             }
         };
 
+        // ========== DATABASE PASTI ==========
+        const nutritionData = {
+            // Pasti per giorni ALLENAMENTO (Lunedì e Mercoledì - Palestra ore 12:00)
+            workout: {
+                colazione: {
+                    name: "Colazione Pre-Workout",
+                    time: "8:00-8:30",
+                    description: "Colazione leggera per energia senza appesantire prima dell'allenamento",
+                    isImportant: false,
+                    options: [
+                        {
+                            name: "Opzione 1 - Leggera",
+                            items: "2-3 fette biscottate integrali + marmellata, 1 yogurt greco (150g), 1 frutto, Caffè",
+                            macros: { protein: "15g", carbs: "45g", fats: "5g" }
+                        },
+                        {
+                            name: "Opzione 2 - Porridge",
+                            items: "50g avena + latte + miele, 15g mandorle, 1 frutto",
+                            macros: { protein: "18g", carbs: "50g", fats: "12g" }
+                        },
+                        {
+                            name: "Opzione 3 - Shake Veloce",
+                            items: "Banana + 20g proteine + latte + burro arachidi, 2 fette biscottate",
+                            macros: { protein: "25g", carbs: "42g", fats: "10g" }
+                        }
+                    ]
+                },
+                spuntino: {
+                    name: "Spuntino Pre-Workout",
+                    time: "10:30",
+                    description: "Opzionale - Solo se hai fame prima dell'allenamento",
+                    isImportant: false,
+                    options: [
+                        { name: "Banana + Mandorle", items: "1 banana + 10 mandorle" },
+                        { name: "Barretta", items: "1 barretta energetica" },
+                        { name: "Pane e Miele", items: "1 fetta pane + miele" }
+                    ]
+                },
+                pranzo: {
+                    name: "Pranzo Post-Workout",
+                    time: "13:00-13:30",
+                    description: "",
+                    isImportant: true,
+                    options: [
+                        {
+                            name: "Pokè Bowl",
+                            items: "130g riso + 150g salmone/tonno + avocado + edamame + verdure",
+                            macros: { protein: "35g", carbs: "55g", fats: "18g" }
+                        },
+                        {
+                            name: "Pasta e Proteine",
+                            items: "130g pasta + 150g pollo/tonno + 20g olio + verdure",
+                            macros: { protein: "38g", carbs: "60g", fats: "20g" }
+                        },
+                        {
+                            name: "Meal Prep",
+                            items: "150g pollo/tacchino + 100g riso + verdure grigliate + olio",
+                            macros: { protein: "40g", carbs: "50g", fats: "18g" }
+                        },
+                        {
+                            name: "Panino Proteico (emergenza)",
+                            items: "100g pane integrale + 100g bresaola/tacchino + verdure + avocado",
+                            macros: { protein: "30g", carbs: "45g", fats: "15g" }
+                        }
+                    ]
+                },
+                merenda: {
+                    name: "Merenda Pomeridiana",
+                    time: "16:00",
+                    description: "Snack leggero per mantenere energia",
+                    isImportant: false,
+                    options: [
+                        { name: "Yogurt e Frutta", items: "125g yogurt greco + 20g cocco disidratato" },
+                        { name: "Frutta Secca", items: "1 frutto + 15-20 mandorle/noci" },
+                        { name: "Barretta", items: "1 barretta proteica" }
+                    ]
+                },
+                cena: {
+                    name: "Cena",
+                    time: "20:00",
+                    description: "Pasto leggero - Focus proteine e verdure",
+                    isImportant: false,
+                    options: [
+                        {
+                            name: "Pesce e Verdure",
+                            items: "200g pesce magro + 60g pane integrale + verdure + olio",
+                            macros: { protein: "40g", carbs: "30g", fats: "20g" }
+                        },
+                        {
+                            name: "Carne Bianca",
+                            items: "200g tacchino/pollo + patate (150g) + verdure + olio",
+                            macros: { protein: "42g", carbs: "35g", fats: "18g" }
+                        },
+                        {
+                            name: "Minestrone Proteico",
+                            items: "Minestrone verdure + 200g legumi + patate + olio",
+                            macros: { protein: "20g", carbs: "40g", fats: "20g" }
+                        }
+                    ]
+                }
+            },
+
+            // Pasti per giorni RIPOSO
+            rest: {
+                colazione: {
+                    name: "Colazione",
+                    time: "8:00-9:00",
+                    description: "Colazione completa e bilanciata",
+                    isImportant: false,
+                    options: [
+                        {
+                            name: "Dolce - Latte e Pane",
+                            items: "250ml latte + 90g pane integrale + marmellata + 20 mandorle",
+                            macros: { protein: "20g", carbs: "65g", fats: "15g" }
+                        },
+                        {
+                            name: "Dolce - Yogurt e Cereali",
+                            items: "125g yogurt + 50g cereali + 10 noci",
+                            macros: { protein: "18g", carbs: "55g", fats: "12g" }
+                        },
+                        {
+                            name: "Salata - Pane e Bresaola",
+                            items: "90g pane integrale + olio + 90g bresaola/fesa tacchino",
+                            macros: { protein: "25g", carbs: "50g", fats: "10g" }
+                        },
+                        {
+                            name: "Salata - Gallette e Ricotta",
+                            items: "40g gallette + 100g ricotta magra + miele + noci",
+                            macros: { protein: "20g", carbs: "48g", fats: "14g" }
+                        }
+                    ]
+                },
+                spuntino: {
+                    name: "Spuntino Mattina",
+                    time: "11:00",
+                    description: "Snack leggero metà mattina",
+                    isImportant: false,
+                    options: [
+                        { name: "Frutta e Cracker", items: "40g cracker + 1 frutto" },
+                        { name: "Gallette e Frutta", items: "40g gallette riso + 1 frutto" },
+                        { name: "Parmigiano", items: "20g parmigiano + verdure crude" },
+                        { name: "Cioccolato", items: "30g cioccolato fondente + 1 frutto" }
+                    ]
+                },
+                pranzo: {
+                    name: "Pranzo",
+                    time: "13:00-14:00",
+                    description: "Pasto completo: Proteine + Carboidrati + Verdure + Grassi",
+                    isImportant: false,
+                    options: [
+                        {
+                            name: "Pasta con Tonno",
+                            items: "130g pasta + 180g tonno al naturale + verdure + 20g olio",
+                            macros: { protein: "40g", carbs: "65g", fats: "20g" }
+                        },
+                        {
+                            name: "Riso e Legumi",
+                            items: "130g riso + 200g legumi cotti + verdure + olio",
+                            macros: { protein: "22g", carbs: "70g", fats: "20g" }
+                        },
+                        {
+                            name: "Quinoa e Pollo",
+                            items: "130g quinoa + 150g pollo + verdure + olio",
+                            macros: { protein: "42g", carbs: "60g", fats: "20g" }
+                        },
+                        {
+                            name: "Pane e Affettato",
+                            items: "90g pane + 100g bresaola/fesa tacchino + olio + finocchi",
+                            macros: { protein: "28g", carbs: "50g", fats: "15g" }
+                        }
+                    ]
+                },
+                merenda: {
+                    name: "Merenda Pomeriggio",
+                    time: "16:30",
+                    description: "Snack pomeridiano",
+                    isImportant: false,
+                    options: [
+                        { name: "Yogurt e Cocco", items: "125g yogurt magro + 20g cocco disidratato" },
+                        { name: "Frutta e Noci", items: "10g frutta a guscio + 1 frutto" },
+                        { name: "Lupini", items: "90g lupini + verdure crude" },
+                        { name: "Pizza", items: "130g pizza farcita" }
+                    ]
+                },
+                cena: {
+                    name: "Cena",
+                    time: "20:00-20:30",
+                    description: "Proteine + Verdure + Carboidrati moderati",
+                    isImportant: false,
+                    options: [
+                        {
+                            name: "Orata e Patate",
+                            items: "200g orata al forno + 300g patate + verdure + olio",
+                            macros: { protein: "45g", carbs: "50g", fats: "20g" }
+                        },
+                        {
+                            name: "Tacchino ai Ferri",
+                            items: "250g tacchino + 60g pane integrale + verdure + olio",
+                            macros: { protein: "50g", carbs: "30g", fats: "20g" }
+                        },
+                        {
+                            name: "Minestrone Completo",
+                            items: "Minestrone verdure + 200g piselli + patate + olio",
+                            macros: { protein: "18g", carbs: "45g", fats: "20g" }
+                        },
+                        {
+                            name: "Vitello e Vellutata",
+                            items: "250g vitello + vellutata patate/zucca + olio",
+                            macros: { protein: "48g", carbs: "35g", fats: "20g" }
+                        }
+                    ]
+                }
+            }
+        };
+
+        // Stato nutrizionale
+        let currentDayType = 'workout'; // 'workout' o 'rest'
+        let completedMeals = JSON.parse(localStorage.getItem('completedMeals') || '{}');
+
+        // Switch tra tipo giornata
+        function switchDayType(type) {
+            currentDayType = type;
+
+            // Aggiorna bottoni
+            document.querySelectorAll('.day-type-btn').forEach(btn => btn.classList.remove('active'));
+            if (type === 'workout') {
+                document.getElementById('btnWorkout').classList.add('active');
+            } else {
+                document.getElementById('btnRest').classList.add('active');
+            }
+
+            // Ricarica i pasti
+            loadMeals();
+        }
+
+        // Carica i pasti per il tipo di giornata corrente
+        function loadMeals() {
+            const container = document.getElementById('mealsContainer');
+            const meals = nutritionData[currentDayType];
+            const today = new Date().toLocaleDateString('it-IT');
+
+            let html = '';
+
+            for (const [key, meal] of Object.entries(meals)) {
+                const mealId = `${today}-${currentDayType}-${key}`;
+                const isCompleted = completedMeals[mealId] || false;
+
+                html += `
+                    <div class="meal-card ${isCompleted ? 'completed' : ''}">
+                        <div class="meal-header">
+                            <div>
+                                <div class="meal-time">${meal.time}</div>
+                            </div>
+                            <div class="checkbox-meal ${isCompleted ? 'checked' : ''}" onclick="toggleMeal('${mealId}')">
+                                ${isCompleted ? '✓' : ''}
+                            </div>
+                        </div>
+                        <div class="meal-name">${meal.name}</div>
+                        <div class="meal-description">${meal.description}</div>
+                        <div class="meal-actions">
+                            <button class="meal-btn primary" onclick="showMealDetail('${currentDayType}', '${key}')">
+                                Vedi Opzioni (${meal.options.length})
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Toggle completamento pasto
+        function toggleMeal(mealId) {
+            completedMeals[mealId] = !completedMeals[mealId];
+            localStorage.setItem('completedMeals', JSON.stringify(completedMeals));
+            loadMeals();
+        }
+
+        // Mostra dettagli pasto
+        function showMealDetail(dayType, mealKey) {
+            const meal = nutritionData[dayType][mealKey];
+            const modal = document.getElementById('mealModal');
+            const title = document.getElementById('mealModalTitle');
+            const body = document.getElementById('mealModalBody');
+
+            title.textContent = meal.name;
+
+            let html = `<div class="meal-detail-section">
+                <div class="meal-detail-title">Scegli un'opzione:</div>`;
+
+            meal.options.forEach((option, index) => {
+                html += `
+                    <div class="meal-detail-option">
+                        <div class="meal-detail-option-name">${option.name}</div>
+                        <div class="meal-detail-option-desc">${option.items}</div>
+                        ${option.macros ? `
+                            <div class="meal-macro-pills">
+                                <div class="macro-pill protein">🥩 ${option.macros.protein}</div>
+                                <div class="macro-pill carbs">🍞 ${option.macros.carbs}</div>
+                                <div class="macro-pill fats">🥑 ${option.macros.fats}</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+
+            if (meal.isImportant && dayType === 'workout') {
+                html += `
+                    <div style="background: rgba(255, 107, 53, 0.1); padding: 12px; border-radius: 10px; margin-top: 16px;">
+                        <strong>💡 Consiglio:</strong> Questo pasto è fondamentale dopo l'allenamento per il recupero muscolare.
+                        Cerca di consumarlo entro 60 minuti dalla fine dell'allenamento.
+                    </div>
+                `;
+            }
+
+            body.innerHTML = html;
+            modal.style.display = 'flex';
+        }
+
+        // Chiudi modal pasto
+        function closeMealModal() {
+            document.getElementById('mealModal').style.display = 'none';
+        }
+
+        // Storico alimentazione
+        function showNutritionHistory() {
+            alert('Funzionalità in arrivo: Qui vedrai lo storico completo dei pasti completati per ogni giorno!');
+        }
+
         // Gestione checklist e localStorage
         function toggleCheck(id) {
             const checkbox = document.getElementById(id);
@@ -3666,6 +4288,30 @@
             }
         }
 
+        // Countdown beep for timers (different pitch for final beep)
+        function playCountdownBeep(isFinal = false) {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                // Higher pitch for final beep, lower for countdown
+                oscillator.frequency.value = isFinal ? 1200 : 800;
+                oscillator.type = 'sine';
+
+                gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + (isFinal ? 0.3 : 0.15));
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + (isFinal ? 0.3 : 0.15));
+            } catch (err) {
+                console.log('Countdown beep not available:', err);
+            }
+        }
+
         // Recovery Timer
         let recoveryInterval;
         let recoverySeconds = 0;
@@ -3726,7 +4372,7 @@
                 { id: 'b-fisio1', name: 'Plank Estensione Gamba', key: 'plankestensione', sets: 3, reps: 10, recovery: 0, superset: true, supersetPair: 'ss3', supersetPartner: 'b-fisio2', supersetColor: '#3498DB' },
                 { id: 'b-fisio2', name: 'L-Sit', key: 'lsit', sets: 3, reps: 30, recovery: 45, superset: true, supersetPair: 'ss3', supersetPartner: 'b-fisio1', supersetColor: '#3498DB' },
                 { id: 'b-fisio3', name: 'Squat Tempo', key: 'squattempo', sets: 3, reps: 8, recovery: 0, superset: true, supersetPair: 'ss4', supersetPartner: 'b-fisio4', supersetColor: '#E74C3C' },
-                { id: 'b-fisio4', name: 'Wall Sit', key: 'wallsit', sets: 3, reps: 45, recovery: 120, superset: true, supersetPair: 'ss4', supersetPartner: 'b-fisio3', supersetColor: '#E74C3C' },
+                { id: 'b-fisio4', name: 'Wall Sit', key: 'wallsit', sets: 3, duration: 45, recovery: 120, superset: true, supersetPair: 'ss4', supersetPartner: 'b-fisio3', supersetColor: '#E74C3C' },
                 { id: 'b-fisio5', name: 'Affondo Camminato', key: 'affondo', sets: 3, reps: 12, recovery: 120 },
                 { id: 'b-pull1', name: 'Trazioni', key: 'trazioni', sets: 4, reps: 8, recovery: 120 },
                 { id: 'b-pull2', name: 'Pulley', key: 'pulley', sets: 3, reps: 12, recovery: 90 },
@@ -3847,6 +4493,9 @@
             };
             document.getElementById('flowWorkoutTitle').textContent = titles[workoutId];
 
+            // Hide navigation bar during workout
+            document.querySelector('.nav-bottom').classList.add('hidden');
+
             // Show flow view
             document.getElementById('homeView').classList.add('hidden');
             document.getElementById('workoutFlowView').classList.add('visible');
@@ -3892,7 +4541,25 @@
         }
 
         function beginFirstExercise() {
-            workoutFlowState.currentExerciseIndex = 0;
+            // Find the first uncompleted exercise based on checkbox state
+            const workoutId = workoutFlowState.workoutId;
+            const exercises = workoutFlowState.exercises;
+            let firstUncompletedIndex = 0;
+
+            for (let i = 0; i < exercises.length; i++) {
+                const exercise = exercises[i];
+                const checkbox = document.getElementById(exercise.id);
+                if (checkbox && !checkbox.classList.contains('checked')) {
+                    firstUncompletedIndex = i;
+                    break;
+                }
+                // If we checked all and none are uncompleted, start from beginning
+                if (i === exercises.length - 1) {
+                    firstUncompletedIndex = 0;
+                }
+            }
+
+            workoutFlowState.currentExerciseIndex = firstUncompletedIndex;
             startExerciseState();
         }
 
@@ -3955,6 +4622,8 @@
 
             if (exercise.reps) {
                 document.getElementById('flowRepsInfo').textContent = exercise.reps;
+            } else if (exercise.duration) {
+                document.getElementById('flowRepsInfo').textContent = `${exercise.duration}"`;
             } else {
                 document.getElementById('flowRepsInfo').textContent = '-';
             }
@@ -4055,11 +4724,26 @@
             workoutFlowState.timerInterval = setInterval(() => {
                 if (workoutFlowState.timerMode === 'countdown') {
                     workoutFlowState.timerSeconds--;
+
+                    // Countdown beep in last 3 seconds
+                    if (workoutFlowState.timerSeconds > 0 && workoutFlowState.timerSeconds <= 3) {
+                        playCountdownBeep(workoutFlowState.timerSeconds === 1);
+                    }
+
                     if (workoutFlowState.timerSeconds <= 0) {
                         workoutFlowState.timerSeconds = 0;
                         stopExerciseTimer();
                         // Auto complete when countdown reaches 0
                         if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+
+                        // For timed exercises (duration-based), automatically proceed to next step
+                        const exercise = workoutFlowState.exercises[workoutFlowState.currentExerciseIndex];
+                        if (exercise && exercise.duration) {
+                            // Automatically complete the exercise after a short delay
+                            setTimeout(() => {
+                                completeCurrentExercise();
+                            }, 500);
+                        }
                     }
                 } else {
                     workoutFlowState.timerSeconds++;
@@ -4313,6 +4997,11 @@
                 const progress = workoutFlowState.restSeconds / workoutFlowState.totalRestSeconds;
                 updateRestCircle(progress);
 
+                // Countdown beep in last 3 seconds
+                if (workoutFlowState.restSeconds > 0 && workoutFlowState.restSeconds <= 3) {
+                    playCountdownBeep(workoutFlowState.restSeconds === 1);
+                }
+
                 if (workoutFlowState.restSeconds <= 0) {
                     stopRestTimer();
                     // Auto advance with logging opportunity
@@ -4535,6 +5224,9 @@
                 exercises: []
             };
 
+            // Show navigation bar again
+            document.querySelector('.nav-bottom').classList.remove('hidden');
+
             // Hide flow view
             document.getElementById('workoutFlowView').classList.remove('visible');
 
@@ -4753,16 +5445,22 @@
         function switchView(view) {
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
 
+            // Nascondi tutte le viste
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('historyView').classList.remove('visible');
+            document.getElementById('nutritionView').classList.remove('visible');
+            document.querySelectorAll('.workout-detail').forEach(w => w.classList.remove('visible'));
+
             if (view === 'home') {
                 document.getElementById('homeView').classList.remove('hidden');
-                document.getElementById('historyView').classList.remove('visible');
-                document.querySelectorAll('.workout-detail').forEach(w => w.classList.remove('visible'));
                 document.querySelectorAll('.nav-btn')[0].classList.add('active');
-            } else if (view === 'history') {
-                document.getElementById('homeView').classList.add('hidden');
-                document.getElementById('historyView').classList.add('visible');
-                document.querySelectorAll('.workout-detail').forEach(w => w.classList.remove('visible'));
+            } else if (view === 'nutrition') {
+                document.getElementById('nutritionView').classList.add('visible');
                 document.querySelectorAll('.nav-btn')[1].classList.add('active');
+                loadMeals(); // Carica i pasti
+            } else if (view === 'history') {
+                document.getElementById('historyView').classList.add('visible');
+                document.querySelectorAll('.nav-btn')[2].classList.add('active');
                 loadHistory();
             }
             window.scrollTo(0, 0);

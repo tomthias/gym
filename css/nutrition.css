@@ -1,0 +1,226 @@
+/* Nutrition View */
+.nutrition-view {
+    display: none;
+    animation: slideIn 0.3s ease-out;
+}
+
+.nutrition-view.visible {
+    display: block;
+}
+
+/* Day Type Selector */
+.day-type-selector {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding: 0 4px;
+}
+
+.day-type-btn {
+    flex: 1;
+    background: var(--color-bg-card);
+    border: 2px solid var(--color-border-light);
+    color: var(--color-text-muted);
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.day-type-btn.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 135, 95, 0.3);
+}
+
+.day-type-btn:active {
+    transform: scale(0.95);
+}
+
+/* Meal Cards */
+.meal-card {
+    background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-card-alt) 100%);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s;
+}
+
+.meal-card.completed {
+    opacity: 0.7;
+    border: 2px solid var(--color-primary);
+}
+
+.meal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.meal-time {
+    font-size: 14px;
+    color: var(--color-text-dim);
+    font-weight: 500;
+}
+
+.meal-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.meal-description {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+}
+
+/* Meal Options */
+.meal-options {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.meal-option-tag {
+    background: var(--color-bg-button);
+    color: var(--color-text-secondary);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Meal Actions */
+.meal-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.meal-btn {
+    flex: 1;
+    background: var(--color-bg-button);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.meal-btn.primary {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+
+.meal-btn:active {
+    transform: scale(0.95);
+}
+
+/* Macro Pills */
+.meal-macro-pills {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.macro-pill {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--color-bg-button);
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.macro-pill.protein {
+    background: rgba(255, 107, 107, 0.2);
+    color: #ff6b6b;
+}
+
+.macro-pill.carbs {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+}
+
+.macro-pill.fats {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+}
+
+/* Meal Detail Modal */
+.meal-detail-section {
+    margin-bottom: 20px;
+}
+
+.meal-detail-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--color-primary);
+}
+
+.meal-detail-option {
+    background: var(--color-bg-card-alt);
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.meal-detail-option:hover {
+    background: var(--color-bg-button);
+    transform: translateX(4px);
+}
+
+.meal-detail-option-name {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.meal-detail-option-desc {
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+/* Workout Day Badge */
+.workout-day-badge {
+    display: inline-block;
+    background: rgba(255, 107, 53, 0.2);
+    color: #FF6B35;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+/* Meal Checkbox */
+.checkbox-meal {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.checkbox-meal.checked {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
