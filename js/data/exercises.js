@@ -233,12 +233,12 @@ export const exerciseData = {
 
     // Upper Body Pull
     trazioni: {
-        name: 'Trazioni / Lat Machine',
-        series: '4×6 (o Lat Machine 4×10)',
-        carico: 'Corpo libero o macchina',
+        name: 'Lat Machine',
+        series: '4x10',
+        carico: '25kg,
         recupero: '1\'',
         focus: 'Dorsali, bicipiti, grip strength',
-        come: 'Appeso alla sbarra (trazioni) o seduto alla lat machine, tira il corpo/peso verso l\'alto.',
+        come: 'seduto alla lat machine, tira il corpo/peso verso l\'alto.',
         tecnica: 'Discesa lenta 3 secondi, retrazione scapole',
         note: 'Discesa lenta 3 secondi (come suggerito dai PT). Se non riesci: Lat Machine 4×10',
         image: 'https://s3assets.skimble.com/assets/1825601/image_full.jpg'
@@ -450,7 +450,7 @@ export function filterExercisesByCategory(category) {
         fisio: Object.keys(exerciseData).filter(key => exerciseData[key].fisio),
         riscaldamento: ['bike', 'circonduzione', 'mobilita'],
         push: ['pancapiana', 'croci', 'militarypress', 'alzatelaterali', 'pushdown', 'dips'],
-        pull: ['trazioni', 'pulley', 'curlpanca', 'hammercurl', 'curlpolsi', 'reversecurl', 'farmerswalk'],
+        pull: ['latmachine', 'pulley', 'curlpanca', 'hammercurl', 'curlpolsi', 'reversecurl', 'farmerswalk'],
         core: ['vup', 'crunch', 'biciclette', 'plank', 'hollowhold', 'reversecrunch', 'planklaterale', 'russiantwist', 'hollowrock']
     };
 
