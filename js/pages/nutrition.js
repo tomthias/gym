@@ -38,23 +38,23 @@ let activeFilters = {
 // ========== ICON SYSTEM ==========
 const ICONS = {
     // Recipe types
-    meat: '/assets/icons/meat.svg',
-    fish: '/assets/icons/fish.svg',
-    veggie: '/assets/icons/veggie.svg',
-    egg: '/assets/icons/egg.svg',
-    pancake: '/assets/icons/pancake.svg',
-    dish: '/assets/icons/dish.svg',
+    meat: 'assets/icons/meat.svg',
+    fish: 'assets/icons/fish.svg',
+    veggie: 'assets/icons/veggie.svg',
+    egg: 'assets/icons/egg.svg',
+    pancake: 'assets/icons/pancake.svg',
+    dish: 'assets/icons/dish.svg',
     // Macros
-    protein: '/assets/icons/protein.svg',
-    carbs: '/assets/icons/carbs.svg',
-    fats: '/assets/icons/fats.svg',
+    protein: 'assets/icons/protein.svg',
+    carbs: 'assets/icons/carbs.svg',
+    fats: 'assets/icons/fats.svg',
     // UI
-    search: '/assets/icons/search.svg',
-    clock: '/assets/icons/clock.svg',
-    fast: '/assets/icons/fast.svg',
-    tip: '/assets/icons/tip.svg',
-    check: '/assets/icons/check.svg',
-    refresh: '/assets/icons/refresh.svg'
+    search: 'assets/icons/search.svg',
+    clock: 'assets/icons/clock.svg',
+    fast: 'assets/icons/fast.svg',
+    tip: 'assets/icons/tip.svg',
+    check: 'assets/icons/check.svg',
+    refresh: 'assets/icons/refresh.svg'
 };
 
 function icon(name, className = 'icon') {
@@ -308,7 +308,7 @@ function renderRecipeCards() {
 
     let html = '';
     filteredRecipes.forEach(recipe => {
-        const icon = getRecipeIcon(recipe);
+        const recipeIcon = getRecipeIcon(recipe);
         const isSelected = recipe.id === selectedRecipeId;
         const isVeloce = recipe.time <= 15;
         const isProteico = recipe.macros && parseInt(recipe.macros.protein) >= 25;
@@ -320,7 +320,7 @@ function renderRecipeCards() {
                         ${recipe.name}
                     </div>
                     <div class="recipe-tags">
-                        <span class="recipe-tag">${icon}</span>
+                        <span class="recipe-tag">${recipeIcon}</span>
                     </div>
                 </div>
 
