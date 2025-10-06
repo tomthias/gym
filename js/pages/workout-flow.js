@@ -11,8 +11,8 @@ const workoutExercises = {
         { id: 'a-warm1', name: 'Bike/Tapirulan', key: 'bike', type: 'warmup', duration: 720 },
         { id: 'a-warm2', name: 'Circonduzione Braccia', key: 'circonduzione', type: 'warmup' },
         { id: 'a-warm3', name: 'Mobilità Spalle e Polsi', key: 'mobilita', type: 'warmup' },
-        { id: 'a-fisio1', name: 'Heel Raises', key: 'heelraises', sets: 2, reps: 15, recovery: 60 },
-        { id: 'a-fisio2', name: 'Box Bridge', key: 'boxbridge', sets: 3, reps: 10, recovery: 60 },
+        { id: 'a-fisio1', name: 'Heel Raises', key: 'heelraises', sets: 2, reps: 15, recovery: 0, superset: true, supersetPair: 'ss0', supersetPartner: 'a-fisio2', supersetColor: '#9B59B6' },
+        { id: 'a-fisio2', name: 'Box Bridge', key: 'boxbridge', sets: 3, reps: 10, recovery: 60, superset: true, supersetPair: 'ss0', supersetPartner: 'a-fisio1', supersetColor: '#9B59B6' },
         { id: 'a-fisio3', name: 'Hip Thrust', key: 'hipthrust', sets: 3, reps: 12, recovery: 0, superset: true, supersetPair: 'ss1', supersetPartner: 'a-fisio4', supersetColor: '#FF6B35' },
         { id: 'a-fisio4', name: 'Side Walk', key: 'sidewalk', sets: 3, reps: 20, recovery: 60, superset: true, supersetPair: 'ss1', supersetPartner: 'a-fisio3', supersetColor: '#FF6B35' },
         { id: 'a-fisio5', name: 'Elvis', key: 'elvis', sets: 2, reps: 15, recovery: 60 },
@@ -293,7 +293,7 @@ function startExerciseState() {
         return;
     }
 
-    console.log('Exercise:', exercise.name, 'Superset:', exercise.superset, 'Recovery:', exercise.recovery);
+    console.log('Exercise:', exercise.name, 'ID:', exercise.id, 'Superset:', exercise.superset, 'Recovery:', exercise.recovery, 'Set:', workoutFlowState.currentSet);
 
     // Stop metronome if active and not squattempo exercise
     if (exercise.key !== 'squattempo' && isSquatTempoMetronomeActive()) {
@@ -575,17 +575,21 @@ function completeCurrentExercise() {
             if (workoutFlowState.currentSet < maxSets) {
                 // More sets to do, take rest then go back to first exercise (A)
                 console.log('SUPERSET FLOW: More sets needed, going to rest');
-                console.log('Incrementing currentSet from', workoutFlowState.currentSet, 'to', workoutFlowState.currentSet + 1);
-                workoutFlowState.currentSet++;
+
                 // Find the first exercise in the superset pair (the one with recovery: 0)
                 const firstExerciseIndex = workoutFlowState.exercises.findIndex(
                     ex => ex.id === partner.supersetPartner
                 );
+
+                // IMPORTANT: Set currentExerciseIndex BEFORE incrementing currentSet
                 workoutFlowState.currentExerciseIndex = firstExerciseIndex;
+                workoutFlowState.currentSet++;
+
                 console.log('State BEFORE rest:', {
                     exerciseIndex: workoutFlowState.currentExerciseIndex,
                     currentSet: workoutFlowState.currentSet,
-                    willRestartWith: workoutFlowState.exercises[firstExerciseIndex].name
+                    willRestartWith: workoutFlowState.exercises[firstExerciseIndex].name,
+                    exerciseName: workoutFlowState.exercises[workoutFlowState.currentExerciseIndex].name
                 });
                 startRestState(exercise.recovery);
             } else {
