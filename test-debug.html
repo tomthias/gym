@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Test</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1a1a1a; color: #fff; }
+        .test { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .pass { background: #00875F; }
+        .fail { background: #dc3545; }
+        .info { background: #17a2b8; }
+        button { padding: 10px 20px; margin: 10px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Debug Test Page</h1>
+    <div id="results"></div>
+
+    <h2>Test Buttons:</h2>
+    <button onclick="testNavigation()">Test Navigation</button>
+    <button onclick="testWorkoutButton()">Test Workout Button</button>
+    <button onclick="testModules()">Test Modules</button>
+    <button onclick="clearConsole()">Clear</button>
+
+    <script>
+        const results = document.getElementById('results');
+
+        function log(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `test ${type}`;
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            results.appendChild(div);
+        }
+
+        function clearConsole() {
+            results.innerHTML = '';
+        }
+
+        // Test 1: Check if files exist
+        async function testModules() {
+            log('Testing module files...', 'info');
+            const files = [
+                '/js/shared.js',
+                '/js/pages/home.js',
+                '/js/pages/nutrition.js',
+                '/js/pages/history.js',
+                '/js/data/exercises.js',
+                '/js/data/nutrition.js'
+            ];
+
+            for (const file of files) {
+                try {
+                    const response = await fetch(file);
+                    if (response.ok) {
+                        log(`✅ ${file} - OK (${response.status})`, 'pass');
+                    } else {
+                        log(`❌ ${file} - FAIL (${response.status})`, 'fail');
+                    }
+                } catch (e) {
+                    log(`❌ ${file} - ERROR: ${e.message}`, 'fail');
+                }
+            }
+        }
+
+        // Test 2: Check navigation
+        function testNavigation() {
+            log('Testing navigation...', 'info');
+            const pages = ['index.html', 'nutrition.html', 'history.html', 'workout-flow.html'];
+            pages.forEach(page => {
+                log(`Navigation: ${page} = ${window.location.origin}/${page}`, 'info');
+            });
+        }
+
+        // Test 3: Simulate workout button click
+        function testWorkoutButton() {
+            log('Testing workout button click...', 'info');
+            log('Simulating: window.location.href = "workout-flow.html?workout=workoutA"', 'info');
+            setTimeout(() => {
+                window.location.href = 'workout-flow.html?workout=workoutA';
+            }, 1000);
+        }
+
+        // Auto-run on load
+        window.addEventListener('DOMContentLoaded', () => {
+            log('✅ DOMContentLoaded fired', 'pass');
+            log('Current URL: ' + window.location.href, 'info');
+            testModules();
+        });
+    </script>
+</body>
+</html>

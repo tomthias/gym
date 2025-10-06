@@ -39,8 +39,8 @@ function saveWorkoutSession(workoutName, completed, total) {
 
 // Initialize on page load if on history page
 document.addEventListener('DOMContentLoaded', function() {
-    const historyView = document.getElementById('historyView');
-    if (historyView) {
+    const historyList = document.getElementById('historyList');
+    if (historyList) {
         loadHistory();
     }
 });

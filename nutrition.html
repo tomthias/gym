@@ -19,8 +19,8 @@
     </header>
 
     <div class="day-type-selector">
-        <button class="day-type-btn active" data-day="workout">Giorno Allenamento</button>
-        <button class="day-type-btn" data-day="rest">Giorno Riposo</button>
+        <button class="day-type-btn active" id="btnWorkout" data-day="workout">Giorno Allenamento</button>
+        <button class="day-type-btn" id="btnRest" data-day="rest">Giorno Riposo</button>
     </div>
 
     <div id="mealsContainer" class="meals-container"></div>
@@ -51,6 +51,17 @@
                 <path d="M10.8079 10.8078C15.8847 5.73102 24.1158 5.731 29.1926 10.8078C34.2692 15.8846 34.2693 24.1159 29.1926 29.1926C24.1159 34.2693 15.8847 34.2692 10.8079 29.1926C5.73104 24.1158 5.73104 15.8846 10.8079 10.8078ZM27.5061 11.9592C23.1932 7.92818 16.4282 8.01563 12.2219 12.2219C7.92616 16.5176 7.92615 23.4827 12.2219 27.7785C16.5177 32.0741 23.4829 32.0742 27.7786 27.7785C31.9848 23.5723 32.0723 16.8063 28.0413 12.4934L27.7786 12.2219L27.5061 11.9592Z" fill="currentColor"/>
             </svg>
         </button>
+    </div>
+
+    <!-- Meal Detail Modal -->
+    <div id="mealModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="mealModalTitle"></div>
+                <button class="close-button" onclick="closeMealModal()">&times;</button>
+            </div>
+            <div id="mealModalBody"></div>
+        </div>
     </div>
 
     <script type="module" src="js/shared.js"></script>

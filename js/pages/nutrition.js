@@ -52,7 +52,7 @@ function loadMeals() {
                 <div class="meal-description">${meal.description}</div>
                 <div class="meal-actions">
                     <button class="meal-btn primary" onclick="showMealDetail('${currentDayType}', '${key}')">
-                        Vedi Opzioni (${meal.options.length})
+                        Vedi Opzioni (${meal.recipes.length})
                     </button>
                 </div>
             </div>
@@ -83,16 +83,17 @@ function showMealDetail(dayType, mealKey) {
     let html = `<div class="meal-detail-section">
         <div class="meal-detail-title">Scegli un'opzione:</div>`;
 
-    meal.options.forEach((option, index) => {
+    meal.recipes.forEach((recipe, index) => {
+        const ingredients = recipe.ingredients ? recipe.ingredients.join(', ') : '';
         html += `
             <div class="meal-detail-option">
-                <div class="meal-detail-option-name">${option.name}</div>
-                <div class="meal-detail-option-desc">${option.items}</div>
-                ${option.macros ? `
+                <div class="meal-detail-option-name">${recipe.name}</div>
+                <div class="meal-detail-option-desc">${ingredients}</div>
+                ${recipe.macros ? `
                     <div class="meal-macro-pills">
-                        <div class="macro-pill protein">🥩 ${option.macros.protein}</div>
-                        <div class="macro-pill carbs">🍞 ${option.macros.carbs}</div>
-                        <div class="macro-pill fats">🥑 ${option.macros.fats}</div>
+                        <div class="macro-pill protein">🥩 ${recipe.macros.protein}</div>
+                        <div class="macro-pill carbs">🍞 ${recipe.macros.carbs}</div>
+                        <div class="macro-pill fats">🥑 ${recipe.macros.fats}</div>
                     </div>
                 ` : ''}
             </div>
