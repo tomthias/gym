@@ -27,9 +27,9 @@ export const exerciseData = {
     // Fisioterapia Allenamento A
     heelraises: {
         name: 'SL Heel Raises con Step',
-        series: '3×10-15 per lato',
+        series: '3×10 + 15" per lato',
         carico: 'Manubrio 8 KG',
-        recupero: '1\'',
+        recupero: 'SS (Superserie con boxbridge)',
         focus: 'Polpacci e stabilità della caviglia',
         come: 'In piedi su uno step, solleva il tallone sulla punta del piede (un piede alla volta). Il ginocchio deve rimanere dritto. Tieni un manubrio in mano per equilibrio e carico.',
         tecnica: 'Movimento lento e controllato, pausa in alto',
@@ -39,14 +39,14 @@ export const exerciseData = {
     },
     boxbridge: {
         name: 'SL Box Bridge',
-        series: '3×5+10+5 per lato',
+        series: '3×5+10"+5 per lato',
         carico: '-',
         recupero: '1\'',
         focus: 'Glutei, core, stabilità unilaterale',
         come: 'Sdraiato supino, un piede appoggiato su un box/step, l\'altro sollevato. Solleva i fianchi contraendo i glutei.',
         tecnica: '"Alza bene il sedere" - contrai fortemente i glutei in alto',
         note: 'Alza bene il sedere',
-        image: 'https://i.ytimg.com/vi/NK4WJme6IXo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLC1B5hfxu1CitmI6x0vaSKGPUK28Q',
+        image: 'https://escapefitness.com/wps/us/wp-content/uploads/sites/3/2021/12/Escape-Fitness-Plyometric-Box-Exercises-Single-Leg-Glute-Bridge.jpg',
         fisio: true
     },
     hipthrust: {

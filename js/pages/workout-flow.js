@@ -77,14 +77,16 @@ async function requestWakeLock() {
     try {
         if ('wakeLock' in navigator) {
             wakeLock = await navigator.wakeLock.request('screen');
-            console.log('Screen Wake Lock attivo.');
+            console.log('Screen Wake Lock attivo - lo schermo non si bloccherà durante l\'allenamento');
 
             wakeLock.addEventListener('release', () => {
-                console.log('Screen Wake Lock rilasciato.');
+                console.log('Screen Wake Lock rilasciato');
             });
+        } else {
+            console.log('Wake Lock API non supportata da questo browser');
         }
     } catch (err) {
-        console.log('Screen Wake Lock non supportato o negato:', err);
+        console.error('Errore nell\'attivazione del Wake Lock:', err);
     }
 }
 
@@ -92,10 +94,17 @@ function releaseWakeLock() {
     if (wakeLock) {
         wakeLock.release().then(() => {
             wakeLock = null;
-            console.log('Screen Wake Lock rilasciato manualmente.');
+            console.log('Screen Wake Lock rilasciato - lo schermo può bloccarsi normalmente');
         });
     }
 }
+
+// Re-acquire wake lock when page becomes visible again (user returns to app)
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && workoutFlowState.workoutId) {
+        requestWakeLock();
+    }
+});
 
 // Workout Log for progressive overload tracking
 let workoutLog = JSON.parse(localStorage.getItem('workoutLog') || '[]');
@@ -962,17 +971,8 @@ function exitWorkoutFlow() {
         exercises: []
     };
 
-    // Show navigation bar again
-    const navBar = document.querySelector('.nav-bottom');
-    if (navBar) navBar.classList.remove('hidden');
-
-    // Hide flow view
-    const flowView = document.getElementById('workoutFlowView');
-    if (flowView) flowView.classList.remove('visible');
-
-    // Show home view
-    const homeView = document.getElementById('homeView');
-    if (homeView) homeView.classList.remove('hidden');
+    // Navigate back to home page
+    window.location.href = 'index.html';
 }
 
 // Initialize on page load if on workout-flow page
