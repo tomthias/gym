@@ -100,6 +100,20 @@ document.addEventListener('DOMContentLoaded', function() {
     initCheckboxes();
     loadProgress();
     updateCalendar();
+
+    // Add event listeners for workout start buttons
+    document.querySelectorAll('.btn-start-full-workout').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const workoutId = this.dataset.workout;
+            window.location.href = `workout-flow.html?workout=${workoutId}`;
+        });
+    });
+
+    // Add event listener for reset cache button
+    const resetBtn = document.querySelector('.clear-cache-btn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', resetAllProgress);
+    }
 });
 
 // Expose functions to window for onclick handlers

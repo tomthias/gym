@@ -77,3 +77,23 @@ window.addEventListener('beforeinstallprompt', (e) => {
 export function getDeferredPrompt() {
     return deferredPrompt;
 }
+
+// Initialize navigation
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle bottom navigation clicks
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const view = this.dataset.view;
+            if (view) {
+                const pages = {
+                    'home': 'index.html',
+                    'nutrition': 'nutrition.html',
+                    'history': 'history.html'
+                };
+                if (pages[view]) {
+                    window.location.href = pages[view];
+                }
+            }
+        });
+    });
+});
