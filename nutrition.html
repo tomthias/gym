@@ -53,14 +53,88 @@
         </button>
     </div>
 
-    <!-- Meal Detail Modal -->
-    <div id="mealModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title" id="mealModalTitle"></div>
-                <button class="close-button" onclick="closeMealModal()">&times;</button>
+    <!-- Recipe Bottom Sheet -->
+    <div id="recipeBottomSheet" class="bottom-sheet">
+        <div class="sheet-backdrop"></div>
+        <div class="sheet-container">
+            <div class="sheet-handle"></div>
+
+            <div class="sheet-header">
+                <h2 id="sheetTitle">Colazione</h2>
+                <button class="sheet-close" onclick="closeRecipeSheet()">&times;</button>
             </div>
-            <div id="mealModalBody"></div>
+
+            <div class="sheet-content">
+                <!-- Search & Filters -->
+                <div class="filter-section">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="recipeSearch" placeholder="Cerca ricette...">
+                    </div>
+
+                    <div class="filter-chips" id="filterChips">
+                        <div class="chip active" data-filter="all">Tutti</div>
+                        <div class="chip" data-filter="veloce">⚡ Veloce</div>
+                        <div class="chip" data-filter="veggie">🌱 Veggie</div>
+                        <div class="chip filter-more" onclick="openFilterDrawer()">+ Filtri</div>
+                    </div>
+
+                    <div class="filter-active-count" id="filterCount">
+                        <span id="recipeCount">20</span> ricette
+                    </div>
+                </div>
+
+                <!-- Recipe List -->
+                <div class="recipes-list" id="recipesList">
+                    <!-- Recipe cards will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Drawer (Advanced Filters) -->
+    <div id="filterDrawer" class="filter-drawer">
+        <div class="drawer-backdrop" onclick="closeFilterDrawer()"></div>
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h3>Filtri Avanzati</h3>
+                <button onclick="closeFilterDrawer()">&times;</button>
+            </div>
+
+            <div class="drawer-body">
+                <div class="filter-group">
+                    <label>Tipo Proteina</label>
+                    <div class="filter-options">
+                        <div class="filter-option" data-filter="carne">🥩 Carne</div>
+                        <div class="filter-option" data-filter="pesce">🐟 Pesce</div>
+                        <div class="filter-option" data-filter="vegano">🌱 Vegano</div>
+                        <div class="filter-option" data-filter="uova">🥚 Uova</div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>Tempo Preparazione</label>
+                    <div class="filter-options">
+                        <div class="filter-option" data-filter="time-5">&lt; 5 min</div>
+                        <div class="filter-option" data-filter="time-15">5-15 min</div>
+                        <div class="filter-option" data-filter="time-30">15-30 min</div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>Difficoltà</label>
+                    <div class="filter-options">
+                        <div class="filter-option" data-filter="facilissimo">Facilissimo</div>
+                        <div class="filter-option" data-filter="facile">Facile</div>
+                        <div class="filter-option" data-filter="media">Media</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer-footer">
+                <button class="btn-secondary" onclick="resetAllFilters()">Reset</button>
+                <button class="btn-primary" onclick="applyAdvancedFilters()">Applica</button>
+            </div>
         </div>
     </div>
 
