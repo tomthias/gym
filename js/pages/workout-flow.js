@@ -3,7 +3,7 @@
 import { getUrlParameter, initCheckboxes, toggleSection } from '../shared.js';
 import { exerciseData } from '../data/exercises.js';
 import { playCountdownBeep, stopSquatTempoMetronome, isSquatTempoMetronomeActive, toggleSquatTempoMetronome } from '../utils/timers.js';
-import { showExerciseDetail } from '../utils/modal.js';
+import { showExerciseDetail, closeExerciseModal } from '../utils/modal.js';
 
 // Workout exercises database
 const workoutExercises = {
@@ -1029,7 +1029,8 @@ window.skipTransitionRest = skipTransitionRest;
 window.exitWorkoutFlow = exitWorkoutFlow;
 window.toggleSquatTempoMetronome = toggleSquatTempoMetronome;
 window.toggleSection = toggleSection;
-window.showExerciseDetail = showExerciseDetail;
+window.showExerciseDetail = (key) => showExerciseDetail(key, exerciseData);
+window.closeExerciseModal = closeExerciseModal;
 window.toggleCheck = (id) => {
     const checkbox = document.getElementById(id);
     if (checkbox) {
