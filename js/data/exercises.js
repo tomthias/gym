@@ -235,7 +235,7 @@ export const exerciseData = {
     trazioni: {
         name: 'Lat Machine',
         series: '4x10',
-        carico: '25kg,
+        carico: '25kg',
         recupero: '1\'',
         focus: 'Dorsali, bicipiti, grip strength',
         come: 'seduto alla lat machine, tira il corpo/peso verso l\'alto.',
