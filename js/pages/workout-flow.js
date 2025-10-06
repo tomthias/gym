@@ -705,8 +705,6 @@ function updateFlowSectionsCheckbox(exerciseId) {
             checkboxes.forEach(cb => {
                 cb.classList.add('checked');
             });
-            // Update section counters
-            updateSectionCounters(container);
         }
     });
 }
