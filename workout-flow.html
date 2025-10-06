@@ -14,41 +14,163 @@
 </head>
 <body>
     <div id="workoutFlowView">
+        <div class="workout-detail-header">
+            <button class="back-button" onclick="exitWorkoutFlow()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 11.25C19.4142 11.25 19.75 11.5858 19.75 12C19.75 12.3797 19.4678 12.6935 19.1018 12.7432L19 12.75H5C4.58579 12.75 4.25 12.4142 4.25 12C4.25 11.6203 4.53215 11.3065 4.89823 11.2568L5 11.25H19Z" fill="#FFFFFF"/>
+                    <path d="M9.46967 6.46967C9.76256 6.17678 10.2374 6.17678 10.5303 6.46967C10.7966 6.73594 10.8208 7.1526 10.6029 7.44621L10.5303 7.53033L5.53033 12.5303C5.23744 12.8232 4.76256 12.8232 4.46967 12.5303C4.2034 12.2641 4.1792 11.8474 4.39705 11.5538L4.46967 11.4697L9.46967 6.46967Z" fill="#FFFFFF"/>
+                    <path d="M4.46967 11.4697C4.73594 11.2034 5.1526 11.1792 5.44621 11.3971L5.53033 11.4697L10.5303 16.4697C10.8232 16.7626 10.8232 17.2374 10.5303 17.5303C10.2641 17.7966 9.8474 17.8208 9.55379 17.6029L9.46967 17.5303L4.46967 12.5303C4.17678 12.2374 4.17678 11.7626 4.46967 11.4697Z" fill="#FFFFFF"/>
+                </svg>
+            </button>
+            <div class="workout-detail-title" id="flowWorkoutTitle">Allenamento 1</div>
+            <div class="header-spacer"></div>
+        </div>
+
         <!-- Start State -->
         <div id="flowStateStart" class="flow-state">
-            <header>
-                <h1 id="flowWorkoutTitle">Allenamento</h1>
-                <div class="subtitle" id="flowWorkoutSubtitle"></div>
-            </header>
-            <div id="flowStartSections"></div>
-            <button class="btn-primary btn-start-workout" id="btnStartWorkout">Inizia Allenamento</button>
+            <div class="start-section">
+                <button class="btn-start-workout" id="btnStartWorkout">
+                    <svg width="38" height="41" viewBox="0 0 38 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.500488 23.4998C0.500488 13.8349 8.33541 6 18.0002 6C27.665 6 35.5 13.8349 35.5 23.4998C35.5 33.1646 27.665 40.9996 18.0002 40.9996C8.33541 40.9996 0.500488 33.1646 0.500488 23.4998ZM32.5 23.4998C32.5 15.4917 26.0082 8.99996 18.0002 8.99996C9.99223 8.99996 3.50045 15.4917 3.50045 23.4998C3.50045 31.5078 9.99223 37.9996 18.0002 37.9996C26.0082 37.9996 32.5 31.5078 32.5 23.4998Z" fill="white"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9741 19.7318C12.9736 18.2236 14.1958 17.0006 15.7041 17L15.9965 17.0156C16.3833 17.0572 16.7581 17.181 17.0951 17.3802L23.4647 21.1476C24.7627 21.915 25.1929 23.5894 24.4255 24.8874C24.1913 25.2836 23.8607 25.614 23.4649 25.8482L17.0949 29.6156C15.7967 30.3832 14.1219 29.953 13.3543 28.6548C13.1053 28.2336 12.9741 27.7536 12.9741 27.2644V19.7318ZM21.5447 23.4974L15.9727 20.2016V26.7914L21.5447 23.4974Z" fill="white"/>
+                        <path d="M22.0004 0C22.8288 0 23.5004 0.67156 23.5004 1.49998C23.5004 2.25936 22.936 2.88694 22.2038 2.98626L22.0004 2.99996H14.0005C13.172 2.99996 12.5005 2.3284 12.5005 1.49998C12.5005 0.7406 13.0648 0.11302 13.7969 0.0137L14.0005 0H22.0004Z" fill="white"/>
+                        <path d="M30.9393 6.56031C29.5739 5.19489 31.5043 3.17029 32.9119 4.30517L33.0605 4.43903L37.0605 8.43897C37.6463 9.02475 37.6463 9.97449 37.0605 10.5603C36.5281 11.0928 35.6947 11.1412 35.1075 10.7055L34.9393 10.5603L33.9999 9.62161L30.3747 13.2462C29.8421 13.7788 29.0087 13.8272 28.4215 13.3915L28.2533 13.2462C27.7207 12.7137 27.6723 11.8804 28.1081 11.2932L28.2533 11.1249L31.8779 7.49965L30.9393 6.56031Z" fill="white"/>
+                    </svg>
+                    Inizia Allenamento
+                </button>
+            </div>
+
+            <div class="sections-container" id="flowStartSections">
+                <!-- Sections will be inserted here by JavaScript -->
+            </div>
         </div>
 
         <!-- Exercise State -->
-        <div id="flowStateExercise" class="flow-state">
-            <div class="flow-exercise-header">
-                <div class="flow-progress-indicator" id="flowProgressIndicator"></div>
-                <h2 id="flowExerciseName"></h2>
-                <div id="flowExerciseDetails" class="flow-exercise-details"></div>
+        <div id="flowStateExercise" class="flow-state hidden">
+            <div class="exercise-section">
+                <div class="status-badge">IN PROGRESS</div>
+                <div id="flowSupersetBadge" class="superset-badge hidden">⚡ SUPERSET</div>
+                <div class="exercise-category" id="flowExerciseCategory">Riscaldamento</div>
+                <h2 class="exercise-name-large" id="flowExerciseName">Bike</h2>
+                <div class="timer-display" id="flowTimer">00:00</div>
+                <div id="flowPreviousData" class="previous-data-display"></div>
             </div>
-            <div id="flowExerciseContent" class="flow-exercise-content"></div>
-            <div class="flow-actions">
-                <button class="btn-secondary" id="btnPrevExercise">Precedente</button>
-                <button class="btn-primary" id="btnCompleteExercise">Completato</button>
-                <button class="btn-secondary" id="btnSkipExercise">Salta</button>
+
+            <div class="exercise-actions">
+                <button class="action-btn action-btn-side" id="flowTimerPlayPause" onclick="toggleExerciseTimer()" aria-label="Pause">
+                    <svg id="flowTimerPauseIcon" width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.6665 18.6945C3.6665 12.2512 8.88985 7.02783 15.3332 7.02783C21.7765 7.02783 26.9998 12.2512 26.9998 18.6945C26.9998 25.1378 21.7765 30.3612 15.3332 30.3612C8.88985 30.3612 3.6665 25.1378 3.6665 18.6945ZM24.9998 18.6945C24.9998 13.3558 20.672 9.02783 15.3332 9.02783C9.99442 9.02783 5.6665 13.3558 5.6665 18.6945C5.6665 24.0333 9.99442 28.3612 15.3332 28.3612C20.672 28.3612 24.9998 24.0333 24.9998 18.6945Z" fill="white"/>
+                        <path d="M17.9998 3.02783C18.5521 3.02783 18.9998 3.47555 18.9998 4.02783C18.9998 4.5341 18.6236 4.95249 18.1356 5.0187L17.9998 5.02783H12.6665C12.1142 5.02783 11.6665 4.58011 11.6665 4.02783C11.6665 3.52157 12.0427 3.10318 12.5308 3.03697L12.6665 3.02783H17.9998Z" fill="white"/>
+                        <path d="M23.9594 7.4014C23.049 6.49111 24.3361 5.14135 25.2745 5.89795L25.3735 5.98719L28.0402 8.65386C28.4307 9.04438 28.4307 9.67755 28.0402 10.0681C27.6853 10.4231 27.1297 10.4554 26.7382 10.1649L26.6261 10.0681L23.9594 7.4014Z" fill="white"/>
+                        <path d="M17.7036 15.0278C18.2099 15.0278 18.6283 15.4041 18.6945 15.8921L18.7036 16.0278V21.3612C18.7036 21.9134 18.2559 22.3612 17.7036 22.3612C17.1973 22.3612 16.7789 21.9849 16.7127 21.4969L16.7036 21.3612V16.0278C16.7036 15.4756 17.1513 15.0278 17.7036 15.0278Z" fill="white"/>
+                        <path d="M12.9629 15.0278C13.4691 15.0278 13.8875 15.4041 13.9538 15.8921L13.9629 16.0278V21.3612C13.9629 21.9134 13.5151 22.3612 12.9629 22.3612C12.4566 22.3612 12.0382 21.9849 11.972 21.4969L11.9629 21.3612V16.0278C11.9629 15.4756 12.4106 15.0278 12.9629 15.0278Z" fill="white"/>
+                        <path d="M25.2933 7.32072C25.6838 6.9302 26.3169 6.9302 26.7074 7.32072C27.0625 7.67575 27.0948 8.2313 26.8044 8.62278L26.7074 8.73494L23.5874 11.8549C23.1969 12.2455 22.5638 12.2455 22.1733 11.8549C21.8182 11.4999 21.786 10.9444 22.0765 10.5529L22.1733 10.4407L25.2933 7.32072Z" fill="white"/>
+                    </svg>
+                    <svg id="flowTimerPlayIcon" class="hidden" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 8L24 16L10 24V8Z" fill="white"/>
+                    </svg>
+                </button>
+
+                <button class="action-btn action-btn-main" onclick="completeCurrentExercise()" aria-label="Complete">
+                    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="26" cy="26" r="24" stroke="white" stroke-width="3"/>
+                        <path d="M16 26L23 33L36 20" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <button class="action-btn action-btn-side" onclick="resetExerciseTimer()" aria-label="Reset">
+                    <svg width="30" height="33" viewBox="0 0 30 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.4375 18.6945C3.4375 12.2512 8.33439 7.02783 14.375 7.02783C20.4156 7.02783 25.3125 12.2512 25.3125 18.6945C25.3125 25.1378 20.4156 30.3612 14.375 30.3612C8.33439 30.3612 3.4375 25.1378 3.4375 18.6945ZM23.4375 18.6945C23.4375 13.3558 19.3801 9.02783 14.375 9.02783C9.36993 9.02783 5.3125 13.3558 5.3125 18.6945C5.3125 24.0333 9.36993 28.3612 14.375 28.3612C19.3801 28.3612 23.4375 24.0333 23.4375 18.6945Z" fill="white"/>
+                        <path d="M16.875 3.02783C17.3927 3.02783 17.8125 3.47555 17.8125 4.02783C17.8125 4.5341 17.4598 4.95249 17.0022 5.0187L16.875 5.02783H11.875C11.3572 5.02783 10.9375 4.58011 10.9375 4.02783C10.9375 3.52157 11.2902 3.10318 11.7478 3.03697L11.875 3.02783H16.875Z" fill="white"/>
+                        <path d="M22.4619 7.4014C21.6084 6.49111 22.8151 5.14135 23.6948 5.89795L23.7877 5.98719L26.2877 8.65386C26.6538 9.04438 26.6538 9.67755 26.2877 10.0681C25.9549 10.4231 25.4341 10.4554 25.0671 10.1649L24.9619 10.0681L22.4619 7.4014Z" fill="white"/>
+                        <path d="M13.7196 18.8357C14.0241 18.5109 14.5178 18.5109 14.8223 18.8357C15.0991 19.1309 15.1242 19.593 14.8978 19.9186L14.8223 20.0119L14.0744 20.8099L14.8223 21.608C15.0991 21.9032 15.1242 22.3653 14.8978 22.6909L14.8223 22.7842C14.5455 23.0794 14.1123 23.1063 13.807 22.8647L13.7196 22.7842L12.4201 21.398C12.1433 21.1027 12.1181 20.6407 12.3446 20.3151L12.4201 20.2218L13.7196 18.8357Z" fill="white"/>
+                        <path d="M13.6616 14.7008L13.959 14.7108C16.7726 14.7108 19.1571 16.1488 19.1571 18.207C19.1571 20.2653 16.7727 21.7032 13.9563 21.7032C13.5955 21.7018 13.2352 21.6758 12.8776 21.6253C12.4507 21.565 12.1505 21.1469 12.207 20.6916C12.2635 20.2362 12.6555 19.916 13.0823 19.9763C13.3739 20.0175 13.6677 20.0387 13.959 20.0398C16.0258 20.0398 17.5977 19.0919 17.5977 18.207C17.5977 17.355 16.14 16.4444 14.1476 16.3769L13.9154 16.3729C12.6938 16.2999 11.4943 16.7416 10.5751 17.6029C10.2516 17.9061 9.7589 17.8721 9.4747 17.527C9.1905 17.1819 9.22237 16.6564 9.54589 16.3533C10.6956 15.2759 12.1742 14.6906 13.6616 14.7008Z" fill="white"/>
+                        <path d="M23.7123 7.32072C24.0784 6.9302 24.6719 6.9302 25.0381 7.32072C25.3709 7.67575 25.4012 8.2313 25.1289 8.62278L25.0381 8.73494L22.1131 11.8549C21.7469 12.2455 21.1534 12.2455 20.7873 11.8549C20.4544 11.4999 20.4242 10.9444 20.6966 10.5529L20.7873 10.4407L23.7123 7.32072Z" fill="white"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="exercise-stats">
+                <div class="stat-item">
+                    <div class="stat-header">
+                        <div class="stat-label">Serie</div>
+                        <div class="stat-value" id="flowSeriesInfo">2/3</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-header">
+                        <div class="stat-label">Reps</div>
+                        <div class="stat-value" id="flowRepsInfo">12</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="how-to-section">
+                <div class="how-to-header" onclick="toggleHowTo()">
+                    <div class="how-to-title">Come eseguire</div>
+                </div>
+                <div class="how-to-content" id="flowHowToContent">
+                    <p id="flowExerciseInstructions">Pedalare sulla cyclette a intensità moderata...</p>
+                </div>
+            </div>
+
+            <button id="squatTempoMetronome" class="metronome-toggle" onclick="toggleSquatTempoMetronome()">
+                <svg class="metronome-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3L13.5 8H19L14.5 11.5L16 17L12 13.5L8 17L9.5 11.5L5 8H10.5L12 3Z" fill="currentColor"/>
+                    <path d="M12 13.5V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span id="metronomeLabel">Attiva Metronomo 3-3-3</span>
+            </button>
+
+            <div class="sections-container" id="flowExerciseSections">
+                <!-- Sections will be inserted here by JavaScript -->
             </div>
         </div>
 
         <!-- Rest State -->
-        <div id="flowStateRest" class="flow-state">
-            <div class="rest-container">
-                <h2>Recupero</h2>
-                <div id="restTimer" class="rest-timer"></div>
-                <div id="restNextExercise" class="rest-next-exercise"></div>
-                <div class="flow-actions">
-                    <button class="btn-secondary" id="btnSkipRest">Salta Recupero</button>
-                    <button class="btn-primary" id="btnAddTime">+30s</button>
+        <div id="flowStateRest" class="flow-state hidden">
+            <div class="rest-section">
+                <div class="status-badge rest">RIPOSA</div>
+
+                <div class="timer-circle-container">
+                    <svg class="timer-circle-svg" viewBox="0 0 280 280">
+                        <circle class="timer-circle-bg" cx="140" cy="140" r="136"/>
+                        <circle id="flowRestCircle" class="timer-circle-progress" cx="140" cy="140" r="136"/>
+                    </svg>
+                    <div class="timer-circle-time" id="flowRestTimer">01:30</div>
                 </div>
+
+                <div class="timer-controls">
+                    <button class="timer-btn" id="flowRestPlayPause" onclick="toggleRestTimer()">
+                        <svg id="flowRestPauseIcon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                        </svg>
+                        <svg id="flowRestPlayIcon" class="hidden" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </button>
+                    <button class="timer-btn" onclick="logAndMoveToNextSet()">
+                        <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div id="rest-log-inputs" class="rest-log-container">
+                    <h3 class="rest-title-log">📝 Registra la serie completata</h3>
+                    <div class="rest-input-group">
+                        <label for="load-during-rest">Carico (Kg):</label>
+                        <input type="number" id="load-during-rest" placeholder="Peso" min="0" step="0.5" value="" class="load-input">
+                    </div>
+                    <div class="rest-input-group">
+                        <label for="rpe-during-rest">RPE (1-10):</label>
+                        <input type="number" id="rpe-during-rest" placeholder="Sforzo" min="1" max="10" step="0.5" value="" class="load-input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="sections-container" id="flowRestSections">
+                <!-- Sections will be inserted here by JavaScript -->
             </div>
         </div>
     </div>
