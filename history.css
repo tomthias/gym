@@ -1,0 +1,29 @@
+/* History View */
+.history-view {
+    display: none;
+}
+
+.history-view.visible {
+    display: block;
+}
+
+/* History Items */
+.history-item {
+    background: var(--color-bg-card);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.history-date {
+    font-size: 14px;
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.history-workout {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}

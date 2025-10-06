@@ -1,0 +1,1060 @@
+/* Workout Flow View */
+.workout-flow-view {
+    display: none;
+}
+
+.workout-flow-view.visible {
+    display: block;
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Workout Detail View */
+.workout-detail {
+    display: none;
+    animation: slideIn 0.3s ease-out;
+}
+
+.workout-detail.visible {
+    display: block;
+}
+
+.workout-detail-header {
+    position: sticky;
+    top: 0;
+    background: var(--color-bg-primary);
+    padding: 16px;
+    margin: -16px -16px 20px -16px;
+    border-bottom: 1px solid var(--color-border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.workout-detail-title {
+    font-size: 18px;
+    font-weight: 600;
+    flex: 1;
+    text-align: center;
+}
+
+.header-spacer {
+    width: 32px;
+}
+
+/* Flow States */
+.flow-state {
+    display: block;
+}
+
+.flow-state.hidden {
+    display: none;
+}
+
+/* Start State */
+.start-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.start-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.btn-start-workout {
+    background: var(--color-primary);
+    color: var(--color-text-primary);
+    border: none;
+    padding: 16px 40px;
+    border-radius: 9999px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
+    transition: transform 0.2s;
+    box-shadow: var(--shadow-card);
+}
+
+.btn-start-workout:active {
+    transform: scale(0.92);
+}
+
+.btn-start-workout svg {
+    width: 36px;
+    height: 36px;
+}
+
+/* Exercise Sections */
+.sections-container {
+    width: 100%;
+}
+
+.section {
+    background: var(--color-bg-card);
+    border-radius: 16px;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.section-header {
+    padding: 20px;
+    cursor: pointer;
+    gap: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-bg-card);
+    transition: background 0.3s;
+}
+
+.section-header.expanded {
+    background: var(--color-secondary);
+    color: var(--color-text-primary);
+}
+
+.section-header::after {
+    content: '';
+    width: 24px;
+    height: 24px;
+    background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.46967 9.46967C7.73594 9.2034 8.1526 9.1792 8.44621 9.39705L8.53033 9.46967L12 12.939L15.4697 9.46967C15.7359 9.2034 16.1526 9.1792 16.4462 9.39705L16.5303 9.46967C16.7966 9.73594 16.8208 10.1526 16.6029 10.4462L16.5303 10.5303L12.5303 14.5303C12.2641 14.7966 11.8474 14.8208 11.5538 14.6029L11.4697 14.5303L7.46967 10.5303C7.17678 10.2374 7.17678 9.76256 7.46967 9.46967Z" fill="%23FFFFFF"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: transform 0.3s;
+}
+
+.section-header.expanded::after {
+    transform: rotate(180deg);
+}
+
+.section-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    flex: auto;
+}
+
+.section-counter {
+    font-size: 16px;
+    color: whitesmoke;
+    font-weight: 400;
+}
+
+.section-duration {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    background: var(--bg-overlay-light);
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+
+.section-content {
+    display: none;
+    padding: 0 12px 12px 12px;
+}
+
+.section-content.expanded {
+    display: block;
+    padding-top: 24px;
+}
+
+/* Exercise Items */
+.exercise-item {
+    background: var(--color-bg-card-alt);
+    border-radius: 10px;
+    padding: 12px;
+    gap:6px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.exercise-item:active {
+    background: var(--color-bg-card);
+}
+
+.exercise-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.checkbox {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.checkbox .svg-unchecked {
+    display: block;
+}
+
+.checkbox .svg-checked {
+    display: none;
+}
+
+.checkbox.checked .svg-unchecked {
+    display: none;
+}
+
+.checkbox.checked .svg-checked {
+    display: block;
+}
+
+.exercise-info {
+    flex: 1;
+}
+
+.exercise-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.exercise-details {
+    font-size: 13px;
+    color: var(--color-text-disabled);
+}
+
+.info-icon {
+    color: var(--color-primary);
+    font-size: 20px;
+}
+
+/* Exercise State */
+.exercise-section {
+    padding: 60px 24px 32px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.status-badge {
+    background: var(--color-primary);
+    color: var(--color-text-primary);
+    padding: 8px 24px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-block;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.status-badge.rest {
+    background: var(--color-secondary);
+}
+
+.superset-badge {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 50%, #6BCB77 100%);
+    color: var(--color-text-dark);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.superset-badge.hidden {
+    display: none;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+.exercise-category {
+    font-size: 16px;
+    font-weight: 700;
+    color: #aaaaaa;
+    margin: 0;
+}
+
+.exercise-name-large {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1;
+}
+
+.exercise-stats {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    justify-content: center;
+    width: 100%;
+}
+
+.stat-item {
+    flex: 1;
+    background: #2a2a2a;
+    padding: 24px;
+    border-radius: 16px;
+    width: 100%;
+}
+
+.stat-item .stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.stat-label {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    text-align: right;
+}
+
+/* How To Section */
+.how-to-section {
+    background: #2a2a2a;
+    border-radius: 16px;
+    margin: 0 0 24px 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.how-to-header {
+    padding: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.how-to-header::after {
+    content: '▼';
+    font-size: 12px;
+    color: #aaaaaa;
+    transition: transform 0.3s;
+}
+
+.how-to-header.expanded::after {
+    transform: rotate(180deg);
+}
+
+.how-to-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.how-to-content {
+    display: none;
+    padding: 0 24px 24px 24px;
+    font-size: 23px;
+    line-height: 24px;
+    color: #cccccc;
+    font-weight: 400;
+}
+
+.how-to-content.expanded {
+    display: block;
+}
+
+/* Exercise Actions */
+.exercise-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 0 20px;
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 32px;
+}
+
+.action-btn {
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn:active {
+    transform: translateY(-2px);
+}
+
+.action-btn-main {
+    background: var(--color-primary);
+    color: var(--color-text-primary);
+    width: 172px;
+    height: 72px;
+    border-radius: 36px;
+    box-shadow: 0px 4px 12px 0px rgba(76, 175, 80, 0.3);
+}
+
+.action-btn-main:hover {
+    background: #006748;
+    box-shadow: 0px 6px 16px 0px rgba(76, 175, 80, 0.4);
+}
+
+.action-btn-main svg {
+    width: 52px;
+    height: 52px;
+}
+
+.action-btn-side {
+    background: transparent;
+    color: var(--color-text-primary);
+    width: 56px;
+    height: 56px;
+    border-radius: 22px;
+    border: 0.611px solid white;
+}
+
+.action-btn-side:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.action-btn-side svg {
+    width: 32px;
+    height: 32px;
+}
+
+.complete-button {
+    background: var(--color-primary);
+    color: var(--color-text-primary);
+    border: none;
+    padding: 16px;
+    border-radius: 9999px;
+    font-size: 16px;
+    font-weight: 600;
+    width: calc(100% - 32px);
+    margin: 0 16px 24px 16px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.complete-button:active {
+    transform: scale(0.98);
+}
+
+/* Rest State */
+.rest-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 32px;
+}
+
+/* Timer Circle */
+.timer-circle-container {
+    width: 280px;
+    height: 280px;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.timer-circle-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.timer-circle-bg {
+    fill: none;
+    stroke: var(--color-bg-button);
+    stroke-width: 8;
+}
+
+.timer-circle-progress {
+    fill: none;
+    stroke: var(--color-secondary);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s linear;
+    filter: drop-shadow(0 0 12px var(--color-secondary));
+}
+
+.timer-circle-time {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 64px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Timer Display */
+.timer-display {
+    font-size: 64px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 2px;
+    width: 320px;
+}
+
+/* Timer Controls */
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.timer-btn {
+    background: var(--color-primary);
+    border: none;
+    color: var(--color-text-primary);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: transform 0.2s;
+}
+
+.timer-btn:active {
+    transform: scale(0.95);
+}
+
+.timer-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Rest Log */
+.rest-log-container {
+    margin-top: 8px;
+    padding: 24px;
+    background-color: var(--color-bg-secondary);
+    border-radius: 16px;
+    text-align: left;
+    width: 100%;
+    max-width: 420px;
+}
+
+.rest-title-log {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--color-primary);
+    text-align: center;
+}
+
+.rest-input-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.rest-input-group label {
+    font-size: 0.95em;
+    color: var(--color-text-secondary);
+    min-width: 110px;
+    font-weight: 500;
+}
+
+.load-input {
+    width: 130px;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    text-align: right;
+    font-size: 1em;
+    font-weight: 600;
+    -moz-appearance: textfield;
+}
+
+.load-input::-webkit-inner-spin-button,
+.load-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.load-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(0, 135, 95, 0.2);
+}
+
+.last-load {
+    font-size: 11px;
+    color: var(--color-primary);
+    margin-top: 4px;
+}
+
+/* Previous Data Display */
+.previous-data-display {
+    margin-top: 20px;
+    padding: 14px 20px;
+    background-color: var(--color-bg-secondary);
+    border-radius: 12px;
+    font-size: 0.92em;
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+.previous-data-display.hidden {
+    display: none;
+}
+
+.previous-data-display strong {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Recovery Button */
+.btn-recovery {
+    background: var(--color-secondary);
+    color: var(--color-text-dark);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Tabata Timer Modal */
+.timer-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-bg-modal);
+    z-index: 2000;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-modal.active {
+    display: flex;
+}
+
+.timer-content {
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    padding: 40px 20px;
+}
+
+.timer-phase {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--color-text-disabled);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.timer-modal.active .timer-phase {
+    color: var(--color-primary);
+}
+
+.timer-exercise {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 48px;
+    color: var(--color-text-primary);
+    line-height: 1.2;
+}
+
+.timer-circle {
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 1;
+    margin: 0 auto 32px;
+    position: relative;
+}
+
+.timer-circle svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.timer-circle .timer-circle-bg {
+    fill: none;
+    stroke: #2a2a2a;
+    stroke-width: 12;
+}
+
+.timer-circle .timer-circle-progress {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 12;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.1s linear, stroke 0.3s;
+    filter: drop-shadow(0 0 8px var(--color-primary));
+}
+
+.timer-circle-progress.rest {
+    stroke: var(--color-secondary);
+    filter: drop-shadow(0 0 8px var(--color-secondary));
+}
+
+.timer-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 96px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    font-variant-numeric: tabular-nums;
+}
+
+.timer-rounds {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+.timer-modal .timer-controls {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer-modal .timer-btn {
+    background: transparent;
+    color: var(--color-text-primary);
+    border: none;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.timer-modal .timer-btn svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--color-text-primary);
+    transition: fill 0.2s;
+}
+
+.timer-modal .timer-btn:active {
+    transform: scale(0.92);
+}
+
+.timer-modal .timer-btn.primary {
+    width: 80px;
+    height: 80px;
+}
+
+.timer-modal .timer-btn.primary svg {
+    fill: var(--color-primary);
+    filter: drop-shadow(0 4px 12px rgba(29, 107, 149, 0.3));
+}
+
+.timer-modal .timer-btn.stop svg {
+    fill: #ef4444;
+}
+
+.btn-tabata {
+    background: var(--color-accent);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 12px auto;
+    display: block;
+}
+
+/* Workout Assistant */
+.workout-assistant {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-bg-primary);
+    z-index: 2000;
+    animation: fadeIn 0.3s;
+}
+
+.workout-assistant.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.assistant-content {
+    width: 100%;
+    max-width: 500px;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.assistant-header {
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+.close-assistant {
+    background: var(--color-bg-button);
+    border: none;
+    color: var(--color-text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.assistant-status-tag {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: var(--color-primary);
+    color: var(--color-text-primary);
+}
+
+.assistant-status-tag.recovery {
+    background: var(--color-secondary);
+    color: var(--color-text-dark);
+}
+
+.assistant-exercise-name {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 30px;
+    line-height: 1.2;
+}
+
+.assistant-sets-info {
+    margin-bottom: 50px;
+}
+
+.sets-to-do {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-bottom: 10px;
+}
+
+.sets-progress {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.assistant-stopwatch {
+    margin-bottom: 30px;
+}
+
+.assistant-stopwatch.hidden {
+    display: none;
+}
+
+.stopwatch-label {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    margin-bottom: 10px;
+}
+
+.stopwatch-display {
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.assistant-timer {
+    display: none;
+    margin-bottom: 30px;
+}
+
+.assistant-timer.active {
+    display: block;
+}
+
+.timer-label {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    margin-bottom: 10px;
+}
+
+.assistant-instructions {
+    background: var(--color-bg-card);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.assistant-instructions.hidden {
+    display: none;
+}
+
+.instructions-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+.instructions-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+}
+
+.assistant-controls {
+    margin-top: 30px;
+}
+
+.assistant-btn {
+    background: var(--color-primary);
+    color: var(--color-text-primary);
+    border: none;
+    padding: 20px 60px;
+    border-radius: 16px;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.assistant-btn:active {
+    transform: scale(0.95);
+}
+
+/* Recovery Toast */
+.recovery-toast {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-secondary);
+    color: var(--color-text-dark);
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    z-index: 1500;
+    box-shadow: var(--shadow-card-hover);
+    min-width: 200px;
+    text-align: center;
+}
+
+.recovery-toast.active {
+    display: block;
+    animation: slideUpBounce 0.3s ease-out;
+}
+
+@keyframes slideUpBounce {
+    0% {
+        transform: translateX(-50%) translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Squat Tempo Metronome */
+.metronome-toggle {
+    display: none;
+    margin-bottom: 24px;
+    padding: 12px 24px;
+    background: var(--color-bg-card);
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    color: var(--color-text-primary);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.metronome-toggle.visible {
+    display: flex;
+}
+
+.metronome-toggle.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(29, 107, 149, 0.3);
+}
+
+.metronome-toggle:active {
+    transform: scale(0.95);
+}
+
+.metronome-icon {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
