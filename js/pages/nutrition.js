@@ -30,7 +30,8 @@ function loadMeals() {
     if (!container) return;
 
     const meals = nutritionRecipes[currentDayType];
-    const today = new Date().toLocaleDateString('it-IT');
+    // Use ISO date format (YYYY-MM-DD) for consistency across locales
+    const today = new Date().toISOString().split('T')[0];
 
     let html = '';
 

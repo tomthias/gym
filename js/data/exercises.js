@@ -7,7 +7,7 @@ export const exerciseData = {
         come: 'Pedalare sulla cyclette a intensità moderata mantenendo una frequenza cardiaca costante.',
         tecnica: 'Respirazione regolare, postura corretta sulla sella',
         note: 'Riscaldamento',
-        duration: 720
+        duration: '12\''
     },
     circonduzione: {
         name: 'Circonduzione Braccia',

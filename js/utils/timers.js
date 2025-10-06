@@ -209,6 +209,11 @@ function playMetronomeBeep() {
 
         oscillator.start(audioContext.currentTime);
         oscillator.stop(audioContext.currentTime + 0.1);
+
+        // Close AudioContext after beep finishes
+        setTimeout(() => {
+            audioContext.close();
+        }, 150);
     } catch (err) {
         console.log('Metronome beep not available:', err);
     }
@@ -232,11 +237,17 @@ export function playCountdownBeep(isFinal = false) {
         oscillator.frequency.value = isFinal ? 1200 : 800;
         oscillator.type = 'sine';
 
+        const duration = isFinal ? 0.3 : 0.15;
         gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + (isFinal ? 0.3 : 0.15));
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
 
         oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + (isFinal ? 0.3 : 0.15));
+        oscillator.stop(audioContext.currentTime + duration);
+
+        // Close AudioContext after beep finishes
+        setTimeout(() => {
+            audioContext.close();
+        }, (duration + 0.05) * 1000);
     } catch (err) {
         console.log('Countdown beep not available:', err);
     }
