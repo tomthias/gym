@@ -616,11 +616,12 @@ function completeCurrentExercise() {
             if (workoutFlowState.currentSet < maxSets) {
                 // More sets to do, take rest then go back to first exercise (A)
                 console.log('SUPERSET FLOW: More sets needed, going to rest');
+                console.log('Current exercise:', exercise.name, 'at index:', workoutFlowState.currentExerciseIndex);
+                console.log('Partner:', partner.name, 'at index:', partnerIndex, 'recovery:', partner.recovery);
 
-                // Find the first exercise in the superset pair (the one with recovery: 0)
-                // partner is the first exercise (A), current exercise is the second (B)
-                // We need to find the index of partner (A), not partner.supersetPartner
-                const firstExerciseIndex = partnerIndex;
+                // The first exercise in the pair is the one with recovery: 0
+                // We need to determine which one is first based on recovery value
+                const firstExerciseIndex = partner.recovery === 0 ? partnerIndex : workoutFlowState.currentExerciseIndex;
 
                 // IMPORTANT: Set currentExerciseIndex BEFORE incrementing currentSet
                 workoutFlowState.currentExerciseIndex = firstExerciseIndex;
