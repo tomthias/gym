@@ -502,21 +502,7 @@
     border-style: dashed;
 }
 
-/* Correzione 1: Veggie chip */
-.filter-chips .chip[data-filter="veggie"]::before {
-    /* ERRORE: background-image: url('../assets/veggie.svg'); */
-    background-image: url('../assets/icons/veggie.svg'); /* CORRETTO */
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 6px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    filter: invert(100%);
-    position: relative;
-    top: 2px;
-}
+
 
 .filter-active-count {
     text-align: center;
