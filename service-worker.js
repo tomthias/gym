@@ -1,4 +1,4 @@
-const CACHE_NAME = 'scheda-palestra-v1';
+const CACHE_NAME = 'scheda-palestra-v2';
 const urlsToCache = [
   './',
   './index.html',
@@ -43,27 +43,49 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - network first for JS files, cache first for others
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request).then(response => {
-          // Don't cache non-successful responses
-          if (!response || response.status !== 200 || response.type !== 'basic') {
-            return response;
-          }
-          // Clone the response
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME)
-            .then(cache => {
+  const url = new URL(event.request.url);
+
+  // Network-first strategy for JavaScript files to always get latest updates
+  if (url.pathname.endsWith('.js')) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          // Cache the new version
+          if (response && response.status === 200) {
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME).then(cache => {
               cache.put(event.request, responseToCache);
             });
+          }
           return response;
-        });
-      })
-  );
+        })
+        .catch(() => {
+          // Fallback to cache if offline
+          return caches.match(event.request);
+        })
+    );
+  } else {
+    // Cache-first strategy for other resources (HTML, CSS, images)
+    event.respondWith(
+      caches.match(event.request)
+        .then(response => {
+          if (response) {
+            return response;
+          }
+          return fetch(event.request).then(response => {
+            if (!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME)
+              .then(cache => {
+                cache.put(event.request, responseToCache);
+              });
+            return response;
+          });
+        })
+    );
+  }
 });
