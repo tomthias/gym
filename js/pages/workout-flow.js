@@ -338,24 +338,38 @@ function startExerciseState() {
     const exerciseName = document.getElementById('flowExerciseName');
     if (exerciseName) exerciseName.textContent = exercise.name || 'Esercizio';
 
-    // Update stats
+    // Update stats (hide for warmup exercises)
+    const isWarmupOrCardio = exercise.type === 'warmup' || (exercise.duration && !exercise.sets);
+
     const seriesInfo = document.getElementById('flowSeriesInfo');
-    if (seriesInfo) {
-        if (exercise.sets) {
-            seriesInfo.textContent = `${workoutFlowState.currentSet}/${exercise.sets}`;
+    const seriesLabel = seriesInfo?.parentElement;
+    if (seriesInfo && seriesLabel) {
+        if (isWarmupOrCardio) {
+            seriesLabel.style.display = 'none';
         } else {
-            seriesInfo.textContent = '-';
+            seriesLabel.style.display = '';
+            if (exercise.sets) {
+                seriesInfo.textContent = `${workoutFlowState.currentSet}/${exercise.sets}`;
+            } else {
+                seriesInfo.textContent = '-';
+            }
         }
     }
 
     const repsInfo = document.getElementById('flowRepsInfo');
-    if (repsInfo) {
-        if (exercise.reps) {
-            repsInfo.textContent = exercise.reps;
-        } else if (exercise.duration) {
-            repsInfo.textContent = `${exercise.duration}"`;
+    const repsLabel = repsInfo?.parentElement;
+    if (repsInfo && repsLabel) {
+        if (isWarmupOrCardio) {
+            repsLabel.style.display = 'none';
         } else {
-            repsInfo.textContent = '-';
+            repsLabel.style.display = '';
+            if (exercise.reps) {
+                repsInfo.textContent = exercise.reps;
+            } else if (exercise.duration) {
+                repsInfo.textContent = `${exercise.duration}"`;
+            } else {
+                repsInfo.textContent = '-';
+            }
         }
     }
 
