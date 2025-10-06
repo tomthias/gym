@@ -618,9 +618,9 @@ function completeCurrentExercise() {
                 console.log('SUPERSET FLOW: More sets needed, going to rest');
 
                 // Find the first exercise in the superset pair (the one with recovery: 0)
-                const firstExerciseIndex = workoutFlowState.exercises.findIndex(
-                    ex => ex.id === partner.supersetPartner
-                );
+                // partner is the first exercise (A), current exercise is the second (B)
+                // We need to find the index of partner (A), not partner.supersetPartner
+                const firstExerciseIndex = partnerIndex;
 
                 // IMPORTANT: Set currentExerciseIndex BEFORE incrementing currentSet
                 workoutFlowState.currentExerciseIndex = firstExerciseIndex;
