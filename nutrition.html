@@ -15,7 +15,6 @@
 <body>
     <header>
         <h1>Piano Nutrizionale</h1>
-        <div class="subtitle">Il tuo piano alimentare personalizzato</div>
     </header>
 
     <div class="day-type-selector">
@@ -68,14 +67,20 @@
                 <!-- Search & Filters -->
                 <div class="filter-section">
                     <div class="search-box">
-                        <span class="search-icon">🔍</span>
+                        <span class="search-icon">
+                            <img src="/assets/icons/search.svg" class="icon-inline" alt="search">
+                        </span>
                         <input type="text" id="recipeSearch" placeholder="Cerca ricette...">
                     </div>
 
                     <div class="filter-chips" id="filterChips">
                         <div class="chip active" data-filter="all">Tutti</div>
-                        <div class="chip" data-filter="veloce">⚡ Veloce</div>
-                        <div class="chip" data-filter="veggie">🌱 Veggie</div>
+                        <div class="chip" data-filter="veloce">
+                            <img src="/assets/icons/fast.svg" class="chip-icon" alt="fast"> Veloce
+                        </div>
+                        <div class="chip" data-filter="veggie">
+                            <img src="/assets/icons/veggie.svg" class="chip-icon" alt="veggie"> Veggie
+                        </div>
                         <div class="chip filter-more" onclick="openFilterDrawer()">+ Filtri</div>
                     </div>
 
@@ -105,10 +110,18 @@
                 <div class="filter-group">
                     <label>Tipo Proteina</label>
                     <div class="filter-options">
-                        <div class="filter-option" data-filter="carne">🥩 Carne</div>
-                        <div class="filter-option" data-filter="pesce">🐟 Pesce</div>
-                        <div class="filter-option" data-filter="vegano">🌱 Vegano</div>
-                        <div class="filter-option" data-filter="uova">🥚 Uova</div>
+                        <div class="filter-option" data-filter="carne">
+                            <img src="/assets/icons/meat.svg" class="filter-icon" alt="meat"> Carne
+                        </div>
+                        <div class="filter-option" data-filter="pesce">
+                            <img src="/assets/icons/fish.svg" class="filter-icon" alt="fish"> Pesce
+                        </div>
+                        <div class="filter-option" data-filter="vegano">
+                            <img src="/assets/icons/veggie.svg" class="filter-icon" alt="veggie"> Vegano
+                        </div>
+                        <div class="filter-option" data-filter="uova">
+                            <img src="/assets/icons/egg.svg" class="filter-icon" alt="egg"> Uova
+                        </div>
                     </div>
                 </div>
 

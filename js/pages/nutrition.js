@@ -35,17 +35,43 @@ let activeFilters = {
     advanced: [] // ['carne', 'pesce', 'time-5', etc.]
 };
 
+// ========== ICON SYSTEM ==========
+const ICONS = {
+    // Recipe types
+    meat: '/assets/icons/meat.svg',
+    fish: '/assets/icons/fish.svg',
+    veggie: '/assets/icons/veggie.svg',
+    egg: '/assets/icons/egg.svg',
+    pancake: '/assets/icons/pancake.svg',
+    dish: '/assets/icons/dish.svg',
+    // Macros
+    protein: '/assets/icons/protein.svg',
+    carbs: '/assets/icons/carbs.svg',
+    fats: '/assets/icons/fats.svg',
+    // UI
+    search: '/assets/icons/search.svg',
+    clock: '/assets/icons/clock.svg',
+    fast: '/assets/icons/fast.svg',
+    tip: '/assets/icons/tip.svg',
+    check: '/assets/icons/check.svg',
+    refresh: '/assets/icons/refresh.svg'
+};
+
+function icon(name, className = 'icon') {
+    return `<img src="${ICONS[name]}" class="${className}" alt="${name}">`;
+}
+
 // ========== UTILITY FUNCTIONS ==========
 
 // Get icon for recipe type
 function getRecipeIcon(recipe) {
     if (recipe.tags.includes('vegano') || recipe.tags.includes('vegetariano') || recipe.category === 'vegano') {
-        return '🌱';
+        return icon('veggie', 'recipe-type-icon');
     }
-    if (recipe.tags.includes('pesce')) return '🐟';
-    if (recipe.tags.includes('carne') || recipe.tags.includes('proteico')) return '🥩';
-    if (recipe.category === 'dolce') return '🥞';
-    return '🍽️';
+    if (recipe.tags.includes('pesce')) return icon('fish', 'recipe-type-icon');
+    if (recipe.tags.includes('carne') || recipe.tags.includes('proteico')) return icon('meat', 'recipe-type-icon');
+    if (recipe.category === 'dolce') return icon('pancake', 'recipe-type-icon');
+    return icon('dish', 'recipe-type-icon');
 }
 
 // Check if recipe matches filters
@@ -153,7 +179,7 @@ function loadMeals() {
                         <div class="meal-time">${meal.time}</div>
                     </div>
                     <div class="checkbox-meal ${isCompleted ? 'checked' : ''}" onclick="toggleMeal('${mealId}')">
-                        ${isCompleted ? '✓' : ''}
+                        ${isCompleted ? icon('check', 'checkbox-icon') : ''}
                     </div>
                 </div>
                 <div class="meal-name">${meal.name}</div>
@@ -161,7 +187,7 @@ function loadMeals() {
 
                 ${selectedRecipe ? `
                     <div class="meal-selected-recipe">
-                        <div class="selected-recipe-label">✓ Selezionata:</div>
+                        <div class="selected-recipe-label">${icon('check', 'selected-icon')} Selezionata:</div>
                         <div class="selected-recipe-name">${selectedRecipe.name}</div>
                         <div class="selected-recipe-macros">
                             ${selectedRecipe.macros.calories} •
@@ -270,7 +296,7 @@ function renderRecipeCards() {
     if (filteredRecipes.length === 0) {
         container.innerHTML = `
             <div style="text-align: center; padding: 40px 20px; color: var(--color-text-muted);">
-                <div style="font-size: 48px; margin-bottom: 16px;">🔍</div>
+                <div style="font-size: 48px; margin-bottom: 16px;">${icon('search', 'empty-state-icon')}</div>
                 <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Nessuna ricetta trovata</div>
                 <div style="font-size: 14px;">Prova a modificare i filtri</div>
             </div>
@@ -305,13 +331,13 @@ function renderRecipeCards() {
                           recipe.difficulty === 'media' ? 'Medio' : 'Difficile'}
                     </div>
                     <div class="recipe-meta-item">
-                        ⏱️ ${recipe.time} min
+                        ${icon('clock', 'icon-inline')} ${recipe.time} min
                     </div>
                 </div>
 
                 ${isVeloce || isProteico || recipe.tags.includes('meal-prep') ? `
                     <div class="recipe-badges">
-                        ${isVeloce ? '<span class="recipe-badge veloce">Veloce</span>' : ''}
+                        ${isVeloce ? `<span class="recipe-badge veloce">${icon('fast', 'badge-icon')} Veloce</span>` : ''}
                         ${isProteico ? '<span class="recipe-badge proteico">Proteico</span>' : ''}
                         ${recipe.tags.includes('meal-prep') ? '<span class="recipe-badge">Meal Prep</span>' : ''}
                     </div>
@@ -323,15 +349,15 @@ function renderRecipeCards() {
                             <span class="value">${recipe.macros.calories}</span>
                         </div>
                         <div class="macro-item">
-                            <span class="icon">🥩</span>
+                            ${icon('protein', 'macro-icon')}
                             <span class="value">${recipe.macros.protein}</span>
                         </div>
                         <div class="macro-item">
-                            <span class="icon">🍞</span>
+                            ${icon('carbs', 'macro-icon')}
                             <span class="value">${recipe.macros.carbs}</span>
                         </div>
                         <div class="macro-item">
-                            <span class="icon">🥑</span>
+                            ${icon('fats', 'macro-icon')}
                             <span class="value">${recipe.macros.fats}</span>
                         </div>
                     </div>
@@ -339,7 +365,7 @@ function renderRecipeCards() {
 
                 <div class="recipe-actions">
                     <button class="recipe-btn recipe-btn-primary" onclick="selectRecipe('${recipe.id}')">
-                        ${isSelected ? 'Deseleziona ✓' : 'Seleziona'}
+                        ${isSelected ? `Deseleziona ${icon('check', 'icon-inline')}` : 'Seleziona'}
                     </button>
                 </div>
 
@@ -352,7 +378,7 @@ function renderRecipeCards() {
                     ` : ''}
                     ${recipe.tips ? `
                         <div style="margin-top: 12px; padding: 10px; background: rgba(0, 135, 95, 0.1); border-radius: 8px; font-size: 13px;">
-                            💡 ${recipe.tips}
+                            ${icon('tip', 'icon-inline')} ${recipe.tips}
                         </div>
                     ` : ''}
                 </div>

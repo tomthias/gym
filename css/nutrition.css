@@ -1,3 +1,64 @@
+/* ==================== ICON SYSTEM ==================== */
+.icon,
+.icon-inline,
+.recipe-type-icon,
+.macro-icon,
+.badge-icon,
+.chip-icon,
+.filter-icon,
+.checkbox-icon,
+.selected-icon,
+.empty-state-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+.recipe-type-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.macro-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.badge-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.chip-icon,
+.filter-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+}
+
+.checkbox-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.selected-icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
+}
+
+.empty-state-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.search-icon img {
+    width: 16px;
+    height: 16px;
+    opacity: 0.6;
+}
+
 /* Nutrition View */
 .nutrition-view {
     display: none;
