@@ -121,6 +121,12 @@ function saveSetData(exerciseId, exerciseName, setNumber, load, rpe) {
     };
 
     workoutLog.push(logEntry);
+
+    // Limit workoutLog to last 200 entries to prevent localStorage overflow
+    if (workoutLog.length > 200) {
+        workoutLog = workoutLog.slice(-200);
+    }
+
     localStorage.setItem('workoutLog', JSON.stringify(workoutLog));
     console.log('Set salvato:', logEntry);
 }
@@ -288,6 +294,11 @@ function startExerciseState() {
     }
 
     console.log('Exercise:', exercise.name, 'Superset:', exercise.superset, 'Recovery:', exercise.recovery);
+
+    // Stop metronome if active and not squattempo exercise
+    if (exercise.key !== 'squattempo' && isSquatTempoMetronomeActive()) {
+        stopSquatTempoMetronome();
+    }
 
     const exerciseInfo = exercise.key ? exerciseData[exercise.key] : null;
 
@@ -566,11 +577,15 @@ function completeCurrentExercise() {
                 console.log('SUPERSET FLOW: More sets needed, going to rest');
                 console.log('Incrementing currentSet from', workoutFlowState.currentSet, 'to', workoutFlowState.currentSet + 1);
                 workoutFlowState.currentSet++;
-                workoutFlowState.currentExerciseIndex = partnerIndex; // Set to go back to first exercise after rest
+                // Find the first exercise in the superset pair (the one with recovery: 0)
+                const firstExerciseIndex = workoutFlowState.exercises.findIndex(
+                    ex => ex.id === partner.supersetPartner
+                );
+                workoutFlowState.currentExerciseIndex = firstExerciseIndex;
                 console.log('State BEFORE rest:', {
                     exerciseIndex: workoutFlowState.currentExerciseIndex,
                     currentSet: workoutFlowState.currentSet,
-                    willRestartWith: partner.name
+                    willRestartWith: workoutFlowState.exercises[firstExerciseIndex].name
                 });
                 startRestState(exercise.recovery);
             } else {
@@ -600,7 +615,15 @@ function completeCurrentExercise() {
         }
     } else {
         // Regular exercise (not superset)
-        if (exercise.recovery && exercise.sets && workoutFlowState.currentSet < exercise.sets) {
+        // Check if this is a warmup/cardio exercise with only duration (no sets)
+        const isWarmupOrCardio = exercise.type === 'warmup' || (exercise.duration && !exercise.sets);
+
+        if (isWarmupOrCardio) {
+            // Warmup/cardio exercise complete, mark and move to next
+            console.log('Warmup/cardio exercise complete, starting transition rest');
+            markExerciseComplete(exercise.id);
+            startTransitionRest();
+        } else if (exercise.recovery && exercise.sets && workoutFlowState.currentSet < exercise.sets) {
             // Go to rest state
             console.log('Going to rest - has recovery');
             workoutFlowState.currentSet++;
@@ -689,6 +712,9 @@ function updateFlowSectionsCheckbox(exerciseId) {
 }
 
 function startRestState(restTime) {
+    // Stop exercise timer if it's still running
+    stopExerciseTimer();
+
     workoutFlowState.restSeconds = restTime || 90;
     workoutFlowState.totalRestSeconds = workoutFlowState.restSeconds;
     workoutFlowState.isTransitionRest = false; // This is a regular rest between sets
@@ -812,10 +838,22 @@ function logAndMoveToNextSet() {
         const loadInput = document.getElementById('load-during-rest');
         const rpeInput = document.getElementById('rpe-during-rest');
         if (loadInput && rpeInput) {
-            const load = loadInput.value ? parseFloat(loadInput.value) : null;
-            const rpe = rpeInput.value ? parseFloat(rpeInput.value) : null;
+            let load = loadInput.value ? parseFloat(loadInput.value) : null;
+            let rpe = rpeInput.value ? parseFloat(rpeInput.value) : null;
 
-            // Save the set data if at least one value was entered
+            // Validate load (must be >= 0)
+            if (load !== null && (isNaN(load) || load < 0)) {
+                console.warn('Invalid load value:', loadInput.value);
+                load = null;
+            }
+
+            // Validate RPE (must be between 1 and 10)
+            if (rpe !== null && (isNaN(rpe) || rpe < 1 || rpe > 10)) {
+                console.warn('Invalid RPE value:', rpeInput.value);
+                rpe = null;
+            }
+
+            // Save the set data if at least one valid value was entered
             if (load !== null || rpe !== null) {
                 saveSetData(
                     exercise.id,
@@ -854,6 +892,11 @@ function logAndMoveToNextSet() {
 
         oscillator.start(audioContext.currentTime);
         oscillator.stop(audioContext.currentTime + 0.2);
+
+        // Close AudioContext after beep finishes
+        setTimeout(() => {
+            audioContext.close();
+        }, 250);
     } catch (err) {
         console.log('Audio feedback non disponibile:', err);
     }
@@ -873,6 +916,12 @@ function logAndMoveToNextSet() {
 
 function startTransitionRest() {
     console.log('Starting transition rest between exercises');
+
+    // Stop exercise timer and metronome if still running
+    stopExerciseTimer();
+    if (isSquatTempoMetronomeActive()) {
+        stopSquatTempoMetronome();
+    }
 
     // Set transition rest time (60 seconds default for equipment change)
     workoutFlowState.restSeconds = 60;
@@ -1031,6 +1080,7 @@ window.toggleSquatTempoMetronome = toggleSquatTempoMetronome;
 window.toggleSection = toggleSection;
 window.showExerciseDetail = (key) => showExerciseDetail(key, exerciseData);
 window.closeExerciseModal = closeExerciseModal;
+window.logAndMoveToNextSet = logAndMoveToNextSet;
 window.toggleCheck = (id) => {
     const checkbox = document.getElementById(id);
     if (checkbox) {
