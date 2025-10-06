@@ -339,7 +339,7 @@ function renderRecipeCards() {
 
                 <div class="recipe-actions">
                     <button class="recipe-btn recipe-btn-primary" onclick="selectRecipe('${recipe.id}')">
-                        ${isSelected ? 'Selezionata ✓' : 'Seleziona'}
+                        ${isSelected ? 'Deseleziona ✓' : 'Seleziona'}
                     </button>
                 </div>
 
@@ -372,6 +372,21 @@ function toggleRecipeDetail(recipeId) {
 
 function selectRecipe(recipeId) {
     const key = `${currentDayType}-${currentMealKey}`;
+
+    // Toggle: if already selected, deselect it
+    if (selectedRecipes[key] === recipeId) {
+        delete selectedRecipes[key];
+        localStorage.setItem('selectedRecipes', JSON.stringify(selectedRecipes));
+
+        // Update UI immediately
+        renderRecipeCards();
+        loadMeals();
+
+        // Don't close the sheet, user might want to select another
+        return;
+    }
+
+    // Otherwise, select this recipe
     selectedRecipes[key] = recipeId;
     localStorage.setItem('selectedRecipes', JSON.stringify(selectedRecipes));
 
