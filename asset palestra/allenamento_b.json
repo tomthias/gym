@@ -1,0 +1,227 @@
+{
+    "allenamento_b": {
+      "nome": "ALLENAMENTO B - Upper Body Pull + Fisio 2 (VERSIONE ADATTAMENTO)",
+      "frequenza": "1 volta a settimana",
+      "durata": "55-65 minuti (invece 70-80 originale)",
+      "focus": [
+        "Schiena",
+        "Bicipiti",
+        "Avambracci"
+      ],
+      "versione": "Adattamento settimane 1-3 (50% volume ridotto)",
+      "fasi": {
+        "riscaldamento": {
+          "durata": "8 minuti",
+          "esercizi": [
+            {
+              "nome": "Bike",
+              "durata": "5 minuti",
+              "note": "Come da scheda fisio - NON modificabile",
+              "obbligatorio": true
+            },
+            {
+              "nome": "Cat-Cow",
+              "serie_reps": "2x8",
+              "note": "Mobilità colonna"
+            },
+            {
+              "nome": "Dead Bug",
+              "serie_reps": "2x8 per lato",
+              "note": "Attivazione core"
+            }
+          ]
+        },
+        "fisioterapia": {
+          "nome": "BLOCCO FISIOTERAPIA SCHEDA 2 (OBBLIGATORIO)",
+          "durata": "25 minuti",
+          "modificabile": false,
+          "note": "Esercizi riportati ESATTAMENTE come prescritto dalla fisioterapista",
+          "esercizi": [
+            {
+              "nome": "PLANK + ESTENSIONE ANCA ALTERNATA",
+              "serie_reps": "4x45\"",
+              "rest": "SS (Superserie con L-Sit)",
+              "carico": "",
+              "note": "Non ruotare il bacino, movimento controllato"
+            },
+            {
+              "nome": "L-SIT",
+              "serie_reps": "4x45\"",
+              "rest": "45\"",
+              "carico": "",
+              "note": "Ginocchia in massima estensione, non mollare mai, piedi a martello e gambe che non si toccano",
+              "warning": "Questo esercizio è molto impegnativo e prosciugherà il core"
+            },
+            {
+              "nome": "SQUAT TEMPO",
+              "serie_reps": "3x8",
+              "rest": "SS (Superserie con Wall Sit)",
+              "carico": "20 KG",
+              "note": "3\" a scendere, 3\" fermo iso, 3\" a salire"
+            },
+            {
+              "nome": "WALL SIT",
+              "serie_reps": "3x40\"",
+              "rest": "2'",
+              "carico": "",
+              "note": "Schiena contro muro, cosce parallele"
+            },
+            {
+              "nome": "AFFONDO STATICO CON DISCO SOPRA LA TESTA",
+              "serie_reps": "3x10 per lato",
+              "rest": "2'",
+              "carico": "Disco 5 KG",
+              "note": "Vedi video, occhio agli angoli"
+            }
+          ]
+        },
+        "upper_body_pull": {
+          "nome": "UPPER BODY PULL RIDOTTO (ADATTAMENTO)",
+          "durata": "20 minuti (invece 30 originale)",
+          "volume_ridotto": "10 serie (invece 20 originali)",
+          "riduzione_percentuale": "50%",
+          "esercizi": [
+            {
+              "codice": "A1",
+              "nome": "Lat Machine",
+              "originale": "4x6-10 rec 1'",
+              "adattamento": "3x6-8 rec 2'",
+              "carico": "60-70% peso corporeo per iniziare",
+              "note": "Focus tecnica perfetta, movimento controllato",
+              "setup": {
+                "presa": "Larga, pronazione (palmi in avanti)",
+                "posizione": "Busto leggermente inclinato indietro 15-20°",
+                "movimento": "Tira verso sterno alto, NON dietro nuca",
+                "controllo": "2 sec giù, 1 sec pausa, 2 sec su"
+              },
+              "progressione": {
+                "settimane_1_2": "3x6-8 rec 2' (carico base)",
+                "settimane_3_4": "3x8-10 rec 2' (carico +5-10%)",
+                "settimane_5_plus": "4x10 rec 1'30\" (versione completa)"
+              }
+            },
+            {
+              "codice": "A2",
+              "nome": "Pulley/Rematore cavo",
+              "originale": "3x12 rec 1'",
+              "adattamento": "2x12 rec 2'",
+              "carico": "Medio-leggero",
+              "note": "Schiena già lavorata dal lat machine, focus retrazione scapole"
+            },
+            {
+              "codice": "B1",
+              "nome": "Curl panca 59° manubri",
+              "originale": "3x10 rec 2'",
+              "adattamento": "2x10 rec 2'",
+              "carico": "Moderato",
+              "note": "Stimolo bicipiti sufficiente, focus controllo"
+            },
+            {
+              "codice": "B2",
+              "nome": "Hammer Curl",
+              "originale": "3x10 iso 2\" rec 2'",
+              "adattamento": "SALTARE",
+              "motivo": "Bicipiti già stimolati dal curl panca, evitare sovrallenamento",
+              "note": "Da reintrodurre gradualmente dalla settimana 3-4"
+            },
+            {
+              "codice": "C1",
+              "nome": "Curl polsi",
+              "originale": "3x15 rec 1'",
+              "adattamento": "2x15 rec 1'30\"",
+              "carico": "Leggero-moderato",
+              "note": "Specifico avambracci - molto importante per te",
+              "focus": "Solo movimento polsi, controllo eccentrico"
+            },
+            {
+              "codice": "C2",
+              "nome": "Reverse Curl",
+              "originale": "3x12 rec 1'",
+              "adattamento": "SALTARE",
+              "motivo": "Avambracci già stimolati da lat machine + curl polsi",
+              "note": "Da reintrodurre dalla settimana 4-5"
+            },
+            {
+              "codice": "FINALE",
+              "nome": "Farmer's Walk",
+              "originale": "2x30-45 metri rec 2'",
+              "adattamento": "1x20-30 metri rec 2'",
+              "carico": "Moderato - usa straps se necessario",
+              "note": "Test finale grip strength, fondamentale per presa e avambracci",
+              "tecnica": "Postura perfetta, spalle indietro, passi controllati"
+            }
+          ]
+        },
+        "addominali": {
+          "nome": "ADDOMINALI RIDOTTI (ADATTAMENTO)",
+          "durata": "6 minuti (invece 12 originale)",
+          "riduzione_percentuale": "50%",
+          "esercizi": [
+            {
+              "nome": "Hollow Hold",
+              "originale": "3x30\" rec 1'",
+              "adattamento": "2x30\" rec 1'",
+              "note": "Core già affaticato dal L-Sit della fisio"
+            },
+            {
+              "nome": "Reverse Crunch",
+              "originale": "3x15 rec 1'",
+              "adattamento": "2x15 rec 1'",
+              "note": "Focus qualità movimento"
+            },
+            {
+              "nome": "Plank laterale",
+              "originale": "2x30\" per lato rec 1'",
+              "adattamento": "SALTARE per ora",
+              "motivo": "Core già molto sollecitato",
+              "note": "Da reintrodurre gradualmente"
+            }
+          ]
+        }
+      },
+      "summary": {
+        "volume_totale": {
+          "serie_upper_originale": 20,
+          "serie_upper_adattamento": 10,
+          "riduzione": "50%"
+        },
+        "durata": {
+          "originale": "70-80 minuti",
+          "adattamento": "55-65 minuti",
+          "riduzione": "20%"
+        }
+      },
+      "warnings": {
+        "timing_dopo_allenamento_a": "Aspetta 48-72 ore dopo Allenamento A",
+        "l_sit_killer": "L-Sit 4x45\" dalla fisio prosciugherà il core prima dell'upper body",
+        "grip_fatigue": "Lat machine + curl polsi + farmers walk = attenzione grip strength",
+        "stop_signals": [
+          "Dolore articolare acuto",
+          "Impossibilità completare 6 reps lat machine",
+          "Grip si apre continuamente",
+          "Crampi avambracci",
+          "Vertigini post L-Sit"
+        ]
+      },
+      "progressione": {
+        "indicatori_aumento_volume": [
+          "Completi tutte le serie senza esaurimento eccessivo",
+          "Recuperi nei tempi previsti",
+          "Non hai dolori estremi giorno dopo",
+          "Ti senti energico durante allenamento"
+        ],
+        "quando_passare_livello_successivo": [
+          "Gestisci versione adattamento per 2-3 sessioni consecutive",
+          "Lat machine: riesci a fare 3x8 pulite",
+          "L-Sit fisio: completi 4x45\" senza cedimenti",
+          "Farmers walk: completi distanza senza aprire grip"
+        ]
+      },
+      "note_generali": {
+        "priorita_assoluta": "Blocco fisioterapia NON si modifica mai - ordine medico",
+        "approccio": "Conservativo per costruire base solida",
+        "filosofia": "Qualità movimento > Quantità volume",
+        "pazienza": "Meglio sottostimare che sovrallenare le prime settimane"
+      }
+    }
+  }

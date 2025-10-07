@@ -1,0 +1,638 @@
+{
+  "workout": {
+    "colazione": {
+      "name": "Colazione Pre-Workout",
+      "time": "8:00-8:30",
+      "description": "Colazione leggera per energia senza appesantire prima dell'allenamento",
+      "isImportant": false,
+      "recipes": [
+        {
+          "id": "bevanda-vegetale-granola-frutti-bosco",
+          "name": "Bowl con Bevanda Vegetale, Granola e Frutti di Bosco",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "category": "dolce",
+          "tags": [
+            "velocissimo",
+            "vegan-friendly",
+            "antiossidante"
+          ],
+          "ingredients": [
+            "250ml bevanda vegetale di avena",
+            "40g granola integrale",
+            "80g frutti di bosco misti",
+            "15g mandorle a lamelle",
+            "1 cucchiaino miele"
+          ],
+          "steps": [
+            "Versa la bevanda vegetale in una bowl",
+            "Aggiungi la granola e i frutti di bosco",
+            "Guarnisci con mandorle e miele"
+          ],
+          "macros": {
+            "protein": "12g",
+            "carbs": "52g",
+            "fats": "14g",
+            "calories": "380 kcal"
+          },
+          "tips": "Perfetto senza latte vaccino, mantiene tutti i nutrienti"
+        },
+        {
+          "id": "toast-ricotta-avocado-semi",
+          "name": "Toast Integrale con Ricotta, Avocado e Semi",
+          "difficulty": "facile",
+          "time": 7,
+          "category": "salato",
+          "tags": [
+            "veloce",
+            "proteico",
+            "grassi-buoni"
+          ],
+          "ingredients": [
+            "90g pane integrale (2-3 fette)",
+            "80g ricotta magra",
+            "1/2 avocado maturo",
+            "10g semi di girasole tostati",
+            "Sale, pepe, limone"
+          ],
+          "steps": [
+            "Tosta il pane integrale",
+            "Spalma la ricotta su ogni fetta",
+            "Aggiungi l'avocado a fette",
+            "Condisci con semi, sale, pepe e limone"
+          ],
+          "macros": {
+            "protein": "22g",
+            "carbs": "45g",
+            "fats": "17g",
+            "calories": "410 kcal"
+          }
+        },
+        {
+          "id": "yogurt-greco-overnight-chia",
+          "name": "Yogurt Greco Overnight con Semi di Chia",
+          "difficulty": "facile",
+          "time": 480,
+          "category": "dolce",
+          "tags": [
+            "meal-prep",
+            "proteico",
+            "overnight"
+          ],
+          "ingredients": [
+            "170g yogurt greco magro",
+            "15g semi di chia",
+            "30g fiocchi d'avena",
+            "1 cucchiaio marmellata senza zuccheri",
+            "15g noci spezzettate",
+            "Cannella in polvere"
+          ],
+          "steps": [
+            "La sera prima, mescola yogurt, semi di chia e avena",
+            "Aggiungi la marmellata e mescola",
+            "Copri e riponi in frigo tutta la notte",
+            "Al mattino guarnisci con noci e cannella"
+          ],
+          "macros": {
+            "protein": "25g",
+            "carbs": "38g",
+            "fats": "15g",
+            "calories": "380 kcal"
+          },
+          "tips": "Prepara 3-4 vasetti la domenica per tutta la settimana"
+        },
+        {
+          "id": "smoothie-avena-bevanda-soia",
+          "name": "Smoothie Proteico con Avena e Bevanda di Soia",
+          "difficulty": "facile",
+          "time": 8,
+          "category": "dolce",
+          "tags": [
+            "veloce",
+            "proteico",
+            "cremoso"
+          ],
+          "ingredients": [
+            "250ml bevanda di soia",
+            "40g fiocchi d'avena",
+            "1 banana matura",
+            "1 cucchiaio burro di mandorle",
+            "10g semi di lino",
+            "Cannella, ghiaccio"
+          ],
+          "steps": [
+            "Frulla tutti gli ingredienti per 2 minuti",
+            "Aggiungi ghiaccio per la consistenza desiderata",
+            "Versa in un bicchiere alto",
+            "Guarnisci con cannella"
+          ],
+          "macros": {
+            "protein": "18g",
+            "carbs": "48g",
+            "fats": "14g",
+            "calories": "390 kcal"
+          }
+        },
+        {
+          "id": "pancake-bevanda-vegetale-proteine",
+          "name": "Pancake con Bevanda Vegetale e Proteine",
+          "difficulty": "media",
+          "time": 15,
+          "category": "dolce",
+          "tags": [
+            "proteico",
+            "dolce",
+            "weekend"
+          ],
+          "ingredients": [
+            "50g fiocchi d'avena tritati",
+            "1 uovo intero + 100g albume",
+            "150ml bevanda vegetale di mandorla",
+            "1 cucchiaino lievito per dolci",
+            "1 cucchiaio marmellata",
+            "15g mandorle a lamelle"
+          ],
+          "steps": [
+            "Frulla l'avena fino ad ottenere una farina",
+            "Mescola avena, uovo, albume, bevanda vegetale e lievito",
+            "Cuoci i pancake in padella antiaderente 2-3 min per lato",
+            "Servi con marmellata e mandorle"
+          ],
+          "macros": {
+            "protein": "24g",
+            "carbs": "42g",
+            "fats": "13g",
+            "calories": "380 kcal"
+          }
+        }
+      ]
+    },
+    "spuntino": {
+      "name": "Spuntino Pre-Workout",
+      "time": "10:30",
+      "description": "Spuntino leggero per energia immediata",
+      "isImportant": false,
+      "recipes": [
+        {
+          "id": "banana-burro-mandorle",
+          "name": "Banana con Burro di Mandorle",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "velocissimo",
+            "energetico"
+          ],
+          "ingredients": [
+            "1 banana media",
+            "1 cucchiaio burro di mandorle 100%"
+          ],
+          "steps": [
+            "Taglia la banana a rondelle",
+            "Intingi nel burro di mandorle o spalmalo sopra"
+          ],
+          "macros": {
+            "protein": "6g",
+            "carbs": "28g",
+            "fats": "9g",
+            "calories": "200 kcal"
+          }
+        },
+        {
+          "id": "yogurt-greco-mini-mirtilli",
+          "name": "Mini Bowl Yogurt Greco e Mirtilli",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "velocissimo",
+            "proteico"
+          ],
+          "ingredients": [
+            "125g yogurt greco magro",
+            "60g mirtilli freschi",
+            "5g miele"
+          ],
+          "steps": [
+            "Versa lo yogurt in un bicchiere",
+            "Aggiungi mirtilli e miele"
+          ],
+          "macros": {
+            "protein": "15g",
+            "carbs": "20g",
+            "fats": "3g",
+            "calories": "160 kcal"
+          }
+        },
+        {
+          "id": "cracker-hummus",
+          "name": "Cracker Integrali con Hummus",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "velocissimo",
+            "proteico-vegetale"
+          ],
+          "ingredients": [
+            "25g cracker integrali",
+            "30g hummus di ceci"
+          ],
+          "steps": [
+            "Spalma l'hummus sui cracker"
+          ],
+          "macros": {
+            "protein": "6g",
+            "carbs": "20g",
+            "fats": "7g",
+            "calories": "160 kcal"
+          }
+        },
+        {
+          "id": "pera-gorgonzola",
+          "name": "Pera con Gorgonzola",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "velocissimo",
+            "gourmet"
+          ],
+          "ingredients": [
+            "1 pera media",
+            "20g gorgonzola dolce"
+          ],
+          "steps": [
+            "Taglia la pera a spicchi",
+            "Accompagna con il gorgonzola"
+          ],
+          "macros": {
+            "protein": "5g",
+            "carbs": "24g",
+            "fats": "6g",
+            "calories": "160 kcal"
+          }
+        },
+        {
+          "id": "toast-mini-pomodoro-mozzarella",
+          "name": "Mini Toast Pomodoro e Mozzarella",
+          "difficulty": "facile",
+          "time": 5,
+          "tags": [
+            "veloce",
+            "caprese"
+          ],
+          "ingredients": [
+            "30g pane integrale (1 fetta piccola)",
+            "30g mozzarella magra",
+            "50g pomodorini",
+            "Basilico, olio"
+          ],
+          "steps": [
+            "Tosta il pane",
+            "Aggiungi mozzarella e pomodorini",
+            "Guarnisci con basilico e olio"
+          ],
+          "macros": {
+            "protein": "8g",
+            "carbs": "18g",
+            "fats": "8g",
+            "calories": "170 kcal"
+          }
+        }
+      ]
+    },
+    "pranzo": {
+      "name": "Pranzo Post-Workout",
+      "time": "13:00-13:30",
+      "description": "PASTO FONDAMENTALE - Proteine + Carboidrati per recupero muscolare",
+      "isImportant": true,
+      "recipes": [
+        {
+          "id": "bowl-quinoa-salmone-edamame",
+          "name": "Bowl di Quinoa con Salmone e Edamame",
+          "difficulty": "facile",
+          "time": 20,
+          "category": "post-workout",
+          "tags": [
+            "proteico",
+            "omega3",
+            "completo"
+          ],
+          "ingredients": [
+            "130g quinoa",
+            "120g salmone fresco",
+            "80g edamame sgusciati",
+            "100g cetrioli",
+            "50g avocado",
+            "2 cucchiai olio extravergine",
+            "Limone, semi di sesamo"
+          ],
+          "steps": [
+            "Cuoci la quinoa secondo le istruzioni (15 min)",
+            "Cuoci il salmone in padella 4-5 minuti per lato",
+            "Sbollenta gli edamame per 3 minuti",
+            "Componi la bowl con tutti gli ingredienti",
+            "Condisci con olio, limone e sesamo"
+          ],
+          "macros": {
+            "protein": "36g",
+            "carbs": "58g",
+            "fats": "22g",
+            "calories": "570 kcal"
+          }
+        },
+        {
+          "id": "pasta-pesto-pollo-zucchine",
+          "name": "Pasta al Pesto con Pollo e Zucchine",
+          "difficulty": "facile",
+          "time": 18,
+          "category": "post-workout",
+          "tags": [
+            "proteico",
+            "italiano",
+            "verdure"
+          ],
+          "ingredients": [
+            "130g pasta integrale",
+            "150g petto di pollo",
+            "1 zucchina media",
+            "2 cucchiai pesto genovese",
+            "30g parmigiano grattugiato",
+            "1 cucchiaio olio extravergine"
+          ],
+          "steps": [
+            "Cuoci la pasta al dente",
+            "Taglia il pollo a strisce e griglialo",
+            "Salta le zucchine a rondelle",
+            "Scola la pasta e mescola con pesto, pollo e zucchine",
+            "Guarnisci con parmigiano"
+          ],
+          "macros": {
+            "protein": "42g",
+            "carbs": "62g",
+            "fats": "18g",
+            "calories": "580 kcal"
+          }
+        },
+        {
+          "id": "riso-tacchino-verdure-curry",
+          "name": "Riso con Tacchino al Curry e Verdure",
+          "difficulty": "facile",
+          "time": 22,
+          "category": "post-workout",
+          "tags": [
+            "speziato",
+            "proteico",
+            "esotico"
+          ],
+          "ingredients": [
+            "130g riso basmati",
+            "150g fesa di tacchino",
+            "100ml bevanda vegetale di cocco",
+            "1 cucchiaio curry in polvere",
+            "Zucchine, peperoni",
+            "1 cucchiaio olio di oliva"
+          ],
+          "steps": [
+            "Cuoci il riso basmati",
+            "Taglia il tacchino a cubetti e rosolalo",
+            "Aggiungi curry e bevanda di cocco, cuoci 8 min",
+            "Salta le verdure a parte",
+            "Servi il tacchino al curry con riso e verdure"
+          ],
+          "macros": {
+            "protein": "38g",
+            "carbs": "64g",
+            "fats": "16g",
+            "calories": "550 kcal"
+          }
+        }
+      ]
+    }
+  },
+  "rest": {
+    "colazione": {
+      "name": "Colazione Rest Day",
+      "time": "8:00-9:00",
+      "description": "Colazione completa per giornata di riposo",
+      "isImportant": false,
+      "recipes": [
+        {
+          "id": "porridge-bevanda-mandorla-frutti-rossi",
+          "name": "Porridge con Bevanda di Mandorla e Frutti Rossi",
+          "difficulty": "facile",
+          "time": 10,
+          "category": "dolce",
+          "tags": [
+            "saziante",
+            "vegan-friendly",
+            "fibre"
+          ],
+          "ingredients": [
+            "50g fiocchi d'avena",
+            "250ml bevanda di mandorla",
+            "80g frutti rossi misti",
+            "15g noci spezzettate",
+            "1 cucchiaio miele",
+            "Cannella in polvere"
+          ],
+          "steps": [
+            "Cuoci l'avena nella bevanda di mandorla per 5-6 minuti",
+            "Aggiungi i frutti rossi negli ultimi 2 minuti",
+            "Servi in una bowl e guarnisci con noci, miele e cannella"
+          ],
+          "macros": {
+            "protein": "15g",
+            "carbs": "48g",
+            "fats": "16g",
+            "calories": "390 kcal"
+          }
+        },
+        {
+          "id": "gallette-ricotta-pomodorini",
+          "name": "Gallette con Ricotta e Pomodorini",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "category": "salato",
+          "tags": [
+            "veloce",
+            "salato",
+            "fresco"
+          ],
+          "ingredients": [
+            "40g gallette di riso integrale",
+            "100g ricotta magra",
+            "100g pomodorini",
+            "Basilico fresco",
+            "Olio extravergine",
+            "Sale, pepe"
+          ],
+          "steps": [
+            "Spalma la ricotta sulle gallette",
+            "Taglia i pomodorini e disponili sopra",
+            "Condisci con olio, sale, pepe e basilico"
+          ],
+          "macros": {
+            "protein": "18g",
+            "carbs": "38g",
+            "fats": "12g",
+            "calories": "340 kcal"
+          }
+        },
+        {
+          "id": "toast-formaggio-spalmabile-cetrioli",
+          "name": "Toast con Formaggio Spalmabile e Cetrioli",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "category": "salato",
+          "tags": [
+            "veloce",
+            "fresco",
+            "proteico"
+          ],
+          "ingredients": [
+            "90g pane integrale",
+            "60g formaggio spalmabile light",
+            "1 cetriolo medio",
+            "Aneto fresco",
+            "Pepe nero"
+          ],
+          "steps": [
+            "Tosta il pane",
+            "Spalma il formaggio spalmabile",
+            "Aggiungi cetriolo a fette sottili",
+            "Guarnisci con aneto e pepe"
+          ],
+          "macros": {
+            "protein": "20g",
+            "carbs": "48g",
+            "fats": "14g",
+            "calories": "390 kcal"
+          }
+        }
+      ]
+    },
+    "spuntino": {
+      "name": "Spuntino Rest Day",
+      "time": "10:30-16:00",
+      "description": "Spuntini per giornata di riposo",
+      "isImportant": false,
+      "recipes": [
+        {
+          "id": "smoothie-verde-spinaci-mela",
+          "name": "Smoothie Verde con Spinaci e Mela",
+          "difficulty": "facile",
+          "time": 5,
+          "tags": [
+            "detox",
+            "vitaminico"
+          ],
+          "ingredients": [
+            "1 mela verde",
+            "1 manciata spinaci freschi",
+            "200ml bevanda vegetale di mandorla",
+            "10g semi di lino",
+            "Succo di 1/2 limone"
+          ],
+          "steps": [
+            "Frulla tutti gli ingredienti per 2 minuti",
+            "Aggiungi ghiaccio se desideri",
+            "Servi immediatamente"
+          ],
+          "macros": {
+            "protein": "4g",
+            "carbs": "25g",
+            "fats": "6g",
+            "calories": "160 kcal"
+          }
+        },
+        {
+          "id": "hummus-verdure-crude",
+          "name": "Hummus con Verdure Crude",
+          "difficulty": "facilissimo",
+          "time": 5,
+          "tags": [
+            "vegetariano",
+            "croccante"
+          ],
+          "ingredients": [
+            "50g hummus di ceci",
+            "Carote, finocchi, peperoni a bastoncini"
+          ],
+          "steps": [
+            "Prepara le verdure crude a bastoncini",
+            "Servi con l'hummus per intingere"
+          ],
+          "macros": {
+            "protein": "7g",
+            "carbs": "18g",
+            "fats": "8g",
+            "calories": "160 kcal"
+          }
+        },
+        {
+          "id": "mozzarella-pomodori-secchi",
+          "name": "Mozzarellina con Pomodori Secchi",
+          "difficulty": "facilissimo",
+          "time": 2,
+          "tags": [
+            "velocissimo",
+            "mediterraneo"
+          ],
+          "ingredients": [
+            "100g mozzarella magra",
+            "30g pomodori secchi",
+            "Origano, olio extravergine"
+          ],
+          "steps": [
+            "Taglia la mozzarella a cubetti",
+            "Accompagna con pomodori secchi",
+            "Condisci con origano e olio"
+          ],
+          "macros": {
+            "protein": "18g",
+            "carbs": "8g",
+            "fats": "12g",
+            "calories": "200 kcal"
+          }
+        }
+      ]
+    },
+    "pranzo": {
+      "name": "Pranzo Rest Day",
+      "time": "13:00-14:00",
+      "description": "Pranzo bilanciato per giornata senza allenamento",
+      "isImportant": false,
+      "recipes": [
+        {
+          "id": "insalata-farro-tonno-verdure",
+          "name": "Insalata di Farro con Tonno e Verdure",
+          "difficulty": "facile",
+          "time": 25,
+          "tags": [
+            "fresco",
+            "cereali",
+            "completo"
+          ],
+          "ingredients": [
+            "130g farro perlato",
+            "160g tonno al naturale",
+            "Pomodorini, cetrioli, olive",
+            "Rucola fresca",
+            "2 cucchiai olio extravergine",
+            "Aceto balsamico"
+          ],
+          "steps": [
+            "Cuoci il farro e fallo raffreddare",
+            "Taglia le verdure a pezzi",
+            "Mescola farro, tonno, verdure e rucola",
+            "Condisci con olio e aceto"
+          ],
+          "macros": {
+            "protein": "38g",
+            "carbs": "62g",
+            "fats": "18g",
+            "calories": "550 kcal"
+          }
+        }
+      ]
+    }
+  }
+}

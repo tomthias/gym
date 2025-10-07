@@ -1,0 +1,351 @@
+{
+  "backup_info": {
+    "data_backup": "2025-10-07",
+    "motivo": "Salvataggio versioni originali prima aggiornamento adattamento",
+    "recovery_instructions": "Per ripristinare versioni originali copia contenuto in workout-flow.js",
+    "warning": "Le versioni originali hanno VOLUME MOLTO ALTO (19-20 serie upper body). Usare solo dopo 3+ settimane di adattamento."
+  },
+  "allenamento_a_originale": {
+    "nome": "Allenamento A - Upper Body Push + Fisio 1 (ORIGINALE)",
+    "durata_stimata": "75-85 minuti",
+    "volume_totale": "19 serie upper body + fisioterapia completa",
+    "blocco_fisio": {
+      "durata": "25 minuti",
+      "note": "IMMUTABILE - ordine medico",
+      "esercizi": [
+        {
+          "id": "a-fisio1",
+          "name": "Heel Raises",
+          "key": "heelraises",
+          "sets": 3,
+          "reps": 10,
+          "recovery": 0,
+          "superset": true,
+          "note": "Superserie con Box Bridge"
+        },
+        {
+          "id": "a-fisio2",
+          "name": "Box Bridge",
+          "key": "boxbridge",
+          "sets": 3,
+          "reps": 10,
+          "recovery": 60,
+          "superset": true,
+          "note": "Completare superserie, poi 60s recupero"
+        },
+        {
+          "id": "a-fisio3",
+          "name": "Hip Thrust",
+          "key": "hipthrust",
+          "sets": 3,
+          "reps": 12,
+          "carico": "30 KG",
+          "recovery": 0,
+          "superset": true,
+          "note": "Superserie con Side Walk"
+        },
+        {
+          "id": "a-fisio4",
+          "name": "Side Walk",
+          "key": "sidewalk",
+          "sets": 3,
+          "reps": 20,
+          "recovery": 60,
+          "superset": true,
+          "note": "Completare superserie, poi 60s recupero"
+        },
+        {
+          "id": "a-fisio5",
+          "name": "Elvis",
+          "key": "elvis",
+          "sets": 2,
+          "reps": 15,
+          "recovery": 60
+        }
+      ]
+    },
+    "upper_body_push_originale": {
+      "durata": "35-40 minuti",
+      "volume": "19 serie totali",
+      "esercizi": [
+        {
+          "id": "a-push1",
+          "name": "Panca Piana Manubri",
+          "key": "pancapiana",
+          "sets": 4,
+          "reps": 8,
+          "recovery": 90,
+          "note": "Focus controllo eccentrico, fermo 1\" al petto"
+        },
+        {
+          "id": "a-push2",
+          "name": "Croci Panca Inclinata",
+          "key": "croci",
+          "sets": 3,
+          "reps": 20,
+          "recovery": 120,
+          "note": "SUPERSERIE: 3x20 croci isometriche 2\" + push-up a esaurimento immediatamente dopo. MOLTO INTENSO per principiante."
+        },
+        {
+          "id": "a-push3",
+          "name": "Military Press",
+          "key": "militarypress",
+          "sets": 4,
+          "reps": 10,
+          "recovery": 90,
+          "note": "Core attivo, non inarcare schiena. Arriva dopo croci+push-up = spalle già affaticate"
+        },
+        {
+          "id": "a-push4",
+          "name": "Alzate Laterali",
+          "key": "alzatelaterali",
+          "sets": 3,
+          "reps": 15,
+          "recovery": 60,
+          "note": "Focus forma, non carico"
+        },
+        {
+          "id": "a-push5",
+          "name": "Push Down",
+          "key": "pushdown",
+          "sets": 3,
+          "reps": 12,
+          "recovery": 60,
+          "note": "Tricipiti"
+        },
+        {
+          "id": "a-push6",
+          "name": "Dips",
+          "key": "dips",
+          "sets": 3,
+          "reps": 12,
+          "recovery": 90,
+          "note": "Tricipiti, se non dà fastidio alla spalla"
+        }
+      ],
+      "totale_serie": 19,
+      "problemi_volume": [
+        "4x8 panca + 3x20 croci + push-up max = esaurimento precoce pettorali",
+        "Military press 4x10 dopo petto già distrutto = forma compromessa",
+        "Dips 3x max dopo tutto = tricipiti morti, rischio infortunio spalla",
+        "Recuperi troppo brevi (60-90s) per principiante",
+        "Nessun periodo graduale di adattamento"
+      ]
+    },
+    "addominali_originale": {
+      "tipo": "Tabata 4 minuti",
+      "struttura": "8 round x 20\" lavoro + 10\" riposo",
+      "esercizi": ["V-up", "Crunch", "Biciclette", "Plank"],
+      "durata": "4 minuti continui",
+      "note": "Intenso, per finire allenamento già molto lungo"
+    }
+  },
+  "allenamento_b_originale": {
+    "nome": "Allenamento B - Upper Body Pull + Fisio 2 (ORIGINALE)",
+    "durata_stimata": "70-80 minuti",
+    "volume_totale": "20 serie upper body + fisioterapia completa",
+    "blocco_fisio": {
+      "durata": "25 minuti",
+      "note": "IMMUTABILE - ordine medico",
+      "esercizi": [
+        {
+          "id": "b-fisio1",
+          "name": "Plank Estensione Gamba",
+          "key": "plankestensione",
+          "sets": 3,
+          "reps": 10,
+          "recovery": 0,
+          "superset": true
+        },
+        {
+          "id": "b-fisio2",
+          "name": "L-Sit",
+          "key": "lsit",
+          "sets": 3,
+          "reps": 30,
+          "recovery": 45,
+          "superset": true
+        },
+        {
+          "id": "b-fisio3",
+          "name": "Squat Tempo",
+          "key": "squattempo",
+          "sets": 3,
+          "reps": 8,
+          "carico": "20 KG",
+          "recovery": 0,
+          "superset": true,
+          "note": "3\" giù, 3\" fermo, 3\" su"
+        },
+        {
+          "id": "b-fisio4",
+          "name": "Wall Sit",
+          "key": "wallsit",
+          "sets": 3,
+          "duration": 45,
+          "recovery": 120,
+          "superset": true
+        },
+        {
+          "id": "b-fisio5",
+          "name": "Affondo Camminato",
+          "key": "affondo",
+          "sets": 3,
+          "reps": 12,
+          "carico": "Disco 5 KG sopra testa",
+          "recovery": 120
+        }
+      ]
+    },
+    "upper_body_pull_originale": {
+      "durata": "40-45 minuti",
+      "volume": "20 serie totali",
+      "esercizi": [
+        {
+          "id": "b-pull1",
+          "name": "Trazioni O Lat Machine",
+          "key": "latmachine",
+          "sets": 4,
+          "reps_trazioni": 6,
+          "reps_lat_machine": 10,
+          "recovery": 60,
+          "note": "OPZIONE DIFFICILE: 4x6 trazioni (molto difficili per principiante). ALTERNATIVA: 4x10 lat machine"
+        },
+        {
+          "id": "b-pull2",
+          "name": "Pulley",
+          "key": "pulley",
+          "sets": 3,
+          "reps": 12,
+          "recovery": 60,
+          "note": "Focus retrazione scapole"
+        },
+        {
+          "id": "b-pull3",
+          "name": "Curl Panca 59°",
+          "key": "curlpanca",
+          "sets": 3,
+          "reps": 10,
+          "recovery": 120,
+          "note": "Bicipiti"
+        },
+        {
+          "id": "b-pull4",
+          "name": "Hammer Curl",
+          "key": "hammercurl",
+          "sets": 3,
+          "reps": 10,
+          "isometric_hold": "2 secondi",
+          "recovery": 120,
+          "note": "Bicipiti + avambracci, con pausa isometrica 2\""
+        },
+        {
+          "id": "b-pull5",
+          "name": "Curl Polsi",
+          "key": "curlpolsi",
+          "sets": 3,
+          "reps": 15,
+          "recovery": 60,
+          "note": "Specifico avambracci, molto importante"
+        },
+        {
+          "id": "b-pull6",
+          "name": "Reverse Curl",
+          "key": "reversecurl",
+          "sets": 3,
+          "reps": 12,
+          "recovery": 60,
+          "note": "Flessori avambracci"
+        },
+        {
+          "id": "b-pull7",
+          "name": "Farmer's Walk",
+          "key": "farmerswalk",
+          "sets": 2,
+          "distance": "30-45 metri",
+          "recovery": 120,
+          "note": "Fondamentale per presa e avambracci"
+        }
+      ],
+      "totale_serie": 20,
+      "problemi_volume": [
+        "Trazioni 4x6 sono MOLTO difficili per principiante, forma compromessa",
+        "Se usa lat machine: volume comunque molto alto (20 serie back/biceps/forearms)",
+        "Bicipiti: curl panca + hammer curl = volume doppio necessario per inizio",
+        "Avambracci: curl polsi + reverse curl + farmer's walk = triplo stimolo (eccessivo)",
+        "Recuperi brevi (60s) inadatti per principiante",
+        "Durata totale 70-80 min troppo lunga per sostenibilità"
+      ]
+    },
+    "addominali_originale": {
+      "durata": "12 minuti",
+      "esercizi": [
+        {
+          "name": "Hollow Hold",
+          "sets": 3,
+          "duration": "30 secondi",
+          "recovery": 60
+        },
+        {
+          "name": "Reverse Crunch",
+          "sets": 3,
+          "reps": 15,
+          "recovery": 60
+        },
+        {
+          "name": "Plank Laterale",
+          "sets": 2,
+          "duration": "30 secondi per lato",
+          "recovery": 60
+        }
+      ],
+      "note": "Blocco addominali molto lungo dopo allenamento già intenso"
+    }
+  },
+  "analisi_problemi_critici": {
+    "allenamento_a": {
+      "volume_eccessivo": "19 serie upper body in 35-40 minuti = troppo denso per principiante",
+      "superserie_killer": "Croci 3x20 isometriche + push-up a esaurimento = distruzione pettorali",
+      "cascata_fatica": "Petto distrutto → Military press con forma compromessa → Tricipiti morti ai dips",
+      "rischio_infortunio": "Dips a fine allenamento con tricipiti esausti = alto rischio spalla",
+      "durata_totale": "75-85 minuti troppo lunghi per principiante",
+      "recupero": "Recuperi 60-90s inadatti per qualità esecuzione principiante"
+    },
+    "allenamento_b": {
+      "volume_eccessivo": "20 serie upper body = record negativo",
+      "trazioni_impossibili": "4x6 trazioni per principiante = forma orribile, rischio infortunio",
+      "bicipiti_overkill": "Curl panca + hammer curl = doppio volume necessario",
+      "avambracci_triplo": "Curl polsi + reverse curl + farmer's walk = stimolo eccessivo x3",
+      "durata_totale": "70-80 minuti insostenibile",
+      "addominali_finali": "12 minuti addominali dopo tutto = troppo"
+    },
+    "conseguenze_reali": {
+      "mattia_massacrato": "Allenamento A ha letteralmente distrutto Mattia",
+      "rischio_abbandono": "Volume così alto = altissima probabilità abbandono programma",
+      "impossibile_progressione": "Se non riesce a completare allenamento, non può progredire",
+      "infortunio_probabile": "Forma compromessa da fatica = rischio infortuni molto alto"
+    }
+  },
+  "quando_usare_versioni_originali": {
+    "prerequisiti": [
+      "Almeno 3-4 settimane di allenamento costante con versioni adattamento",
+      "Completamento agevole versioni adattamento senza eccessiva fatica",
+      "Forma tecnica consolidata su tutti gli esercizi principali",
+      "Capacità cardiovascolare adeguata per sostenere 75-85 minuti allenamento",
+      "Nessun dolore articolare o muscolare persistente"
+    ],
+    "transizione_graduale": {
+      "settimana_1_3": "Versioni adattamento (10-12 serie)",
+      "settimana_4": "Volume intermedio (15 serie) - aggiungere 1 serie agli esercizi principali",
+      "settimana_5": "Volume alto (17 serie) - aggiungere superserie croci+pushup ma versione facilitata",
+      "settimana_6_plus": "Versioni originali complete (19-20 serie) - solo se tutto va bene"
+    },
+    "segnali_non_pronto": [
+      "Fatica eccessiva durante versioni adattamento",
+      "Forma tecnica che decade nelle ultime serie",
+      "Dolori articolari o muscolari persistenti",
+      "Difficoltà a recuperare tra sessioni",
+      "Mancanza di progressione nei carichi"
+    ]
+  }
+}

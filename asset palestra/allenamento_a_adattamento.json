@@ -1,0 +1,85 @@
+{
+  "analisi_problema": {
+    "problema_principale": "VOLUME ECCESSIVO PER PRINCIPIANTE",
+    "dettagli_critici": [
+      "19 serie total upper body in 35 minuti = troppo denso",
+      "Croci 3x20 + push-up max = esaurimento precoce",
+      "Military press dopo croci/push-up = spalle già affaticate",
+      "Dips dopo tutto il resto = tricipiti morti",
+      "Nessun periodo di adattamento graduale"
+    ],
+    "fattori_aggravanti": [
+      "Prima volta con questa scheda",
+      "Passaggio da inattività a volume alto",
+      "Superserie (croci + push-up) troppo intensive",
+      "Allenamento ore 12:00 = possibile ipoglicemia",
+      "Recuperi troppo brevi per principiante"
+    ],
+    "soluzioni_immediate": {
+      "fase_adattamento_2_settimane": {
+        "riduzione_volume": "50% del volume originale",
+        "eliminazione_superserie": "Niente croci + push-up superset",
+        "aumento_recuperi": "2-3 minuti tra serie pesanti",
+        "riduzione_intensità": "Carichi più leggeri, focus tecnica"
+      }
+    }
+  },
+  "allenamento_originale": {
+    "blocco_fisio": {
+      "durata": "25 minuti",
+      "esercizi": [
+        {
+          "nome": "SL HEEL RAISES CON STEP",
+          "serie_reps": "3x10-15 per lato",
+          "rest": "SS"
+        },
+        {
+          "nome": "SL BOX BRIDGE",
+          "serie_reps": "3x5+10+5 per lato",
+          "rest": "1'"
+        },
+        {
+          "nome": "HIP THRUST",
+          "serie_reps": "3x12 (30kg)",
+          "rest": "SS con Side Walk"
+        },
+        {
+          "nome": "SIDE WALK",
+          "serie_reps": "3x6-6/4-4/2-2",
+          "rest": "1'"
+        },
+        {
+          "nome": "ELVIS IN EQUILIBRIO",
+          "serie_reps": "2x10 per lato",
+          "rest": "No rest"
+        }
+      ]
+    },
+    "upper_body_push": {
+      "durata": "35 minuti",
+      "volume_totale": {
+        "panca_manubri": "4x8 = 32 reps",
+        "croci_pushup": "3x20 + 3x max pushup = 60+ reps",
+        "military_press": "3x10 = 30 reps",
+        "alzate_laterali": "3x12 = 36 reps",
+        "push_down": "3x12 = 36 reps",
+        "dips": "3x max reps"
+      },
+      "total_series": 19,
+      "total_reps_base": 194
+    },
+  },
+  "allenamento_adattamento": {
+    "nome": "ALLENAMENTO A - VERSIONE ADATTAMENTO (Settimane 1-3)",
+    "durata": "60-70 minuti (invece di 75-85)",
+    "blocco_fisio": "IDENTICO - non si tocca",
+    "upper_body_ridotto": {
+      "A1_panca": "3x8 rec 2' (invece 4x8 rec 1'30\")",
+      "A2_croci": "3x12 rec 2' (NO push-up superset)",
+      "B1_military": "2x10 rec 2' (invece 3x10)",
+      "B2_alzate": "2x12 rec 1'30\" (invece 3x12)",
+      "C1_pushdown": "2x12 rec 2' (invece 3x12)",
+      "C2_dips": "SALTARE prime 2 settimane"
+    },
+  }
+}
