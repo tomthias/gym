@@ -215,7 +215,33 @@ function loadMeals() {
         `;
     }
 
+    // Add reset button at the end
+    html += `
+        <button class="clear-cache-btn" id="resetCacheBtn">🗑️ Reset Cache</button>
+    `;
+
     container.innerHTML = html;
+
+    // Re-attach event listener after DOM update
+    const resetBtn = document.getElementById('resetCacheBtn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', function() {
+            // Clear all nutrition-related localStorage
+            const keys = Object.keys(localStorage);
+            keys.forEach(key => {
+                if (key.includes('selectedRecipes') ||
+                    key.includes('completedMeals') ||
+                    key.includes('consumedCalories') ||
+                    key.includes('nutritionHistory') ||
+                    key.includes('lastResetDate')) {
+                    localStorage.removeItem(key);
+                }
+            });
+
+            // Reload page immediately
+            window.location.reload();
+        });
+    }
 }
 
 function toggleMeal(mealId) {
@@ -605,30 +631,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (btnWorkout) btnWorkout.addEventListener('click', () => switchDayType('workout'));
     if (btnRest) btnRest.addEventListener('click', () => switchDayType('rest'));
 
-    // Reset cache button
-    const resetCacheBtn = document.getElementById('resetCacheBtn');
-    if (resetCacheBtn) {
-        resetCacheBtn.addEventListener('click', function() {
-            if (confirm('⚠️ Sei sicuro?\n\nQuesta operazione cancellerà:\n- Tutte le ricette selezionate\n- Storico calorie\n- Storico nutrizione\n\nVuoi continuare?')) {
-                // Clear all nutrition-related localStorage
-                const keys = Object.keys(localStorage);
-                keys.forEach(key => {
-                    if (key.includes('selectedRecipes') ||
-                        key.includes('completedMeals') ||
-                        key.includes('consumedCalories') ||
-                        key.includes('nutritionHistory') ||
-                        key.includes('lastResetDate')) {
-                        localStorage.removeItem(key);
-                    }
-                });
-
-                // Reload page
-                alert('✅ Cache svuotata con successo!\n\nLa pagina verrà ricaricata.');
-                window.location.reload();
-            }
-        });
-    }
-
     // Bottom sheet backdrop click
     const sheetBackdrop = document.querySelector('.sheet-backdrop');
     if (sheetBackdrop) {
@@ -686,30 +688,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (diff > 50) {
                 closeRecipeSheet();
-            }
-        });
-    }
-
-    // Reset cache button
-    const resetCacheBtn = document.getElementById('resetCacheBtn');
-    if (resetCacheBtn) {
-        resetCacheBtn.addEventListener('click', function() {
-            if (confirm('Vuoi davvero svuotare tutte le informazioni inserite nella pagina nutrizione?\n\nQuesta azione cancellerà:\n- Ricette selezionate\n- Pasti completati\n- Calorie consumate')) {
-                // Clear all nutrition-related localStorage
-                localStorage.removeItem('selectedRecipes');
-                localStorage.removeItem('completedMeals');
-                localStorage.removeItem('lastResetDate');
-                resetDailyCalories();
-
-                // Reset state
-                selectedRecipes = {};
-                completedMeals = {};
-
-                // Reload UI
-                loadMeals();
-                updateCalorieDisplay();
-
-                alert('✓ Cache svuotata con successo!');
             }
         });
     }
