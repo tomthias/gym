@@ -14,11 +14,26 @@
 </head>
 <body>
     <header>
-        <h1>Storico Allenamenti</h1>
+        <h1>Storico</h1>
         <div class="subtitle">I tuoi progressi</div>
     </header>
 
-    <div id="historyList"></div>
+    <!-- Tab Selector -->
+    <div class="history-tab-selector">
+        <button class="history-tab-btn active" id="btnWorkoutHistory" data-tab="workout">Allenamenti</button>
+        <button class="history-tab-btn" id="btnNutritionHistory" data-tab="nutrition">Nutrizione</button>
+    </div>
+
+    <!-- Workout History -->
+    <div id="workoutHistoryView" class="history-view active">
+        <div id="historyList"></div>
+    </div>
+
+    <!-- Nutrition History -->
+    <div id="nutritionHistoryView" class="history-view">
+        <div id="nutritionStats" class="nutrition-stats"></div>
+        <div id="nutritionHistoryList" class="nutrition-history-list"></div>
+    </div>
 
     <div class="nav-bottom">
         <button class="nav-btn" data-view="home" title="Allenamenti">
