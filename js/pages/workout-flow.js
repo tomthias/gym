@@ -16,12 +16,11 @@ const workoutExercises = {
         { id: 'a-fisio3', name: 'Hip Thrust', key: 'hipthrust', sets: 3, reps: 12, recovery: 0, superset: true, supersetPair: 'ss1', supersetPartner: 'a-fisio4', supersetColor: '#FF6B35' },
         { id: 'a-fisio4', name: 'Side Walk', key: 'sidewalk', sets: 3, reps: 20, recovery: 60, superset: true, supersetPair: 'ss1', supersetPartner: 'a-fisio3', supersetColor: '#FF6B35' },
         { id: 'a-fisio5', name: 'Elvis', key: 'elvis', sets: 2, reps: 15, recovery: 60 },
-        { id: 'a-push1', name: 'Panca Piana Manubri', key: 'pancapiana', sets: 4, reps: 8, recovery: 90 },
-        { id: 'a-push2', name: 'Croci Panca Inclinata', key: 'croci', sets: 3, reps: 20, recovery: 120 },
-        { id: 'a-push3', name: 'Military Press', key: 'militarypress', sets: 4, reps: 10, recovery: 90 },
-        { id: 'a-push4', name: 'Alzate Laterali', key: 'alzatelaterali', sets: 3, reps: 15, recovery: 60 },
-        { id: 'a-push5', name: 'Push Down', key: 'pushdown', sets: 3, reps: 12, recovery: 60 },
-        { id: 'a-push6', name: 'Dips', key: 'dips', sets: 3, reps: 12, recovery: 90 }
+        { id: 'a-push1', name: 'Panca Piana Manubri', key: 'pancapiana', sets: 3, reps: 8, recovery: 120 },
+        { id: 'a-push2', name: 'Croci Panca Inclinata', key: 'croci', sets: 3, reps: 12, recovery: 120 },
+        { id: 'a-push3', name: 'Military Press', key: 'militarypress', sets: 2, reps: 10, recovery: 120 },
+        { id: 'a-push4', name: 'Alzate Laterali', key: 'alzatelaterali', sets: 2, reps: 12, recovery: 90 },
+        { id: 'a-push5', name: 'Push Down', key: 'pushdown', sets: 2, reps: 12, recovery: 120 }
     ],
     workoutB: [
         { id: 'b-warm1', name: 'Bike/Tapirulan', key: 'bike', type: 'warmup', duration: 720 },
@@ -32,13 +31,12 @@ const workoutExercises = {
         { id: 'b-fisio3', name: 'Squat Tempo', key: 'squattempo', sets: 3, reps: 8, recovery: 0, superset: true, supersetPair: 'ss4', supersetPartner: 'b-fisio4', supersetColor: '#E74C3C' },
         { id: 'b-fisio4', name: 'Wall Sit', key: 'wallsit', sets: 3, duration: 45, recovery: 120, superset: true, supersetPair: 'ss4', supersetPartner: 'b-fisio3', supersetColor: '#E74C3C' },
         { id: 'b-fisio5', name: 'Affondo Camminato', key: 'affondo', sets: 3, reps: 12, recovery: 120 },
-        { id: 'b-pull1', name: 'Lat Machine', key: 'latmachine', sets: 4, reps: 8, recovery: 120 },
-        { id: 'b-pull2', name: 'Pulley', key: 'pulley', sets: 3, reps: 12, recovery: 90 },
-        { id: 'b-pull3', name: 'Curl Panca 45°', key: 'curlpanca', sets: 3, reps: 10, recovery: 60 },
-        { id: 'b-pull4', name: 'Hammer Curl', key: 'hammercurl', sets: 3, reps: 12, recovery: 60 },
-        { id: 'b-pull5', name: 'Curl Polsi', key: 'curlpolsi', sets: 3, reps: 15, recovery: 45 },
-        { id: 'b-pull6', name: 'Reverse Curl', key: 'reversecurl', sets: 3, reps: 12, recovery: 45 },
-        { id: 'b-pull7', name: 'Farmer Walk', key: 'farmerswalk', sets: 3, reps: 60, recovery: 90 }
+        { id: 'b-pull1', name: 'Lat Machine', key: 'latmachine', sets: 3, reps: 6, recovery: 120 },
+        { id: 'b-pull2', name: 'Pulley', key: 'pulley', sets: 2, reps: 12, recovery: 120 },
+        { id: 'b-pull3', name: 'Curl Panca 45°', key: 'curlpanca', sets: 2, reps: 10, recovery: 120 },
+        { id: 'b-pull4', name: 'Hammer Curl', key: 'hammercurl', sets: 2, reps: 10, recovery: 120 },
+        { id: 'b-pull5', name: 'Curl Polsi', key: 'curlpolsi', sets: 2, reps: 15, recovery: 90 },
+        { id: 'b-pull7', name: 'Farmer Walk', key: 'farmerswalk', sets: 1, reps: 30, recovery: 120 }
     ],
     workoutC: [
         { id: 'c-cardio1', name: 'Bike/Tapirulan', key: 'bike', type: 'warmup', duration: 720 },
