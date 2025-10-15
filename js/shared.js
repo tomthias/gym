@@ -98,10 +98,14 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.addEventListener('click', function() {
             const view = this.dataset.view;
             if (view) {
+                // Check if we're in pages/ folder or root
+                const isInPagesFolder = window.location.pathname.includes('/pages/');
+                const pathPrefix = isInPagesFolder ? '../' : '';
+
                 const pages = {
-                    'home': 'index.html',
-                    'nutrition': 'nutrition.html',
-                    'history': 'history.html'
+                    'home': pathPrefix + 'index.html',
+                    'nutrition': pathPrefix + 'pages/nutrition.html',
+                    'history': pathPrefix + 'pages/history.html'
                 };
                 if (pages[view]) {
                     window.location.href = pages[view];

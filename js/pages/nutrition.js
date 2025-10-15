@@ -1,14 +1,6 @@
 // ========== NUTRITION PAGE LOGIC - REFACTORED ==========
 
 import { nutritionRecipes } from '../data/nutrition.js';
-import {
-    calculateRemainingBudget,
-    getCalorieStats,
-    updateConsumedCalories,
-    wouldExceedBudget,
-    wouldTriggerWarning,
-    resetDailyCalories
-} from '../utils/calorieManager.js';
 
 // ========== STATE MANAGEMENT ==========
 let currentDayType = 'workout'; // 'workout' or 'rest'
@@ -26,8 +18,7 @@ function checkAndResetDaily() {
         // New day! Reset selections
         localStorage.setItem('selectedRecipes', '{}');
         localStorage.setItem('lastResetDate', today);
-        resetDailyCalories(); // Reset calorie tracking
-        console.log('🔄 Daily reset: recipe selections and calories cleared for new day');
+        console.log('🔄 Daily reset: recipe selections cleared for new day');
     }
 }
 
@@ -215,33 +206,7 @@ function loadMeals() {
         `;
     }
 
-    // Add reset button at the end
-    html += `
-        <button class="clear-cache-btn" id="resetCacheBtn">🗑️ Reset Cache</button>
-    `;
-
     container.innerHTML = html;
-
-    // Re-attach event listener after DOM update
-    const resetBtn = document.getElementById('resetCacheBtn');
-    if (resetBtn) {
-        resetBtn.addEventListener('click', function() {
-            // Clear all nutrition-related localStorage
-            const keys = Object.keys(localStorage);
-            keys.forEach(key => {
-                if (key.includes('selectedRecipes') ||
-                    key.includes('completedMeals') ||
-                    key.includes('consumedCalories') ||
-                    key.includes('nutritionHistory') ||
-                    key.includes('lastResetDate')) {
-                    localStorage.removeItem(key);
-                }
-            });
-
-            // Reload page immediately
-            window.location.reload();
-        });
-    }
 }
 
 function toggleMeal(mealId) {
@@ -311,20 +276,6 @@ function updateFilterChips() {
 
 function applyFiltersAndRender() {
     filteredRecipes = allRecipes.filter(matchesFilters);
-
-    // Smart calorie-based filtering and sorting
-    const remaining = calculateRemainingBudget();
-
-    // Sort by calories if budget is low (< 30%)
-    const stats = getCalorieStats();
-    if (stats.percentage > 70) {
-        filteredRecipes.sort((a, b) => {
-            const caloriesA = parseInt(a.macros?.calories || '0');
-            const caloriesB = parseInt(b.macros?.calories || '0');
-            return caloriesA - caloriesB;
-        });
-    }
-
     renderRecipeCards();
     updateRecipeCount();
 }
@@ -362,12 +313,8 @@ function renderRecipeCards() {
         const isVeloce = recipe.time <= 15;
         const isProteico = recipe.macros && parseInt(recipe.macros.protein) >= 25;
 
-        // Check if recipe exceeds remaining budget
-        const recipeCalories = recipe.macros?.calories || '0 kcal';
-        const exceedsBudget = !isSelected && wouldExceedBudget(recipeCalories);
-
         html += `
-            <div class="recipe-card ${isSelected ? 'selected' : ''} ${exceedsBudget ? 'exceeds-budget' : ''}" data-recipe-id="${recipe.id}">
+            <div class="recipe-card ${isSelected ? 'selected' : ''}" data-recipe-id="${recipe.id}">
                 <div class="recipe-header">
                     <div class="recipe-name" onclick="toggleRecipeDetail('${recipe.id}')">
                         ${recipe.name}
@@ -388,9 +335,8 @@ function renderRecipeCards() {
                     </div>
                 </div>
 
-                ${isVeloce || isProteico || recipe.tags.includes('meal-prep') || exceedsBudget ? `
+                ${isVeloce || isProteico || recipe.tags.includes('meal-prep') ? `
                     <div class="recipe-badges">
-                        ${exceedsBudget ? '<span class="recipe-badge budget-warning">⚠️ Supera Budget</span>' : ''}
                         ${isVeloce ? `<span class="recipe-badge veloce">${icon('fast', 'badge-icon')} Veloce</span>` : ''}
                         ${isProteico ? '<span class="recipe-badge proteico">Proteico</span>' : ''}
                         ${recipe.tags.includes('meal-prep') ? '<span class="recipe-badge">Meal Prep</span>' : ''}
@@ -418,9 +364,6 @@ function renderRecipeCards() {
                 ` : ''}
 
                 <div class="recipe-actions">
-                    <button class="recipe-btn recipe-btn-secondary" onclick="toggleRecipeDetail('${recipe.id}')">
-                        Ingredienti
-                    </button>
                     <button class="recipe-btn recipe-btn-primary" onclick="selectRecipe('${recipe.id}')">
                         ${isSelected ? `Deseleziona ${icon('check', 'icon-inline')}` : 'Seleziona'}
                     </button>
@@ -455,67 +398,26 @@ function toggleRecipeDetail(recipeId) {
 
 function selectRecipe(recipeId) {
     const key = `${currentDayType}-${currentMealKey}`;
-    const recipe = filteredRecipes.find(r => r.id === recipeId);
 
-    if (!recipe) return;
-
-    const isCurrentlySelected = selectedRecipes[key] === recipeId;
-
-    // If deselecting
-    if (isCurrentlySelected) {
-        // Update calorie tracking
-        updateConsumedCalories(
-            recipe.id,
-            recipe.name,
-            recipe.macros?.calories || 0,
-            key,
-            false // deselecting
-        );
-
+    // Toggle: if already selected, deselect it
+    if (selectedRecipes[key] === recipeId) {
         delete selectedRecipes[key];
         localStorage.setItem('selectedRecipes', JSON.stringify(selectedRecipes));
 
-        // Update UI
+        // Update UI immediately
         renderRecipeCards();
         loadMeals();
-        updateCalorieDisplay();
 
-        // Don't close the sheet
+        // Don't close the sheet, user might want to select another
         return;
     }
 
-    // If selecting - check for warnings
-    const calories = recipe.macros?.calories || '0 kcal';
-
-    if (wouldTriggerWarning(calories)) {
-        const confirm = window.confirm(
-            `⚠️ Attenzione!\n\nSelezionando questa ricetta supererai il 90% del budget giornaliero.\n\n` +
-            `Ricetta: ${recipe.name}\n` +
-            `Calorie: ${calories}\n\n` +
-            `Vuoi continuare?`
-        );
-
-        if (!confirm) {
-            return; // User cancelled
-        }
-    }
-
-    // Update calorie tracking
-    const result = updateConsumedCalories(
-        recipe.id,
-        recipe.name,
-        calories,
-        key,
-        true // selecting
-    );
-
-    // Select the recipe
+    // Otherwise, select this recipe
     selectedRecipes[key] = recipeId;
     localStorage.setItem('selectedRecipes', JSON.stringify(selectedRecipes));
 
     // Update UI
     renderRecipeCards();
-    updateCalorieDisplay();
 
     // Close sheet after short delay
     setTimeout(() => {
@@ -581,48 +483,11 @@ function switchDayType(type) {
     loadMeals();
 }
 
-// ========== CALORIE DISPLAY UPDATE ==========
-
-function updateCalorieDisplay() {
-    const tracker = document.getElementById('calorieTracker');
-    if (!tracker) return;
-
-    const stats = getCalorieStats();
-
-    // Update progress bar
-    const progressBar = tracker.querySelector('.calorie-progress-fill');
-    if (progressBar) {
-        progressBar.style.width = `${Math.min(stats.percentage, 100)}%`;
-        progressBar.className = `calorie-progress-fill status-${stats.status}`;
-    }
-
-    // Update text
-    const calorieText = tracker.querySelector('.calorie-text');
-    if (calorieText) {
-        calorieText.innerHTML = `<strong>${stats.consumed}</strong> / ${stats.budget} kcal`;
-    }
-
-    // Update percentage
-    const percentageText = tracker.querySelector('.calorie-percentage');
-    if (percentageText) {
-        percentageText.textContent = `${stats.percentage}%`;
-    }
-
-    // Update remaining
-    const remainingText = tracker.querySelector('.calorie-remaining');
-    if (remainingText) {
-        remainingText.textContent = stats.remaining >= 0
-            ? `Rimanenti: ${stats.remaining} kcal`
-            : `Eccesso: ${Math.abs(stats.remaining)} kcal`;
-    }
-}
-
 // ========== INITIALIZATION ==========
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Load initial meals and calorie display
+    // Load initial meals
     loadMeals();
-    updateCalorieDisplay();
 
     // Day type buttons
     const btnWorkout = document.getElementById('btnWorkout');

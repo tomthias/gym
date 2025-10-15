@@ -40,6 +40,8 @@ function updateProgress() {
     updateWorkoutProgress('A', 24);
     updateWorkoutProgress('B', 22);
     updateWorkoutProgress('C', 12);
+    updateWorkoutProgress('D', 14); // Allenamento 1A
+    updateWorkoutProgress('E', 16); // Allenamento 2A
 }
 
 function updateWorkoutProgress(workout, total) {
@@ -105,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.btn-start-full-workout').forEach(btn => {
         btn.addEventListener('click', function() {
             const workoutId = this.dataset.workout;
-            window.location.href = `workout-flow.html?workout=${workoutId}`;
+            window.location.href = `pages/workout-flow.html?workout=${workoutId}`;
         });
     });
 

@@ -1,0 +1,287 @@
+{
+  "allenamento_b": {
+    "nome": "ALLENAMENTO B - Upper Body Pull + Fisio 2 (VARIANT 2A)",
+    "frequenza": "1 volta a settimana",
+    "durata": "60-70 minuti",
+    "focus": [
+      "Schiena",
+      "Bicipiti",
+      "Avambracci"
+    ],
+    "versione": "Versione completa - Variant 2A",
+    "fasi": {
+      "riscaldamento": {
+        "durata": "8 minuti",
+        "esercizi": [
+          {
+            "nome": "Bike",
+            "durata": "5 minuti",
+            "note": "Come da scheda fisio - NON modificabile",
+            "obbligatorio": true
+          },
+          {
+            "nome": "Cat-Cow",
+            "serie_reps": "2x8",
+            "note": "Mobilità colonna"
+          },
+          {
+            "nome": "Dead Bug",
+            "serie_reps": "2x8 per lato",
+            "note": "Attivazione core"
+          }
+        ]
+      },
+      "fisioterapia": {
+        "nome": "BLOCCO FISIOTERAPIA SCHEDA 2 (OBBLIGATORIO)",
+        "durata": "25 minuti",
+        "modificabile": false,
+        "note": "Esercizi riportati ESATTAMENTE come prescritto dalla fisioterapista",
+        "esercizi": [
+          {
+            "nome": "PLANK + ESTENSIONE ANCA ALTERNATA",
+            "serie_reps": "4x45\"",
+            "rest": "SS (Superserie con L-Sit)",
+            "carico": "",
+            "note": "Non ruotare il bacino, movimento controllato"
+          },
+          {
+            "nome": "L-SIT",
+            "serie_reps": "4x45\"",
+            "rest": "45\"",
+            "carico": "",
+            "note": "Ginocchia in massima estensione, non mollare mai, piedi a martello e gambe che non si toccano",
+            "warning": "Questo esercizio è molto impegnativo e prosciugherà il core"
+          },
+          {
+            "nome": "SQUAT TEMPO",
+            "serie_reps": "3x8",
+            "rest": "SS (Superserie con Wall Sit)",
+            "carico": "20 KG",
+            "note": "3\" a scendere, 3\" fermo iso, 3\" a salire"
+          },
+          {
+            "nome": "WALL SIT",
+            "serie_reps": "3x40\"",
+            "rest": "2'",
+            "carico": "",
+            "note": "Schiena contro muro, cosce parallele"
+          },
+          {
+            "nome": "AFFONDO STATICO CON DISCO SOPRA LA TESTA",
+            "serie_reps": "3x10 per lato",
+            "rest": "2'",
+            "carico": "Disco 5 KG",
+            "note": "Vedi video, occhio agli angoli"
+          }
+        ]
+      },
+      "upper_body_pull": {
+        "nome": "UPPER BODY PULL - VARIANT 2A",
+        "durata": "25-30 minuti",
+        "volume_completo": "Versione piena per sviluppo massimale",
+        "esercizi": [
+          {
+            "codice": "A1v",
+            "nome": "Trazioni Presa Supina",
+            "serie_reps": "4x6-10",
+            "rest": "2'",
+            "carico": "Corpo libero/zavorra progressiva",
+            "note": "Focus controllo e scapole, full ROM. Se necessario usa elastico assistenza",
+            "focus": "Schiena (gran dorsale), bicipiti",
+            "setup": {
+              "presa": "Supina (palmi verso di te), larghezza spalle",
+              "posizione": "Appeso con braccia tese",
+              "movimento": "Tira su fino mento sopra sbarra",
+              "controllo": "2 sec su, 1 sec pausa, 3 sec giù"
+            },
+            "progressione": {
+              "settimane_1_2": "4x6-8 (assistenza se necessario)",
+              "settimane_3_4": "4x8-10 corpo libero",
+              "settimane_5_plus": "4x10 con zavorra"
+            },
+            "alternativa": "Se non riesci: lat machine presa supina 4x8-10"
+          },
+          {
+            "codice": "A2v",
+            "nome": "Rematore Bilanciere",
+            "serie_reps": "3x10",
+            "rest": "2'",
+            "carico": "Bilanciere progressivo",
+            "note": "Presa pronata, controllo scapole. Busto a 45°, core attivo",
+            "focus": "Dorso (romboidi, trapezio medio), bicipiti",
+            "setup": {
+              "posizione": "In piedi, busto inclinato 45°, bilanciere in mano",
+              "presa": "Pronata, larghezza spalle",
+              "movimento": "Tira verso ombelico, spremi scapole",
+              "controllo": "Scapole indietro, pausa 1\", controllo eccentrico"
+            },
+            "tecnica": "Non usare slancio, movimento inizia dalle scapole"
+          },
+          {
+            "codice": "B1v",
+            "nome": "Curl Bilanciere EZ",
+            "serie_reps": "3x10",
+            "rest": "1'40\"",
+            "carico": "Bilanciere EZ progressivo",
+            "note": "Fermo 1s in contrazione, senza slancio. Gomiti fissi ai fianchi",
+            "focus": "Bicipiti (entrambi i capi)",
+            "setup": {
+              "posizione": "In piedi, bilanciere EZ davanti",
+              "presa": "Supina, impugnature inclinate",
+              "movimento": "Fletti avambracci verso spalle",
+              "controllo": "2 sec su, 1 sec contrazione, 3 sec giù"
+            },
+            "tecnica": "Gomiti fermi, movimento solo dell'avambraccio"
+          },
+          {
+            "codice": "B2v",
+            "nome": "Curl Manubri Panca Inclinata",
+            "serie_reps": "2x10",
+            "rest": "1'40\"",
+            "carico": "Manubri moderati",
+            "note": "Panca a 30-45°, enfasi stretch bicipiti. Alternato o simultaneo",
+            "focus": "Bicipiti (enfasi capo lungo)",
+            "setup": {
+              "posizione": "Seduto su panca inclinata 30-45°",
+              "movimento": "Curl con braccia lungo i fianchi",
+              "controllo": "Stretch completo in basso, contrazione in alto"
+            },
+            "tecnica": "Lascia che il peso tiri il braccio in basso per massimo stretch"
+          },
+          {
+            "codice": "C1v",
+            "nome": "Reverse Curl Bilanciere",
+            "serie_reps": "2x12",
+            "rest": "1'30\"",
+            "carico": "Bilanciere più leggero del curl normale",
+            "note": "Enfasi avambracci, presa prona. Movimento controllato",
+            "focus": "Avambracci, brachioradiale",
+            "setup": {
+              "presa": "Prona (palmi verso basso)",
+              "movimento": "Come curl normale ma con presa opposta",
+              "controllo": "Movimento lento, focus avambracci"
+            },
+            "tecnica": "Carico più leggero del curl normale, focus sulla presa"
+          },
+          {
+            "codice": "C2v",
+            "nome": "Zottman Curl",
+            "serie_reps": "2x10",
+            "rest": "1'30\"",
+            "carico": "Manubri leggeri-moderati",
+            "note": "Rotazione polso in negativo. Su con supina, giù con prona",
+            "focus": "Bicipiti, avambracci",
+            "setup": {
+              "movimento": "Sali con presa supina (normale)",
+              "rotazione": "In alto ruota in presa prona",
+              "controllo": "Scendi lento con presa prona"
+            },
+            "tecnica": "Movimento combinato: bicipiti in salita, avambracci in discesa"
+          },
+          {
+            "codice": "C3",
+            "nome": "Curl Polsi",
+            "serie_reps": "2x15",
+            "rest": "1'",
+            "carico": "Bilanciere o manubri leggeri",
+            "note": "FONDAMENTALE per arrampicata. Solo movimento polsi, controllo eccentrico",
+            "focus": "Avambracci, presa per climbing",
+            "setup": {
+              "posizione": "Seduto, avambracci su cosce o panca",
+              "movimento": "Solo flessione/estensione polsi",
+              "controllo": "Range completo, pausa in contrazione"
+            },
+            "tecnica": "Avambracci fermi, movimento solo dei polsi"
+          },
+          {
+            "codice": "FINALE",
+            "nome": "Farmer's Walk",
+            "serie_reps": "1x40 metri",
+            "rest": "2'",
+            "carico": "Manubri/kettlebell pesanti",
+            "note": "Test finale grip strength, fondamentale per presa e avambracci",
+            "focus": "Presa, avambracci, core, postura",
+            "setup": {
+              "posizione": "In piedi, peso in ogni mano",
+              "movimento": "Cammina mantenendo postura perfetta",
+              "controllo": "Spalle indietro, core attivo, passi controllati"
+            },
+            "tecnica": "Se grip cede, usa straps ma cerca di resistere il più possibile"
+          }
+        ]
+      },
+      "addominali": {
+        "nome": "ADDOMINALI RIDOTTI (ADATTAMENTO)",
+        "durata": "6 minuti (invece 12 originale)",
+        "riduzione_percentuale": "50%",
+        "esercizi": [
+          {
+            "nome": "Hollow Hold",
+            "originale": "3x30\" rec 1'",
+            "adattamento": "2x30\" rec 1'",
+            "note": "Core già affaticato dal L-Sit della fisio"
+          },
+          {
+            "nome": "Reverse Crunch",
+            "originale": "3x15 rec 1'",
+            "adattamento": "2x15 rec 1'",
+            "note": "Focus qualità movimento"
+          },
+          {
+            "nome": "Plank laterale",
+            "originale": "2x30\" per lato rec 1'",
+            "adattamento": "SALTARE per ora",
+            "motivo": "Core già molto sollecitato",
+            "note": "Da reintrodurre gradualmente"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "volume_totale": {
+        "serie_upper_completo": 18,
+        "serie_fisio": 14,
+        "serie_totali": 32
+      },
+      "durata": {
+        "riscaldamento": "8 minuti",
+        "fisioterapia": "25 minuti",
+        "upper_pull": "25-30 minuti",
+        "addominali": "6 minuti",
+        "totale": "60-70 minuti"
+      }
+    },
+    "warnings": {
+      "timing_dopo_allenamento_a": "Aspetta 48-72 ore dopo Allenamento A",
+      "l_sit_killer": "L-Sit 4x45\" dalla fisio prosciugherà il core prima dell'upper body",
+      "grip_fatigue": "Lat machine + curl polsi + farmers walk = attenzione grip strength",
+      "stop_signals": [
+        "Dolore articolare acuto",
+        "Impossibilità completare 6 reps lat machine",
+        "Grip si apre continuamente",
+        "Crampi avambracci",
+        "Vertigini post L-Sit"
+      ]
+    },
+    "progressione": {
+      "indicatori_aumento_volume": [
+        "Completi tutte le serie senza esaurimento eccessivo",
+        "Recuperi nei tempi previsti",
+        "Non hai dolori estremi giorno dopo",
+        "Ti senti energico durante allenamento"
+      ],
+      "quando_passare_livello_successivo": [
+        "Gestisci versione adattamento per 2-3 sessioni consecutive",
+        "Lat machine: riesci a fare 3x8 pulite",
+        "L-Sit fisio: completi 4x45\" senza cedimenti",
+        "Farmers walk: completi distanza senza aprire grip"
+      ]
+    },
+    "note_generali": {
+      "priorita_assoluta": "Blocco fisioterapia NON si modifica mai - ordine medico",
+      "approccio": "Conservativo per costruire base solida",
+      "filosofia": "Qualità movimento > Quantità volume",
+      "pazienza": "Meglio sottostimare che sovrallenare le prime settimane"
+    }
+  }
+}

@@ -1,0 +1,840 @@
+        <!DOCTYPE html>
+        <html lang="it">
+
+        <head>
+            <title>Pagina non trovata</title>
+            <meta name="title" content="Pagina non trovata" />
+            <meta name="description" content="" />
+            <meta name="keywords" content="" />
+            <meta name="author" content="fisioterapiaitalia.com" />
+<meta name="copyright" content="fisioterapiaitalia.com" />
+<meta http-equiv="Reply-to" content="info@fisioterapiaitalia.com" />
+<meta name="revisit-after" content="7 days" />
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=yes" />
+<link rel="icon" href="https://www.fisioterapiaitalia.com/img/favicon/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="https://www.fisioterapiaitalia.com/img/favicon/favicon.ico" type="image/x-icon" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://use.fontawesome.com" />
+<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+<link rel="dns-prefetch" href="https://connect.facebook.net" />
+<link rel="dns-prefetch" href="https://cdn.iubenda.com" />
+<link rel="dns-prefetch" href="https://maps.googleapis.com" />
+<link rel="dns-prefetch" href="https://maps.gstatic.com" />
+<link rel="preload" as="style" type="text/css" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" />
+<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous" />
+<noscript>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" />
+</noscript>
+<link rel="apple-touch-icon" sizes="57x57" href="https://www.fisioterapiaitalia.com/img/favicon/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="https://www.fisioterapiaitalia.com/img/favicon/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="https://www.fisioterapiaitalia.com/img/favicon/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="https://www.fisioterapiaitalia.com/img/favicon/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="https://www.fisioterapiaitalia.com/img/favicon/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="https://www.fisioterapiaitalia.com/img/favicon/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.fisioterapiaitalia.com/img/favicon/apple-icon-144x144.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.fisioterapiaitalia.com/img/favicon/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.fisioterapiaitalia.com/img/favicon/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" sizes="192x192"  href="https://www.fisioterapiaitalia.com/img/favicon/android-icon-192x192.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.fisioterapiaitalia.com/img/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="96x96" href="https://www.fisioterapiaitalia.com/img/favicon/favicon-96x96.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.fisioterapiaitalia.com/img/favicon/favicon-16x16.png" />
+<link rel="manifest" href="/manifest.json" />
+<meta name="msapplication-TileColor" content="#ffffff" />
+<meta name="msapplication-TileImage" content="https://www.fisioterapiaitalia.com/img/favicon/ms-icon-144x144.png" />
+<meta name="theme-color" content="#ffffff" />
+<link rel="stylesheet" type="text/css" href="https://www.fisioterapiaitalia.com/css/chat.css" />
+<link rel="stylesheet" type="text/css" href="https://www.fisioterapiaitalia.com/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="https://www.fisioterapiaitalia.com/css/skeleton.css" />
+<link rel="stylesheet" type="text/css" href="https://www.fisioterapiaitalia.com/css/owl.carousel.min.css" />
+<link rel="stylesheet" type="text/css" href="https://www.fisioterapiaitalia.com/css/owl.theme.default.min.css" />
+<link rel="stylesheet" type="text/css" href="https://www.fisioterapiaitalia.com/css/animate.css" />
+<link rel="stylesheet" type="text/css" href="https://www.fisioterapiaitalia.com/css/lightbox.min.css" />
+<link rel="stylesheet" type="text/css" href="https://www.fisioterapiaitalia.com/css/sweetalert.css" />
+<style type="text/css">#iubenda-cs-banner { bottom: 0px !important; left: 0px !important; position: fixed !important; width: 100% !important; z-index: 99999998 !important; background-color: black; } .iubenda-cs-content { display: block; margin: 0 auto; padding: 20px; width: auto; font-family: Helvetica,Arial,FreeSans,sans-serif; font-size: 14px; background: #000; color: #fff;} .iubenda-cs-rationale { max-width: 900px; position: relative; margin: 0 auto; } .iubenda-banner-content > p { font-family: Helvetica,Arial,FreeSans,sans-serif; line-height: 1.5; } .iubenda-cs-close-btn { margin:0; color: #fff; text-decoration: none; font-size: 14px; position: absolute; top: 0; right: 0; border: none; } .iubenda-cs-cookie-policy-lnk { text-decoration: underline; color: #fff; font-size: 14px; font-weight: 900; } </style>
+<script type="text/javascript">
+var _iub = _iub || [];
+_iub.csConfiguration = {"invalidateConsentWithoutLog":true,"consentOnContinuedBrowsing":false,"perPurposeConsent":true,"whitelabel":false,"lang":"it","siteId":1122873,"floatingPreferencesButtonDisplay":false,"cookiePolicyId":45826973, "banner":{ "acceptButtonDisplay":true,"customizeButtonDisplay":true,"rejectButtonDisplay":true,"position":"float-bottom-right" }};
+</script>
+<script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
+<link rel="stylesheet" type="text/css" href="https://www.fisioterapiaitalia.com/css/style.css" />
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KNRN8C3');</script>
+<script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Fisioterapisti Italia","item":"https:\/\/www.fisioterapiaitalia.com\/centri-di-fisioterapia\/"}]}</script>
+        </head>
+
+        <body>
+            <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KNRN8C3" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<input type="hidden" id="user-ip" value="188.8.38.132" />
+<header>
+<div>
+    <div class="row rgba-menu">
+        <div class="four columns fcm">
+            <div id="logo2">
+                <a href="https://www.fisioterapiaitalia.com/" title="Fisioterapia Italia">
+                    <img src="https://www.fisioterapiaitalia.com/img/nuovo-logo.png" alt="Logo Fisioterapia Italia" title="Fisioterapia Italia" width="644" height="112" />
+                </a>
+            </div>
+        </div>
+        <div class="eight columns fcm">
+            <div id="menu">
+                <ul>
+                     <li><a href="https://www.fisioterapiaitalia.com/" title="Home" class="voce ">HOME</a></li>
+                     <li><a href="https://www.fisioterapiaitalia.com/blog/" title="Articoli" class="voce ">ARTICOLI</a></li>
+                     <li><a href="https://www.fisioterapiaitalia.com/centri-di-fisioterapia/" title="Elenco centri fisioterapia" class="voce ">CENTRI</a></li>
+                     <li><a href="https://www.fisioterapiaitalia.com/patologie/" title="" class="voce ">PATOLOGIE E DOLORE</a>
+                        <ul>
+                            <li class="subvoceli"><a href="https://www.fisioterapiaitalia.com/patologie/testa/" class="subvoce">Testa</a><div class="lsubmenu"><a href="https://www.fisioterapiaitalia.com/patologie/testa/fratture-del-cranio-e-dello-zigomo/" class="subvoce">Fratture del Cranio e dello Zigomo</a><a href="https://www.fisioterapiaitalia.com/patologie/testa/mal-di-testa/" class="subvoce">Mal di testa</a><a href="https://www.fisioterapiaitalia.com/patologie/testa/nevralgia-del-trigemino/" class="subvoce">Nevralgia del Trigemino</a><a href="https://www.fisioterapiaitalia.com/patologie/testa/paralisi-di-bell/" class="subvoce">Paralisi di Bell</a><a href="https://www.fisioterapiaitalia.com/patologie/testa/patologie-delatm/" class="subvoce">Patologie dell' ATM</a></div></li><li class="subvoceli"><a href="https://www.fisioterapiaitalia.com/patologie/cervicale/" class="subvoce">Cervicale</a><div class="lsubmenu"><a href="https://www.fisioterapiaitalia.com/patologie/cervicale/cervico-brachialgia/" class="subvoce">Cervico-brachialgia</a><a href="https://www.fisioterapiaitalia.com/patologie/cervicale/dolori-da-postura/" class="subvoce">Dolori da postura</a><a href="https://www.fisioterapiaitalia.com/patologie/cervicale/ernia-del-disco-cervicale/" class="subvoce">Ernia del disco cervicale</a><a href="https://www.fisioterapiaitalia.com/patologie/cervicale/fratture-della-cervicale/" class="subvoce">Fratture della cervicale</a><a href="https://www.fisioterapiaitalia.com/patologie/cervicale/vertigini-di-origine-cervicale/" class="subvoce">Vertigini cervicali sintomi e rimedi che funzionano</a></div></li><li class="subvoceli"><a href="https://www.fisioterapiaitalia.com/patologie/dorsale/" class="subvoce">Dorsale</a><div class="lsubmenu"><a href="https://www.fisioterapiaitalia.com/patologie/dorsale/contratture-muscolari/" class="subvoce">Contratture  muscolari</a><a href="https://www.fisioterapiaitalia.com/patologie/dorsale/ernia-del-disco-dorsale/" class="subvoce">Ernia del disco dorsale</a><a href="https://www.fisioterapiaitalia.com/patologie/dorsale/fratture-della-dorsale/" class="subvoce">Fratture della dorsale</a><a href="https://www.fisioterapiaitalia.com/patologie/dorsale/cifosi-dorsale/" class="subvoce">La cifosi del tratto dorsale</a><a href="https://www.fisioterapiaitalia.com/patologie/dorsale/sindrome-di-scheuermann/" class="subvoce">Sindrome di Scheuermann</a></div></li><li class="subvoceli"><a href="https://www.fisioterapiaitalia.com/patologie/lombare/" class="subvoce">Lombare</a><div class="lsubmenu"><a href="https://www.fisioterapiaitalia.com/patologie/lombare/ernia-del-disco-lombare/" class="subvoce">Ernia del disco lombare</a><a href="https://www.fisioterapiaitalia.com/patologie/lombare/fratture-della-lombare/" class="subvoce">Frattura Vertebra Lombare</a><a href="https://www.fisioterapiaitalia.com/patologie/lombare/il-colpo-della-strega/" class="subvoce">Il colpo della strega</a><a href="https://www.fisioterapiaitalia.com/patologie/lombare/lombalgia/" class="subvoce">Lombalgia, cause, fattori di rischio e come curarla</a><a href="https://www.fisioterapiaitalia.com/patologie/lombare/mal-di-schiena/" class="subvoce">Mal di schiena</a></div></li><li class="subvoceli"><a href="https://www.fisioterapiaitalia.com/patologie/bacino/" class="subvoce">Bacino</a><div class="lsubmenu"><a href="https://www.fisioterapiaitalia.com/patologie/bacino/coccigodinia/" class="subvoce">Coccigodinia</a><a href="https://www.fisioterapiaitalia.com/patologie/bacino/fratture-del-bacino/" class="subvoce">Fratture del bacino</a><a href="https://www.fisioterapiaitalia.com/patologie/bacino/patologie-danca/" class="subvoce">Patologie d'anca</a><a href="https://www.fisioterapiaitalia.com/patologie/bacino/pubalgia/" class="subvoce">Pubalgia</a><a href="https://www.fisioterapiaitalia.com/patologie/bacino/sacroileite/" class="subvoce">Sacroileite</a></div></li><li class="subvoceli"><a href="https://www.fisioterapiaitalia.com/patologie/spalla/" class="subvoce">Spalla</a><div class="lsubmenu"><a href="https://www.fisioterapiaitalia.com/patologie/spalla/artrosi-della-spalla/" class="subvoce">Artrosi della spalla</a><a href="https://www.fisioterapiaitalia.com/patologie/spalla/cuffia-dei-rotatori/" class="subvoce">Cuffia dei Rotatori</a><a href="https://www.fisioterapiaitalia.com/patologie/spalla/periartrite/" class="subvoce">La Periartrite cos'è e come curarla</a><a href="https://www.fisioterapiaitalia.com/patologie/spalla/la-spalla-nello-sport/" class="subvoce">La spalla nello sport</a><a href="https://www.fisioterapiaitalia.com/patologie/spalla/la-lussazione-della-spalla/" class="subvoce">Lussazione della spalla</a><a href="https://www.fisioterapiaitalia.com/patologie/spalla/protesi-di-spalla/" class="subvoce">Protesi di Spalla</a></div></li><li class="subvoceli"><a href="https://www.fisioterapiaitalia.com/patologie/gomito/" class="subvoce">Gomito</a><div class="lsubmenu"><a href="https://www.fisioterapiaitalia.com/patologie/gomito/borsiste-del-gomito/" class="subvoce">Borsite del Gomito</a><a href="https://www.fisioterapiaitalia.com/patologie/gomito/compressione-dellulnare/" class="subvoce">Compressione dell’ulnare</a><a href="https://www.fisioterapiaitalia.com/patologie/gomito/epicondilite-gomito-del-tennista/" class="subvoce">Epicondilite o gomito del tennista, cos’è, sintomi e cure</a><a href="https://www.fisioterapiaitalia.com/patologie/gomito/epitrocleite-gomito-del-golfista/" class="subvoce">Epitrocleite (Gomito del golfista )</a><a href="https://www.fisioterapiaitalia.com/patologie/gomito/fratture-del-gomito/" class="subvoce">Fratture del gomito</a></div></li><li class="subvoceli"><a href="https://www.fisioterapiaitalia.com/patologie/polso-e-mano/" class="subvoce">Polso e Mano</a><div class="lsubmenu"><a href="https://www.fisioterapiaitalia.com/patologie/polso-e-mano/artrosi-della-mano/" class="subvoce">Artrosi della mano</a><a href="https://www.fisioterapiaitalia.com/patologie/polso-e-mano/dito-a-scatto/" class="subvoce">Dito a scatto</a><a href="https://www.fisioterapiaitalia.com/patologie/polso-e-mano/frattura-di-colles/" class="subvoce">Frattura di Colles</a><a href="https://www.fisioterapiaitalia.com/patologie/polso-e-mano/tunnel-carpale/" class="subvoce">Sindrome del Tunnel carpale Cos'è e come si Cura</a></div></li><li class="subvoceli"><a href="https://www.fisioterapiaitalia.com/patologie/anca/" class="subvoce">Anca</a><div class="lsubmenu"><a href="https://www.fisioterapiaitalia.com/patologie/anca/artrosi-danca/" class="subvoce">Artrosi dell' anca</a><a href="https://www.fisioterapiaitalia.com/patologie/anca/borsiste-trocanterica/" class="subvoce">Borsite Trocanterica</a><a href="https://www.fisioterapiaitalia.com/patologie/anca/fratture-del-femore/" class="subvoce">Fratture del femore</a><a href="https://www.fisioterapiaitalia.com/patologie/anca/protesi-danca/" class="subvoce">Protesi d'anca</a><a href="https://www.fisioterapiaitalia.com/patologie/anca/sindrome-del-piriforme/" class="subvoce">Sindrome del piriforme</a></div></li><li class="subvoceli"><a href="https://www.fisioterapiaitalia.com/patologie/ginocchio/" class="subvoce">Ginocchio</a><div class="lsubmenu"><a href="https://www.fisioterapiaitalia.com/patologie/ginocchio/artrosi-ginocchio/" class="subvoce">Artrosi al ginocchio</a><a href="https://www.fisioterapiaitalia.com/patologie/ginocchio/cisti-di-baker/" class="subvoce">Cisti di baker</a><a href="https://www.fisioterapiaitalia.com/patologie/ginocchio/fratture-del-ginocchio/" class="subvoce">Fratture del ginocchio</a><a href="https://www.fisioterapiaitalia.com/patologie/ginocchio/lesioni-del-menisco-e-dei-crociati/" class="subvoce">Lesioni del menisco e dei crociati, differenze e trattamento</a><a href="https://www.fisioterapiaitalia.com/patologie/ginocchio/morbo-di-osgood-schlatter/" class="subvoce">Morbo di Osgood-Schlatter</a><a href="https://www.fisioterapiaitalia.com/patologie/ginocchio/sindrome-femoro-rotulea/" class="subvoce">Sindrome femoro-rotulea</a></div></li><li class="subvoceli"><a href="https://www.fisioterapiaitalia.com/patologie/piede-e-caviglia/" class="subvoce">Piede e Caviglia</a><div class="lsubmenu"><a href="https://www.fisioterapiaitalia.com/patologie/piede-e-caviglia/alluce-valgo/" class="subvoce">Alluce valgo</a><a href="https://www.fisioterapiaitalia.com/patologie/piede-e-caviglia/distorsione-della-caviglia/" class="subvoce">Distorsione della caviglia</a><a href="https://www.fisioterapiaitalia.com/patologie/piede-e-caviglia/metatarsalgia/" class="subvoce">La metatarsalgia, come riconoscerla e curarla</a><a href="https://www.fisioterapiaitalia.com/patologie/piede-e-caviglia/neuroma-di-morton/" class="subvoce">Neuroma di Morton</a><a href="https://www.fisioterapiaitalia.com/patologie/piede-e-caviglia/tallonite/" class="subvoce">Tallonite cause e come curarla</a><a href="https://www.fisioterapiaitalia.com/patologie/piede-e-caviglia/tendiniti-del-piede/" class="subvoce">Tendiniti del piede</a></div></li><li class="subvoceli"><a href="https://www.fisioterapiaitalia.com/patologie/altre-patologie/" class="subvoce">Altre Patologie</a><div class="lsubmenu"><a href="https://www.fisioterapiaitalia.com/patologie/altre-patologie/fibromialgia-cos-e-come-si-cura/" class="subvoce">Fibromialgia Cos'è e Come si Cura</a></div></li><li class="subvoceli"><a href="https://www.fisioterapiaitalia.com/patologie/news-in-fisioterapia/" class="subvoce">News in fisioterapia</a></li>                            </ul>
+                     </li>
+                     <li><a href="https://www.fisioterapiaitalia.com/terapie/" title="" class="voce ">TERAPIE</a>
+                        <ul id = "ul-terapie">
+                            <li><a href="https://www.fisioterapiaitalia.com/terapie/terapia-manuale/" class="subvoce">Terapia manuale</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/osteopatia/" class="subvoce">Osteopatia</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/terapia-mio-fasciale/" class="subvoce">Terapia mio-fasciale</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/massoterapia/" class="subvoce">Massoterapia</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/riabilitazione-post-chirugica/" class="subvoce">Riabilitazione post chirugica</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/riabilitazione-neurologica/" class="subvoce">Riabilitazione neurologica</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/riabilitazione-sportiva/" class="subvoce">Riabilitazione sportiva</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/riabilitazione-funzionale/" class="subvoce">Riabilitazione funzionale</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/riabilitazione-pavimento-pelvico/" class="subvoce">Riabilitazione pavimento pelvico</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/ginnastica-posturale/" class="subvoce">Ginnastica posturale</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/propriocezione/" class="subvoce">Riabilitazione Propriocettiva</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/movimento-e-allenamento/" class="subvoce">Movimento e Allenamento</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/esercizio-terapeutico/" class="subvoce">Esercizio terapeutico</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/idrokinesiterapia/" class="subvoce">Idrokinesiterapia</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/linfodrenaggio/" class="subvoce">Linfodrenaggio</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/kinesiterapia/" class="subvoce">Kinesiterapia</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/pompage/" class="subvoce">Pompage</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/fisioterapia-dermatofunzionale/" class="subvoce">Fisioterapia dermatofunzionale</a></li>                            </ul>
+                     </li>
+                     <li><a href="https://www.fisioterapiaitalia.com/tecnologie/" title="" class="voce ">TECNOLOGIE</a>
+                     <ul class = "ul-column">
+                            <li><a href="https://www.fisioterapiaitalia.com/tecnologie/laserterapia/" class="subvoce">Laserterapia</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/tecarterapia/" class="subvoce">Tecarterapia</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/onde-durto/" class="subvoce">Onde d'urto</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/elettroterapia/" class="subvoce">Elettroterapia</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/magnetoterapia/" class="subvoce">Magnetoterapia</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/ultrasuoni/" class="subvoce">Ultrasuoni</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/ipertermia/" class="subvoce">Ipertermia</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/scrambler-therapy/" class="subvoce">Scrambler Therapy</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/microcorrenti/" class="subvoce">Microcorrenti</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/vibrazioni-fisioterpia/" class="subvoce">Vibrazioni in fisioterpia</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/frems/" class="subvoce">FREMS</a></li>                            </ul>
+                     </li>
+                     <li><a href="https://www.fisioterapiaitalia.com/pagina-risorse-per-fisioterapista/" title="" class="voce ">PER I FISIOTERAPISTI</a>
+                        <ul>
+                            <li><a title="" class="subvoce" href="https://www.fisioterapiaitalia.com/corsi-ecm-per-fisioterapista/">CORSI E.C.M.</a></li>
+                            <li><a title="" class="subvoce" href="https://www.fisioterapiaitalia.com/eventi-formazione-fisioterapia/">EVENTI E FORMAZIONE</a></li>
+                            <li><a title="" class="subvoce" href="https://www.fisioterapiaitalia.com/ecm-fisioterapista-corsi-fad/">CORSI F.A.D.</a></li>
+                            <li><a title="" class="subvoce" href="https://www.fisioterapiaitalia.com/offerte-di-lavoro-per-fisioterapista/">OFFERTE DI LAVORO</a></li>
+                            <li><a title="" class="subvoce" href="https://www.fisioterapiaitalia.com/concorsi-pubblici-fisioterapista/">CONCORSI PUBBLICI</a></li> 
+                            <li><a title="" class="subvoce" href="https://www.fisioterapiaitalia.com/area-riservata/login.php">GESTIONE SITI</a></li>                 
+                            <li><a style="color:#f26522" title="" class="subvoce" href="https://fisioterapiaitalia.mykajabi.com/login">FORMAZIONE FISIO</a></li>                         
+                        </ul>
+                     </li>
+                </ul>
+            </div>
+            <div id="menu-telefono">
+                <div class="menu-tel">
+                    <a href="#" onclick="return showmenu()" class="pointer" rel="noindex nofollow">
+                        <img src="https://www.fisioterapiaitalia.com/img/menu-mobile.png" alt="" title="" />
+                    </a>
+                </div>
+                <div class="voci-menu-tel hide collapse-container">
+                     <li><a href="https://www.fisioterapiaitalia.com/" title="Home" class="voce ">HOME</a></li>
+                     <li><a href="https://www.fisioterapiaitalia.com/blog/" title="Articoli" class="voce "><strong>ARTICOLI</strong></a></li>
+                     <li><a href="https://www.fisioterapiaitalia.com/centri-di-fisioterapia/" title="Elenco centri fisioterapia" class="voce "><strong>CENTRI</strong></a></li>
+                     <li>
+                        <a href="#" class="voce display-block pr20 " onclick="toggle_submenu(this, '#submenu-patologie')">
+                            <strong>PATOLOGIE E DOLORE</strong>
+                            <i class="fa fa-plus pull-right mt3"></i>
+                        </a>
+                        <ul id="submenu-patologie" class="collapse-item collapse-container hide">
+                            <li class="subvoceli">
+                                <a href="https://www.fisioterapiaitalia.com/patologie/" title="PATOLOGIE E DOLORE" class="subvoce">
+                                    <strong>PATOLOGIE E DOLORE</strong>
+                                </a>
+                            </li>
+                                                        <li class="subvoceli">
+                                                                <a href="#" class="subvoce" onclick="toggle_submenu(this, '#subvoceli-4')">
+                                    Testa                                    <i class="fa fa-plus pull-right"></i>
+                                </a>
+                                <ul id="subvoceli-4" class="lsubmenu collapse-item hide">
+                                    <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/testa/" class="subvoce">Testa</a>
+                                    </li>
+                                                                        <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/testa/fratture-del-cranio-e-dello-zigomo/" class="subvoce">Fratture del Cranio e dello Zigomo</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/testa/mal-di-testa/" class="subvoce">Mal di testa</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/testa/nevralgia-del-trigemino/" class="subvoce">Nevralgia del Trigemino</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/testa/paralisi-di-bell/" class="subvoce">Paralisi di Bell</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/testa/patologie-delatm/" class="subvoce">Patologie dell' ATM</a>
+                                    </li>
+                                                                        </ul>
+                                                                </li>
+                                                            <li class="subvoceli">
+                                                                <a href="#" class="subvoce" onclick="toggle_submenu(this, '#subvoceli-6')">
+                                    Cervicale                                    <i class="fa fa-plus pull-right"></i>
+                                </a>
+                                <ul id="subvoceli-6" class="lsubmenu collapse-item hide">
+                                    <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/cervicale/" class="subvoce">Cervicale</a>
+                                    </li>
+                                                                        <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/cervicale/cervico-brachialgia/" class="subvoce">Cervico-brachialgia</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/cervicale/dolori-da-postura/" class="subvoce">Dolori da postura</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/cervicale/ernia-del-disco-cervicale/" class="subvoce">Ernia del disco cervicale</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/cervicale/fratture-della-cervicale/" class="subvoce">Fratture della cervicale</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/cervicale/vertigini-di-origine-cervicale/" class="subvoce">Vertigini cervicali sintomi e rimedi che funzionano</a>
+                                    </li>
+                                                                        </ul>
+                                                                </li>
+                                                            <li class="subvoceli">
+                                                                <a href="#" class="subvoce" onclick="toggle_submenu(this, '#subvoceli-7')">
+                                    Dorsale                                    <i class="fa fa-plus pull-right"></i>
+                                </a>
+                                <ul id="subvoceli-7" class="lsubmenu collapse-item hide">
+                                    <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/dorsale/" class="subvoce">Dorsale</a>
+                                    </li>
+                                                                        <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/dorsale/contratture-muscolari/" class="subvoce">Contratture  muscolari</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/dorsale/ernia-del-disco-dorsale/" class="subvoce">Ernia del disco dorsale</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/dorsale/fratture-della-dorsale/" class="subvoce">Fratture della dorsale</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/dorsale/cifosi-dorsale/" class="subvoce">La cifosi del tratto dorsale</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/dorsale/sindrome-di-scheuermann/" class="subvoce">Sindrome di Scheuermann</a>
+                                    </li>
+                                                                        </ul>
+                                                                </li>
+                                                            <li class="subvoceli">
+                                                                <a href="#" class="subvoce" onclick="toggle_submenu(this, '#subvoceli-57')">
+                                    Lombare                                    <i class="fa fa-plus pull-right"></i>
+                                </a>
+                                <ul id="subvoceli-57" class="lsubmenu collapse-item hide">
+                                    <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/lombare/" class="subvoce">Lombare</a>
+                                    </li>
+                                                                        <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/lombare/ernia-del-disco-lombare/" class="subvoce">Ernia del disco lombare</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/lombare/fratture-della-lombare/" class="subvoce">Frattura Vertebra Lombare</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/lombare/il-colpo-della-strega/" class="subvoce">Il colpo della strega</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/lombare/lombalgia/" class="subvoce">Lombalgia, cause, fattori di rischio e come curarla</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/lombare/mal-di-schiena/" class="subvoce">Mal di schiena</a>
+                                    </li>
+                                                                        </ul>
+                                                                </li>
+                                                            <li class="subvoceli">
+                                                                <a href="#" class="subvoce" onclick="toggle_submenu(this, '#subvoceli-8')">
+                                    Bacino                                    <i class="fa fa-plus pull-right"></i>
+                                </a>
+                                <ul id="subvoceli-8" class="lsubmenu collapse-item hide">
+                                    <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/bacino/" class="subvoce">Bacino</a>
+                                    </li>
+                                                                        <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/bacino/coccigodinia/" class="subvoce">Coccigodinia</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/bacino/fratture-del-bacino/" class="subvoce">Fratture del bacino</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/bacino/patologie-danca/" class="subvoce">Patologie d'anca</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/bacino/pubalgia/" class="subvoce">Pubalgia</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/bacino/sacroileite/" class="subvoce">Sacroileite</a>
+                                    </li>
+                                                                        </ul>
+                                                                </li>
+                                                            <li class="subvoceli">
+                                                                <a href="#" class="subvoce" onclick="toggle_submenu(this, '#subvoceli-9')">
+                                    Spalla                                    <i class="fa fa-plus pull-right"></i>
+                                </a>
+                                <ul id="subvoceli-9" class="lsubmenu collapse-item hide">
+                                    <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/spalla/" class="subvoce">Spalla</a>
+                                    </li>
+                                                                        <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/spalla/artrosi-della-spalla/" class="subvoce">Artrosi della spalla</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/spalla/cuffia-dei-rotatori/" class="subvoce">Cuffia dei Rotatori</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/spalla/periartrite/" class="subvoce">La Periartrite cos'è e come curarla</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/spalla/la-spalla-nello-sport/" class="subvoce">La spalla nello sport</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/spalla/la-lussazione-della-spalla/" class="subvoce">Lussazione della spalla</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/spalla/protesi-di-spalla/" class="subvoce">Protesi di Spalla</a>
+                                    </li>
+                                                                        </ul>
+                                                                </li>
+                                                            <li class="subvoceli">
+                                                                <a href="#" class="subvoce" onclick="toggle_submenu(this, '#subvoceli-10')">
+                                    Gomito                                    <i class="fa fa-plus pull-right"></i>
+                                </a>
+                                <ul id="subvoceli-10" class="lsubmenu collapse-item hide">
+                                    <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/gomito/" class="subvoce">Gomito</a>
+                                    </li>
+                                                                        <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/gomito/borsiste-del-gomito/" class="subvoce">Borsite del Gomito</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/gomito/compressione-dellulnare/" class="subvoce">Compressione dell’ulnare</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/gomito/epicondilite-gomito-del-tennista/" class="subvoce">Epicondilite o gomito del tennista, cos’è, sintomi e cure</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/gomito/epitrocleite-gomito-del-golfista/" class="subvoce">Epitrocleite (Gomito del golfista )</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/gomito/fratture-del-gomito/" class="subvoce">Fratture del gomito</a>
+                                    </li>
+                                                                        </ul>
+                                                                </li>
+                                                            <li class="subvoceli">
+                                                                <a href="#" class="subvoce" onclick="toggle_submenu(this, '#subvoceli-12')">
+                                    Polso e Mano                                    <i class="fa fa-plus pull-right"></i>
+                                </a>
+                                <ul id="subvoceli-12" class="lsubmenu collapse-item hide">
+                                    <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/polso-e-mano/" class="subvoce">Polso e Mano</a>
+                                    </li>
+                                                                        <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/polso-e-mano/artrosi-della-mano/" class="subvoce">Artrosi della mano</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/polso-e-mano/dito-a-scatto/" class="subvoce">Dito a scatto</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/polso-e-mano/frattura-di-colles/" class="subvoce">Frattura di Colles</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/polso-e-mano/tunnel-carpale/" class="subvoce">Sindrome del Tunnel carpale Cos'è e come si Cura</a>
+                                    </li>
+                                                                        </ul>
+                                                                </li>
+                                                            <li class="subvoceli">
+                                                                <a href="#" class="subvoce" onclick="toggle_submenu(this, '#subvoceli-30')">
+                                    Anca                                    <i class="fa fa-plus pull-right"></i>
+                                </a>
+                                <ul id="subvoceli-30" class="lsubmenu collapse-item hide">
+                                    <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/anca/" class="subvoce">Anca</a>
+                                    </li>
+                                                                        <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/anca/artrosi-danca/" class="subvoce">Artrosi dell' anca</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/anca/borsiste-trocanterica/" class="subvoce">Borsite Trocanterica</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/anca/fratture-del-femore/" class="subvoce">Fratture del femore</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/anca/protesi-danca/" class="subvoce">Protesi d'anca</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/anca/sindrome-del-piriforme/" class="subvoce">Sindrome del piriforme</a>
+                                    </li>
+                                                                        </ul>
+                                                                </li>
+                                                            <li class="subvoceli">
+                                                                <a href="#" class="subvoce" onclick="toggle_submenu(this, '#subvoceli-31')">
+                                    Ginocchio                                    <i class="fa fa-plus pull-right"></i>
+                                </a>
+                                <ul id="subvoceli-31" class="lsubmenu collapse-item hide">
+                                    <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/ginocchio/" class="subvoce">Ginocchio</a>
+                                    </li>
+                                                                        <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/ginocchio/artrosi-ginocchio/" class="subvoce">Artrosi al ginocchio</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/ginocchio/cisti-di-baker/" class="subvoce">Cisti di baker</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/ginocchio/fratture-del-ginocchio/" class="subvoce">Fratture del ginocchio</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/ginocchio/lesioni-del-menisco-e-dei-crociati/" class="subvoce">Lesioni del menisco e dei crociati, differenze e trattamento</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/ginocchio/morbo-di-osgood-schlatter/" class="subvoce">Morbo di Osgood-Schlatter</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/ginocchio/sindrome-femoro-rotulea/" class="subvoce">Sindrome femoro-rotulea</a>
+                                    </li>
+                                                                        </ul>
+                                                                </li>
+                                                            <li class="subvoceli">
+                                                                <a href="#" class="subvoce" onclick="toggle_submenu(this, '#subvoceli-33')">
+                                    Piede e Caviglia                                    <i class="fa fa-plus pull-right"></i>
+                                </a>
+                                <ul id="subvoceli-33" class="lsubmenu collapse-item hide">
+                                    <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/piede-e-caviglia/" class="subvoce">Piede e Caviglia</a>
+                                    </li>
+                                                                        <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/piede-e-caviglia/alluce-valgo/" class="subvoce">Alluce valgo</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/piede-e-caviglia/distorsione-della-caviglia/" class="subvoce">Distorsione della caviglia</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/piede-e-caviglia/metatarsalgia/" class="subvoce">La metatarsalgia, come riconoscerla e curarla</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/piede-e-caviglia/neuroma-di-morton/" class="subvoce">Neuroma di Morton</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/piede-e-caviglia/tallonite/" class="subvoce">Tallonite cause e come curarla</a>
+                                    </li>
+                                                                            <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/piede-e-caviglia/tendiniti-del-piede/" class="subvoce">Tendiniti del piede</a>
+                                    </li>
+                                                                        </ul>
+                                                                </li>
+                                                            <li class="subvoceli">
+                                                                <a href="#" class="subvoce" onclick="toggle_submenu(this, '#subvoceli-34')">
+                                    Altre Patologie                                    <i class="fa fa-plus pull-right"></i>
+                                </a>
+                                <ul id="subvoceli-34" class="lsubmenu collapse-item hide">
+                                    <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/altre-patologie/" class="subvoce">Altre Patologie</a>
+                                    </li>
+                                                                        <li>
+                                        <a href="https://www.fisioterapiaitalia.com/patologie/altre-patologie/fibromialgia-cos-e-come-si-cura/" class="subvoce">Fibromialgia Cos'è e Come si Cura</a>
+                                    </li>
+                                                                        </ul>
+                                                                </li>
+                                                            <li class="subvoceli">
+                                                                <a href="https://www.fisioterapiaitalia.com/patologie/news-in-fisioterapia/" class="subvoce" >News in fisioterapia</a>
+                                                                </li>
+                                                        </ul>
+                     </li>
+                     <li>
+                        <a href="#" class="voce display-block pr20 " onclick="toggle_submenu(this, '#submenu-terapie')">
+                            <strong>TERAPIE</strong>
+                            <i class="fa fa-plus pull-right mt3"></i>
+                        </a>
+                        <ul id="submenu-terapie" class="collapse-item hide">
+                            <li>
+                                <a href="https://www.fisioterapiaitalia.com/terapie/" title="TERAPIE" class="subvoce"><strong>TERAPIE</strong></a>
+                            </li>
+                            <li><a href="https://www.fisioterapiaitalia.com/terapie/fisioterapia-dermatofunzionale/" class="subvoce">Fisioterapia dermatofunzionale</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/pompage/" class="subvoce">Pompage</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/kinesiterapia/" class="subvoce">Kinesiterapia</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/linfodrenaggio/" class="subvoce">Linfodrenaggio</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/idrokinesiterapia/" class="subvoce">Idrokinesiterapia</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/esercizio-terapeutico/" class="subvoce">Esercizio terapeutico</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/movimento-e-allenamento/" class="subvoce">Movimento e Allenamento</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/propriocezione/" class="subvoce">Riabilitazione Propriocettiva</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/ginnastica-posturale/" class="subvoce">Ginnastica posturale</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/riabilitazione-pavimento-pelvico/" class="subvoce">Riabilitazione pavimento pelvico</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/riabilitazione-funzionale/" class="subvoce">Riabilitazione funzionale</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/riabilitazione-sportiva/" class="subvoce">Riabilitazione sportiva</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/riabilitazione-neurologica/" class="subvoce">Riabilitazione neurologica</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/riabilitazione-post-chirugica/" class="subvoce">Riabilitazione post chirugica</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/massoterapia/" class="subvoce">Massoterapia</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/terapia-mio-fasciale/" class="subvoce">Terapia mio-fasciale</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/osteopatia/" class="subvoce">Osteopatia</a></li><li><a href="https://www.fisioterapiaitalia.com/terapie/terapia-manuale/" class="subvoce">Terapia manuale</a></li>                            </ul>
+                     </li>
+                     <li>
+                        <a href="#" class="voce display-block pr20 " onclick="toggle_submenu(this, '#submenu-tecnologie')">
+                            <strong>TECNOLOGIE</strong>
+                            <i class="fa fa-plus pull-right mt3"></i>
+                        </a>
+                        <ul id="submenu-tecnologie" class="collapse-item hide">
+                            <li>
+                                <a href="https://www.fisioterapiaitalia.com/tecnologie/" title="TECNOLOGIE" class="subvoce"><strong>TECNOLOGIE</strong></a>
+                            </li>
+                            <li><a href="https://www.fisioterapiaitalia.com/tecnologie/laserterapia/" class="subvoce">Laserterapia</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/tecarterapia/" class="subvoce">Tecarterapia</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/onde-durto/" class="subvoce">Onde d'urto</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/elettroterapia/" class="subvoce">Elettroterapia</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/magnetoterapia/" class="subvoce">Magnetoterapia</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/ultrasuoni/" class="subvoce">Ultrasuoni</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/ipertermia/" class="subvoce">Ipertermia</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/scrambler-therapy/" class="subvoce">Scrambler Therapy</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/microcorrenti/" class="subvoce">Microcorrenti</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/vibrazioni-fisioterpia/" class="subvoce">Vibrazioni in fisioterpia</a></li><li><a href="https://www.fisioterapiaitalia.com/tecnologie/frems/" class="subvoce">FREMS</a></li>                            </ul>
+                     </li>
+                     <li>
+                        <a href="#" class="voce display-block pr20 " onclick="toggle_submenu(this, '#submenu-fisioterapisti')">
+                            <strong>PER I FISIOTERAPISTI</strong>
+                            <i class="fa fa-plus pull-right mt3"></i>
+                        </a>
+                        <ul id="submenu-fisioterapisti" class="collapse-item hide">
+                            <li>
+                                <a href="https://www.fisioterapiaitalia.com/pagina-risorse-per-fisioterapista/" title="PER I FISIOTERAPISTI" class="subvoce"><strong>PER I FISIOTERAPISTI</strong></a>
+                            </li>
+                            <li><a title="" class="subvoce" href="https://www.fisioterapiaitalia.com/corsi-ecm-per-fisioterapista/">CORSI E.C.M.</a></li>
+                            <li><a title="" class="subvoce" href="https://www.fisioterapiaitalia.com/eventi-formazione-fisioterapia/">EVENTI E FORMAZIONE</a></li>
+                            <li><a title="" class="subvoce" href="https://www.fisioterapiaitalia.com/ecm-fisioterapista-corsi-fad/">CORSI F.A.D.</a></li>
+                            <li><a title="" class="subvoce" href="https://www.fisioterapiaitalia.com/offerte-di-lavoro-per-fisioterapista/">OFFERTE DI LAVORO</a></li>
+                            <li><a title="" class="subvoce" href="https://www.fisioterapiaitalia.com/concorsi-pubblici-fisioterapista/">CONCORSI PUBBLICI</a></li>
+                            <li><a style="color:#f26522" title="" class="subvoce" href="https://formazione.fisioterapiaitalia.com/">FORMAZIONE FISIO</a></li> 
+                        </ul>
+                     </li>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div id="barra-ricerca-header">
+        <div class="container blocco-ricerca" style="margin-bottom: 10px">
+            <div class="blocco-ricerca-input">
+                <img class="blocco-ricerca-icona" src="https://www.fisioterapiaitalia.com/img/Icona-ricerca.png" />
+                <input type="text" id="keyBar" class="blocco-ricerca-input-left" placeholder="Patologia, terapia, dolore" style="border: 1px solid #ddd"/>
+            </div>
+            <div class="blocco-ricerca-input">
+                <img class="blocco-ricerca-icona" src="https://www.fisioterapiaitalia.com/img/Pin-Map.png" />
+                <input type="text" id="posizione" class="blocco-ricerca-input-right" placeholder="La tua posizione" style="border: 1px solid #ddd"/>
+            </div>
+            <div class="blocco-ricerca-submit ricerca-go-bar" style="border: 1px solid #ddd;">Cerca</div>
+        </div>
+    </div>
+        </div>
+</header>
+                <section class="testata-elenco">
+                <div class="container">
+                    <h1 class="font3x regular">PAGINA NON TROVATA</h1>
+                </div>
+            </section>
+            <section>
+                <div class="container">
+                    <h3>Siamo spiacenti ma la pagina che hai richiesto non &egrave; presente!</h3>
+                </div>
+            </section>
+            <footer>
+    <section style="height:200px;padding:0;">
+        <div class="quattro">
+            <div class="borderc">
+                <p class="psocial aligncenter">
+                    <a class="color-social" href="https://www.facebook.com/fisioterapiaitaliaoriginal" target="_blank" rel="noopener" title="Segui Fisioterapia Italia su Facebook">
+                        <i class="fab fa-facebook-f fa-2x"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="quattro">
+            <div class="borderc">
+                <p class="psocial aligncenter">
+                    <a class="color-social" href="https://www.linkedin.com/company/fisioterapia-italia/" target="_blank" rel="noopener" title="Segui Fisioterapia Italia su LinkedIn">
+                        <i class="fab fa-linkedin-in fa-2x"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="quattro">
+            <div class="borderc">
+                <p class="psocial aligncenter">
+                    <a class="color-social" href="https://www.youtube.com/channel/UCpCrT-nnGYNyx6b5Hmw6NcA" target="_blank" rel="noopener" title="Segui Fisioterapia Italia su YouTube">
+                        <i class="fab fa-youtube fa-2x"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="quattro">
+            <div class="borderc">
+                <p class="psocial aligncenter">
+                    <a class="color-social" href="https://www.instagram.com/fisioterapia_italia_network/" target="_blank" rel="noopener" title="Segui Fisioterapia Italia su Instagram">
+                        <i class="fab fa-instagram fa-2x"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </section>
+    <div class="copyright">
+        <div class="row aligncenter">
+            <p class="arancio font2x">Vuoi sapere se il tuo fisioterapista è iscritto all'albo?</p>
+            <div class="aligncenter arancio">
+                <a class="button-home2" href="https://www.fisioterapiaitalia.com/verifica-albo-fisioterapisti/" target="_blank" title="Iscriviti al portale FisioterapiaItalia">CLICCA QUI</a>
+            </div>
+        </div>
+        <div class="row aligncenter">
+            <div class="spazio50"></div>
+            <div class="row nero">
+                <div class="aligncenter">
+                    <h4 title="Link utili">Link utili
+                        <a href="#" class="testodown-blog" onclick="return readmore('.footerlinkutili')" rel="noindex nofollow" title="Mostra tutto" style="font-size: 30px;margin-top: unset;float: unset;vertical-align: unset;">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </h4>
+                </div>
+            </div>
+            <div class="row font12x nero aligncenter hide footerlinkutili">
+                <div class="three columns pbrow">
+                    <a href="https://www.fisioterapiaitalia.com/">Home</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/">Chi siamo</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/">Trova il fisioterapista</a><br /><br />
+                     <a href="https://www.fisioterapiaitalia.com/">F.A.Q.</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/">Contatti</a>
+                </div>
+                <div class="three columns pbrow">
+                    <a href="https://www.fisioterapiaitalia.com/fisioterapista-lazio/fisioterapia-roma/">Fisioterapisti Roma</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/fisioterapista-lombardia/fisioterapia-milano/">Fisioterapisti Milano</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/fisioterapista-toscana/fisioterapia-firenze/">Fisioterapisti Firenze</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/fisioterapista-campania/fisioterapia-napoli/">Fisioterapisti Napoli</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/fisioterapista-emilia-romagna/fisioterapia-bologna/">Fisioterapista Bologna</a>
+                </div>
+                <div class="three columns pbrow">
+                    <a href="https://www.fisioterapiaitalia.com/fisioterapista-piemonte/fisioterapia-torino/">Fisioterapisti Torino</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/fisioterapista-sicilia/fisioterapia-palermo/">Fisioterapisti Palermo</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/fisioterapista-puglia/fisioterapia-bari/">Fisioterapisti Bari</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/fisioterapista-liguria/fisioterapia-genova/">Fisioterapisti Genova</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/fisioterapista-sicilia/fisioterapia-catania/">Fisioterapista Catania</a> <br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/physiowin-sas/">Fisioterapia Lamezia Terme</a>  
+                </div>
+                <div class="three columns">
+                    <a href="https://www.fisioterapiaitalia.com/blog/">Blog</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/patologie/">Patologie</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/terapie/">Terapie</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/tecnologie/">Tecnologie</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/articoli-scientifici-tesi-fisioterapia/">Articoli scientifici</a><br /><br />
+                    <a href="https://www.fisioterapiaitalia.com/fisioterapista-lazio/fisioterapia-roma/tecarterapia/">Tecarterapia Roma</a>
+                </div>
+
+                
+            </div>
+            <div class="spazio50"></div>
+            <div class="row">
+                <div class="twelve columns">
+                    <div class="aligncenter arancio" style="margin-bottom:2rem;">
+                        <a class="button-home2" href="https://www.fisioterapiaitalia.com/articoli-fisioterapia/" title="Guarda i 100 articoli pi&ugrave; letti">Guarda i 100 articoli pi&ugrave; letti</a>
+                    </div>
+                </div>
+            </div>
+            <div class="spazio50"></div>
+            <div class="row nero">
+                <div class="aligncenter">
+                    <h4 title="Articoli informativi pi&ugrave; letti">Articoli informativi pi&ugrave; letti
+                        <a href="#" class="testodown-blog" onclick="return readmore('.footerpiuletti')" rel="noindex nofollow" title="Mostra tutto" style="font-size: 30px;margin-top: unset;float: unset;vertical-align: unset;">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </h4>
+                </div>
+            </div>
+            <div class="row font12x nero hide footerpiuletti">
+                                <div class="three columns pbrow aligncenter">
+                                        <a href="https://www.fisioterapiaitalia.com/blog/dolore-dietro-al-ginocchio-cosa-lo-provoca-e-quali-sono-i-rimedi/" title="Dolore dietro ginocchio">
+                        Dolore dietro ginocchio                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/spondiloartrosi/" title="Spondiloartorsi">
+                        Spondiloartorsi                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/tendinite-al-polso-come-curarla-e-riconoscerla/" title="Tendinite al polso">
+                        Tendinite al polso                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/dolore-osso-sacro-cause-rimedi/" title="Dolore osso sacro">
+                        Dolore osso sacro                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/dolore-parte-centrale-schiena-cause-rimedi/" title="Dolore alla schiena">
+                        Dolore alla schiena                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/dolore-al-piede-sotto-calcagno-come-si-cura/" title="Dolore al piede sotto al calcagno">
+                        Dolore al piede sotto al calcagno                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/dolore-al-gomito/" title="Dolore al gomito">
+                        Dolore al gomito                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/dolori-intercostali/" title="Dolore intercostale">
+                        Dolore intercostale                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/cosa-fare-se-abbiamo-una-ciste-al-polso/" title="Cistetendinea al polso">
+                        Cistetendinea al polso                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/patologie/bacino/pubalgia/" title="Pubalgia">
+                        Pubalgia                    </a>
+                    <br />
+                    <br />
+                                        </div>
+            
+                                    <div class="three columns pbrow aligncenter">
+                                        <a href="https://www.fisioterapiaitalia.com/blog/la-nevralgia-del-pudendo/" title="Nevralgia del pudendo">
+                        Nevralgia del pudendo                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/meniscosi-cure-rimedi-dolore-al-ginocchio/" title="Meniscosi cure e rimedi">
+                        Meniscosi cure e rimedi                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/patologie/gomito/epicondilite-gomito-del-tennista/" title="Patologie epicondilite cause cure e fisioterapia">
+                        Patologie epicondilite cause cure e fisioterapia                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/rottura-crociato-ginocchio-operarsi-riabilitazione/" title="Rottura crociato ginocchio: quando operarsi e la riabilitazione">
+                        Rottura crociato ginocchio: quando operarsi e la riabilitazione                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/ginocchio-gonfio-o-bloccato-fisioterapia-roma/" title="Ginocchio gonfio o bloccato cause e rimedi">
+                        Ginocchio gonfio o bloccato cause e rimedi                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/dolore-fianco-sinistro/" title="Dolore al fianco sinistro">
+                        Dolore al fianco sinistro                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/il-fisioterapista-chi-cosa-fa-e-come-pu-aiutarti/" title="Fisioterapista">
+                        Fisioterapista                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/mal-di-schiena-quando-respiro-cause-e-rimedi/" title="Mal di schiena quando respiro">
+                        Mal di schiena quando respiro                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/i-migliori-esercizi-da-fare-dopo-uningessatura-del-piede/" title="I migliori esercizi da fare dopo un'ingessatura del piede">
+                        I migliori esercizi da fare dopo un'ingessatura del piede                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/ginocchio-valgo-esercizi-e-riabilitazione-per-correggerlo/" title="Ginocchio valgo">
+                        Ginocchio valgo                    </a>
+                    <br />
+                    <br />
+                                        </div>
+            
+                                    <div class="three columns pbrow aligncenter">
+                                        <a href="https://www.fisioterapiaitalia.com/blog/mal-di-schiena-quando-tossisco-cause-e-rimedi/" title="Mal di schiena quando tossisco">
+                        Mal di schiena quando tossisco                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/riabilitazione-frattura-composta-delle-costole/" title="Riabilitazione frattura composta delle costole">
+                        Riabilitazione frattura composta delle costole                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/cervicale-sintomi-e-rimedi/" title="Cervicale sintomi e rimedi">
+                        Cervicale sintomi e rimedi                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/fisioterapia-per-la-frattura-composta-dellacetabolo/" title="Frattura scomposta dell'acetabolo">
+                        Frattura scomposta dell'acetabolo                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/trattamento-di-edema-post-traumatico-linfodrenaggio/" title="Trattamento di edema post traumatico: linfodrenaggio">
+                        Trattamento di edema post traumatico: linfodrenaggio                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/la-riabilitazione-per-la-lesione-del-tendine-rotuleo/" title="Riabilitazione per lesione del tendine rotuleo">
+                        Riabilitazione per lesione del tendine rotuleo                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/frattura-al-calcagno-il-trattamento-e-la-terapia-fisioterapica/" title="Frattura del calcagno">
+                        Frattura del calcagno                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/rottura-della-clavicola-la-fisioterapia-per-la-riabilitazione/" title="Rottura della clavicola">
+                        Rottura della clavicola                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/mal-schiena-cause-secondarie-piede-caviglia-ginocchio/" title="Il mal di schiena cause secondarie">
+                        Il mal di schiena cause secondarie                    </a>
+                    <br />
+                    <br />
+                                        </div>
+            
+                                    <div class="three columns pbrow aligncenter">
+                                        <a href="https://www.fisioterapiaitalia.com/blog/la-rieducazione-del-ginocchio-le-migliori-tecniche-di-riabilitazione/" title="La rieducazione del ginocchio">
+                        La rieducazione del ginocchio                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/patologie/cervicale/cervico-brachialgia/" title="Cervicobrachialgia">
+                        Cervicobrachialgia                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/pubalgia-in-gravidanza-cos-come-prevenirla-e-come-curarla/" title="Pubalgia in gravidanza">
+                        Pubalgia in gravidanza                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/cosa-fare-dolore-tendine-achille/" title="Cosa fare per il dolore al tendine di achille">
+                        Cosa fare per il dolore al tendine di achille                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/diastasi-addominale-post-parto/" title="Diastasi addominale post parto">
+                        Diastasi addominale post parto                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/dolore-al-tallone/" title="Dolore al tallone">
+                        Dolore al tallone                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/la-formazione-post-laurea-del-fisioterapista/" title="La formazione post laurea del fisioterapista">
+                        La formazione post laurea del fisioterapista                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/blog/dito-a-scatto-cause-e-cure-per-la-tenosinovite-stenosante/" title="Dito a scatto cause e cure per la tenosinovite stenosante">
+                        Dito a scatto cause e cure per la tenosinovite stenosante                    </a>
+                    <br />
+                    <br />
+                                            <a href="https://www.fisioterapiaitalia.com/patologie/gomito/epicondilite-gomito-del-tennista/" title="Epicondilite">
+                        Epicondilite                    </a>
+                    <br />
+                    <br />
+                                        </div>
+            
+                                    
+            </div>
+            <div class="separatore"></div>
+            <div class="row">
+                 <div class="six columns">
+                    <a href="https://www.fisioterapiaitalia.com/" title="Fisioterapia Italia">
+                        <img src="https://www.fisioterapiaitalia.com/img/logo-footer.png" alt="Logo Fisioterapia Italia" title="Fisioterapia Italia" width="44" height="49" loading="lazy" />
+                    </a>
+                    <span class="diritti">Tutti i diritti riservati Fisioterapia Italia 2018</span>
+                    <br />
+                    <span style="text-align:left">Sede legale: Medben S.r.l.,Via Campania, 37/a 00187 Roma <br />
+                    Sede operativa: Corso del Popolo, 18 00046 Grottaferrata (Roma) Cap. 00046</span>
+                </div>
+                <div class="six columns aligncenter">
+                    <p class="ptop20;" style="font-size: 1.1em;">
+                        Partita iva 11138691008 |
+                        <a href="https://www.fisioterapiaitalia.com/disclaimer/" target="_blank" title="Disclaimer e Note legali">Disclaimer</a> |
+                        <a href="https://www.iubenda.com/privacy-policy/45826973" target="_blank" rel="noopener" title="Privacy Policy">Privacy Policy</a> | 
+                        <a href="https://www.iubenda.com/privacy-policy/45826973/cookie-policy" target="_blank" rel="noopener">Cookie</a> | 
+                        <a href="https://www.comunicazione-sanitaria.com/" target="_blank" rel="noopener" title="Comunicazione sanitaria">Credits</a> |
+                        <a href="https://www.it-al.it" target="_blank" rel="noopener" title="IT-AL">Technical Partner</a><br />
+                        Resp. Legale: <a href="https://it.linkedin.com/in/luca-luciani-009b3223" target="_blank" rel="noopener">Dott. Luca Luciani</a> | Mail:  <a href="mailto:lucalucianifisio@gmail.com">lucalucianifisio@gmail.com</a><br />
+                        Resp. Scientifico: <a href="https://it.linkedin.com/in/giuliano-mari-5797b830" target="_blank" rel="noopener">Dott. Giuliano Mari</a> | Mail:  <a href="mailto:giulianomari@gmail.com">giulianomari@gmail.com</a><br />
+                    </p>
+                </div>
+            </div>
+                        <p style="text-align:center; font-size: 1.1em">I centri di Fisioterapia Italia hanno tutti regolare autorizzazione Sanitaria, rilasciata dalle ASL (aziende sanitarie locali) di competenza o dalla Regione di Appartenenza, in relazione all'attività svolta come ambulatorio o studio professionale.
+Tutti i fisioterapisti che lavorano nei centri Fisioterapia Italia sono regolarmente iscritti all'albo professionale -DECRETO 13 marzo 2018 - Costituzione degli Albi delle professioni sanitarie tecniche, della riabilitazione e della prevenzione. (18A02393) (GU Serie Generale n.77 del 03-04-2018)
+<a href="https://www.gazzettaufficiale.it/eli/id/2018/04/03/18A02393/sg" target="_blank" rel="noopener">Gazzetta Ufficiale</a>
+</p>
+           
+        </div>
+        
+    </div>
+</footer>
+    
+<div class="box-chat">
+    <a href="https://www.fisioterapiaitalia.it/" class="mr5" rel="noopener">
+        Sei un fisioterapista?
+    </a>
+    <a href="https://www.fisioterapiaitalia.com/centri-di-fisioterapia/" class="ml0">
+        Trova fisioterapista
+    </a>
+</div>
+        
+<script type="text/javascript" src="https://www.fisioterapiaitalia.com/js/jquery.js"></script>
+<script type="text/javascript" src="https://www.fisioterapiaitalia.com/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="https://www.fisioterapiaitalia.com/js/lightbox.min.js"></script>
+<script type="text/javascript" src="https://www.fisioterapiaitalia.com/js/jquery.lazy.min.js"></script>
+<script type="text/javascript" src="https://www.fisioterapiaitalia.com/js/chat.js"></script>
+<script type="text/javascript" src="https://www.fisioterapiaitalia.com/js/waypoints/lib/jquery.waypoints.min.js"></script>
+<!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
+<script type="text/javascript" src="https://www.fisioterapiaitalia.com/js/script.js"></script>
+<script type="text/javascript" src="https://www.fisioterapiaitalia.com/js/mappa-strutture.js"></script>
+<script src="https://www.fisioterapiaitalia.com/js/markerclusterer.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq6gablGPXzmeU1UViK7oPz12JMCyL8Bc&callback=initMap"></script>
+
+
+        </body>
+
+        </html>

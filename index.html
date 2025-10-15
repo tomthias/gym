@@ -18,6 +18,18 @@
         <div class="subtitle">Scegli il tuo allenamento</div>
     </header>
 
+    <!-- Resume workout banner (hidden by default, shown by JS if there's an active workout) -->
+    <div id="resumeWorkoutBanner" class="resume-workout-banner" style="display: none;">
+        <div class="resume-info">
+            <div class="resume-title">Allenamento in corso</div>
+            <div id="resumeDetails" class="resume-details"></div>
+        </div>
+        <div class="resume-actions">
+            <button id="btnResumeWorkout" class="btn-resume">RIPRENDI</button>
+            <button id="btnCancelWorkout" class="btn-cancel">✕</button>
+        </div>
+    </div>
+
     <div class="workout-card">
         <div>
             <div class="workout-header">
@@ -67,6 +79,40 @@
             </div>
         </div>
         <button class="btn-start-full-workout" data-workout="workoutC">Avvia Allenamento</button>
+    </div>
+
+    <div class="workout-card">
+        <div>
+            <div class="workout-header">
+                <div class="workout-title">Allenamento 1A</div>
+            </div>
+            <div class="workout-info">Upper Body Push Variant + Fisio 1</div>
+            <div class="workout-info">75-85 minuti</div>
+            <div class="workout-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressD" style="width: 0%"></div>
+                </div>
+                <div class="progress-text" id="progressTextD">0/14</div>
+            </div>
+        </div>
+        <button class="btn-start-full-workout" data-workout="workoutD">Avvia Allenamento</button>
+    </div>
+
+    <div class="workout-card">
+        <div>
+            <div class="workout-header">
+                <div class="workout-title">Allenamento 2A</div>
+            </div>
+            <div class="workout-info">Upper Body Pull Variant + Fisio 2</div>
+            <div class="workout-info">60-70 minuti</div>
+            <div class="workout-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressE" style="width: 0%"></div>
+                </div>
+                <div class="progress-text" id="progressTextE">0/16</div>
+            </div>
+        </div>
+        <button class="btn-start-full-workout" data-workout="workoutE">Avvia Allenamento</button>
     </div>
 
     <button class="clear-cache-btn">Reset Cache</button>

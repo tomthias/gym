@@ -1,0 +1,235 @@
+{
+  "allenamento_a": {
+    "nome": "ALLENAMENTO A - Upper Body Push + Fisio 1 (VARIANT 1A)",
+    "frequenza": "1 volta a settimana",
+    "durata": "75-85 minuti",
+    "focus": [
+      "Pettorali",
+      "Spalle",
+      "Tricipiti"
+    ],
+    "versione": "Versione completa - Variant 1A",
+    "fasi": {
+      "riscaldamento": {
+        "durata": "12 minuti",
+        "esercizi": [
+          {
+            "nome": "Bike/Tapirulan",
+            "durata": "12 minuti",
+            "note": "Cardio a basso impatto, riscaldamento generale",
+            "obbligatorio": true
+          },
+          {
+            "nome": "Circonduzione Braccia",
+            "serie_reps": "2x10",
+            "note": "Mobilità spalle - movimenti ampi e controllati"
+          },
+          {
+            "nome": "Mobilità Spalle e Polsi",
+            "serie_reps": "2x10",
+            "note": "Preparazione articolazioni - rotazioni in tutte le direzioni"
+          }
+        ]
+      },
+      "fisioterapia": {
+        "nome": "BLOCCO FISIOTERAPIA SCHEDA 1 (OBBLIGATORIO)",
+        "durata": "30 minuti",
+        "modificabile": false,
+        "note": "Esercizi riportati ESATTAMENTE come prescritto dalla fisioterapista",
+        "esercizi": [
+          {
+            "nome": "SL HEEL RAISES CON STEP",
+            "serie_reps": "3x10+15\" per lato",
+            "rest": "SS (Superserie con Box Bridge)",
+            "carico": "Manubrio 8 KG",
+            "note": "Sollevamento sulla punta, ginocchio dritto. Movimento lento e controllato, pausa in alto",
+            "focus": "Polpacci e stabilità della caviglia",
+            "tecnica": "In piedi su uno step, solleva il tallone sulla punta del piede (un piede alla volta). Il ginocchio deve rimanere dritto"
+          },
+          {
+            "nome": "SL BOX BRIDGE",
+            "serie_reps": "3x5+10\"+5 per lato",
+            "rest": "1'",
+            "carico": "-",
+            "note": "Alza bene il sedere - contrai fortemente i glutei in alto",
+            "focus": "Glutei, core, stabilità unilaterale",
+            "tecnica": "Sdraiato supino, un piede appoggiato su un box/step, l'altro sollevato. Solleva i fianchi contraendo i glutei"
+          },
+          {
+            "nome": "HIP THRUST",
+            "serie_reps": "3x12",
+            "rest": "SS (Superserie con Side Walk)",
+            "carico": "30 KG",
+            "note": "Stai 2\" su ad ogni ripetizione - pausa di 2 secondi nella posizione alta",
+            "focus": "Glutei, forza posteriore catena",
+            "tecnica": "Schiena appoggiata alla panca, bilanciere sui fianchi. Spingi i fianchi verso l'alto contraendo i glutei"
+          },
+          {
+            "nome": "SIDE WALK",
+            "serie_reps": "3x6-6/4-4/2-2",
+            "rest": "1'",
+            "carico": "Elastico sui piedi",
+            "note": "Non strisciare il piede, elastico sempre in tensione. Passi controllati",
+            "focus": "Glutei medi, stabilità dell'anca",
+            "tecnica": "Elastico intorno alle caviglie, cammina lateralmente mantenendo tensione costante"
+          },
+          {
+            "nome": "ELVIS IN EQUILIBRIO SU UN PIEDE",
+            "serie_reps": "2x10 per lato",
+            "rest": "No rest",
+            "carico": "Tappetino piegato",
+            "note": "Esecuzione lenta - focus su equilibrio e stabilità",
+            "focus": "Equilibrio e stabilità",
+            "tecnica": "In equilibrio su un piede, eseguire movimenti controllati"
+          }
+        ]
+      },
+      "upper_body_push": {
+        "nome": "UPPER BODY PUSH - VARIANT 1A",
+        "durata": "25-30 minuti",
+        "esercizi": [
+          {
+            "codice": "A1v",
+            "nome": "Chest Press Bilanciere",
+            "serie_reps": "4x8",
+            "rest": "2'",
+            "carico": "Progressivo",
+            "note": "Controllo massima qualità, focus forza. Bilanciere più stabile dei manubri",
+            "focus": "Pettorali, tricipiti, spalle anteriori",
+            "setup": {
+              "posizione": "Sdraiato su panca, bilanciere impugnato",
+              "movimento": "Abbassa verso il petto e spingi verso l'alto",
+              "controllo": "Controllo eccentrico, fermo 1\" al petto, spinta esplosiva"
+            },
+            "progressione": {
+              "settimane_1_2": "4x8 con carico moderato",
+              "settimane_3_4": "4x8 con carico aumentato +2.5-5kg",
+              "settimane_5_plus": "4x8-10 con carico massimale"
+            }
+          },
+          {
+            "codice": "A2v",
+            "nome": "Dips Parallele Zavorrate",
+            "serie_reps": "3x8-10",
+            "rest": "2'",
+            "carico": "Peso corporeo/zavorra progressiva",
+            "note": "Controllo profondo, massimo range. Se fastidio spalle, usa panca assistita",
+            "focus": "Tricipiti, pettorali inferiori",
+            "setup": {
+              "posizione": "Alle parallele, corpo sospeso",
+              "movimento": "Scendi profondo flettendo gomiti, risali estendendo",
+              "controllo": "Discesa 3 sec, risalita esplosiva ma controllata"
+            },
+            "tecnica": "Non forzare se dà fastidio alla spalla - range naturale del corpo"
+          },
+          {
+            "codice": "B1v",
+            "nome": "Arnold Press",
+            "serie_reps": "3x10",
+            "rest": "1'30\"",
+            "carico": "Manubri progressivi",
+            "note": "Rotazione completa, stimolo deltoide anteriore/mediale. Core attivo",
+            "focus": "Spalle (tutti i fasci), tricipiti",
+            "setup": {
+              "posizione": "Seduto o in piedi, manubri altezza spalle palmi verso corpo",
+              "movimento": "Ruota i polsi mentre spingi verso l'alto",
+              "controllo": "Rotazione fluida, pausa 1\" in alto"
+            },
+            "tecnica": "Inizia con palmi verso il corpo, finisci con palmi in avanti"
+          },
+          {
+            "codice": "B2v",
+            "nome": "Alzate Frontali Bilanciere",
+            "serie_reps": "3x12",
+            "rest": "1'",
+            "carico": "Bilanciere EZ o dritto leggero",
+            "note": "Lento e controllato, senza slancio. Focus isolamento deltoidi anteriori",
+            "focus": "Deltoidi anteriori",
+            "setup": {
+              "posizione": "In piedi, bilanciere davanti alle cosce",
+              "movimento": "Solleva davanti fino altezza spalle",
+              "controllo": "2 sec su, 1 sec pausa, 2 sec giù"
+            },
+            "tecnica": "Non superare altezza spalle, evitare oscillazioni del busto"
+          },
+          {
+            "codice": "C1v",
+            "nome": "Skullcrushers EZ",
+            "serie_reps": "3x12",
+            "rest": "2'",
+            "carico": "Bilanciere EZ",
+            "note": "Estensione completa, gomiti fissi. Controllo eccentrico fondamentale",
+            "focus": "Tricipiti (capo lungo e laterale)",
+            "setup": {
+              "posizione": "Sdraiato su panca, bilanciere sopra il petto",
+              "movimento": "Fletti solo avambracci verso fronte, estendi",
+              "controllo": "Gomiti fissi, movimento solo dell'avambraccio"
+            },
+            "tecnica": "Non muovere le spalle, isolamento puro tricipiti"
+          },
+          {
+            "codice": "C2v",
+            "nome": "Push-Up Diamond",
+            "serie_reps": "3x max (8-15)",
+            "rest": "1'30\"",
+            "carico": "Corpo libero",
+            "note": "Contrazione massima tricipiti, movimento lento e controllato",
+            "focus": "Tricipiti, pettorali interni",
+            "setup": {
+              "posizione": "Plank, mani a diamante sotto il petto",
+              "movimento": "Scendi al petto, spingi su",
+              "controllo": "2 sec giù, 1 sec pausa, 2 sec su"
+            },
+            "tecnica": "Se troppo difficile, appoggia le ginocchia o fai su panca inclinata"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "volume_totale": {
+        "serie_fisio": 14,
+        "serie_push": 19,
+        "serie_totali": 33
+      },
+      "durata": {
+        "riscaldamento": "12 minuti",
+        "fisioterapia": "30 minuti",
+        "upper_push": "25-30 minuti",
+        "totale": "75-85 minuti"
+      }
+    },
+    "warnings": {
+      "spalle": "Attenzione alle spalle durante dips - se dà fastidio, saltare",
+      "petto": "Non far rimbalzare i manubri sul petto durante panca piana",
+      "core": "Mantieni core attivo durante military press per proteggere schiena",
+      "stop_signals": [
+        "Dolore acuto alle spalle",
+        "Impossibilità di mantenere forma corretta",
+        "Dolore al petto non muscolare",
+        "Vertigini o nausea",
+        "Crampi eccessivi"
+      ]
+    },
+    "progressione": {
+      "indicatori_aumento_carico": [
+        "Completi tutte le serie con forma perfetta",
+        "Ultime 2 reps di ogni serie ancora controllate",
+        "Recuperi completamente nei tempi previsti",
+        "Non hai dolori articolari giorno dopo"
+      ],
+      "quando_aumentare_carico": [
+        "Gestisci carico attuale per 2 sessioni consecutive",
+        "Panca piana: riesci a fare 4x8 con controllo completo",
+        "Military press: mantieni core stabile per tutte le serie",
+        "Croci: completi 3x20 senza compensi"
+      ]
+    },
+    "note_generali": {
+      "priorita_assoluta": "Blocco fisioterapia NON si modifica mai - ordine medico",
+      "approccio_push": "Focus su controllo eccentrico e tecnica perfetta",
+      "filosofia": "Qualità movimento > Carico massimale",
+      "recupero": "Aspetta 48-72 ore prima di Allenamento B o C",
+      "ordine_esercizi": "Non modificare l'ordine - c'è una logica nella progressione"
+    }
+  }
+}

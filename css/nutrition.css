@@ -73,93 +73,8 @@
 .day-type-selector {
     display: flex;
     gap: 12px;
-    margin-bottom: 16px;
-    padding: 0 4px;
-}
-
-/* Clear Cache Button */
-.clear-cache-btn {
-    background: rgba(231, 76, 60, 0.1);
-    border: 2px solid rgba(231, 76, 60, 0.3);
-    color: #ff6b6b;
-    padding: 12px 16px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    width: 100%;
-    margin-top: 24px;
-    margin-bottom: 120px;
-}
-
-.clear-cache-btn:active {
-    background: rgba(231, 76, 60, 0.2);
-    transform: scale(0.95);
-}
-
-/* ==================== CALORIE TRACKER ==================== */
-.calorie-tracker {
-    background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-card-alt) 100%);
-    border-radius: 16px;
-    padding: 16px 20px;
     margin-bottom: 24px;
-    box-shadow: var(--shadow-card);
-}
-
-.calorie-tracker-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.calorie-text {
-    font-size: 16px;
-    color: var(--color-text-primary);
-}
-
-.calorie-text strong {
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.calorie-percentage {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--color-text-muted);
-}
-
-.calorie-progress-bar {
-    height: 10px;
-    background: var(--color-bg-secondary);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 8px;
-}
-
-.calorie-progress-fill {
-    height: 100%;
-    transition: width 0.5s ease, background 0.3s ease;
-    border-radius: 10px;
-}
-
-.calorie-progress-fill.status-good {
-    background: linear-gradient(90deg, #00875f 0%, #00a86b 100%);
-}
-
-.calorie-progress-fill.status-warning {
-    background: linear-gradient(90deg, #f39c12 0%, #f1c40f 100%);
-}
-
-.calorie-progress-fill.status-danger {
-    background: linear-gradient(90deg, #e74c3c 0%, #ff6b6b 100%);
-}
-
-.calorie-remaining {
-    font-size: 13px;
-    color: var(--color-text-muted);
-    text-align: right;
+    padding: 0 4px;
 }
 
 .day-type-btn {
@@ -716,17 +631,6 @@
     color: #4caf50;
 }
 
-.recipe-badge.budget-warning {
-    background: rgba(231, 76, 60, 0.2);
-    color: #ff6b6b;
-    font-weight: 600;
-}
-
-.recipe-card.exceeds-budget {
-    opacity: 0.7;
-    border: 1px solid rgba(231, 76, 60, 0.3);
-}
-
 .recipe-macros {
     display: flex;
     gap: 12px;
@@ -775,9 +679,9 @@
 }
 
 .recipe-btn-secondary {
-    background: transparent;
-    color: white;
-    border: 1.2px solid var(--color-primary);
+    background: var(--color-bg-button);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border-light);
 }
 
 /* Recipe Detail Accordion */
@@ -969,9 +873,8 @@
 }
 
 .btn-secondary {
-    background: transparent;
-    color: white;
-    border: 1.2px solid var(--color-primary);
+    background: var(--color-bg-button);
+    color: var(--color-text-secondary);
 }
 
 .btn-primary {

@@ -7,21 +7,24 @@ export const exerciseData = {
         come: 'Pedalare sulla cyclette a intensità moderata mantenendo una frequenza cardiaca costante.',
         tecnica: 'Respirazione regolare, postura corretta sulla sella',
         note: 'Riscaldamento',
-        duration: '12\''
+        duration: '12\'',
+        image: 'assets/images/exercises/bike.jpg'
     },
     circonduzione: {
         name: 'Circonduzione Braccia',
         focus: 'Mobilità spalle',
         come: 'In piedi, ruotare le braccia descrivendo ampi cerchi, prima in avanti poi indietro.',
         tecnica: 'Movimenti ampi e controllati, non forzare',
-        note: ''
+        note: '',
+        image: 'assets/images/exercises/circonduzione.jpg'
     },
     mobilita: {
         name: 'Mobilità Spalle e Polsi',
         focus: 'Preparazione articolazioni',
         come: 'Eseguire rotazioni delle spalle e dei polsi in tutte le direzioni.',
         tecnica: 'Movimenti lenti e controllati',
-        note: ''
+        note: '',
+        image: 'assets/images/exercises/mobilita.jpg'
     },
 
     // Fisioterapia Allenamento A
@@ -82,6 +85,7 @@ export const exerciseData = {
         come: 'In equilibrio su un piede, eseguire movimenti controllati.',
         tecnica: 'Esecuzione lenta',
         note: 'Tappetino piegato',
+        image: 'assets/images/exercises/elvis.jpg',
         fisio: true
     },
 
@@ -168,6 +172,7 @@ export const exerciseData = {
         come: 'Supino, braccia e gambe in alto. Abbassa alternativamente braccio e gamba opposti.',
         tecnica: 'Mantieni la schiena aderente al pavimento',
         note: '',
+        image: 'assets/images/exercises/deadbug.gif',
         video: 'https://www.youtube.com/watch?v=g_BYB0R-4Ws'
     },
     plankestensione: {
@@ -380,7 +385,8 @@ export const exerciseData = {
         focus: 'Cardio total body',
         come: 'Cardio a basso impatto su macchina ellittica.',
         tecnica: 'Movimento fluido, intensità moderata',
-        note: 'Se disponibile'
+        note: 'Se disponibile',
+        image: 'assets/images/exercises/ellittica.jpg'
     },
     alzatecavo: {
         name: 'Alzate Laterali Cavo Mono',
@@ -436,6 +442,142 @@ export const exerciseData = {
         tecnica: 'Mantieni la forma hollow, movimento piccolo',
         note: '',
         image: 'https://i.ytimg.com/vi/jOjWxZsiJFE/maxresdefault.jpg'
+    },
+
+    // Allenamento 1A - Variant Push Exercises
+    chestpressbilanciere: {
+        name: 'Chest Press Bilanciere',
+        series: '4×8',
+        carico: 'Progressivo',
+        recupero: '2\'',
+        focus: 'Pettorali, tricipiti, spalle anteriori',
+        come: 'Sdraiato su panca, bilanciere impugnato. Abbassa verso il petto e spingi verso l\'alto.',
+        tecnica: 'Controllo eccentrico, fermo 1" al petto, spinta esplosiva. Bilanciere più stabile dei manubri',
+        note: 'Controllo massima qualità, focus forza',
+        image: 'https://pplx-res.cloudinary.com/image/upload/v1760550929/pplx_project_search_images/e0351026879ef40293a2f829214de5224bc389f5.png'
+    },
+    dipsparallele: {
+        name: 'Dips Parallele Zavorrate',
+        series: '3×8-10',
+        carico: 'Peso corporeo/zavorra progressiva',
+        recupero: '2\'',
+        focus: 'Tricipiti, pettorali inferiori',
+        come: 'Alle parallele, corpo sospeso. Scendi profondo flettendo gomiti, risali estendendo.',
+        tecnica: 'Discesa 3 sec, risalita esplosiva ma controllata. Non forzare se dà fastidio alla spalla',
+        note: 'Controllo profondo, massimo range. Se fastidio spalle, usa panca assistita',
+        image: 'https://pplx-res.cloudinary.com/image/upload/v1754821138/pplx_project_search_images/1b0e172de8b4e010e6291376b41998d0679164b2.png'
+    },
+    arnoldpress: {
+        name: 'Arnold Press',
+        series: '3×10',
+        carico: 'Manubri progressivi',
+        recupero: '1\'30"',
+        focus: 'Spalle (tutti i fasci), tricipiti',
+        come: 'Seduto o in piedi, manubri altezza spalle palmi verso corpo. Ruota i polsi mentre spingi verso l\'alto.',
+        tecnica: 'Inizia con palmi verso il corpo, finisci con palmi in avanti. Rotazione fluida, pausa 1" in alto',
+        note: 'Rotazione completa, stimolo deltoide anteriore/mediale. Core attivo',
+        image: 'assets/images/exercises/arnoldpress.gif'
+    },
+    alzatefrontalibilanciere: {
+        name: 'Alzate Frontali Bilanciere',
+        series: '3×12',
+        carico: 'Bilanciere EZ o dritto leggero',
+        recupero: '1\'',
+        focus: 'Deltoidi anteriori',
+        come: 'In piedi, bilanciere davanti alle cosce. Solleva davanti fino altezza spalle.',
+        tecnica: 'Non superare altezza spalle, evitare oscillazioni del busto. 2 sec su, 1 sec pausa, 2 sec giù',
+        note: 'Lento e controllato, senza slancio. Focus isolamento deltoidi anteriori',
+        image: 'assets/images/exercises/alzatefrontalibilanciere.gif'
+    },
+    skullcrushers: {
+        name: 'Skullcrushers EZ',
+        series: '3×12',
+        carico: 'Bilanciere EZ',
+        recupero: '2\'',
+        focus: 'Tricipiti (capo lungo e laterale)',
+        come: 'Sdraiato su panca, bilanciere sopra il petto. Fletti solo avambracci verso fronte, estendi.',
+        tecnica: 'Gomiti fissi, movimento solo dell\'avambraccio. Non muovere le spalle, isolamento puro tricipiti',
+        note: 'Estensione completa, gomiti fissi. Controllo eccentrico fondamentale',
+        image: 'assets/images/exercises/skullcrushers.gif'
+    },
+    pushupdiamond: {
+        name: 'Push-Up Diamond',
+        series: '3×max (8-15)',
+        carico: 'Corpo libero',
+        recupero: '1\'30"',
+        focus: 'Tricipiti, pettorali interni',
+        come: 'Posizione plank, mani a diamante sotto il petto. Scendi al petto, spingi su.',
+        tecnica: 'Se troppo difficile, appoggia le ginocchia o fai su panca inclinata. 2 sec giù, 1 sec pausa, 2 sec su',
+        note: 'Contrazione massima tricipiti, movimento lento e controllato',
+        image: 'assets/images/exercises/pushupdiamond.gif'
+    },
+
+    // Allenamento 2A - Variant Pull Exercises
+    trazionisupina: {
+        name: 'Trazioni Presa Supina',
+        series: '4×6-10',
+        carico: 'Corpo libero/zavorra progressiva',
+        recupero: '2\'',
+        focus: 'Schiena (gran dorsale), bicipiti',
+        come: 'Appeso alla sbarra con presa supina (palmi verso di te), larghezza spalle. Tira su fino mento sopra sbarra.',
+        tecnica: '2 sec su, 1 sec pausa, 3 sec giù. Focus controllo e scapole, full ROM',
+        note: 'Se necessario usa elastico assistenza. Alternativa: lat machine presa supina 4×8-10',
+        image: 'assets/images/exercises/trazionisupina.gif'
+    },
+    rematorebilanciere: {
+        name: 'Rematore Bilanciere',
+        series: '3×10',
+        carico: 'Bilanciere progressivo',
+        recupero: '2\'',
+        focus: 'Dorso (romboidi, trapezio medio), bicipiti',
+        come: 'In piedi, busto inclinato 45°, bilanciere in mano con presa pronata larghezza spalle. Tira verso ombelico, spremi scapole.',
+        tecnica: 'Non usare slancio, movimento inizia dalle scapole. Scapole indietro, pausa 1", controllo eccentrico',
+        note: 'Presa pronata, controllo scapole. Busto a 45°, core attivo',
+        image: 'assets/images/exercises/rematorebilanciere.gif'
+    },
+    curlbilanciere: {
+        name: 'Curl Bilanciere EZ',
+        series: '3×10',
+        carico: 'Bilanciere EZ progressivo',
+        recupero: '1\'40"',
+        focus: 'Bicipiti (entrambi i capi)',
+        come: 'In piedi, bilanciere EZ davanti con presa supina. Fletti avambracci verso spalle.',
+        tecnica: 'Gomiti fermi, movimento solo dell\'avambraccio. 2 sec su, 1 sec contrazione, 3 sec giù',
+        note: 'Fermo 1s in contrazione, senza slancio. Gomiti fissi ai fianchi',
+        image: 'https://pplx-res.cloudinary.com/image/upload/v1760550964/pplx_project_search_images/314ef31222566c563dc4e11c4025b2fc3dfd4063.png'
+    },
+    curlpancainclinata: {
+        name: 'Curl Manubri Panca Inclinata',
+        series: '2×10',
+        carico: 'Manubri moderati',
+        recupero: '1\'40"',
+        focus: 'Bicipiti (enfasi capo lungo)',
+        come: 'Seduto su panca inclinata 30-45°, manubri in mano. Curl con braccia lungo i fianchi.',
+        tecnica: 'Lascia che il peso tiri il braccio in basso per massimo stretch. Stretch completo in basso, contrazione in alto',
+        note: 'Panca a 30-45°, enfasi stretch bicipiti. Alternato o simultaneo',
+        image: 'https://pplx-res.cloudinary.com/image/upload/v1760550982/pplx_project_search_images/735a18712d4c9df10bcb2f45aa7183b2c7605061.png'
+    },
+    reversecurlbilanciere: {
+        name: 'Reverse Curl Bilanciere',
+        series: '2×12',
+        carico: 'Bilanciere più leggero del curl normale',
+        recupero: '1\'30"',
+        focus: 'Avambracci, brachioradiale',
+        come: 'Come curl normale ma con presa prona (palmi verso basso).',
+        tecnica: 'Carico più leggero del curl normale, focus sulla presa. Movimento lento, focus avambracci',
+        note: 'Enfasi avambracci, presa prona. Movimento controllato',
+        image: 'https://pplx-res.cloudinary.com/image/upload/v1755875771/pplx_project_search_images/1ffed2311ad55745f99ebe9df6b9ebf994d308b2.png'
+    },
+    zottmancurl: {
+        name: 'Zottman Curl',
+        series: '2×10',
+        carico: 'Manubri leggeri-moderati',
+        recupero: '1\'30"',
+        focus: 'Bicipiti, avambracci',
+        come: 'Sali con presa supina (normale curl). In alto ruota in presa prona. Scendi lento con presa prona.',
+        tecnica: 'Movimento combinato: bicipiti in salita, avambracci in discesa',
+        note: 'Rotazione polso in negativo. Su con supina, giù con prona',
+        image: 'assets/images/exercises/zottmancurl.gif'
     }
 };
 
