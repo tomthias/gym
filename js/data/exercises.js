@@ -248,6 +248,17 @@ export const exerciseData = {
         note: 'Discesa lenta 3 secondi (come suggerito dai PT). Se non riesci: Lat Machine 4×10',
         image: 'https://s3assets.skimble.com/assets/1825601/image_full.jpg'
     },
+    latmachine: {
+        name: 'Lat Machine',
+        series: '4x10',
+        carico: '25kg',
+        recupero: '1\'',
+        focus: 'Dorsali, bicipiti, grip strength',
+        come: 'seduto alla lat machine, tira il corpo/peso verso l\'alto.',
+        tecnica: 'Discesa lenta 3 secondi, retrazione scapole',
+        note: 'Discesa lenta 3 secondi (come suggerito dai PT). Se non riesci: Lat Machine 4×10',
+        image: 'https://s3assets.skimble.com/assets/1825601/image_full.jpg'
+    },
     pulley: {
         name: 'Pulley/Rematore Cavo',
         series: '3×12',
@@ -454,7 +465,7 @@ export const exerciseData = {
         come: 'Sdraiato su panca, bilanciere impugnato. Abbassa verso il petto e spingi verso l\'alto.',
         tecnica: 'Controllo eccentrico, fermo 1" al petto, spinta esplosiva. Bilanciere più stabile dei manubri',
         note: 'Controllo massima qualità, focus forza',
-        image: 'https://pplx-res.cloudinary.com/image/upload/v1760550929/pplx_project_search_images/e0351026879ef40293a2f829214de5224bc389f5.png'
+        image: 'assets/images/exercises/chestpressbilanciere.gif'
     },
     dipsparallele: {
         name: 'Dips Parallele Zavorrate',
