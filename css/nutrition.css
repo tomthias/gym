@@ -13,21 +13,25 @@
     width: 16px;
     height: 16px;
     vertical-align: middle;
+    color: var(--text-primary);
 }
 
 .recipe-type-icon {
     width: 20px;
     height: 20px;
+    color: var(--primary-color);
 }
 
 .macro-icon {
     width: 18px;
     height: 18px;
+    color: var(--text-secondary);
 }
 
 .badge-icon {
     width: 14px;
     height: 14px;
+    color: var(--primary-color);
 }
 
 .chip-icon,
@@ -35,17 +39,26 @@
     width: 16px;
     height: 16px;
     margin-right: 4px;
+    color: var(--text-primary);
 }
 
 .checkbox-icon {
     width: 14px;
     height: 14px;
+    color: var(--success-color);
 }
 
 .selected-icon {
     width: 14px;
     height: 14px;
     margin-right: 4px;
+    color: var(--success-color);
+}
+
+.empty-state-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--text-tertiary);
 }
 
 .empty-state-icon {
