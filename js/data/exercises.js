@@ -457,7 +457,7 @@ export const exerciseData = {
 
     // Allenamento 1A - Variant Push Exercises
     chestpressbilanciere: {
-        name: 'Chest Press Bilanciere',
+        name: 'Panca Piana bilanciere',
         series: '4×8',
         carico: 'Progressivo',
         recupero: '2\'',

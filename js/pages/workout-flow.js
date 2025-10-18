@@ -61,7 +61,7 @@ const workoutExercises = {
         { id: 'd-fisio3', name: 'Hip Thrust', key: 'hipthrust', sets: 3, reps: 12, recovery: 0, superset: true, supersetPair: 'ss1', supersetPartner: 'd-fisio4', supersetColor: '#FF6B35' },
         { id: 'd-fisio4', name: 'Side Walk', key: 'sidewalk', sets: 3, reps: 20, recovery: 60, superset: true, supersetPair: 'ss1', supersetPartner: 'd-fisio3', supersetColor: '#FF6B35' },
         { id: 'd-fisio5', name: 'Elvis', key: 'elvis', sets: 2, reps: 15, recovery: 60 },
-        { id: 'd-push1', name: 'Chest Press Bilanciere', key: 'chestpressbilanciere', sets: 4, reps: 8, recovery: 120 },
+        { id: 'd-push1', name: 'Panca Piana bilanciere', key: 'chestpressbilanciere', sets: 4, reps: 8, recovery: 120 },
         { id: 'd-push2', name: 'Dips Parallele', key: 'dipsparallele', sets: 3, reps: 10, recovery: 120 },
         { id: 'd-push3', name: 'Arnold Press', key: 'arnoldpress', sets: 3, reps: 10, recovery: 90 },
         { id: 'd-push4', name: 'Alzate Frontali Bilanciere', key: 'alzatefrontalibilanciere', sets: 3, reps: 12, recovery: 60 },
