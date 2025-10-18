@@ -589,6 +589,140 @@ export const exerciseData = {
         tecnica: 'Movimento combinato: bicipiti in salita, avambracci in discesa',
         note: 'Rotazione polso in negativo. Su con supina, giù con prona',
         image: 'assets/images/exercises/zottmancurl.gif'
+    },
+
+    // Nuovi esercizi - Ottimizzazione Spalla Safe + Ipertrofia
+    landminepress: {
+        name: 'Landmine Press',
+        series: '3×12',
+        carico: 'Bilanciere progressivo',
+        recupero: '60"',
+        focus: 'Deltoidi anteriori, parte alta petto',
+        come: 'Bilanciere fissato a terra con landmine o angolo. Spingi verso l\'alto con traiettoria diagonale naturale.',
+        tecnica: 'Angolo naturale di spinta riduce stress sulla spalla. Controllo eccentrico, spinta esplosiva.',
+        note: 'SICURO per spalla - alternativa Alzate Frontali Bilanciere',
+        image: 'https://www.inspireusafoundation.org/wp-content/uploads/2022/03/landmine-press.gif'
+    },
+    shoulderpressinclinata: {
+        name: 'Shoulder Press Manubri Inclinata 70°',
+        series: '3×10',
+        carico: 'Manubri progressivi',
+        recupero: '90"',
+        focus: 'Deltoidi (tutti i fasci), tricipiti',
+        come: 'Su panca inclinata 70°, manubri altezza spalle con presa neutra. Spingi verso alto senza massima estensione.',
+        tecnica: 'Presa neutra (palmi fronte a fronte) più sicura. ROM limitato a 170° flessione. Core attivo.',
+        note: 'SICURO per lesione spalla - sostituisce Arnold Press. Inclinazione riduce stress overhead',
+        image: 'https://homeworkouts.org/wp-content/uploads/anim-incline-shoulder-press.gif'
+    },
+    crocicavibassi: {
+        name: 'Croci ai Cavi Bassi',
+        series: '3×15',
+        carico: 'Cavi',
+        recupero: '90"',
+        focus: 'Pettorali alti, definizione',
+        come: 'Cavi bassi, impugnature in mano. Movimento dal basso verso alto (come abbracciare), mani si incontrano al centro.',
+        tecnica: 'Gomiti leggermente flessi 15-20°. Scapole addotte. Tensione costante, pausa 1" in contrazione.',
+        note: 'SICURO per spalla - sostituisce Croci Panca Inclinata. Controllo ROM, no iperestensione',
+        image: 'https://newlife.com.cy/wp-content/uploads/2019/11/standing-low-cable-crossover_chest.gif'
+    },
+    curlconcentrato: {
+        name: 'Curl Concentrato',
+        series: '3×12-15',
+        carico: 'Manubrio moderato',
+        recupero: '60"',
+        focus: 'Bicipiti (isolamento massimo)',
+        come: 'Seduto, braccio appoggiato interno coscia. Curl con un manubrio alla volta, focus contrazione picco.',
+        tecnica: 'Braccio fermo contro coscia impedisce compensi. Supinazione completa, pausa 2" in contrazione.',
+        note: 'MIGLIOR esercizio bicipiti per attivazione EMG (97% - Studio ACE). Connessione mente-muscolo ottimale',
+        image: 'https://homeworkouts.org/wp-content/uploads/anim-dumbbell-concentration-curl.gif'
+    },
+    curlmanubri: {
+        name: 'Curl Manubri Alternati',
+        series: '2×12',
+        carico: 'Manubri moderati',
+        recupero: '60"',
+        focus: 'Bicipiti',
+        come: 'In piedi o seduto, curl alternato con manubri. Supinazione durante salita.',
+        tecnica: 'Gomiti fissi, movimento controllato. 2 sec su, 1 sec pausa, 2 sec giù.',
+        note: 'Esecuzione lenta e controllata. Focus qualità movimento.',
+        image: 'https://thumbs.gfycat.com/AgonizingAmusingArmadillo-max-1mb.gif'
+    },
+    crunchcavi: {
+        name: 'Crunch ai Cavi Alti con Peso',
+        series: '4×10-12',
+        carico: 'Cavo progressivo',
+        recupero: '90"',
+        focus: 'Addominali (retto addominale), ipertrofia',
+        come: 'Cavo alto, corda dietro testa/collo. Inginocchiato, fletti busto verso basso contraendo addominali.',
+        tecnica: 'Movimento dalla contrazione addominale, non dalle braccia. Espirazione forzata in contrazione.',
+        note: 'SOVRACCARICO progressivo per ipertrofia addominali. Range 8-12 reps ottimale.',
+        image: 'https://www.inspireusafoundation.org/wp-content/uploads/2022/02/cable-crunch.gif'
+    },
+    abwheel: {
+        name: 'Ab Wheel / Roll Out Bilanciere',
+        series: '4×8-10',
+        carico: 'Corpo libero o bilanciere',
+        recupero: '90"',
+        focus: 'Core completo, addominali, stabilità',
+        come: 'Dalle ginocchia, rotola avanti estendendo corpo, mantieni core attivo. Torna indietro controllato.',
+        tecnica: 'Core sempre in tensione, non lasciare cedere schiena. Se troppo difficile: ROM parziale.',
+        note: 'Esercizio avanzato. MASSIMO stimolo core. Ipertrofia addominali + forza funzionale.',
+        image: 'https://homeworkouts.org/wp-content/uploads/anim-ab-wheel-rollout.gif'
+    },
+    legraise: {
+        name: 'Leg Raise Appeso',
+        series: '4×10-12',
+        carico: 'Corpo libero',
+        recupero: '60"',
+        focus: 'Addominali bassi, ileopsoas',
+        come: 'Appeso a sbarra, gambe tese o leggermente flesse. Solleva gambe fino parallelo o 90°.',
+        tecnica: 'Movimento controllato, no slancio. Retroversione bacino, espira in salita.',
+        note: 'Focus addominali bassi. Se troppo difficile: ginocchia piegate (knee raises).',
+        image: 'https://homeworkouts.org/wp-content/uploads/anim-hanging-leg-raise.gif'
+    },
+    crunchdeclinata: {
+        name: 'Crunch Panca Declinata con Peso',
+        series: '4×12-15',
+        carico: 'Disco o manubrio',
+        recupero: '90"',
+        focus: 'Addominali (retto), ipertrofia',
+        come: 'Su panca declinata, piedi bloccati. Tieni peso al petto, crunch controllato.',
+        tecnica: 'Non tirare collo. Movimento da contrazione addominale. Pausa 1" in contrazione.',
+        note: 'SOVRACCARICO progressivo per ipertrofia. Ottimo per volume addominali.',
+        image: 'https://www.inspireusafoundation.org/wp-content/uploads/2022/02/weighted-decline-sit-up.gif'
+    },
+    mountainclimbers: {
+        name: 'Mountain Climbers',
+        series: '3×20',
+        carico: 'Corpo libero',
+        recupero: '45"',
+        focus: 'Core dinamico, cardio, addominali',
+        come: 'Posizione plank, porta ginocchia alternate verso petto in modo dinamico.',
+        tecnica: 'Core sempre attivo, ritmo sostenuto ma controllato. Respirazione regolare.',
+        note: 'Esercizio dinamico. Combina core + cardio. 20 reps = 10 per lato.',
+        image: 'https://homeworkouts.org/wp-content/uploads/anim-mountain-climbers.gif'
+    },
+    cablecrossover: {
+        name: 'Cable Crossover Posizione Media',
+        series: '3×15',
+        carico: 'Cavi',
+        recupero: '60"',
+        focus: 'Pettorali (definizione), parte centrale',
+        come: 'Cavi altezza spalle, impugnature in mano. Movimento verso centro come abbracciare.',
+        tecnica: 'Gomiti leggermente flessi. Tensione costante. Pausa 1" in contrazione centrale.',
+        note: 'Ottimo per definizione petto. Alternativa sicura per spalla. Focus contrazione.',
+        image: 'https://homeworkouts.org/wp-content/uploads/anim-mid-cable-crossover.gif'
+    },
+    pushuppresastretta: {
+        name: 'Push-Up Presa Stretta',
+        series: '3×12-15',
+        carico: 'Corpo libero',
+        recupero: '60"',
+        focus: 'Pettorali interni, tricipiti',
+        come: 'Push-up con mani più strette della larghezza spalle. Gomiti vicini al corpo.',
+        tecnica: 'Discesa controllata 2-3 sec, spinta esplosiva. Core attivo, corpo in linea.',
+        note: 'Presa stretta enfatizza tricipiti + petto interno. Se difficile: su ginocchia.',
+        image: 'https://homeworkouts.org/wp-content/uploads/anim-diamond-push-up.gif'
     }
 };
 

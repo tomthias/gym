@@ -17,11 +17,12 @@ const workoutExercises = {
         { id: 'a-fisio4', name: 'Side Walk', key: 'sidewalk', sets: 3, reps: 20, recovery: 60, superset: true, supersetPair: 'ss1', supersetPartner: 'a-fisio3', supersetColor: '#FF6B35' },
         { id: 'a-fisio5', name: 'Elvis', key: 'elvis', sets: 2, reps: 15, recovery: 60 },
         { id: 'a-push1', name: 'Panca Piana Manubri', key: 'pancapiana', sets: 4, reps: 8, recovery: 90 },
-        { id: 'a-push2', name: 'Croci Panca Inclinata', key: 'croci', sets: 3, reps: 20, recovery: 120 },
-        { id: 'a-push3', name: 'Military Press', key: 'militarypress', sets: 4, reps: 10, recovery: 90 },
+        { id: 'a-push2', name: 'Croci Cavi Bassi', key: 'crocicavibassi', sets: 3, reps: 15, recovery: 90 },
+        { id: 'a-push3', name: 'Military Press Inclinata 70°', key: 'militarypress', sets: 4, reps: 10, recovery: 90 },
         { id: 'a-push4', name: 'Alzate Laterali', key: 'alzatelaterali', sets: 3, reps: 15, recovery: 60 },
-        { id: 'a-push5', name: 'Push Down', key: 'pushdown', sets: 3, reps: 12, recovery: 60 },
-        { id: 'a-push6', name: 'Dips', key: 'dips', sets: 3, reps: 12, recovery: 90 }
+        { id: 'a-push5', name: 'Push Down Corda', key: 'pushdown', sets: 3, reps: 12, recovery: 60 },
+        { id: 'a-push6', name: 'Dips tra Sedie', key: 'dips', sets: 3, reps: 12, recovery: 90 },
+        { id: 'a-core1', name: 'Crunch Cavi Alti', key: 'crunchcavi', sets: 3, reps: 12, recovery: 90 }
     ],
     workoutB: [
         { id: 'b-warm1', name: 'Bike/Tapirulan', key: 'bike', type: 'warmup', duration: 720 },
@@ -32,12 +33,12 @@ const workoutExercises = {
         { id: 'b-fisio3', name: 'Squat Tempo', key: 'squattempo', sets: 3, reps: 8, recovery: 0, superset: true, supersetPair: 'ss4', supersetPartner: 'b-fisio4', supersetColor: '#E74C3C' },
         { id: 'b-fisio4', name: 'Wall Sit', key: 'wallsit', sets: 3, duration: 45, recovery: 120, superset: true, supersetPair: 'ss4', supersetPartner: 'b-fisio3', supersetColor: '#E74C3C' },
         { id: 'b-fisio5', name: 'Affondo Camminato', key: 'affondo', sets: 3, reps: 12, recovery: 120 },
-        { id: 'b-pull1', name: 'Lat Machine', key: 'latmachine', sets: 4, reps: 8, recovery: 120 },
-        { id: 'b-pull2', name: 'Pulley', key: 'pulley', sets: 3, reps: 12, recovery: 90 },
-        { id: 'b-pull3', name: 'Curl Panca 45°', key: 'curlpanca', sets: 3, reps: 10, recovery: 60 },
-        { id: 'b-pull4', name: 'Hammer Curl', key: 'hammercurl', sets: 3, reps: 12, recovery: 60 },
-        { id: 'b-pull5', name: 'Curl Polsi', key: 'curlpolsi', sets: 3, reps: 15, recovery: 45 },
-        { id: 'b-pull6', name: 'Reverse Curl', key: 'reversecurl', sets: 3, reps: 12, recovery: 45 },
+        { id: 'b-pull1', name: 'Curl Bilanciere EZ', key: 'curlbilanciere', sets: 4, reps: 10, recovery: 90 },
+        { id: 'b-pull2', name: 'Lat Machine', key: 'latmachine', sets: 4, reps: 8, recovery: 120 },
+        { id: 'b-pull3', name: 'Pulley', key: 'pulley', sets: 3, reps: 12, recovery: 90 },
+        { id: 'b-pull4', name: 'Curl Panca 45°', key: 'curlpanca', sets: 3, reps: 10, recovery: 60 },
+        { id: 'b-pull5', name: 'Curl Concentrato', key: 'curlconcentrato', sets: 3, reps: 15, recovery: 60 },
+        { id: 'b-pull6', name: 'Curl Polsi', key: 'curlpolsi', sets: 3, reps: 15, recovery: 45 },
         { id: 'b-pull7', name: 'Farmer Walk', key: 'farmerswalk', sets: 3, reps: 60, recovery: 90 }
     ],
     workoutC: [
@@ -47,9 +48,9 @@ const workoutExercises = {
         { id: 'c-spalle2', name: 'Aperture 90°', key: 'aperture90', sets: 3, reps: 12, recovery: 45 },
         { id: 'c-spalle3', name: 'Farmer Walk', key: 'farmerswalk', sets: 2, reps: 60, recovery: 60 },
         { id: 'c-spalle4', name: 'Burpees', key: 'burpees', sets: 3, reps: 180, recovery: 60 },
-        { id: 'c-core1', name: 'Russian Twist', key: 'russiantwist', sets: 3, reps: 30, recovery: 45 },
-        { id: 'c-core2', name: 'Hollow Rock', key: 'hollowrock', sets: 3, reps: 20, recovery: 45 },
-        { id: 'c-core3', name: 'Plank', key: 'plank', sets: 3, reps: 60, recovery: 45 }
+        { id: 'c-core1', name: 'Ab Wheel / Roll Out', key: 'abwheel', sets: 3, reps: 10, recovery: 90 },
+        { id: 'c-core2', name: 'Leg Raise Appeso', key: 'legraise', sets: 3, reps: 12, recovery: 60 },
+        { id: 'c-core3', name: 'Plank con Peso', key: 'plank', sets: 3, reps: 60, recovery: 60 }
     ],
     workoutD: [
         // Allenamento 1A - Upper Body Push Variant + Fisio 1
@@ -62,11 +63,12 @@ const workoutExercises = {
         { id: 'd-fisio4', name: 'Side Walk', key: 'sidewalk', sets: 3, reps: 20, recovery: 60, superset: true, supersetPair: 'ss1', supersetPartner: 'd-fisio3', supersetColor: '#FF6B35' },
         { id: 'd-fisio5', name: 'Elvis', key: 'elvis', sets: 2, reps: 15, recovery: 60 },
         { id: 'd-push1', name: 'Panca Piana bilanciere', key: 'chestpressbilanciere', sets: 4, reps: 8, recovery: 120 },
-        { id: 'd-push2', name: 'Dips Parallele', key: 'dipsparallele', sets: 3, reps: 10, recovery: 120 },
-        { id: 'd-push3', name: 'Arnold Press', key: 'arnoldpress', sets: 3, reps: 10, recovery: 90 },
-        { id: 'd-push4', name: 'Alzate Frontali Bilanciere', key: 'alzatefrontalibilanciere', sets: 3, reps: 12, recovery: 60 },
-        { id: 'd-push5', name: 'Skullcrushers EZ', key: 'skullcrushers', sets: 3, reps: 12, recovery: 120 },
-        { id: 'd-push6', name: 'Push-Up Diamond', key: 'pushupdiamond', sets: 3, reps: 12, recovery: 90 }
+        { id: 'd-push2', name: 'Dips Parallele (ROM 90°)', key: 'dipsparallele', sets: 3, reps: 10, recovery: 120 },
+        { id: 'd-push3', name: 'Shoulder Press Inclinata 70°', key: 'shoulderpressinclinata', sets: 3, reps: 10, recovery: 90 },
+        { id: 'd-push4', name: 'Landmine Press', key: 'landminepress', sets: 3, reps: 12, recovery: 60 },
+        { id: 'd-push5', name: 'Push Down Corda', key: 'pushdown', sets: 3, reps: 12, recovery: 90 },
+        { id: 'd-push6', name: 'Push-Up Diamond', key: 'pushupdiamond', sets: 3, reps: 12, recovery: 90 },
+        { id: 'd-core1', name: 'Crunch Declinata Peso', key: 'crunchdeclinata', sets: 3, reps: 15, recovery: 90 }
     ],
     workoutE: [
         // Allenamento 2A - Upper Body Pull Variant + Fisio 2
@@ -78,14 +80,12 @@ const workoutExercises = {
         { id: 'e-fisio3', name: 'Squat Tempo', key: 'squattempo', sets: 3, reps: 8, recovery: 0, superset: true, supersetPair: 'ss4', supersetPartner: 'e-fisio4', supersetColor: '#E74C3C' },
         { id: 'e-fisio4', name: 'Wall Sit', key: 'wallsit', sets: 3, duration: 45, recovery: 120, superset: true, supersetPair: 'ss4', supersetPartner: 'e-fisio3', supersetColor: '#E74C3C' },
         { id: 'e-fisio5', name: 'Affondo Camminato', key: 'affondo', sets: 3, reps: 12, recovery: 120 },
-        { id: 'e-pull1', name: 'Trazioni Presa Supina', key: 'trazionisupina', sets: 4, reps: 8, recovery: 120 },
-        { id: 'e-pull2', name: 'Rematore Bilanciere', key: 'rematorebilanciere', sets: 3, reps: 10, recovery: 120 },
-        { id: 'e-pull3', name: 'Curl Bilanciere EZ', key: 'curlbilanciere', sets: 3, reps: 10, recovery: 100 },
-        { id: 'e-pull4', name: 'Curl Panca Inclinata', key: 'curlpancainclinata', sets: 2, reps: 10, recovery: 100 },
-        { id: 'e-pull5', name: 'Reverse Curl Bilanciere', key: 'reversecurlbilanciere', sets: 2, reps: 12, recovery: 90 },
-        { id: 'e-pull6', name: 'Zottman Curl', key: 'zottmancurl', sets: 2, reps: 10, recovery: 90 },
-        { id: 'e-pull7', name: 'Curl Polsi', key: 'curlpolsi', sets: 2, reps: 15, recovery: 60 },
-        { id: 'e-pull8', name: 'Farmer Walk', key: 'farmerswalk', sets: 1, reps: 40, recovery: 120 }
+        { id: 'e-pull1', name: 'Curl Bilanciere EZ', key: 'curlbilanciere', sets: 3, reps: 10, recovery: 100 },
+        { id: 'e-pull2', name: 'Trazioni Presa Supina', key: 'trazionisupina', sets: 4, reps: 8, recovery: 120 },
+        { id: 'e-pull3', name: 'Rematore Bilanciere', key: 'rematorebilanciere', sets: 3, reps: 10, recovery: 120 },
+        { id: 'e-pull4', name: 'Curl Panca Inclinata', key: 'curlpancainclinata', sets: 3, reps: 10, recovery: 100 },
+        { id: 'e-pull5', name: 'Zottman Curl', key: 'zottmancurl', sets: 2, reps: 10, recovery: 90 },
+        { id: 'e-pull6', name: 'Farmer Walk', key: 'farmerswalk', sets: 1, reps: 40, recovery: 120 }
     ]
 };
 
