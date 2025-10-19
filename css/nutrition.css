@@ -1,74 +1,65 @@
 /* ==================== ICON SYSTEM ==================== */
-.icon,
-.icon-inline,
-.recipe-type-icon,
-.macro-icon,
-.badge-icon,
-.chip-icon,
-.filter-icon,
-.checkbox-icon,
-.selected-icon,
-.empty-state-icon {
+/* Icons are inline SVG with fill="currentColor" for dynamic coloring */
+/* SVG content is read from assets/icons/ and injected via JavaScript */
+
+.icon {
     display: inline-block;
     width: 16px;
     height: 16px;
     vertical-align: middle;
-    color: var(--text-primary);
+}
+
+/* Icon size variants */
+.chip-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+}
+
+.filter-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
 }
 
 .recipe-type-icon {
     width: 20px;
     height: 20px;
-    color: var(--primary-color);
 }
 
 .macro-icon {
     width: 18px;
     height: 18px;
-    color: var(--text-secondary);
 }
 
-.badge-icon {
+.icon-inline {
     width: 14px;
     height: 14px;
-    color: var(--primary-color);
 }
 
+/* Icon colors - using currentColor inheritance from fill="currentColor" in SVG */
+/* Chip and filter icons inherit color from their parent */
 .chip-icon,
 .filter-icon {
-    width: 16px;
-    height: 16px;
-    margin-right: 4px;
-    color: var(--text-primary);
+    color: inherit;
 }
 
-.checkbox-icon {
-    width: 14px;
-    height: 14px;
-    color: var(--success-color);
+.recipe-type-icon {
+    color: var(--color-primary);
 }
 
-.selected-icon {
-    width: 14px;
-    height: 14px;
-    margin-right: 4px;
-    color: var(--success-color);
+.macro-icon {
+    color: var(--color-text-secondary);
 }
 
-.empty-state-icon {
-    width: 48px;
-    height: 48px;
-    color: var(--text-tertiary);
+/* White icons when chip/filter is active (redundant but explicit) */
+.chip.active .chip-icon,
+.chip.active .filter-icon,
+.filter-option.active .filter-icon {
+    color: inherit;
 }
 
-.empty-state-icon {
-    width: 48px;
-    height: 48px;
-}
-
-.search-icon img {
-    width: 16px;
-    height: 16px;
+.search-icon .icon {
     opacity: 0.6;
 }
 
@@ -112,6 +103,71 @@
 
 .day-type-btn:active {
     transform: scale(0.95);
+}
+
+/* Calorie Tracker */
+.calorie-tracker {
+    background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-card-alt) 100%);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-card);
+}
+
+.calorie-tracker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.calorie-text {
+    font-size: 18px;
+    color: var(--color-text-secondary);
+}
+
+.calorie-text strong {
+    font-size: 24px;
+    color: var(--color-text-primary);
+    font-weight: 700;
+}
+
+.calorie-percentage {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.calorie-progress-bar {
+    background: var(--color-bg-secondary);
+    height: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.calorie-progress-fill {
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.calorie-progress-fill.status-good {
+    background: linear-gradient(90deg, var(--color-primary) 0%, #00a875 100%);
+}
+
+.calorie-progress-fill.status-warning {
+    background: linear-gradient(90deg, #ff9500 0%, #ffb340 100%);
+}
+
+.calorie-progress-fill.status-danger {
+    background: linear-gradient(90deg, #ff3b30 0%, #ff6b60 100%);
+}
+
+.calorie-remaining {
+    font-size: 14px;
+    color: var(--color-text-dim);
+    text-align: center;
 }
 
 /* Meal Cards */
