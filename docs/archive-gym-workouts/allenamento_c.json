@@ -1,0 +1,156 @@
+{
+  "allenamento_c": {
+    "nome": "ALLENAMENTO C - Spalle + Core",
+    "frequenza": "1 volta a settimana",
+    "durata": "40-50 minuti",
+    "focus": [
+      "Deltoidi laterali e posteriori",
+      "Core e addominali",
+      "Grip strength"
+    ],
+    "versione": "Versione completa",
+    "fasi": {
+      "riscaldamento": {
+        "durata": "12 minuti",
+        "esercizi": [
+          {
+            "nome": "Bike/Tapirulan",
+            "durata": "12 minuti",
+            "note": "Cardio a basso impatto, riscaldamento generale",
+            "obbligatorio": true
+          },
+          {
+            "nome": "Ellittica",
+            "durata": "Opzionale",
+            "note": "Cardio total body se disponibile"
+          }
+        ]
+      },
+      "spalle": {
+        "nome": "BLOCCO SPALLE",
+        "durata": "15-20 minuti",
+        "esercizi": [
+          {
+            "codice": "S1",
+            "nome": "Alzate Laterali Cavo Mono",
+            "serie_reps": "3×15",
+            "rest": "45\"",
+            "carico": "Cavo leggero-moderato",
+            "note": "Un braccio alla volta, focus controllo",
+            "focus": "Deltoidi laterali",
+            "tecnica": "Al cavo basso, un braccio alla volta, solleva lateralmente fino altezza spalle"
+          },
+          {
+            "codice": "S2",
+            "nome": "Aperture 90° Deltoidi Posteriori",
+            "serie_reps": "3×12",
+            "rest": "45\"",
+            "carico": "Manubri leggeri",
+            "note": "Busto a 90°, focus contrazione deltoidi posteriori",
+            "focus": "Deltoidi posteriori",
+            "tecnica": "Busto inclinato a 90°, apri le braccia lateralmente con manubri, focus sulla contrazione"
+          },
+          {
+            "codice": "S3",
+            "nome": "Farmer's Walk",
+            "serie_reps": "2×60 secondi",
+            "rest": "60\"",
+            "carico": "Manubri pesanti",
+            "note": "Grip strength e postura",
+            "focus": "Avambracci, grip strength, trapezi",
+            "tecnica": "Manubri pesanti in mano, cammina mantenendo postura eretta"
+          },
+          {
+            "codice": "S4",
+            "nome": "Burpees",
+            "serie_reps": "3×180 secondi (3 minuti)",
+            "rest": "60\"",
+            "carico": "Corpo libero",
+            "note": "Cardio metabolico intenso",
+            "focus": "Cardio total body, esplosività",
+            "tecnica": "Movimento fluido: squat → plank → push-up (opzionale) → salto esplosivo"
+          }
+        ]
+      },
+      "core": {
+        "nome": "BLOCCO CORE E ADDOMINALI",
+        "durata": "15 minuti",
+        "esercizi": [
+          {
+            "codice": "C1",
+            "nome": "Ab Wheel / Roll Out Bilanciere",
+            "serie_reps": "3×10",
+            "rest": "90\"",
+            "carico": "Corpo libero o bilanciere",
+            "note": "Esercizio avanzato - massimo stimolo core",
+            "focus": "Core completo, addominali, stabilità",
+            "tecnica": "Dalle ginocchia, rotola avanti estendendo corpo, torna indietro controllato. Core sempre in tensione"
+          },
+          {
+            "codice": "C2",
+            "nome": "Leg Raise Appeso",
+            "serie_reps": "3×12",
+            "rest": "60\"",
+            "carico": "Corpo libero",
+            "note": "Focus addominali bassi - se difficile: ginocchia piegate",
+            "focus": "Addominali bassi, ileopsoas",
+            "tecnica": "Appeso a sbarra, solleva gambe fino parallelo o 90°. Movimento controllato, no slancio"
+          },
+          {
+            "codice": "C3",
+            "nome": "Plank con Peso",
+            "serie_reps": "3×60 secondi",
+            "rest": "60\"",
+            "carico": "Disco sulla schiena (opzionale)",
+            "note": "Mantieni posizione stabile",
+            "focus": "Core, stabilità",
+            "tecnica": "Posizione plank sui gomiti, corpo in linea retta. Core attivo, non far cedere i fianchi"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "volume_totale": {
+        "serie_spalle": 11,
+        "serie_core": 9,
+        "serie_totali": 20
+      },
+      "durata": {
+        "riscaldamento": "12 minuti",
+        "spalle": "15-20 minuti",
+        "core": "15 minuti",
+        "totale": "40-50 minuti"
+      }
+    },
+    "warnings": {
+      "burpees": "Se hai problemi articolari, riduci l'intensità del salto finale",
+      "ab_wheel": "Se troppo difficile, esegui con ROM parziale o su ginocchia",
+      "stop_signals": [
+        "Dolore acuto alle spalle",
+        "Impossibilità di mantenere forma corretta nel plank",
+        "Vertigini o nausea durante burpees",
+        "Crampi avambracci eccessivi"
+      ]
+    },
+    "progressione": {
+      "indicatori_aumento_carico": [
+        "Completi tutte le serie con forma perfetta",
+        "Alzate laterali: controllo completo senza slancio",
+        "Ab wheel: riesci a estendere completamente",
+        "Burpees: mantieni ritmo costante per tutto il tempo"
+      ],
+      "quando_aumentare_carico": [
+        "Gestisci carico attuale per 2 sessioni consecutive",
+        "Alzate laterali: 3×15 senza compensi",
+        "Farmer's walk: completi 60 sec senza aprire grip",
+        "Core: completi tutte le serie senza cedimenti forma"
+      ]
+    },
+    "note_generali": {
+      "timing": "Allenamento leggero di recupero attivo - puoi farlo anche 24-48 ore dopo A o B",
+      "approccio": "Focus su qualità movimento e connessione mente-muscolo",
+      "filosofia": "Lavoro accessorio per bilanciare gli allenamenti principali A e B",
+      "burpees_note": "Mantieni ritmo costante, non sprint. È allenamento metabolico, non cardio HIIT estremo"
+    }
+  }
+}

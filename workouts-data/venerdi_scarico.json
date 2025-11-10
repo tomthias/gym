@@ -1,0 +1,59 @@
+{
+  "giorno": "Venerdì",
+  "sessione": "Singola",
+  "tipo": "recupero",
+  "nome": "SCARICO - Recupero Attivo",
+  "durata": "30-40 minuti",
+  "frequenza": "1 volta a settimana OBBLIGATORIA",
+  "focus": [
+    "Mobilità articolare",
+    "Recupero attivo",
+    "Prevenzione infortuni"
+  ],
+  "obbligatorio": true,
+  "nota": "Preparazione per essere fresco sabato in montagna",
+  "fasi": {
+    "mobilita": {
+      "durata": "20 minuti",
+      "esercizi": [
+        {
+          "nome": "Mobilità Spalle",
+          "durata": "5 minuti",
+          "esercizi": "Circonduzioni, rotazioni, stretching"
+        },
+        {
+          "nome": "Stretching Avambracci e Dita",
+          "durata": "5 minuti",
+          "esercizi": "Estensione dita, flessione polsi"
+        },
+        {
+          "nome": "Mobilità Anche e Gambe",
+          "durata": "5 minuti",
+          "esercizi": "Aperture, affondi dinamici, catena posteriore"
+        },
+        {
+          "nome": "Core Leggero",
+          "durata": "5 minuti",
+          "esercizi": "2x30\" plank, bird-dog - solo attivazione"
+        }
+      ]
+    },
+    "cardio_opzionale": {
+      "durata": "10-20 minuti (opzionale)",
+      "intensita": "Molto bassa - conversazionale",
+      "opzioni": [
+        "Camminata veloce",
+        "Bike easy",
+        "Nuoto tranquillo",
+        "Yoga"
+      ]
+    }
+  },
+  "cosa_NON_fare": [
+    "NO arrampicata",
+    "NO trave",
+    "NO fingerboard",
+    "NO palestra"
+  ],
+  "importanza": "Fondamentale - prepara il corpo per il weekend in montagna"
+}

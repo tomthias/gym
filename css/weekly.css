@@ -1,0 +1,427 @@
+/* ========== WEEKLY SCHEDULE STYLES ========== */
+
+/* Weekly Container */
+.weekly-container {
+    padding: 20px;
+    padding-bottom: 100px; /* Space for bottom nav */
+}
+
+.weekly-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Day Card */
+.day-card {
+    background: var(--card-bg, #2a2a2a);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.day-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.day-today {
+    border: 2px solid var(--primary-color, #4CAF50);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+}
+
+/* Day Header */
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.day-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-color, #ffffff);
+}
+
+.badge-today {
+    display: inline-block;
+    background: var(--primary-color, #4CAF50);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.sessions-badge {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-color, #ffffff);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.sessions-badge.all-completed {
+    background: var(--success-color, #4CAF50);
+    color: white;
+}
+
+/* Sessions Container */
+.sessions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Session Card */
+.session-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 16px;
+    border-left: 4px solid var(--session-color, #888);
+    transition: all 0.2s;
+}
+
+.session-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.session-completed {
+    opacity: 0.7;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+/* Session Types Colors */
+.session-type-fisioterapia {
+    --session-color: #20B2AA;
+}
+
+.session-type-arrampicata_corda {
+    --session-color: #FFB347;
+}
+
+.session-type-arrampicata_boulder {
+    --session-color: #FF6B35;
+}
+
+.session-type-arrampicata_outdoor {
+    --session-color: #4169E1;
+}
+
+.session-type-riposo {
+    --session-color: #808080;
+}
+
+.session-type-recupero {
+    --session-color: #90EE90;
+}
+
+.session-type-variabile {
+    --session-color: #DDA0DD;
+}
+
+/* Turno Badge */
+.turno-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.turno-mattina {
+    background: linear-gradient(135deg, #FDB813 0%, #FCCF31 100%);
+}
+
+.turno-pomeriggio {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Session Content */
+.session-emoji {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.session-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: var(--text-color, #ffffff);
+}
+
+.session-duration {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 4px 0;
+}
+
+/* Focus Tags */
+.focus-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 10px 0;
+}
+
+.focus-tag {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Session Warning */
+.session-warning {
+    background: rgba(255, 152, 0, 0.2);
+    border-left: 3px solid #FF9800;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 8px 0;
+    font-size: 0.85rem;
+    color: #FFB74D;
+}
+
+.mandatory-badge {
+    background: rgba(244, 67, 54, 0.2);
+    color: #FF5252;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 8px;
+    display: inline-block;
+}
+
+/* Session Action Button */
+.btn-start-session {
+    width: 100%;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-color, #4CAF50);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-start-session:hover {
+    background: var(--primary-hover, #45a049);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+.btn-start-session:active {
+    transform: translateY(0);
+}
+
+.btn-start-session.btn-completed {
+    background: rgba(76, 175, 80, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-start-session.btn-completed:hover {
+    background: rgba(76, 175, 80, 0.5);
+}
+
+/* Session Checkmark */
+.session-checkmark {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 28px;
+    height: 28px;
+    background: var(--success-color, #4CAF50);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Weekly Stats */
+.weekly-stats-container {
+    background: var(--card-bg, #2a2a2a);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.weekly-stats-container h2 {
+    margin: 0 0 16px 0;
+    font-size: 1.3rem;
+    color: var(--text-color, #ffffff);
+}
+
+.weekly-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.stat-value {
+    color: var(--text-color, #ffffff);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.stat-progress {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.stat-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color, #4CAF50) 0%, #8BC34A 100%);
+    transition: width 0.3s ease;
+}
+
+.stat-percentage {
+    text-align: right;
+    color: var(--primary-color, #4CAF50);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Actions Container */
+.actions-container {
+    display: flex;
+    gap: 12px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.btn-secondary {
+    padding: 12px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-color, #ffffff);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* App Loader */
+.app-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top-color: var(--primary-color, #4CAF50);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.app-loader p {
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+}
+
+/* Error Message */
+.error-message {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--text-color, #ffffff);
+}
+
+.error-message h3 {
+    color: #FF5252;
+    margin-bottom: 12px;
+}
+
+.error-message button {
+    margin-top: 20px;
+    padding: 12px 32px;
+    background: var(--primary-color, #4CAF50);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .weekly-container {
+        padding: 12px;
+    }
+
+    .day-card {
+        padding: 12px;
+    }
+
+    .session-card {
+        padding: 12px;
+    }
+
+    .day-title {
+        font-size: 1.3rem;
+    }
+
+    .session-title {
+        font-size: 1.1rem;
+    }
+}

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'scheda-palestra-v3'; // NUOVA VERSIONE
+const CACHE_NAME = 'scheda-palestra-v4'; // WEEKLY SCHEDULE VERSION
 const urlsToCache = [
   './',
   './index.html',
@@ -8,18 +8,32 @@ const urlsToCache = [
   './css/shared.css',
   './css/home.css',
   './css/workout-flow.css',
-  './css/nutrition.css', // AGGIUNTO
+  './css/nutrition.css',
+  './css/weekly.css', // NEW - Weekly schedule styles
   './js/shared.js',
   './js/pages/home.js',
   './js/pages/workout-flow.js',
+  './js/pages/weekly-schedule.js', // NEW - Weekly schedule logic
   './js/pages/nutrition.js',
   './js/pages/history.js',
   './js/data/exercises.js',
   './js/data/nutrition.js',
   './js/utils/modal.js',
   './js/utils/timers.js',
-  
-  // ICONE AGGIUNTE (presupponendo che siano in assets/icons/ dopo la tua correzione)
+  './js/utils/session-loader.js', // NEW - Session loader utility
+
+  // NEW SESSION JSON FILES
+  './workouts-data/lunedi_fisio_1.json',
+  './workouts-data/lunedi_corda.json',
+  './workouts-data/martedi_boulder_1.json',
+  './workouts-data/mercoledi_off.json',
+  './workouts-data/giovedi_fisio_2.json',
+  './workouts-data/giovedi_boulder_2.json',
+  './workouts-data/venerdi_scarico.json',
+  './workouts-data/sabato_montagna.json',
+  './workouts-data/domenica_variabile.json',
+
+  // ICONS
   './assets/icons/search.svg',
   './assets/icons/clock.svg',
   './assets/icons/check.svg',
@@ -27,13 +41,12 @@ const urlsToCache = [
   './assets/icons/fish.svg',
   './assets/icons/veggie.svg',
   './assets/icons/egg.svg',
-  './assets/icons/apple.svg', // NUOVO
-  './assets/icons/mag.svg',    // NUOVO
+  './assets/icons/apple.svg',
+  './assets/icons/mag.svg',
 
   './icon-192.png',
   './icon-512.png',
-  // Se usi l'icona SVG, assicurati che sia nella root
-  './icon.svg' 
+  './icon.svg'
 ];
 
 // Install event - cache resources

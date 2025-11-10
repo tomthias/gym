@@ -1,0 +1,228 @@
+{
+  "allenamento_1a": {
+    "nome": "ALLENAMENTO 1A - Upper Body Push Variant + Fisio 1",
+    "frequenza": "1 volta a settimana (alternare con Allenamento A)",
+    "durata": "75-85 minuti",
+    "focus": [
+      "Pettorali",
+      "Spalle",
+      "Tricipiti"
+    ],
+    "versione": "Variante con esercizi diversi dall'Allenamento A",
+    "note_variante": "Allenamento complementare all'A - stessi muscoli, esercizi differenti per stimolo completo",
+    "fasi": {
+      "riscaldamento": {
+        "durata": "12 minuti",
+        "esercizi": [
+          {
+            "nome": "Bike/Tapirulan",
+            "durata": "12 minuti",
+            "note": "Cardio a basso impatto, riscaldamento generale",
+            "obbligatorio": true
+          },
+          {
+            "nome": "Circonduzione Braccia",
+            "serie_reps": "2x10",
+            "note": "Mobilità spalle - movimenti ampi e controllati"
+          },
+          {
+            "nome": "Mobilità Spalle e Polsi",
+            "serie_reps": "2x10",
+            "note": "Preparazione articolazioni - rotazioni in tutte le direzioni"
+          }
+        ]
+      },
+      "fisioterapia": {
+        "nome": "BLOCCO FISIOTERAPIA SCHEDA 1 (OBBLIGATORIO)",
+        "durata": "30 minuti",
+        "modificabile": false,
+        "note": "Stesso blocco fisio dell'Allenamento A",
+        "esercizi": [
+          {
+            "nome": "SL HEEL RAISES CON STEP",
+            "serie_reps": "3x10+15\" per lato",
+            "rest": "SS (Superserie con Box Bridge)",
+            "carico": "Manubrio 8 KG",
+            "note": "Sollevamento sulla punta, ginocchio dritto",
+            "focus": "Polpacci e stabilità della caviglia",
+            "tecnica": "In piedi su uno step, solleva il tallone sulla punta del piede (un piede alla volta)"
+          },
+          {
+            "nome": "SL BOX BRIDGE",
+            "serie_reps": "3x5+10\"+5 per lato",
+            "rest": "1'",
+            "carico": "-",
+            "note": "Alza bene il sedere - contrai fortemente i glutei in alto",
+            "focus": "Glutei, core, stabilità unilaterale",
+            "tecnica": "Sdraiato supino, un piede appoggiato su un box/step, l'altro sollevato. Solleva i fianchi contraendo i glutei"
+          },
+          {
+            "nome": "HIP THRUST",
+            "serie_reps": "3x12",
+            "rest": "SS (Superserie con Side Walk)",
+            "carico": "30 KG",
+            "note": "Stai 2\" su ad ogni ripetizione",
+            "focus": "Glutei, forza posteriore catena",
+            "tecnica": "Schiena appoggiata alla panca, bilanciere sui fianchi. Spingi i fianchi verso l'alto contraendo i glutei"
+          },
+          {
+            "nome": "SIDE WALK",
+            "serie_reps": "3x6-6/4-4/2-2",
+            "rest": "1'",
+            "carico": "Elastico sui piedi",
+            "note": "Non strisciare il piede, elastico sempre in tensione",
+            "focus": "Glutei medi, stabilità dell'anca",
+            "tecnica": "Elastico intorno alle caviglie, cammina lateralmente mantenendo tensione costante"
+          },
+          {
+            "nome": "ELVIS IN EQUILIBRIO SU UN PIEDE",
+            "serie_reps": "2x10 per lato",
+            "rest": "No rest",
+            "carico": "Tappetino piegato",
+            "note": "Esecuzione lenta - focus su equilibrio e stabilità",
+            "focus": "Equilibrio e stabilità",
+            "tecnica": "In equilibrio su un piede, eseguire movimenti controllati"
+          }
+        ]
+      },
+      "upper_body_push": {
+        "nome": "UPPER BODY PUSH VARIANT",
+        "durata": "25-30 minuti",
+        "note": "Varianti con bilanciere e focus forza/ipertrofia",
+        "esercizi": [
+          {
+            "codice": "A1",
+            "nome": "Panca Piana Bilanciere",
+            "serie_reps": "4×8",
+            "rest": "2'",
+            "carico": "Progressivo",
+            "note": "Bilanciere più stabile dei manubri - focus forza",
+            "focus": "Pettorali, tricipiti, spalle anteriori",
+            "setup": {
+              "posizione": "Sdraiato su panca, bilanciere impugnato",
+              "movimento": "Abbassa verso il petto e spingi verso l'alto",
+              "controllo": "Controllo eccentrico, fermo 1\" al petto, spinta esplosiva"
+            },
+            "progressione": {
+              "settimane_1_2": "4x8 con carico moderato",
+              "settimane_3_4": "4x8 con carico aumentato +5-10%",
+              "settimane_5_plus": "4x8-10 con carico massimale"
+            }
+          },
+          {
+            "codice": "A2",
+            "nome": "Dips Parallele (ROM 90°)",
+            "serie_reps": "3×8-10",
+            "rest": "2'",
+            "carico": "Peso corporeo/zavorra progressiva",
+            "note": "Se fastidio spalle: usa panca assistita. ROM limitato a 90° per sicurezza",
+            "focus": "Tricipiti, pettorali inferiori",
+            "tecnica": "Alle parallele, corpo sospeso. Scendi 3 sec, risali esplosivo. Non forzare se dà fastidio alla spalla"
+          },
+          {
+            "codice": "B1",
+            "nome": "Shoulder Press Manubri Inclinata 70°",
+            "serie_reps": "3×10",
+            "rest": "1'30\"",
+            "carico": "Manubri progressivi",
+            "note": "Panca a 70°, presa neutra - SICURO per lesione spalla. Sostituisce Arnold Press",
+            "focus": "Spalle (deltoidi), tricipiti",
+            "tecnica": "Su panca inclinata 70°, manubri altezza spalle con presa neutra (palmi fronte a fronte). Spingi verso alto. Core attivo"
+          },
+          {
+            "codice": "B2",
+            "nome": "Landmine Press",
+            "serie_reps": "3×12",
+            "rest": "1'",
+            "carico": "Bilanciere progressivo",
+            "note": "SICURO per spalla - traiettoria naturale riduce stress articolare",
+            "focus": "Deltoidi anteriori, parte alta petto",
+            "tecnica": "Bilanciere fissato a terra. Spingi verso l'alto con traiettoria diagonale naturale. Angolo riduce stress spalla"
+          },
+          {
+            "codice": "C1",
+            "nome": "Push Down Corda",
+            "serie_reps": "3×12",
+            "rest": "1'30\"",
+            "carico": "Cavo",
+            "note": "Gomiti fissi ai fianchi, separa la corda in fondo",
+            "focus": "Tricipiti",
+            "tecnica": "Al cavo, corda in mano, spingi verso il basso estendendo i tricipiti"
+          },
+          {
+            "codice": "C2",
+            "nome": "Push-Up Diamond",
+            "serie_reps": "3×max (8-15)",
+            "rest": "1'30\"",
+            "carico": "Corpo libero",
+            "note": "Mani a diamante sotto il petto - se troppo difficile: su ginocchia o panca inclinata",
+            "focus": "Tricipiti, pettorali interni",
+            "tecnica": "Posizione plank, mani a diamante. Scendi 2 sec, pausa 1 sec, spingi 2 sec. Contrazione massima tricipiti"
+          }
+        ]
+      },
+      "core": {
+        "nome": "ADDOMINALI",
+        "durata": "8-10 minuti",
+        "esercizi": [
+          {
+            "nome": "Crunch Panca Declinata con Peso",
+            "serie_reps": "3×12-15",
+            "rest": "90\"",
+            "carico": "Disco o manubrio al petto",
+            "note": "Sovraccarico progressivo per ipertrofia addominali",
+            "focus": "Addominali (retto), ipertrofia",
+            "tecnica": "Su panca declinata, piedi bloccati. Disco al petto, crunch controllato. Non tirare collo"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "volume_totale": {
+        "serie_fisio": 14,
+        "serie_push": 19,
+        "serie_core": 3,
+        "serie_totali": 36
+      },
+      "durata": {
+        "riscaldamento": "12 minuti",
+        "fisioterapia": "30 minuti",
+        "upper_push": "25-30 minuti",
+        "core": "8-10 minuti",
+        "totale": "75-85 minuti"
+      }
+    },
+    "warnings": {
+      "spalle": "Landmine Press e Shoulder Press Inclinata sono SAFE per lesione spalla",
+      "dips": "ROM limitato a 90° - se dà fastidio, saltare",
+      "bilanciere": "Panca piana bilanciere richiede spotter se carichi pesanti",
+      "stop_signals": [
+        "Dolore acuto alle spalle",
+        "Impossibilità di mantenere forma corretta",
+        "Dolore al petto non muscolare",
+        "Vertigini o nausea"
+      ]
+    },
+    "progressione": {
+      "indicatori_aumento_carico": [
+        "Completi tutte le serie con forma perfetta",
+        "Ultime 2 reps di ogni serie ancora controllate",
+        "Recuperi completamente nei tempi previsti",
+        "Non hai dolori articolari giorno dopo"
+      ],
+      "quando_aumentare_carico": [
+        "Gestisci carico attuale per 2 sessioni consecutive",
+        "Panca piana bilanciere: riesci a fare 4x8 con controllo completo",
+        "Dips: completi 3x10 senza compensi",
+        "Shoulder Press: mantieni core stabile per tutte le serie"
+      ]
+    },
+    "note_generali": {
+      "priorita_assoluta": "Blocco fisioterapia NON si modifica mai - ordine medico",
+      "variazione": "Alternare con Allenamento A ogni settimana per stimolo completo",
+      "filosofia": "Qualità movimento > Carico massimale",
+      "recupero": "Aspetta 48-72 ore prima di Allenamento B o 2A",
+      "ordine_esercizi": "Non modificare l'ordine - c'è una logica nella progressione"
+    }
+  }
+}

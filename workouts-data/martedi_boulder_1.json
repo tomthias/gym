@@ -1,0 +1,81 @@
+{
+  "giorno": "Martedì",
+  "sessione": "Singola",
+  "tipo": "arrampicata_boulder",
+  "nome": "BOULDER 1 - Forza Massimale",
+  "durata": "60-75 minuti",
+  "frequenza": "1 volta a settimana",
+  "focus": [
+    "Forza massimale dita",
+    "Movimenti potenti",
+    "Progressione 6b → 6c+"
+  ],
+  "obiettivo_grado": "Dal 6b al 6c+",
+  "fasi": {
+    "riscaldamento": {
+      "durata": "15 minuti",
+      "esercizi": [
+        {
+          "nome": "Mobilità Articolare",
+          "durata": "5 minuti",
+          "note": "Spalle, polsi, dita, anche"
+        },
+        {
+          "nome": "Boulder Facili",
+          "serie_reps": "4-5 boulder",
+          "grado": "5a-5c",
+          "note": "Riscaldamento progressivo"
+        },
+        {
+          "nome": "Fingerboard Light",
+          "serie_reps": "3x7\" hang",
+          "rest": "53\"",
+          "note": "Attivazione tendini"
+        }
+      ]
+    },
+    "boulder_forza_massimale": {
+      "durata": "40-50 minuti",
+      "focus": "Movimenti al limite su boulder brevi e intensi",
+      "esercizi": [
+        {
+          "codice": "B1",
+          "nome": "Limit Bouldering",
+          "serie_reps": "5-7 boulder",
+          "grado": "6b - 6c (al tuo limite)",
+          "rest": "5-7 minuti tra boulder",
+          "tecnica": "Max 8 movimenti per boulder"
+        },
+        {
+          "codice": "B2",
+          "nome": "Movimenti Specifici",
+          "serie_reps": "4-5 sezioni",
+          "focus": "Lanci, blocchi, pinze, reglette",
+          "rest": "3-5 minuti"
+        },
+        {
+          "codice": "B3",
+          "nome": "Max Hangs su Fingerboard",
+          "serie_reps": "4x7\" per presa",
+          "rest": "53\" tra hang, 3' tra prese",
+          "prese": "Mezzo crimp 20mm, tacca 2 dita, mezzo crimp 15mm",
+          "protocollo": "7-53 Eric Hörst"
+        }
+      ]
+    },
+    "defaticamento": {
+      "durata": "5 minuti",
+      "esercizi": [
+        {
+          "nome": "Traversi Facili + Stretching",
+          "durata": "5 minuti"
+        }
+      ]
+    }
+  },
+  "intensita": "ALTA - 90-95%",
+  "warnings": {
+    "dita": "Se dolore tendini, interrompere max hangs",
+    "recupero": "24h dopo corda lunedì"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "giorno": "Lunedì",
+  "sessione": "Mattina",
+  "tipo": "fisioterapia",
+  "nome": "FISIO 1 - Mobilità e Stabilità",
+  "durata": "30-35 minuti",
+  "frequenza": "1 volta a settimana",
+  "focus": [
+    "Mobilità spalle",
+    "Stabilità core",
+    "Preparazione arrampicata",
+    "Glutei e polpacci"
+  ],
+  "riferimento_originale": "allenamento_a.json - blocco fisioterapia",
+  "nota": "Fatto al mattino. Poi corda nel pomeriggio/sera (spacing 3-4 ore).",
+  "obbligatorio": true,
+  "modificabile": false,
+  "fasi": {
+    "riscaldamento": {
+      "durata": "5 minuti",
+      "esercizi": [
+        {
+          "nome": "Bike",
+          "durata": "5 minuti",
+          "note": "Riscaldamento generale a basso impatto"
+        }
+      ]
+    },
+    "fisioterapia": {
+      "nome": "BLOCCO FISIOTERAPIA SCHEDA 1 (OBBLIGATORIO)",
+      "durata": "25-30 minuti",
+      "modificabile": false,
+      "note": "Esercizi riportati ESATTAMENTE come prescritto dalla fisioterapista",
+      "esercizi": [
+        {
+          "nome": "SL HEEL RAISES CON STEP",
+          "serie_reps": "3x10+15\" per lato",
+          "rest": "SS (Superserie con Box Bridge)",
+          "carico": "Manubrio 8 KG",
+          "note": "Sollevamento sulla punta, ginocchio dritto. Movimento lento e controllato, pausa in alto",
+          "focus": "Polpacci e stabilità della caviglia",
+          "tecnica": "In piedi su uno step, solleva il tallone sulla punta del piede (un piede alla volta). Il ginocchio deve rimanere dritto"
+        },
+        {
+          "nome": "SL BOX BRIDGE",
+          "serie_reps": "3x5+10\"+5 per lato",
+          "rest": "1'",
+          "carico": "-",
+          "note": "Alza bene il sedere - contrai fortemente i glutei in alto",
+          "focus": "Glutei, core, stabilità unilaterale",
+          "tecnica": "Sdraiato supino, un piede appoggiato su un box/step, l'altro sollevato. Solleva i fianchi contraendo i glutei"
+        },
+        {
+          "nome": "HIP THRUST",
+          "serie_reps": "3x12",
+          "rest": "SS (Superserie con Side Walk)",
+          "carico": "30 KG",
+          "note": "Stai 2\" su ad ogni ripetizione - pausa di 2 secondi nella posizione alta",
+          "focus": "Glutei, forza posteriore catena",
+          "tecnica": "Schiena appoggiata alla panca, bilanciere sui fianchi. Spingi i fianchi verso l'alto contraendo i glutei"
+        },
+        {
+          "nome": "SIDE WALK",
+          "serie_reps": "3x6-6/4-4/2-2",
+          "rest": "1'",
+          "carico": "Elastico sui piedi",
+          "note": "Non strisciare il piede, elastico sempre in tensione. Passi controllati",
+          "focus": "Glutei medi, stabilità dell'anca",
+          "tecnica": "Elastico intorno alle caviglie, cammina lateralmente mantenendo tensione costante"
+        },
+        {
+          "nome": "ELVIS IN EQUILIBRIO SU UN PIEDE",
+          "serie_reps": "2x10 per lato",
+          "rest": "No rest",
+          "carico": "Tappetino piegato",
+          "note": "Esecuzione lenta - focus su equilibrio e stabilità",
+          "focus": "Equilibrio e stabilità",
+          "tecnica": "In equilibrio su un piede, eseguire movimenti controllati"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "volume_totale": {
+      "serie_fisio": 14,
+      "durata_totale": "30-35 minuti"
+    }
+  },
+  "warnings": {
+    "priorita_assoluta": "Blocco fisioterapia NON si modifica mai - ordine medico",
+    "spacing": "Aspetta 3-4 ore prima della sessione corda pomeridiana",
+    "stop_signals": [
+      "Dolore acuto alle caviglie",
+      "Impossibilità di mantenere equilibrio",
+      "Crampi eccessivi ai polpacci",
+      "Dolore lombare acuto"
+    ]
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "allenamento_2a": {
+    "nome": "ALLENAMENTO 2A - Upper Body Pull Variant + Fisio 2",
+    "frequenza": "1 volta a settimana (alternare con Allenamento B)",
+    "durata": "70-80 minuti",
+    "focus": [
+      "Schiena",
+      "Bicipiti",
+      "Avambracci"
+    ],
+    "versione": "Variante con esercizi diversi dall'Allenamento B",
+    "note_variante": "Allenamento complementare al B - stessi muscoli, esercizi differenti per stimolo completo. Include gli esercizi richiesti: Pull, Curl Bilanciere EZ, Trazioni Supina, Zottman Curl",
+    "fasi": {
+      "riscaldamento": {
+        "durata": "8 minuti",
+        "esercizi": [
+          {
+            "nome": "Bike/Tapirulan",
+            "durata": "5 minuti",
+            "note": "Cardio a basso impatto",
+            "obbligatorio": true
+          },
+          {
+            "nome": "Cat-Cow",
+            "serie_reps": "2x8",
+            "note": "Mobilità colonna vertebrale"
+          },
+          {
+            "nome": "Dead Bug",
+            "serie_reps": "2x8 per lato",
+            "note": "Attivazione core"
+          }
+        ]
+      },
+      "fisioterapia": {
+        "nome": "BLOCCO FISIOTERAPIA SCHEDA 2 (OBBLIGATORIO)",
+        "durata": "30 minuti",
+        "modificabile": false,
+        "note": "Stesso blocco fisio dell'Allenamento B",
+        "esercizi": [
+          {
+            "nome": "PLANK + ESTENSIONE ANCA ALTERNATA",
+            "serie_reps": "4×45\"",
+            "rest": "SS (Superserie con L-Sit)",
+            "carico": "-",
+            "note": "Non ruotare il bacino, movimento controllato",
+            "focus": "Core, glutei, stabilità",
+            "tecnica": "Posizione plank, alterna l'estensione di una gamba verso l'alto mantenendo il core stabile"
+          },
+          {
+            "nome": "L-SIT",
+            "serie_reps": "4×45\"",
+            "rest": "45\"",
+            "carico": "-",
+            "note": "Ginocchia in massima estensione, non mollare mai, piedi a martello",
+            "warning": "Esercizio molto impegnativo - prosciugherà il core",
+            "focus": "Core, forza funzionale",
+            "tecnica": "Seduto per terra, gambe distese, solleva tutto il corpo con le braccia"
+          },
+          {
+            "nome": "SQUAT TEMPO",
+            "serie_reps": "3×8",
+            "rest": "SS (Superserie con Wall Sit)",
+            "carico": "20 KG",
+            "note": "3\" a scendere, 3\" fermo iso, 3\" a salire",
+            "focus": "Quadricipiti, controllo",
+            "tecnica": "Squat eseguito con tempo controllato: 3\" in discesa, 3\" fermo in basso, 3\" in salita"
+          },
+          {
+            "nome": "WALL SIT",
+            "serie_reps": "3×40\"",
+            "rest": "2'",
+            "carico": "-",
+            "note": "Schiena contro muro, cosce parallele al pavimento",
+            "focus": "Quadricipiti, resistenza muscolare",
+            "tecnica": "Schiena contro il muro, scivola giù fino a 90° alle ginocchia. Mantieni la posizione"
+          },
+          {
+            "nome": "AFFONDO STATICO CON DISCO SOPRA LA TESTA",
+            "serie_reps": "3×10 per lato",
+            "rest": "2'",
+            "carico": "Disco 5 KG",
+            "note": "Vedi video, occhio agli angoli",
+            "focus": "Gambe, core, stabilità",
+            "tecnica": "Posizione di affondo statico, disco sollevato sopra la testa"
+          }
+        ]
+      },
+      "upper_body_pull": {
+        "nome": "UPPER BODY PULL VARIANT",
+        "durata": "25-30 minuti",
+        "note": "Focus su bicipiti con varianti bilanciere e enfasi su stretch/contrazione",
+        "esercizi": [
+          {
+            "codice": "A1",
+            "nome": "Curl Bilanciere EZ",
+            "serie_reps": "3×10",
+            "rest": "1'40\"",
+            "carico": "Bilanciere EZ progressivo",
+            "note": "Fermo 1s in contrazione, senza slancio. Gomiti fissi ai fianchi",
+            "focus": "Bicipiti (entrambi i capi)",
+            "setup": {
+              "posizione": "In piedi, bilanciere EZ davanti con presa supina",
+              "movimento": "Fletti avambracci verso spalle",
+              "controllo": "2 sec su, 1 sec contrazione, 3 sec giù"
+            },
+            "tecnica": "Gomiti fermi, movimento solo dell'avambraccio. Pausa isometrica 1\" in contrazione massima"
+          },
+          {
+            "codice": "A2",
+            "nome": "Trazioni Presa Supina",
+            "serie_reps": "4×6-10",
+            "rest": "2'",
+            "carico": "Corpo libero/zavorra progressiva",
+            "note": "Se necessario usa elastico assistenza. Alternativa: lat machine presa supina 4×8-10",
+            "focus": "Schiena (gran dorsale), bicipiti",
+            "tecnica": "Appeso alla sbarra con presa supina (palmi verso di te), larghezza spalle. Tira su fino mento sopra sbarra. 2 sec su, 1 sec pausa, 3 sec giù. Focus controllo e scapole"
+          },
+          {
+            "codice": "B1",
+            "nome": "Rematore Bilanciere",
+            "serie_reps": "3×10",
+            "rest": "2'",
+            "carico": "Bilanciere progressivo",
+            "note": "Presa pronata, controllo scapole. Busto a 45°, core attivo",
+            "focus": "Dorso (romboidi, trapezio medio), bicipiti",
+            "tecnica": "In piedi, busto inclinato 45°, bilanciere con presa pronata larghezza spalle. Tira verso ombelico, spremi scapole. Non usare slancio, movimento inizia dalle scapole"
+          },
+          {
+            "codice": "B2",
+            "nome": "Curl Manubri Panca Inclinata",
+            "serie_reps": "3×10",
+            "rest": "1'40\"",
+            "carico": "Manubri moderati",
+            "note": "Panca a 30-45°, enfasi stretch bicipiti. Alternato o simultaneo",
+            "focus": "Bicipiti (enfasi capo lungo)",
+            "tecnica": "Seduto su panca inclinata 30-45°, manubri in mano. Curl con braccia lungo i fianchi. Lascia che il peso tiri il braccio in basso per massimo stretch. Contrazione in alto"
+          },
+          {
+            "codice": "C1",
+            "nome": "Zottman Curl",
+            "serie_reps": "2×10",
+            "rest": "1'30\"",
+            "carico": "Manubri leggeri-moderati",
+            "note": "Rotazione polso in negativo. Su con supina, giù con prona",
+            "focus": "Bicipiti, avambracci",
+            "tecnica": "Sali con presa supina (normale curl). In alto ruota in presa prona. Scendi lento con presa prona. Movimento combinato: bicipiti in salita, avambracci in discesa"
+          },
+          {
+            "codice": "FINALE",
+            "nome": "Farmer's Walk",
+            "serie_reps": "1×40 secondi",
+            "rest": "2'",
+            "carico": "Manubri pesanti - usa straps se necessario",
+            "note": "Test finale grip strength, fondamentale per presa e avambracci",
+            "focus": "Avambracci, grip strength, core",
+            "tecnica": "Postura perfetta, spalle indietro, passi controllati"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "volume_totale": {
+        "serie_fisio": 17,
+        "serie_pull": 16,
+        "serie_totali": 33
+      },
+      "durata": {
+        "riscaldamento": "8 minuti",
+        "fisioterapia": "30 minuti",
+        "upper_pull": "25-30 minuti",
+        "totale": "70-80 minuti"
+      }
+    },
+    "warnings": {
+      "timing_dopo_allenamento_a": "Aspetta 48-72 ore dopo Allenamento A o 1A",
+      "l_sit_killer": "L-Sit 4x45\" dalla fisio prosciugherà il core prima dell'upper body",
+      "grip_fatigue": "Trazioni supina + Rematore + Zottman + Farmers walk = attenzione grip strength",
+      "trazioni": "Se non riesci a fare trazioni supine, usa lat machine presa supina",
+      "stop_signals": [
+        "Dolore articolare acuto",
+        "Impossibilità completare 6 reps trazioni/lat machine",
+        "Grip si apre continuamente",
+        "Crampi avambracci",
+        "Vertigini post L-Sit"
+      ]
+    },
+    "progressione": {
+      "indicatori_aumento_volume": [
+        "Completi tutte le serie senza esaurimento eccessivo",
+        "Recuperi nei tempi previsti",
+        "Non hai dolori estremi giorno dopo",
+        "Ti senti energico durante allenamento"
+      ],
+      "quando_aumentare_carico": [
+        "Gestisci carico attuale per 2 sessioni consecutive",
+        "Curl bilanciere EZ: riesci a fare 3x10 con 1\" contrazione isometrica",
+        "Trazioni supina: completi 4x6 pulite o lat machine 4x10",
+        "Rematore: mantieni busto a 45° stabile senza slancio",
+        "Farmers walk: completi distanza senza aprire grip"
+      ]
+    },
+    "note_generali": {
+      "priorita_assoluta": "Blocco fisioterapia NON si modifica mai - ordine medico",
+      "variazione": "Alternare con Allenamento B ogni settimana per stimolo completo",
+      "approccio": "Focus su controllo eccentrico e contrazione isometrica per massimizzare ipertrofia bicipiti",
+      "filosofia": "Qualità movimento > Quantità volume",
+      "bicipiti_focus": "Questo allenamento ha focus specifico su bicipiti con 4 esercizi dedicati (Curl EZ, Trazioni Supina, Curl Panca Inclinata, Zottman Curl)",
+      "pazienza": "Meglio sottostimare che sovrallenare - costruisci base solida"
+    }
+  }
+}

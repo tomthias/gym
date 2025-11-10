@@ -1,0 +1,37 @@
+{
+  "giorno": "Mercoledì",
+  "tipo": "riposo",
+  "nome": "OFF - Recupero Attivo (opzionale)",
+  "durata": "30-40 minuti (opzionale)",
+  "frequenza": "1 volta a settimana",
+  "obbligatorio": true,
+  "focus": [
+    "Recupero completo",
+    "Mobilità leggera (opzionale)"
+  ],
+  "nota": "Giorno di riposo tra i due boulder intensi",
+  "fasi": {
+    "opzione_1": {
+      "nome": "Riposo Completo",
+      "durata": "Giornata OFF totale",
+      "attivita": "Vita normale, mobilità naturale"
+    },
+    "opzione_2": {
+      "nome": "Mobilità Leggera (opzionale)",
+      "durata": "30-40 minuti",
+      "attivita": [
+        "Stretching dolce",
+        "Yoga leggero",
+        "Camminata"
+      ],
+      "intensita": "Molto bassa - solo piacere"
+    }
+  },
+  "cosa_NON_fare": [
+    "NO arrampicata",
+    "NO trave",
+    "NO fingerboard",
+    "NO palestra pesi"
+  ],
+  "importanza": "Essenziale per recupero tra Boulder 1 e Boulder 2"
+}

@@ -1,0 +1,70 @@
+{
+  "giorno": "Giovedì",
+  "sessione": "Pomeriggio/Sera",
+  "tipo": "arrampicata_boulder",
+  "nome": "BOULDER 2 - Volume e Resistenza",
+  "durata": "40-50 minuti",
+  "frequenza": "1 volta a settimana",
+  "focus": [
+    "Resistenza su boulder",
+    "Alto volume",
+    "Tecnica e fluidità"
+  ],
+  "obiettivo_grado": "Consolidamento 6b, volume su 6a/6a+",
+  "nota": "Fatto nel pomeriggio/sera, SEPARATO da Fisio 2 mattina",
+  "spacing": "Minimo 3-4 ore tra sessioni",
+  "fasi": {
+    "riscaldamento": {
+      "durata": "12 minuti",
+      "esercizi": [
+        {
+          "nome": "Bike/Cardio",
+          "durata": "5 minuti",
+          "note": "Leggero"
+        },
+        {
+          "nome": "Boulder Progressivi",
+          "serie_reps": "5-6 boulder",
+          "grado": "4c → 5c",
+          "note": "Riscaldamento graduale"
+        }
+      ]
+    },
+    "corpo_principale": {
+      "durata": "25-35 minuti",
+      "focus": "Alto volume, consolidamento tecnica",
+      "esercizi": [
+        {
+          "codice": "V1",
+          "nome": "4x4 Boulder Pyramid",
+          "serie_reps": "4 serie da 4 boulder",
+          "grado": "6a, 6a+, 6b, 6b per ogni serie",
+          "rest": "2' tra boulder, 5' tra serie",
+          "tecnica": "Focus continuità e fluidità"
+        },
+        {
+          "codice": "V2",
+          "nome": "Circuit Training",
+          "serie_reps": "8-10 boulder concatenati",
+          "grado": "5b → 6a+",
+          "rest": "30\" tra boulder, 4' dopo circuito",
+          "ripetizioni": "2-3 circuiti totali"
+        }
+      ]
+    },
+    "defaticamento": {
+      "durata": "5 minuti",
+      "esercizi": [
+        {
+          "nome": "Traversi Facili + Stretching",
+          "durata": "5 minuti"
+        }
+      ]
+    }
+  },
+  "intensita": "MEDIA - 70-85%",
+  "warnings": {
+    "spacing": "Minimo 3-4 ore da Fisio 2 mattina",
+    "volume": "È il giorno più voluminoso - domani scarico"
+  }
+}

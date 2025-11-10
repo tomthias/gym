@@ -1,0 +1,81 @@
+{
+  "giorno": "Lunedì",
+  "sessione": "Pomeriggio/Sera",
+  "tipo": "arrampicata_corda",
+  "nome": "CORDA - Resistenza e Tattica",
+  "durata": "50-65 minuti",
+  "frequenza": "1 volta a settimana",
+  "focus": [
+    "Resistenza su via",
+    "Tattica e lettura",
+    "Gestione energie"
+  ],
+  "obiettivo_grado": "Consolidare 6b in continuità, approcciare 6c",
+  "versione": "Senza fisio - solo arrampicata",
+  "nota": "Fatto nel pomeriggio/sera, SEPARATO da Fisio 1 mattina",
+  "spacing": "Minimo 3-4 ore tra sessioni per recupero",
+  "fasi": {
+    "riscaldamento": {
+      "durata": "12 minuti",
+      "esercizi": [
+        {
+          "nome": "Mobilità Specifica",
+          "durata": "5 minuti",
+          "note": "Spalle, polsi, dita - preparazione corda"
+        },
+        {
+          "nome": "Vie Facili",
+          "serie_reps": "2 vie",
+          "grado": "5a - 5b",
+          "note": "Riscaldamento progressivo, focus moschettaggio"
+        }
+      ]
+    },
+    "corpo_principale": {
+      "nome": "ALLENAMENTO CORDA",
+      "durata": "35-45 minuti",
+      "focus": "Resistenza su via, continuità, gestione riposi",
+      "esercizi": [
+        {
+          "codice": "C1",
+          "nome": "Laps Method - Vie Ripetute",
+          "serie_reps": "3 vie",
+          "grado": "6a - 6a+",
+          "note": "Ogni via 2 volte consecutive",
+          "rest": "10' tra vie",
+          "tecnica": "Prima salita: memorizza. Seconda: ottimizza"
+        },
+        {
+          "codice": "C2",
+          "nome": "Interval Training",
+          "serie_reps": "4 minuti on, 4 minuti off",
+          "grado": "6a",
+          "ripetizioni": "4-5 cicli",
+          "note": "Scala continuativamente 4', riposa 4'"
+        },
+        {
+          "codice": "C3",
+          "nome": "Progetto Working (opzionale)",
+          "serie_reps": "1 via progetto",
+          "grado": "6b o 6b+",
+          "tentativi": "2-3 tentativi",
+          "rest": "10' tra tentativi",
+          "nota": "Se non troppo stanco dopo laps + interval"
+        }
+      ]
+    },
+    "defaticamento": {
+      "durata": "3-5 minuti",
+      "esercizi": [
+        {
+          "nome": "Stretching",
+          "durata": "3-5 minuti"
+        }
+      ]
+    }
+  },
+  "warnings": {
+    "spacing": "Minimo 3-4 ore da Fisio 1 mattina",
+    "energia": "Non esagerare - hai Boulder 1 domani martedì"
+  }
+}

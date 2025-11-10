@@ -1,0 +1,111 @@
+{
+  "giorno": "Giovedì",
+  "sessione": "Mattina",
+  "tipo": "fisioterapia",
+  "nome": "FISIO 2 - L-Sit e Core",
+  "durata": "25-30 minuti",
+  "frequenza": "1 volta a settimana",
+  "focus": [
+    "L-Sit progression",
+    "Core strength",
+    "Preparazione boulder",
+    "Gambe e stabilità"
+  ],
+  "riferimento_originale": "allenamento_b.json - blocco fisioterapia",
+  "nota": "Fatto al mattino. Poi boulder nel pomeriggio/sera (spacing 3-4 ore).",
+  "obbligatorio": true,
+  "modificabile": false,
+  "fasi": {
+    "riscaldamento": {
+      "durata": "5 minuti",
+      "esercizi": [
+        {
+          "nome": "Bike",
+          "durata": "5 minuti",
+          "note": "Riscaldamento generale a basso impatto"
+        },
+        {
+          "nome": "Cat-Cow",
+          "serie_reps": "2x8",
+          "note": "Mobilità colonna vertebrale"
+        },
+        {
+          "nome": "Dead Bug",
+          "serie_reps": "2x8 per lato",
+          "note": "Attivazione core"
+        }
+      ]
+    },
+    "fisioterapia": {
+      "nome": "BLOCCO FISIOTERAPIA SCHEDA 2 (OBBLIGATORIO)",
+      "durata": "20-25 minuti",
+      "modificabile": false,
+      "note": "Esercizi riportati ESATTAMENTE come prescritto dalla fisioterapista",
+      "esercizi": [
+        {
+          "nome": "PLANK + ESTENSIONE ANCA ALTERNATA",
+          "serie_reps": "4x45\"",
+          "rest": "SS (Superserie con L-Sit)",
+          "carico": "-",
+          "note": "Non ruotare il bacino, movimento controllato",
+          "focus": "Core, glutei, stabilità",
+          "tecnica": "Posizione plank, alterna l'estensione di una gamba verso l'alto mantenendo il core stabile"
+        },
+        {
+          "nome": "L-SIT",
+          "serie_reps": "4x45\"",
+          "rest": "45\"",
+          "carico": "-",
+          "note": "Ginocchia in massima estensione, non mollare mai, piedi a martello e gambe che non si toccano",
+          "warning": "Questo esercizio è molto impegnativo e prosciugherà il core",
+          "focus": "Core, forza funzionale",
+          "tecnica": "Seduto per terra, gambe distese, solleva tutto il corpo con le braccia. Ginocchia in massima estensione"
+        },
+        {
+          "nome": "SQUAT TEMPO",
+          "serie_reps": "3x8",
+          "rest": "SS (Superserie con Wall Sit)",
+          "carico": "20 KG",
+          "note": "3\" a scendere, 3\" fermo iso, 3\" a salire",
+          "focus": "Quadricipiti, controllo",
+          "tecnica": "Squat eseguito con tempo controllato: 3 secondi in discesa, 3 secondi fermo in basso, 3 secondi in salita"
+        },
+        {
+          "nome": "WALL SIT",
+          "serie_reps": "3x40\"",
+          "rest": "2'",
+          "carico": "-",
+          "note": "Schiena contro muro, cosce parallele al pavimento",
+          "focus": "Quadricipiti, resistenza muscolare",
+          "tecnica": "Schiena contro il muro, scivola giù fino a cosce parallele al pavimento (90° alle ginocchia). Mantieni la posizione"
+        },
+        {
+          "nome": "AFFONDO STATICO CON DISCO SOPRA LA TESTA",
+          "serie_reps": "3x10 per lato",
+          "rest": "2'",
+          "carico": "Disco 5 KG",
+          "note": "Vedi video, occhio agli angoli",
+          "focus": "Gambe, core, stabilità",
+          "tecnica": "Posizione di affondo statico, disco sollevato sopra la testa"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "volume_totale": {
+      "serie_fisio": 17,
+      "durata_totale": "25-30 minuti"
+    }
+  },
+  "warnings": {
+    "priorita_assoluta": "Blocco fisioterapia NON si modifica mai - ordine medico",
+    "l_sit_killer": "L-Sit 4x45\" prosciugherà il core - è normale sentirsi affaticati",
+    "spacing": "Aspetta 3-4 ore prima della sessione boulder pomeridiana",
+    "stop_signals": [
+      "Dolore acuto lombare",
+      "Impossibilità di mantenere L-Sit per più di 10 secondi",
+      "Crampi quadricipiti eccessivi",
+      "Vertigini post L-Sit"
+    ]
+  }
+}

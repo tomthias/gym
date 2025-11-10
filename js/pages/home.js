@@ -1,127 +1,118 @@
-// ========== HOME PAGE LOGIC ==========
+// ========== HOME PAGE LOGIC - WEEKLY SCHEDULE ==========
 
-import { initCheckboxes, clearAllCache, toggleSection } from '../shared.js';
-import { exerciseData } from '../data/exercises.js';
+import { clearAllCache } from '../shared.js';
+import { initWeeklySchedule, refreshWeeklySchedule } from './weekly-schedule.js';
+import { resetAllSessionHistory } from '../utils/session-loader.js';
 
-// Workout progress management
-function toggleCheck(id) {
-    const checkbox = document.getElementById(id);
-    if (checkbox) {
-        checkbox.classList.toggle('checked');
-        saveProgress();
-        updateProgress();
-    }
-}
+/**
+ * Initialize on page load
+ */
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('Inizializzazione home page con weekly schedule...');
 
-function saveProgress() {
-    const checkboxes = document.querySelectorAll('.checkbox');
-    const progress = {};
-    checkboxes.forEach(cb => {
-        progress[cb.id] = cb.classList.contains('checked');
-    });
-    localStorage.setItem('workoutProgress', JSON.stringify(progress));
-}
+    // Mostra loader
+    showLoader();
 
-function loadProgress() {
-    const saved = localStorage.getItem('workoutProgress');
-    if (saved) {
-        const progress = JSON.parse(saved);
-        Object.keys(progress).forEach(id => {
-            const checkbox = document.getElementById(id);
-            if (checkbox && progress[id]) {
-                checkbox.classList.add('checked');
-            }
-        });
-    }
-    updateProgress();
-}
+    try {
+        // Inizializza il calendario settimanale
+        await initWeeklySchedule();
 
-function updateProgress() {
-    updateWorkoutProgress('A', 24);
-    updateWorkoutProgress('B', 22);
-    updateWorkoutProgress('C', 12);
-    updateWorkoutProgress('D', 14); // Allenamento 1A
-    updateWorkoutProgress('E', 16); // Allenamento 2A
-}
+        // Nascondi loader
+        hideLoader();
 
-function updateWorkoutProgress(workout, total) {
-    const prefix = workout.toLowerCase();
-    const checkboxes = document.querySelectorAll(`[id^="${prefix}-"]`);
-    let completed = 0;
-    checkboxes.forEach(cb => {
-        if (cb.classList.contains('checked')) completed++;
-    });
-    const percentage = (completed / total) * 100;
-    const progressBar = document.getElementById(`progress${workout}`);
-    const progressText = document.getElementById(`progressText${workout}`);
-    if (progressBar) progressBar.style.width = percentage + '%';
-    if (progressText) progressText.textContent = `${completed}/${total}`;
-}
+        // Setup event listeners
+        setupEventListeners();
 
-function resetAllProgress() {
-    if (confirm('Vuoi resettare tutti i progressi degli allenamenti?')) {
-        localStorage.removeItem('workoutProgress');
-        document.querySelectorAll('.checkbox').forEach(cb => {
-            cb.classList.remove('checked');
-        });
-        updateProgress();
-    }
-}
-
-// Workout navigation
-function openWorkout(workoutId) {
-    const homeView = document.getElementById('homeView');
-    const workoutDetail = document.getElementById(workoutId);
-    if (homeView) homeView.classList.add('hidden');
-    if (workoutDetail) workoutDetail.classList.add('visible');
-    window.scrollTo(0, 0);
-}
-
-function closeWorkout() {
-    document.querySelectorAll('.workout-detail').forEach(w => {
-        w.classList.remove('visible');
-    });
-    const homeView = document.getElementById('homeView');
-    if (homeView) homeView.classList.remove('hidden');
-    window.scrollTo(0, 0);
-}
-
-// Calendar - Highlight today
-function updateCalendar() {
-    const today = new Date().getDay(); // 0 = Dom, 1 = Lun, ...
-    document.querySelectorAll('.calendar-day').forEach(day => {
-        const dayNum = parseInt(day.dataset.day);
-        if (dayNum === today) {
-            day.classList.add('today');
-        }
-    });
-}
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    initCheckboxes();
-    loadProgress();
-    updateCalendar();
-
-    // Add event listeners for workout start buttons
-    document.querySelectorAll('.btn-start-full-workout').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const workoutId = this.dataset.workout;
-            window.location.href = `pages/workout-flow.html?workout=${workoutId}`;
-        });
-    });
-
-    // Add event listener for reset cache button
-    const resetBtn = document.querySelector('.clear-cache-btn');
-    if (resetBtn) {
-        resetBtn.addEventListener('click', resetAllProgress);
+    } catch (error) {
+        console.error('Errore inizializzazione:', error);
+        hideLoader();
+        showError('Errore nel caricamento dell\'app. Riprova ricariando la pagina.');
     }
 });
 
+/**
+ * Setup event listeners
+ */
+function setupEventListeners() {
+    // Reset progress button
+    const resetBtn = document.querySelector('.btn-reset-progress');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', resetProgress);
+    }
+
+    // Clear cache button
+    const clearCacheBtn = document.querySelector('.clear-cache-btn');
+    if (clearCacheBtn) {
+        clearCacheBtn.addEventListener('click', clearAllCache);
+    }
+
+    // Refresh button
+    const refreshBtn = document.querySelector('.btn-refresh');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', () => {
+            refreshWeeklySchedule();
+        });
+    }
+}
+
+/**
+ * Reset progress con conferma
+ */
+function resetProgress() {
+    const success = resetAllSessionHistory();
+    if (success) {
+        // Ricarica la pagina per aggiornare la UI
+        window.location.reload();
+    }
+}
+
+/**
+ * Mostra loader
+ */
+function showLoader() {
+    let loader = document.getElementById('appLoader');
+    if (!loader) {
+        loader = document.createElement('div');
+        loader.id = 'appLoader';
+        loader.className = 'app-loader';
+        loader.innerHTML = `
+            <div class="loader-spinner"></div>
+            <p>Caricamento sessioni...</p>
+        `;
+        document.body.appendChild(loader);
+    }
+    loader.style.display = 'flex';
+}
+
+/**
+ * Nascondi loader
+ */
+function hideLoader() {
+    const loader = document.getElementById('appLoader');
+    if (loader) {
+        loader.style.display = 'none';
+    }
+}
+
+/**
+ * Mostra errore
+ */
+function showError(message) {
+    const container = document.getElementById('weeklyListContainer');
+    if (container) {
+        container.innerHTML = `
+            <div class="error-message">
+                <h3>⚠️ Errore</h3>
+                <p>${message}</p>
+                <button onclick="window.location.reload()" class="btn-primary">
+                    Ricarica
+                </button>
+            </div>
+        `;
+    }
+}
+
 // Expose functions to window for onclick handlers
-window.toggleCheck = toggleCheck;
-window.toggleSection = toggleSection;
-window.openWorkout = openWorkout;
-window.closeWorkout = closeWorkout;
-window.resetAllProgress = resetAllProgress;
-window.clearCache = clearAllCache;
+window.resetProgress = resetProgress;
+window.clearAllCache = clearAllCache;
+window.refreshWeeklySchedule = refreshWeeklySchedule;
