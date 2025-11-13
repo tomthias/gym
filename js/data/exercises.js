@@ -8,7 +8,7 @@ export const exerciseData = {
         tecnica: 'Respirazione regolare, postura corretta sulla sella',
         note: 'Riscaldamento',
         duration: '12\'',
-        image: 'assets/images/exercises/bike.jpg'
+        image: '/assets/images/exercises/bike.jpg'
     },
     circonduzione: {
         name: 'Circonduzione Braccia',
@@ -16,7 +16,7 @@ export const exerciseData = {
         come: 'In piedi, ruotare le braccia descrivendo ampi cerchi, prima in avanti poi indietro.',
         tecnica: 'Movimenti ampi e controllati, non forzare',
         note: '',
-        image: 'assets/images/exercises/circonduzione.jpg'
+        image: '/assets/images/exercises/circonduzione.jpg'
     },
     mobilita: {
         name: 'Mobilità Spalle e Polsi',
@@ -24,7 +24,7 @@ export const exerciseData = {
         come: 'Eseguire rotazioni delle spalle e dei polsi in tutte le direzioni.',
         tecnica: 'Movimenti lenti e controllati',
         note: '',
-        image: 'assets/images/exercises/mobilita.jpg'
+        image: '/assets/images/exercises/mobilita.jpg'
     },
 
     // Fisioterapia Allenamento A
@@ -85,7 +85,7 @@ export const exerciseData = {
         come: 'In equilibrio su un piede, eseguire movimenti controllati.',
         tecnica: 'Esecuzione lenta',
         note: 'Tappetino piegato',
-        image: 'assets/images/exercises/elvis.jpg',
+        image: '/assets/images/exercises/elvis.jpg',
         fisio: true
     },
 
@@ -172,7 +172,7 @@ export const exerciseData = {
         come: 'Supino, braccia e gambe in alto. Abbassa alternativamente braccio e gamba opposti.',
         tecnica: 'Mantieni la schiena aderente al pavimento',
         note: '',
-        image: 'assets/images/exercises/deadbug.gif',
+        image: '/assets/images/exercises/deadbug.gif',
         video: 'https://www.youtube.com/watch?v=g_BYB0R-4Ws'
     },
     plankestensione: {
@@ -397,7 +397,7 @@ export const exerciseData = {
         come: 'Cardio a basso impatto su macchina ellittica.',
         tecnica: 'Movimento fluido, intensità moderata',
         note: 'Se disponibile',
-        image: 'assets/images/exercises/ellittica.jpg'
+        image: '/assets/images/exercises/ellittica.jpg'
     },
     alzatecavo: {
         name: 'Alzate Laterali Cavo Mono',
@@ -465,7 +465,7 @@ export const exerciseData = {
         come: 'Sdraiato su panca, bilanciere impugnato. Abbassa verso il petto e spingi verso l\'alto.',
         tecnica: 'Controllo eccentrico, fermo 1" al petto, spinta esplosiva. Bilanciere più stabile dei manubri',
         note: 'Controllo massima qualità, focus forza',
-        image: 'assets/images/exercises/chestpressbilanciere.gif'
+        image: '/assets/images/exercises/chestpressbilanciere.gif'
     },
     dipsparallele: {
         name: 'Dips Parallele Zavorrate',
@@ -487,7 +487,7 @@ export const exerciseData = {
         come: 'Seduto o in piedi, manubri altezza spalle palmi verso corpo. Ruota i polsi mentre spingi verso l\'alto.',
         tecnica: 'Inizia con palmi verso il corpo, finisci con palmi in avanti. Rotazione fluida, pausa 1" in alto',
         note: 'Rotazione completa, stimolo deltoide anteriore/mediale. Core attivo',
-        image: 'assets/images/exercises/arnoldpress.gif'
+        image: '/assets/images/exercises/arnoldpress.gif'
     },
     alzatefrontalibilanciere: {
         name: 'Alzate Frontali Bilanciere',
@@ -498,7 +498,7 @@ export const exerciseData = {
         come: 'In piedi, bilanciere davanti alle cosce. Solleva davanti fino altezza spalle.',
         tecnica: 'Non superare altezza spalle, evitare oscillazioni del busto. 2 sec su, 1 sec pausa, 2 sec giù',
         note: 'Lento e controllato, senza slancio. Focus isolamento deltoidi anteriori',
-        image: 'assets/images/exercises/alzatefrontalibilanciere.gif'
+        image: '/assets/images/exercises/alzatefrontalibilanciere.gif'
     },
     skullcrushers: {
         name: 'Skullcrushers EZ',
@@ -509,7 +509,7 @@ export const exerciseData = {
         come: 'Sdraiato su panca, bilanciere sopra il petto. Fletti solo avambracci verso fronte, estendi.',
         tecnica: 'Gomiti fissi, movimento solo dell\'avambraccio. Non muovere le spalle, isolamento puro tricipiti',
         note: 'Estensione completa, gomiti fissi. Controllo eccentrico fondamentale',
-        image: 'assets/images/exercises/skullcrushers.gif'
+        image: '/assets/images/exercises/skullcrushers.gif'
     },
     pushupdiamond: {
         name: 'Push-Up Diamond',
@@ -520,7 +520,7 @@ export const exerciseData = {
         come: 'Posizione plank, mani a diamante sotto il petto. Scendi al petto, spingi su.',
         tecnica: 'Se troppo difficile, appoggia le ginocchia o fai su panca inclinata. 2 sec giù, 1 sec pausa, 2 sec su',
         note: 'Contrazione massima tricipiti, movimento lento e controllato',
-        image: 'assets/images/exercises/pushupdiamond.gif'
+        image: '/assets/images/exercises/pushupdiamond.gif'
     },
 
     // Allenamento 2A - Variant Pull Exercises
@@ -533,7 +533,7 @@ export const exerciseData = {
         come: 'Appeso alla sbarra con presa supina (palmi verso di te), larghezza spalle. Tira su fino mento sopra sbarra.',
         tecnica: '2 sec su, 1 sec pausa, 3 sec giù. Focus controllo e scapole, full ROM',
         note: 'Se necessario usa elastico assistenza. Alternativa: lat machine presa supina 4×8-10',
-        image: 'assets/images/exercises/trazionisupina.gif'
+        image: '/assets/images/exercises/trazionisupina.gif'
     },
     rematorebilanciere: {
         name: 'Rematore Bilanciere',
@@ -544,7 +544,7 @@ export const exerciseData = {
         come: 'In piedi, busto inclinato 45°, bilanciere in mano con presa pronata larghezza spalle. Tira verso ombelico, spremi scapole.',
         tecnica: 'Non usare slancio, movimento inizia dalle scapole. Scapole indietro, pausa 1", controllo eccentrico',
         note: 'Presa pronata, controllo scapole. Busto a 45°, core attivo',
-        image: 'assets/images/exercises/rematorebilanciere.gif'
+        image: '/assets/images/exercises/rematorebilanciere.gif'
     },
     curlbilanciere: {
         name: 'Curl Bilanciere EZ',
@@ -588,7 +588,7 @@ export const exerciseData = {
         come: 'Sali con presa supina (normale curl). In alto ruota in presa prona. Scendi lento con presa prona.',
         tecnica: 'Movimento combinato: bicipiti in salita, avambracci in discesa',
         note: 'Rotazione polso in negativo. Su con supina, giù con prona',
-        image: 'assets/images/exercises/zottmancurl.gif'
+        image: '/assets/images/exercises/zottmancurl.gif'
     },
 
     // Nuovi esercizi - Ottimizzazione Spalla Safe + Ipertrofia

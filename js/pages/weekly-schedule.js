@@ -3,13 +3,14 @@
 import {
     WEEKLY_STRUCTURE,
     SESSION_COLORS,
-    SESSION_EMOJI,
+    SESSION_ICONS,
     loadAllSessions,
     getCurrentDayKey,
     isSessionCompleted,
     getWeeklyStats,
     getTodayDate
 } from '../utils/session-loader.js';
+import { getSessionIcon, getTurnoIcon } from '../utils/icons.js';
 
 /**
  * Dati delle sessioni caricati
@@ -123,15 +124,15 @@ function renderSessionCard(sessione, giornoKey) {
     if (sessione.turno !== 'tutto_giorno') {
         const turnoBadge = document.createElement('span');
         turnoBadge.className = `turno-badge turno-${sessione.turno}`;
-        turnoBadge.textContent = sessione.turno === 'mattina' ? '☀️ Mattina' : '🌙 Pomeriggio';
+        turnoBadge.innerHTML = getTurnoIcon(sessione.turno, { size: 16 }) + ' ' + (sessione.turno === 'mattina' ? 'Mattina' : 'Pomeriggio');
         card.appendChild(turnoBadge);
     }
 
-    // Emoji tipo
-    const emoji = document.createElement('span');
-    emoji.className = 'session-emoji';
-    emoji.textContent = SESSION_EMOJI[sessione.tipo];
-    card.appendChild(emoji);
+    // Icona tipo sessione
+    const iconWrapper = document.createElement('div');
+    iconWrapper.className = 'session-icon';
+    iconWrapper.innerHTML = getSessionIcon(sessione.tipo, { size: 32 });
+    card.appendChild(iconWrapper);
 
     // Titolo sessione
     const title = document.createElement('h3');
@@ -143,7 +144,10 @@ function renderSessionCard(sessione, giornoKey) {
     if (sessionData?.durata) {
         const duration = document.createElement('p');
         duration.className = 'session-duration';
-        duration.innerHTML = `⏱️ ${sessionData.durata}`;
+        duration.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+            <polyline points="12 6 12 12 16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg> ${sessionData.durata}`;
         card.appendChild(duration);
     }
 
@@ -164,7 +168,11 @@ function renderSessionCard(sessione, giornoKey) {
     if (sessione.tipo === 'riposo') {
         const restWarning = document.createElement('div');
         restWarning.className = 'session-warning';
-        restWarning.innerHTML = '⚠️ Giorno OFF obbligatorio';
+        restWarning.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="currentColor" stroke-width="2"/>
+            <line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" stroke-width="2"/>
+            <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2"/>
+        </svg> Giorno OFF obbligatorio`;
         card.appendChild(restWarning);
     }
 
@@ -180,8 +188,11 @@ function renderSessionCard(sessione, giornoKey) {
     actionButton.className = `btn-start-session ${isCompleted ? 'btn-completed' : ''}`;
 
     if (isCompleted) {
-        actionButton.innerHTML = '✓ Completata';
+        actionButton.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg> Completata`;
         actionButton.disabled = false;
+        actionButton.setAttribute('aria-label', 'Sessione completata, clicca per riaprire');
         actionButton.onclick = () => {
             if (confirm('Vuoi riaprire questa sessione?')) {
                 startSession(sessione.id, giornoKey);
@@ -189,16 +200,20 @@ function renderSessionCard(sessione, giornoKey) {
         };
     } else {
         actionButton.textContent = 'Inizia Sessione';
+        actionButton.setAttribute('aria-label', 'Inizia questa sessione');
         actionButton.onclick = () => startSession(sessione.id, giornoKey);
     }
 
     card.appendChild(actionButton);
 
-    // Checkbox per completamento rapido
+    // Checkmark per completamento rapido
     if (isCompleted) {
         const checkmark = document.createElement('div');
         checkmark.className = 'session-checkmark';
-        checkmark.innerHTML = '✓';
+        checkmark.setAttribute('aria-hidden', 'true');
+        checkmark.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`;
         card.appendChild(checkmark);
     }
 
@@ -262,7 +277,12 @@ function showError(message) {
     if (container) {
         container.innerHTML = `
             <div class="error-message">
-                <p>⚠️ ${message}</p>
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="currentColor" stroke-width="2"/>
+                    <line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" stroke-width="2"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <p>${message}</p>
             </div>
         `;
     }

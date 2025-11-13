@@ -126,7 +126,13 @@ function renderSessionHeader() {
             <div class="session-title">
                 <h1>${sessionData.nome || sessionInfo.id}</h1>
                 <p class="session-meta">${sessionData.giorno || ''} ${sessionData.sessione ? '- ' + sessionData.sessione : ''}</p>
-                <p class="session-duration">⏱️ ${sessionData.durata || 'N/A'}</p>
+                <p class="session-duration">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <polyline points="12 6 12 12 16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    ${sessionData.durata || 'N/A'}
+                </p>
             </div>
         </div>
     `;
@@ -180,8 +186,11 @@ function renderSessionExercises() {
     html += renderSessionNotes();
     html += `
         <div class="session-actions">
-            <button onclick="completeSession()" class="btn-complete-session">
-                ✓ Completa Sessione
+            <button onclick="completeSession()" class="btn-complete-session" aria-label="Completa sessione">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Completa Sessione
             </button>
         </div>
     `;
@@ -202,7 +211,14 @@ function renderExerciseCard(exercise, idx) {
                 ${exercise.serie_reps ? `<span class="exercise-sets">${exercise.serie_reps}</span>` : ''}
             </div>
 
-            ${exercise.focus ? `<p class="exercise-focus">🎯 ${exercise.focus}</p>` : ''}
+            ${exercise.focus ? `<p class="exercise-focus">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="2" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                ${exercise.focus}
+            </p>` : ''}
 
             ${exercise.tecnica ? `
                 <div class="exercise-technique">
@@ -210,15 +226,40 @@ function renderExerciseCard(exercise, idx) {
                 </div>
             ` : ''}
 
-            ${exercise.note ? `<p class="exercise-note">💡 ${exercise.note}</p>` : ''}
+            ${exercise.note ? `<p class="exercise-note">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <line x1="12" y1="16" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                ${exercise.note}
+            </p>` : ''}
 
-            ${exercise.carico ? `<p class="exercise-load">🏋️ ${exercise.carico}</p>` : ''}
+            ${exercise.carico ? `<p class="exercise-load">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="9" y1="4" x2="9" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="15" y1="4" x2="15" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="4" y1="9" x2="20" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="4" y1="15" x2="20" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                ${exercise.carico}
+            </p>` : ''}
 
-            ${exercise.rest ? `<p class="exercise-rest">⏱️ Recupero: ${exercise.rest}</p>` : ''}
+            ${exercise.rest ? `<p class="exercise-rest">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <polyline points="12 6 12 12 16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Recupero: ${exercise.rest}
+            </p>` : ''}
 
             ${detailsExist ? `
-                <button onclick="showExerciseDetails('${exercise.key}')" class="btn-details">
-                    📖 Vedi Dettagli
+                <button onclick="showExerciseDetails('${exercise.key}')" class="btn-details" aria-label="Vedi dettagli esercizio">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Vedi Dettagli
                 </button>
             ` : ''}
 
@@ -241,7 +282,14 @@ function renderSessionNotes() {
 
     if (sessionData.warnings) {
         html += '<div class="session-warnings">';
-        html += '<h3>⚠️ Avvisi Importanti</h3>';
+        html += `<h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="currentColor" stroke-width="2"/>
+                <line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" stroke-width="2"/>
+                <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            Avvisi Importanti
+        </h3>`;
 
         if (sessionData.warnings.stop_signals) {
             html += '<div class="warning-box">';
@@ -260,7 +308,15 @@ function renderSessionNotes() {
     }
 
     if (sessionData.nota) {
-        html += `<div class="session-note-box">📝 ${sessionData.nota}</div>`;
+        html += `<div class="session-note-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            ${sessionData.nota}
+        </div>`;
     }
 
     return html;
@@ -361,7 +417,7 @@ function completeSession() {
 
     // Show completion message
     if (confirm(`Sessione completata! 🎉\n\nDurata: ${durationMinutes} minuti\n\nTornare alla home?`)) {
-        window.location.href = '../index.html';
+        window.location.href = '/index.html';
     }
 }
 
@@ -371,7 +427,7 @@ function completeSession() {
 function confirmExitSession() {
     if (confirm('Sei sicuro di voler uscire? Il progresso non verrà salvato.')) {
         releaseWakeLock();
-        window.location.href = '../index.html';
+        window.location.href = '/index.html';
     }
 }
 
@@ -405,9 +461,16 @@ function showError(message) {
     if (container) {
         container.innerHTML = `
             <div class="error-state">
-                <h2>⚠️ Errore</h2>
+                <h2>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="currentColor" stroke-width="2"/>
+                        <line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" stroke-width="2"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Errore
+                </h2>
                 <p>${message}</p>
-                <button onclick="window.location.href='../index.html'" class="btn-primary">
+                <button onclick="window.location.href='/index.html'" class="btn-primary" aria-label="Torna alla home">
                     Torna alla Home
                 </button>
             </div>

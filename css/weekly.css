@@ -151,10 +151,16 @@
 }
 
 /* Session Content */
-.session-emoji {
-    font-size: 2rem;
-    display: block;
-    margin-bottom: 8px;
+.session-icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: var(--spacing-md, 12px);
+    color: var(--color-text-secondary, rgba(255, 255, 255, 0.9));
+}
+
+.session-icon svg {
+    flex-shrink: 0;
 }
 
 .session-title {
@@ -423,5 +429,181 @@
 
     .session-title {
         font-size: 1.1rem;
+    }
+}
+
+/* ========== SVG ICONS STYLING ========== */
+
+/* General SVG styling for inline icons */
+button svg,
+.btn-secondary svg,
+.btn-start-session svg {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: var(--spacing-sm, 8px);
+}
+
+/* Icon in text elements */
+p svg,
+h3 svg,
+.session-duration svg,
+.exercise-focus svg,
+.exercise-note svg,
+.exercise-load svg,
+.exercise-rest svg {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: var(--spacing-xs, 4px);
+}
+
+/* Turno badge with icons */
+.turno-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs, 4px);
+}
+
+.turno-badge svg {
+    margin-right: 0;
+}
+
+/* Session warning with icon */
+.session-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm, 8px);
+}
+
+.session-warning svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Session note box with icon */
+.session-note-box {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm, 8px);
+    background: rgba(255, 255, 255, 0.05);
+    padding: var(--spacing-md, 12px);
+    border-radius: var(--radius-md, 8px);
+    border-left: 3px solid var(--color-info, #2196F3);
+    margin: var(--spacing-lg, 16px) 0;
+}
+
+.session-note-box svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Error message styling */
+.error-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-3xl, 32px);
+    text-align: center;
+}
+
+.error-message svg {
+    margin-bottom: var(--spacing-lg, 16px);
+    color: var(--color-error, #F44336);
+}
+
+/* Actions container with icon buttons */
+.actions-container .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm, 8px);
+}
+
+.actions-container .btn-secondary svg {
+    margin-right: 0;
+}
+
+/* Improved button styling */
+.btn-start-session {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm, 8px);
+}
+
+.btn-start-session svg {
+    margin-right: 0;
+    flex-shrink: 0;
+}
+
+/* Session checkmark improved */
+.session-checkmark svg {
+    display: block;
+}
+
+/* ========== IMPROVED CARD DESIGN ========== */
+
+/* Day card improvements */
+.day-card {
+    background: var(--card-bg, #2a2a2a);
+    border-radius: var(--radius-lg, 12px);
+    padding: var(--spacing-lg, 16px);
+    box-shadow: var(--shadow-card, 0 4px 6px rgba(0, 0, 0, 0.16));
+    transition: var(--transition-shadow, box-shadow 0.2s ease);
+    border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.day-card:hover {
+    box-shadow: var(--shadow-card-hover, 0 8px 12px rgba(0, 0, 0, 0.20));
+}
+
+.day-today {
+    border-color: var(--color-primary, #00A76F);
+    box-shadow: 0 0 0 2px rgba(0, 167, 111, 0.2), var(--shadow-card);
+}
+
+/* Session card improvements */
+.session-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md, 10px);
+    padding: var(--spacing-lg, 16px);
+    border-left-width: 3px;
+    transition: var(--transition-normal, all 0.2s ease);
+}
+
+.session-card:hover {
+    background: rgba(255, 255, 255, 0.11);
+    transform: translateY(-1px);
+}
+
+.session-completed {
+    opacity: 0.75;
+    background: rgba(76, 175, 80, 0.08);
+}
+
+/* ========== ACCESSIBILITY IMPROVEMENTS ========== */
+
+/* Focus states for interactive elements */
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--color-primary, #00A76F);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm, 6px);
+}
+
+/* Better touch targets for mobile */
+@media (hover: none) and (pointer: coarse) {
+    .btn-start-session {
+        min-height: 44px;
+        padding: var(--spacing-md, 12px) var(--spacing-xl, 20px);
+    }
+
+    .nav-item {
+        min-height: 48px;
+        min-width: 48px;
+    }
+
+    .btn-cancel {
+        min-width: 44px;
+        min-height: 44px;
     }
 }

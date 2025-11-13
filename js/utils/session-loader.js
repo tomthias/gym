@@ -66,16 +66,16 @@ export const SESSION_COLORS = {
 };
 
 /**
- * Emoji per tipo di sessione
+ * Icon names for session types (SVG-based)
  */
-export const SESSION_EMOJI = {
-    fisioterapia: '🏥',
-    arrampicata_corda: '🪢',
-    arrampicata_boulder: '🧗',
-    arrampicata_outdoor: '⛰️',
-    riposo: '😴',
-    recupero: '💪',
-    variabile: '🎯'
+export const SESSION_ICONS = {
+    fisioterapia: 'physio',
+    arrampicata_corda: 'rope',
+    arrampicata_boulder: 'boulder',
+    arrampicata_outdoor: 'mountain',
+    riposo: 'rest',
+    recupero: 'recovery',
+    variabile: 'variable'
 };
 
 /**
@@ -120,7 +120,7 @@ export async function loadSessionData(filename) {
     }
 
     try {
-        const response = await fetch(`workouts-data/${filename}`);
+        const response = await fetch(`/workouts-data/${filename}`);
         if (!response.ok) {
             throw new Error(`Failed to load ${filename}: ${response.statusText}`);
         }

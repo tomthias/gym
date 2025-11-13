@@ -1,0 +1,310 @@
+/* ========== DESIGN TOKENS SYSTEM ========== */
+/* Sistema centralizzato di variabili per design consistency */
+
+:root {
+    /* ========== SPACING SYSTEM (4px base) ========== */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+    --spacing-2xl: 24px;
+    --spacing-3xl: 32px;
+    --spacing-4xl: 40px;
+    --spacing-5xl: 48px;
+    --spacing-6xl: 64px;
+
+    /* ========== BORDER RADIUS SYSTEM ========== */
+    --radius-none: 0;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 20px;
+    --radius-full: 9999px;
+
+    /* ========== SHADOW ELEVATION SYSTEM ========== */
+    --shadow-none: none;
+    --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+    --shadow-2: 0 4px 6px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-3: 0 8px 12px rgba(0, 0, 0, 0.20), 0 4px 6px rgba(0, 0, 0, 0.10);
+    --shadow-4: 0 16px 24px rgba(0, 0, 0, 0.24), 0 8px 12px rgba(0, 0, 0, 0.12);
+    --shadow-5: 0 24px 48px rgba(0, 0, 0, 0.28), 0 12px 20px rgba(0, 0, 0, 0.14);
+
+    /* Shadow specifici */
+    --shadow-card: var(--shadow-2);
+    --shadow-card-hover: var(--shadow-3);
+    --shadow-modal: var(--shadow-5);
+    --shadow-bottom-nav: 0 -2px 8px rgba(0, 0, 0, 0.15);
+
+    /* ========== COLOR PALETTE ========== */
+
+    /* Base Colors - Improved contrast */
+    --color-bg-primary: #1e1e1e;     /* Slightly lighter than #1a1a1a */
+    --color-bg-secondary: #2a2a2a;   /* Cards background */
+    --color-bg-tertiary: #333333;    /* Elevated cards */
+
+    /* Text Colors - WCAG AA compliant */
+    --color-text-primary: #ffffff;    /* Main text */
+    --color-text-secondary: #e0e0e0;  /* Secondary text (improved from #ccc) */
+    --color-text-tertiary: #b3b3b3;   /* Tertiary text (improved from #888) */
+    --color-text-disabled: #808080;   /* Disabled text */
+    --color-text-inverse: #1e1e1e;    /* Text on light backgrounds */
+
+    /* Brand Colors */
+    --color-primary: #00A76F;         /* Primary green (more vivid) */
+    --color-primary-hover: #008F5F;   /* Darker on hover */
+    --color-primary-light: #4CD4A6;   /* Lighter variant */
+    --color-primary-dark: #006B47;    /* Darker variant */
+
+    /* Semantic Colors - Better visibility */
+    --color-success: #4CAF50;         /* Success green */
+    --color-success-light: #81C784;
+    --color-success-dark: #388E3C;
+    --color-success-bg: rgba(76, 175, 80, 0.12);
+
+    --color-warning: #FF9800;         /* Warning orange */
+    --color-warning-light: #FFB74D;
+    --color-warning-dark: #F57C00;
+    --color-warning-bg: rgba(255, 152, 0, 0.12);
+
+    --color-error: #F44336;           /* Error red */
+    --color-error-light: #E57373;
+    --color-error-dark: #D32F2F;
+    --color-error-bg: rgba(244, 67, 54, 0.12);
+
+    --color-info: #2196F3;            /* Info blue */
+    --color-info-light: #64B5F6;
+    --color-info-dark: #1976D2;
+    --color-info-bg: rgba(33, 150, 243, 0.12);
+
+    /* Session Type Colors - More vibrant */
+    --color-physio: #20B2AA;          /* Teal */
+    --color-rope: #FFB347;            /* Tangerine */
+    --color-boulder: #FF6B35;         /* Coral */
+    --color-outdoor: #4169E1;         /* Royal blue */
+    --color-rest: #9E9E9E;            /* Gray (improved from #808080) */
+    --color-recovery: #90EE90;        /* Light green */
+    --color-variable: #DDA0DD;        /* Plum */
+
+    /* Badge/Tag Colors */
+    --color-badge-bg: rgba(255, 255, 255, 0.10);
+    --color-badge-text: rgba(255, 255, 255, 0.85);
+    --color-badge-border: rgba(255, 255, 255, 0.15);
+
+    /* Border Colors */
+    --color-border-subtle: rgba(255, 255, 255, 0.08);
+    --color-border-default: rgba(255, 255, 255, 0.12);
+    --color-border-strong: rgba(255, 255, 255, 0.18);
+
+    /* Overlay Colors */
+    --color-overlay-light: rgba(0, 0, 0, 0.4);
+    --color-overlay-medium: rgba(0, 0, 0, 0.6);
+    --color-overlay-dark: rgba(0, 0, 0, 0.8);
+    --color-overlay-black: rgba(0, 0, 0, 0.95);
+
+    /* ========== TYPOGRAPHY SYSTEM ========== */
+
+    /* Font Families */
+    --font-family-primary: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    --font-family-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+
+    /* Font Sizes - Responsive with clamp() */
+    --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);      /* 12-14px */
+    --font-size-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);          /* 14-16px */
+    --font-size-base: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);       /* 16-18px */
+    --font-size-md: clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem);      /* 18-20px */
+    --font-size-lg: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);        /* 20-24px */
+    --font-size-xl: clamp(1.5rem, 1.35rem + 0.75vw, 2rem);          /* 24-32px */
+    --font-size-2xl: clamp(2rem, 1.75rem + 1.25vw, 3rem);           /* 32-48px */
+    --font-size-3xl: clamp(2.5rem, 2rem + 2.5vw, 4rem);             /* 40-64px */
+
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+
+    /* Line Heights */
+    --line-height-tight: 1.25;
+    --line-height-snug: 1.375;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.625;
+    --line-height-loose: 2;
+
+    /* Letter Spacing */
+    --letter-spacing-tight: -0.025em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.025em;
+    --letter-spacing-wider: 0.05em;
+
+    /* ========== TRANSITIONS & ANIMATIONS ========== */
+
+    /* Durations */
+    --duration-fast: 100ms;
+    --duration-normal: 200ms;
+    --duration-slow: 300ms;
+    --duration-slower: 500ms;
+
+    /* Easing Functions */
+    --ease-linear: linear;
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Common Transitions */
+    --transition-fast: all var(--duration-fast) var(--ease-out);
+    --transition-normal: all var(--duration-normal) var(--ease-out);
+    --transition-slow: all var(--duration-slow) var(--ease-in-out);
+
+    /* Specific Transitions */
+    --transition-color: color var(--duration-normal) var(--ease-out),
+                        background-color var(--duration-normal) var(--ease-out),
+                        border-color var(--duration-normal) var(--ease-out);
+    --transition-transform: transform var(--duration-normal) var(--ease-out);
+    --transition-shadow: box-shadow var(--duration-normal) var(--ease-out);
+
+    /* ========== Z-INDEX SYSTEM ========== */
+    --z-base: 0;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-popover: 600;
+    --z-tooltip: 700;
+    --z-notification: 800;
+
+    /* ========== BREAKPOINTS (for reference, not usable in CSS) ========== */
+    /* Use these values in @media queries */
+    /*
+    --breakpoint-xs: 320px;
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1536px;
+    */
+
+    /* ========== COMPONENT-SPECIFIC TOKENS ========== */
+
+    /* Buttons */
+    --button-padding-sm: var(--spacing-sm) var(--spacing-lg);
+    --button-padding-md: var(--spacing-md) var(--spacing-xl);
+    --button-padding-lg: var(--spacing-lg) var(--spacing-2xl);
+    --button-radius: var(--radius-md);
+    --button-shadow: var(--shadow-1);
+    --button-shadow-hover: var(--shadow-2);
+
+    /* Cards */
+    --card-bg: var(--color-bg-secondary);
+    --card-padding: var(--spacing-lg);
+    --card-radius: var(--radius-lg);
+    --card-border: 1px solid var(--color-border-subtle);
+    --card-shadow: var(--shadow-card);
+    --card-shadow-hover: var(--shadow-card-hover);
+
+    /* Inputs */
+    --input-bg: var(--color-bg-tertiary);
+    --input-border: 1px solid var(--color-border-default);
+    --input-border-focus: 1px solid var(--color-primary);
+    --input-padding: var(--spacing-md) var(--spacing-lg);
+    --input-radius: var(--radius-md);
+    --input-shadow-focus: 0 0 0 3px rgba(0, 167, 111, 0.2);
+
+    /* Modals */
+    --modal-bg: var(--color-bg-secondary);
+    --modal-padding: var(--spacing-2xl);
+    --modal-radius: var(--radius-xl);
+    --modal-shadow: var(--shadow-modal);
+    --modal-backdrop: var(--color-overlay-dark);
+
+    /* Bottom Nav */
+    --bottom-nav-height: 64px;
+    --bottom-nav-bg: var(--color-bg-secondary);
+    --bottom-nav-shadow: var(--shadow-bottom-nav);
+    --bottom-nav-padding: var(--spacing-md);
+
+    /* Progress Bars */
+    --progress-height: 8px;
+    --progress-bg: rgba(255, 255, 255, 0.1);
+    --progress-fill: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    --progress-radius: var(--radius-full);
+
+    /* Badges */
+    --badge-padding: var(--spacing-xs) var(--spacing-md);
+    --badge-radius: var(--radius-full);
+    --badge-font-size: var(--font-size-xs);
+    --badge-font-weight: var(--font-weight-medium);
+}
+
+/* ========== UTILITY CLASSES ========== */
+
+/* Spacing utilities */
+.p-0 { padding: 0; }
+.p-xs { padding: var(--spacing-xs); }
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.p-xl { padding: var(--spacing-xl); }
+.p-2xl { padding: var(--spacing-2xl); }
+
+.m-0 { margin: 0; }
+.m-xs { margin: var(--spacing-xs); }
+.m-sm { margin: var(--spacing-sm); }
+.m-md { margin: var(--spacing-md); }
+.m-lg { margin: var(--spacing-lg); }
+.m-xl { margin: var(--spacing-xl); }
+.m-2xl { margin: var(--spacing-2xl); }
+
+/* Text utilities */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.font-light { font-weight: var(--font-weight-light); }
+.font-normal { font-weight: var(--font-weight-normal); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+/* Color utilities */
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-tertiary { color: var(--color-text-tertiary); }
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-error { color: var(--color-error); }
+
+/* SVG icon utilities */
+.icon-inline {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: var(--spacing-sm);
+}
+
+.icon-center {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+svg {
+    flex-shrink: 0; /* Prevent SVG from shrinking */
+}
+
+/* Accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}

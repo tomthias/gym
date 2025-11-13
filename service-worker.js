@@ -1,10 +1,11 @@
-const CACHE_NAME = 'scheda-palestra-v4'; // WEEKLY SCHEDULE VERSION
+const CACHE_NAME = 'scheda-palestra-v5'; // UI REFACTORED VERSION with SVG icons
 const urlsToCache = [
   './',
   './index.html',
   './pages/workout-flow.html',
   './pages/nutrition.html',
   './pages/history.html',
+  './css/design-tokens.css', // NEW - Design system tokens
   './css/shared.css',
   './css/home.css',
   './css/workout-flow.css',
@@ -21,6 +22,7 @@ const urlsToCache = [
   './js/utils/modal.js',
   './js/utils/timers.js',
   './js/utils/session-loader.js', // NEW - Session loader utility
+  './js/utils/icons.js', // NEW - SVG icons utility
 
   // NEW SESSION JSON FILES
   './workouts-data/lunedi_fisio_1.json',
