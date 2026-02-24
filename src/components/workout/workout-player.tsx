@@ -1,0 +1,255 @@
+"use client";
+
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useWorkoutStore } from "@/lib/stores/workout-store";
+import { useTimer } from "@/lib/hooks/use-timer";
+import { useAudio } from "@/lib/hooks/use-audio";
+import { useWakeLock } from "@/lib/hooks/use-wake-lock";
+import { getExerciseType } from "@/types/workout";
+import { WorkoutProgressBar } from "./progress-bar";
+import { ExerciseDisplay } from "./exercise-display";
+import { TimerDisplay } from "./timer-display";
+import { PlayerControls } from "./player-controls";
+import { RestTimer } from "./rest-timer";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Play, X } from "lucide-react";
+
+export function WorkoutPlayer() {
+  const router = useRouter();
+  const store = useWorkoutStore();
+  const { playCountdownTick, playComplete, unlock } = useAudio();
+  const wakeLock = useWakeLock();
+  const [isPaused, setIsPaused] = useState(false);
+
+  const currentItem = store.items[store.currentItemIndex];
+  const exerciseType = currentItem ? getExerciseType(currentItem) : "reps";
+
+  const timer = useTimer({
+    onComplete: () => {
+      if (store.phase === "exercising" && exerciseType === "timed") {
+        playComplete();
+        store.completeSet();
+      }
+    },
+    onTick: (remaining) => {
+      if (
+        store.phase === "exercising" &&
+        exerciseType === "timed" &&
+        remaining <= 3 &&
+        remaining > 0
+      ) {
+        playCountdownTick();
+      }
+    },
+  });
+
+  // Handle workout start
+  const handleStartWorkout = useCallback(() => {
+    unlock(); // Unlock audio context on user gesture
+    wakeLock.request();
+    store.startWorkout();
+  }, [unlock, wakeLock, store]);
+
+  // Handle starting a timed exercise
+  const handleStartTimer = useCallback(() => {
+    if (currentItem?.duration) {
+      timer.startCountdown(currentItem.duration);
+      setIsPaused(false);
+    }
+  }, [currentItem, timer]);
+
+  // Handle starting a stopwatch for reps
+  const handleStartStopwatch = useCallback(() => {
+    timer.startStopwatch();
+    setIsPaused(false);
+  }, [timer]);
+
+  const handlePause = useCallback(() => {
+    timer.pause();
+    setIsPaused(true);
+  }, [timer]);
+
+  const handleResume = useCallback(() => {
+    timer.resume();
+    setIsPaused(false);
+  }, [timer]);
+
+  const handleCompleteSet = useCallback(() => {
+    timer.stop();
+    playComplete();
+    setIsPaused(false);
+    store.completeSet();
+  }, [timer, playComplete, store]);
+
+  const handleSkipExercise = useCallback(() => {
+    timer.stop();
+    setIsPaused(false);
+    store.completeSet();
+  }, [timer, store]);
+
+  const handleRestComplete = useCallback(() => {
+    store.completeRest();
+  }, [store]);
+
+  const handleSkipRest = useCallback(() => {
+    store.skipRest();
+  }, [store]);
+
+  const handleQuit = useCallback(() => {
+    timer.stop();
+    wakeLock.release();
+    store.reset();
+    router.push("/dashboard");
+  }, [timer, wakeLock, store, router]);
+
+  // Auto-start stopwatch for reps exercises when entering exercising phase
+  const prevPhaseRef = useRef(store.phase);
+  useEffect(() => {
+    if (
+      store.phase === "exercising" &&
+      prevPhaseRef.current !== "exercising" &&
+      currentItem
+    ) {
+      const type = getExerciseType(currentItem);
+      if (type === "reps") {
+        timer.startStopwatch();
+      }
+    }
+    prevPhaseRef.current = store.phase;
+  }, [store.phase, currentItem, timer]);
+
+  // Release wake lock on completed
+  useEffect(() => {
+    if (store.phase === "completed") {
+      wakeLock.release();
+      timer.stop();
+      router.push("/workout/complete");
+    }
+  }, [store.phase, wakeLock, timer, router]);
+
+  if (store.phase === "idle" || !store.planId) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-6 py-20">
+        <p className="text-muted-foreground">Nessun workout caricato</p>
+        <Button onClick={() => router.push("/dashboard")} variant="outline">
+          Torna alla dashboard
+        </Button>
+      </div>
+    );
+  }
+
+  if (store.phase === "ready") {
+    return (
+      <div className="space-y-6 px-4 pt-6">
+        <div className="text-center space-y-2">
+          <h1 className="text-2xl font-bold">{store.planName}</h1>
+          <p className="text-muted-foreground">
+            {store.items.length} esercizi
+          </p>
+        </div>
+
+        <div className="space-y-2">
+          {store.items.map((item, i) => (
+            <Card key={item.id}>
+              <CardContent className="flex items-center justify-between p-3">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-medical-100 text-sm font-medium text-medical-600">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <p className="font-medium text-sm">{item.exercise.name}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {item.sets}x
+                      {item.reps
+                        ? ` ${item.reps} rep`
+                        : ` ${item.duration}s`}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <div className="flex gap-3">
+          <Button variant="outline" onClick={handleQuit} className="flex-1">
+            <X className="mr-2 h-4 w-4" />
+            Annulla
+          </Button>
+          <Button onClick={handleStartWorkout} className="flex-1 gap-2">
+            <Play className="h-4 w-4" />
+            Inizia
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (store.phase === "resting" && currentItem) {
+    const nextItem = store.items[store.currentItemIndex];
+    const nextName = nextItem?.exercise.name ?? "Fine workout";
+
+    return (
+      <div className="px-4 pt-6 space-y-4">
+        <WorkoutProgressBar
+          currentExercise={store.currentItemIndex + 1}
+          totalExercises={store.items.length}
+          currentSet={store.currentSet}
+          totalSets={currentItem.sets}
+        />
+        <RestTimer
+          key={`rest-${store.currentItemIndex}-${store.currentSet}`}
+          duration={store.timerSeconds}
+          nextExerciseName={nextName}
+          onComplete={handleRestComplete}
+          onSkip={handleSkipRest}
+        />
+      </div>
+    );
+  }
+
+  if (store.phase === "exercising" && currentItem) {
+    return (
+      <div className="px-4 pt-6 space-y-6">
+        <WorkoutProgressBar
+          currentExercise={store.currentItemIndex + 1}
+          totalExercises={store.items.length}
+          currentSet={store.currentSet}
+          totalSets={currentItem.sets}
+        />
+
+        <ExerciseDisplay item={currentItem} currentSet={store.currentSet} />
+
+        <div className="flex justify-center">
+          <TimerDisplay
+            seconds={timer.displaySeconds}
+            totalSeconds={exerciseType === "timed" ? (currentItem.duration ?? 0) : undefined}
+            mode={exerciseType === "timed" ? "countdown" : "stopwatch"}
+            size="large"
+          />
+        </div>
+
+        <PlayerControls
+          exerciseType={exerciseType}
+          isTimerRunning={!isPaused && timer.displaySeconds > 0 && exerciseType === "timed"}
+          isPaused={isPaused}
+          onStart={handleStartTimer}
+          onPause={handlePause}
+          onResume={handleResume}
+          onComplete={handleCompleteSet}
+          onSkip={handleSkipExercise}
+        />
+
+        <div className="flex justify-center pt-4">
+          <Button variant="ghost" size="sm" onClick={handleQuit} className="text-muted-foreground">
+            Esci dal workout
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}
