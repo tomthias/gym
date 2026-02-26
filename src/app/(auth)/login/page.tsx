@@ -19,7 +19,7 @@ import { Activity, Loader2 } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,6 +30,23 @@ export default function LoginPage() {
     setLoading(true);
 
     const supabase = createClient();
+    const input = identifier.trim();
+
+    // If input looks like a username (no @), resolve to email via RPC
+    let email = input;
+    if (!input.includes("@")) {
+      const { data: resolvedEmail } = await supabase.rpc("get_email_by_username", {
+        lookup_username: input,
+      });
+
+      if (!resolvedEmail) {
+        setError("Nome utente non trovato");
+        setLoading(false);
+        return;
+      }
+      email = resolvedEmail;
+    }
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -72,13 +89,13 @@ export default function LoginPage() {
             <p className="text-sm text-destructive text-center">{error}</p>
           )}
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="identifier">Email o nome utente</Label>
             <Input
-              id="email"
-              type="email"
-              placeholder="nome@esempio.it"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              id="identifier"
+              type="text"
+              placeholder="nome@esempio.it o mario_rossi"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
               required
             />
           </div>
