@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Header } from "@/components/layout/header";
@@ -40,6 +40,20 @@ interface RecipeRow {
 }
 
 export default function AddMealPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-[60vh] items-center justify-center">
+          <Loader2 className="h-6 w-6 animate-spin text-teal-500" />
+        </div>
+      }
+    >
+      <AddMealPageContent />
+    </Suspense>
+  );
+}
+
+function AddMealPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const slot = (searchParams.get("slot") ?? "pranzo") as MealSlot;

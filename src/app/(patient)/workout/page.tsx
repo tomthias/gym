@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useWorkoutStore } from "@/lib/stores/workout-store";
@@ -9,6 +9,20 @@ import type { PlanItemWithExercise } from "@/types/workout";
 import { Loader2 } from "lucide-react";
 
 export default function WorkoutPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-[60vh] items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-teal-500" />
+        </div>
+      }
+    >
+      <WorkoutPageContent />
+    </Suspense>
+  );
+}
+
+function WorkoutPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const store = useWorkoutStore();
