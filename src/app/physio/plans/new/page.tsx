@@ -24,22 +24,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import {
-  DndContext,
-  closestCenter,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  type DragEndEvent,
-} from "@dnd-kit/core";
-import {
-  SortableContext,
-  useSortable,
-  verticalListSortingStrategy,
-  arrayMove,
-} from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import {
   ArrowDown,
   ArrowUp,
   Clock,
@@ -284,7 +268,7 @@ export default function NewPlanPage() {
   if (loading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-medical-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-teal-500" />
       </div>
     );
   }
@@ -327,7 +311,7 @@ export default function NewPlanPage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <GripVertical className="h-4 w-4 text-muted-foreground" />
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-medical-100 text-xs font-medium text-medical-600">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-teal-100 text-xs font-medium text-teal-600">
                       {index + 1}
                     </span>
                     <span className="font-medium text-sm">
@@ -521,7 +505,7 @@ export default function NewPlanPage() {
                           </p>
                         )}
                       </div>
-                      <Plus className="h-4 w-4 text-medical-600 shrink-0" />
+                      <Plus className="h-4 w-4 text-teal-600 shrink-0" />
                     </button>
                   ))
                 )}
