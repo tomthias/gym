@@ -33,7 +33,7 @@ export default function WorkoutCompletePage() {
       } = await supabase.auth.getUser();
 
       if (user && store.planId) {
-        await supabase.from("workout_logs").insert({
+        const { error } = await supabase.from("workout_logs").insert({
           patient_id: user.id,
           plan_id: store.planId,
           started_at: startedAt!,
@@ -44,6 +44,12 @@ export default function WorkoutCompletePage() {
           feedback_score: score,
           feedback_notes: notes || null,
         });
+
+        if (error) {
+          alert("Errore nel salvataggio della sessione");
+          setSaving(false);
+          return;
+        }
       }
 
       store.reset();

@@ -24,19 +24,40 @@ export function AddMealForm({ onSubmit, loading }: AddMealFormProps) {
   const [carbs, setCarbs] = useState("");
   const [fats, setFats] = useState("");
 
+  const [error, setError] = useState("");
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setError("");
+
+    const cal = Number(calories) || 0;
+    const prot = Number(protein) || 0;
+    const carb = Number(carbs) || 0;
+    const fat = Number(fats) || 0;
+
+    if (cal < 0 || prot < 0 || carb < 0 || fat < 0) {
+      setError("I valori non possono essere negativi");
+      return;
+    }
+    if (cal > 5000 || prot > 500 || carb > 500 || fat > 500) {
+      setError("I valori inseriti sono troppo alti");
+      return;
+    }
+
     onSubmit({
       name,
-      calories: Number(calories) || 0,
-      proteinGrams: Number(protein) || 0,
-      carbsGrams: Number(carbs) || 0,
-      fatsGrams: Number(fats) || 0,
+      calories: cal,
+      proteinGrams: prot,
+      carbsGrams: carb,
+      fatsGrams: fat,
     });
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {error && (
+        <p className="text-sm text-destructive text-center">{error}</p>
+      )}
       <div className="space-y-2">
         <Label htmlFor="meal-name">Nome pasto</Label>
         <Input
@@ -53,6 +74,7 @@ export function AddMealForm({ onSubmit, loading }: AddMealFormProps) {
           <Input
             id="meal-cal"
             type="number"
+            min="0"
             placeholder="0"
             value={calories}
             onChange={(e) => setCalories(e.target.value)}
@@ -63,6 +85,7 @@ export function AddMealForm({ onSubmit, loading }: AddMealFormProps) {
           <Input
             id="meal-prot"
             type="number"
+            min="0"
             placeholder="0"
             value={protein}
             onChange={(e) => setProtein(e.target.value)}
@@ -73,6 +96,7 @@ export function AddMealForm({ onSubmit, loading }: AddMealFormProps) {
           <Input
             id="meal-carbs"
             type="number"
+            min="0"
             placeholder="0"
             value={carbs}
             onChange={(e) => setCarbs(e.target.value)}
@@ -83,6 +107,7 @@ export function AddMealForm({ onSubmit, loading }: AddMealFormProps) {
           <Input
             id="meal-fats"
             type="number"
+            min="0"
             placeholder="0"
             value={fats}
             onChange={(e) => setFats(e.target.value)}

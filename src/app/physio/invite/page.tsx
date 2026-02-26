@@ -65,7 +65,7 @@ export default function InvitePage() {
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + INVITE_CODE_EXPIRY_DAYS);
 
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("invite_codes")
       .insert({
         code: generateCode(),
@@ -74,6 +74,12 @@ export default function InvitePage() {
       })
       .select()
       .single();
+
+    if (error) {
+      alert("Errore nella generazione del codice");
+      setCreating(false);
+      return;
+    }
 
     if (data) setCodes((prev) => [data, ...prev]);
     setCreating(false);

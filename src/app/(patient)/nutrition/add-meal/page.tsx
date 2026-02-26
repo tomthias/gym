@@ -67,7 +67,7 @@ export default function AddMealPage() {
       } = await supabase.auth.getUser();
 
       if (user) {
-        await supabase.from("nutrition_logs").insert({
+        const { error } = await supabase.from("nutrition_logs").insert({
           patient_id: user.id,
           date: new Date().toISOString().split("T")[0],
           meal_slot: slot,
@@ -77,6 +77,12 @@ export default function AddMealPage() {
           fats_grams: recipe.fats_grams,
           calories: recipe.calories,
         });
+
+        if (error) {
+          alert("Errore nell'aggiunta del pasto");
+          setSaving(false);
+          return;
+        }
       }
 
       router.push("/nutrition");
@@ -99,7 +105,7 @@ export default function AddMealPage() {
       } = await supabase.auth.getUser();
 
       if (user) {
-        await supabase.from("nutrition_logs").insert({
+        const { error } = await supabase.from("nutrition_logs").insert({
           patient_id: user.id,
           date: new Date().toISOString().split("T")[0],
           meal_slot: slot,
@@ -109,6 +115,12 @@ export default function AddMealPage() {
           fats_grams: data.fatsGrams,
           calories: data.calories,
         });
+
+        if (error) {
+          alert("Errore nell'aggiunta del pasto");
+          setSaving(false);
+          return;
+        }
       }
 
       router.push("/nutrition");

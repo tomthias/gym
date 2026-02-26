@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { User, Mail, Stethoscope } from "lucide-react";
+import { User, AtSign, Mail, Stethoscope } from "lucide-react";
 import { LogoutButton } from "./logout-button";
 
 export default async function SettingsPage() {
@@ -20,7 +20,7 @@ export default async function SettingsPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, email, physio_id")
+    .select("full_name, username, email, physio_id")
     .eq("id", user.id)
     .single();
 
@@ -55,6 +55,20 @@ export default async function SettingsPage() {
               <p className="text-sm text-muted-foreground">Nome</p>
               <p className="font-medium truncate">
                 {profile?.full_name || "Non impostato"}
+              </p>
+            </div>
+          </div>
+
+          <Separator />
+
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-medical-100">
+              <AtSign className="h-5 w-5 text-medical-600" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm text-muted-foreground">Nome utente</p>
+              <p className="font-medium truncate">
+                {profile?.username ? `@${profile.username}` : "Non impostato"}
               </p>
             </div>
           </div>

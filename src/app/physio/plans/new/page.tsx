@@ -24,6 +24,22 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  useSortable,
+  verticalListSortingStrategy,
+  arrayMove,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import {
   ArrowDown,
   ArrowUp,
   Clock,
@@ -90,7 +106,8 @@ export default function NewPlanPage() {
           .select("id")
           .eq("physio_id", user.id)
           .eq("role", "patient")
-          .single();
+          .limit(1)
+          .maybeSingle();
 
         if (patient) {
           const { data: plan } = await supabase
@@ -106,7 +123,7 @@ export default function NewPlanPage() {
             )
             .eq("patient_id", patient.id)
             .eq("active", true)
-            .single();
+            .maybeSingle();
 
           if (plan) {
             setPlanName(plan.name);
@@ -200,7 +217,8 @@ export default function NewPlanPage() {
       .select("id")
       .eq("physio_id", user.id)
       .eq("role", "patient")
-      .single();
+      .limit(1)
+      .maybeSingle();
 
     if (!patient) {
       setSaving(false);
@@ -208,14 +226,20 @@ export default function NewPlanPage() {
     }
 
     // Deactivate existing plans
-    await supabase
+    const { error: deactivateError } = await supabase
       .from("workout_plans")
       .update({ active: false })
       .eq("patient_id", patient.id)
       .eq("active", true);
 
+    if (deactivateError) {
+      alert("Errore nella disattivazione della scheda precedente");
+      setSaving(false);
+      return;
+    }
+
     // Create new plan
-    const { data: plan } = await supabase
+    const { data: plan, error: planError } = await supabase
       .from("workout_plans")
       .insert({
         patient_id: patient.id,
@@ -227,21 +251,30 @@ export default function NewPlanPage() {
       .select()
       .single();
 
-    if (plan) {
-      // Insert plan items
-      const planItems = items.map((item, index) => ({
-        plan_id: plan.id,
-        exercise_id: item.exerciseId,
-        order: index + 1,
-        sets: item.sets,
-        reps: item.type === "reps" ? item.reps : null,
-        duration: item.type === "timed" ? item.duration : null,
-        rest_time: item.restTime,
-        rest_after: item.restAfter,
-        notes: item.notes || null,
-      }));
+    if (planError || !plan) {
+      alert("Errore nella creazione della scheda");
+      setSaving(false);
+      return;
+    }
 
-      await supabase.from("plan_items").insert(planItems);
+    // Insert plan items
+    const planItems = items.map((item, index) => ({
+      plan_id: plan.id,
+      exercise_id: item.exerciseId,
+      order: index + 1,
+      sets: item.sets,
+      reps: item.type === "reps" ? item.reps : null,
+      duration: item.type === "timed" ? item.duration : null,
+      rest_time: item.restTime,
+      rest_after: item.restAfter,
+      notes: item.notes || null,
+    }));
+
+    const { error: itemsError } = await supabase.from("plan_items").insert(planItems);
+    if (itemsError) {
+      alert("Errore nell'inserimento degli esercizi");
+      setSaving(false);
+      return;
     }
 
     setSaving(false);
@@ -392,18 +425,36 @@ export default function NewPlanPage() {
                     </div>
                   ) : (
                     <div className="space-y-1">
-                      <Label className="text-xs">Durata (sec)</Label>
-                      <Input
-                        type="number"
-                        min={5}
-                        value={item.duration}
-                        onChange={(e) =>
-                          updateItem(item.tempId, {
-                            duration: Number(e.target.value) || 5,
-                          })
-                        }
-                        className="h-8 text-xs"
-                      />
+                      <Label className="text-xs">Durata</Label>
+                      <div className="flex items-center gap-1">
+                        <Input
+                          type="number"
+                          min={0}
+                          value={Math.floor(item.duration / 60)}
+                          onChange={(e) => {
+                            const mins = Math.max(0, Number(e.target.value) || 0);
+                            const secs = item.duration % 60;
+                            updateItem(item.tempId, { duration: Math.max(5, mins * 60 + secs) });
+                          }}
+                          className="h-8 text-xs w-16"
+                          placeholder="min"
+                        />
+                        <span className="text-xs text-muted-foreground">m</span>
+                        <Input
+                          type="number"
+                          min={0}
+                          max={59}
+                          value={item.duration % 60}
+                          onChange={(e) => {
+                            const secs = Math.min(59, Math.max(0, Number(e.target.value) || 0));
+                            const mins = Math.floor(item.duration / 60);
+                            updateItem(item.tempId, { duration: Math.max(5, mins * 60 + secs) });
+                          }}
+                          className="h-8 text-xs w-16"
+                          placeholder="sec"
+                        />
+                        <span className="text-xs text-muted-foreground">s</span>
+                      </div>
                     </div>
                   )}
 

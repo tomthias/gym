@@ -58,7 +58,7 @@ export default function WorkoutPage() {
         )
         .eq("patient_id", user.id)
         .eq("active", true)
-        .single();
+        .maybeSingle();
 
       if (!plan || !plan.plan_items?.length) {
         router.push("/dashboard");

@@ -28,7 +28,7 @@ export default async function DashboardPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name")
+    .select("full_name, username")
     .eq("id", user.id)
     .single();
 
@@ -58,7 +58,7 @@ export default async function DashboardPage() {
     )
     .eq("patient_id", user.id)
     .eq("active", true)
-    .single();
+    .maybeSingle();
 
   // Fetch recent logs
   const { data: recentLogs } = await supabase
@@ -82,7 +82,7 @@ export default async function DashboardPage() {
       {/* Welcome */}
       <div>
         <h1 className="text-2xl font-bold">
-          Ciao, {profile?.full_name?.split(" ")[0] ?? ""}
+          Ciao, {profile?.username ?? profile?.full_name?.split(" ")[0] ?? ""}
         </h1>
         <p className="text-muted-foreground">Il tuo percorso di riabilitazione</p>
       </div>

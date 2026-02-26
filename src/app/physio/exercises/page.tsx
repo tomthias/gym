@@ -87,8 +87,9 @@ export default function ExercisesPage() {
     } = await supabase.auth.getUser();
     if (!user) return;
 
+    let error;
     if (editingId) {
-      await supabase
+      ({ error } = await supabase
         .from("exercises")
         .update({
           name,
@@ -96,20 +97,25 @@ export default function ExercisesPage() {
           category,
           video_url: videoUrl || null,
         })
-        .eq("id", editingId);
+        .eq("id", editingId));
     } else {
-      await supabase.from("exercises").insert({
+      ({ error } = await supabase.from("exercises").insert({
         name,
         description: description || null,
         category,
         video_url: videoUrl || null,
         created_by: user.id,
-      });
+      }));
+    }
+
+    setSaving(false);
+    if (error) {
+      alert("Errore nel salvataggio dell'esercizio");
+      return;
     }
 
     resetForm();
     setDialogOpen(false);
-    setSaving(false);
     fetchExercises();
   }, [name, description, category, videoUrl, editingId, resetForm, fetchExercises]);
 
@@ -125,7 +131,11 @@ export default function ExercisesPage() {
   const handleDelete = useCallback(
     async (id: string) => {
       const supabase = createClient();
-      await supabase.from("exercises").delete().eq("id", id);
+      const { error } = await supabase.from("exercises").delete().eq("id", id);
+      if (error) {
+        alert("Errore nell'eliminazione dell'esercizio");
+        return;
+      }
       fetchExercises();
     },
     [fetchExercises]
@@ -201,7 +211,7 @@ export default function ExercisesPage() {
               <Button
                 onClick={handleSave}
                 disabled={!name || saving}
-                className="w-full"
+                className="w-full mt-2"
               >
                 {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 {editingId ? "Salva modifiche" : "Crea esercizio"}

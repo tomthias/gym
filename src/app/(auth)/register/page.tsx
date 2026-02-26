@@ -27,6 +27,7 @@ import { Activity, Loader2 } from "lucide-react";
 export default function RegisterPage() {
   const router = useRouter();
   const [fullName, setFullName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState<"patient" | "physio">("patient");
@@ -40,6 +41,23 @@ export default function RegisterPage() {
     setLoading(true);
 
     const supabase = createClient();
+
+    // Validate username
+    if (!username.trim()) {
+      setError("Inserisci un nome utente");
+      setLoading(false);
+      return;
+    }
+    if (username.trim().length < 3) {
+      setError("Il nome utente deve avere almeno 3 caratteri");
+      setLoading(false);
+      return;
+    }
+    if (!/^[a-zA-Z0-9_]+$/.test(username.trim())) {
+      setError("Il nome utente puo contenere solo lettere, numeri e underscore");
+      setLoading(false);
+      return;
+    }
 
     // If patient, validate invite code
     let physioId: string | null = null;
@@ -67,14 +85,16 @@ export default function RegisterPage() {
       physioId = invite.physio_id;
     }
 
-    // Register user
+    // Register user — physio_id passed in metadata, handled atomically by DB trigger
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
           full_name: fullName,
+          username: username.trim().toLowerCase(),
           role,
+          physio_id: physioId,
         },
       },
     });
@@ -85,20 +105,19 @@ export default function RegisterPage() {
       return;
     }
 
-    // If patient, link to physio and mark invite as used
-    if (role === "patient" && physioId && authData.user) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (supabase.from("profiles") as any)
-        .update({ physio_id: physioId })
-        .eq("id", authData.user.id);
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (supabase.from("invite_codes") as any)
+    // Mark invite code as used
+    if (role === "patient" && authData.user) {
+      const { error: inviteUpdateError } = await supabase
+        .from("invite_codes")
         .update({
           used_by: authData.user.id,
           used_at: new Date().toISOString(),
         })
         .eq("code", inviteCode.trim().toUpperCase());
+
+      if (inviteUpdateError) {
+        console.error("Errore aggiornamento codice invito:", inviteUpdateError.message);
+      }
     }
 
     router.push(role === "physio" ? "/physio/dashboard" : "/dashboard");
@@ -128,6 +147,21 @@ export default function RegisterPage() {
               onChange={(e) => setFullName(e.target.value)}
               required
             />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="username">Nome utente</Label>
+            <Input
+              id="username"
+              placeholder="es. mario_rossi"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              minLength={3}
+              maxLength={30}
+              required
+            />
+            <p className="text-xs text-muted-foreground">
+              Solo lettere, numeri e underscore
+            </p>
           </div>
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>

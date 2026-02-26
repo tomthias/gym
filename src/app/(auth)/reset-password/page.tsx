@@ -43,7 +43,10 @@ export default function ResetPasswordPage() {
     const { error } = await supabase.auth.updateUser({ password });
 
     if (error) {
-      setError(error.message);
+      const msg = error.message.toLowerCase().includes("session")
+        ? "Il link per il reset e scaduto. Richiedi un nuovo reset password."
+        : error.message;
+      setError(msg);
       setLoading(false);
       return;
     }

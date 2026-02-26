@@ -54,14 +54,19 @@ export async function middleware(request: NextRequest) {
 
   // If authenticated and on a public route, redirect based on role
   if (user && isPublicRoute) {
-    const { data: profile } = await supabase
+    const { data: profile, error: profileError } = await supabase
       .from("profiles")
       .select("role")
       .eq("id", user.id)
       .single<ProfileRole>();
 
+    if (profileError || !profile) {
+      // Profile not ready yet (e.g. trigger hasn't fired) — let the request through
+      return supabaseResponse;
+    }
+
     const url = request.nextUrl.clone();
-    url.pathname = profile?.role === "physio" ? "/physio/dashboard" : "/dashboard";
+    url.pathname = profile.role === "physio" ? "/physio/dashboard" : "/dashboard";
     return NextResponse.redirect(url);
   }
 
@@ -76,22 +81,27 @@ export async function middleware(request: NextRequest) {
     const isPhysioRoute = pathname.startsWith("/physio");
 
     if (isPatientRoute || isPhysioRoute) {
-      const { data: profile } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from("profiles")
         .select("role")
         .eq("id", user.id)
         .single<ProfileRole>();
 
-      if (profile) {
+      if (profileError || !profile) {
+        // Profile not found — redirect to login as safety fallback
         const url = request.nextUrl.clone();
-        if (isPatientRoute && profile.role === "physio") {
-          url.pathname = "/physio/dashboard";
-          return NextResponse.redirect(url);
-        }
-        if (isPhysioRoute && profile.role === "patient") {
-          url.pathname = "/dashboard";
-          return NextResponse.redirect(url);
-        }
+        url.pathname = "/login";
+        return NextResponse.redirect(url);
+      }
+
+      const url = request.nextUrl.clone();
+      if (isPatientRoute && profile.role === "physio") {
+        url.pathname = "/physio/dashboard";
+        return NextResponse.redirect(url);
+      }
+      if (isPhysioRoute && profile.role === "patient") {
+        url.pathname = "/dashboard";
+        return NextResponse.redirect(url);
       }
     }
   }

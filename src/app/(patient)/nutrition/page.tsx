@@ -47,7 +47,7 @@ export default function NutritionPage() {
         .from("calorie_budgets")
         .select("*")
         .eq("patient_id", user.id)
-        .single(),
+        .maybeSingle(),
     ]);
 
     if (logsRes.data) setLogs(logsRes.data as LogEntry[]);
@@ -67,7 +67,11 @@ export default function NutritionPage() {
   const handleRemove = useCallback(
     async (logId: string) => {
       const supabase = createClient();
-      await supabase.from("nutrition_logs").delete().eq("id", logId);
+      const { error } = await supabase.from("nutrition_logs").delete().eq("id", logId);
+      if (error) {
+        alert("Errore nell'eliminazione del pasto");
+        return;
+      }
       setLogs((prev) => prev.filter((l) => l.id !== logId));
     },
     []

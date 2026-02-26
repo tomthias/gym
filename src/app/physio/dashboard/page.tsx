@@ -29,13 +29,14 @@ export default async function PhysioDashboardPage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  // Get linked patient (1:1)
+  // Get linked patient (1:1 — maybeSingle to avoid crash if 0 or >1)
   const { data: patient } = await supabase
     .from("profiles")
-    .select("id, full_name, email")
+    .select("id, full_name, username")
     .eq("physio_id", user.id)
     .eq("role", "patient")
-    .single();
+    .limit(1)
+    .maybeSingle();
 
   if (!patient) {
     return (
@@ -62,7 +63,7 @@ export default async function PhysioDashboardPage() {
     .select("id, name, created_at, plan_items(id)")
     .eq("patient_id", patient.id)
     .eq("active", true)
-    .single();
+    .maybeSingle();
 
   // Get patient's logs
   const { data: logs } = await supabase
@@ -99,7 +100,7 @@ export default async function PhysioDashboardPage() {
               <User className="h-5 w-5 text-medical-600" />
               {patient.full_name}
             </CardTitle>
-            <CardDescription>{patient.email}</CardDescription>
+            <CardDescription>@{patient.username}</CardDescription>
           </CardHeader>
         </Card>
 
