@@ -167,10 +167,11 @@ export default async function PhysioDashboardPage() {
         {logs && (
           <ComplianceReport
             logs={logs.map((l) => ({ completed_at: l.completed_at }))}
+            targetPerWeek={2}
           />
         )}
 
-        {/* Send note to patient */}
+        {/* Private notes */}
         <SendNote patientId={patient.id} />
 
         {/* Quick overview: active plans */}

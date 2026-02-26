@@ -1,7 +1,6 @@
-const CACHE_NAME = "physio-track-v1";
+const CACHE_NAME = "physio-track-v2";
 const STATIC_ASSETS = [
   "/",
-  "/dashboard",
   "/manifest.json",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
@@ -44,7 +43,15 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Cache-first for static assets
+  // Network-first for HTML pages (auth redirects, dynamic content)
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request).catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
+  // Cache-first for static assets (icons, manifest, JS/CSS)
   event.respondWith(
     caches
       .match(event.request)

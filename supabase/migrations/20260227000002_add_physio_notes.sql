@@ -1,4 +1,4 @@
--- Physio notes: messages from physio to patient
+-- Physio notes: private notes about a patient (visible only to physio)
 CREATE TABLE IF NOT EXISTS physio_notes (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   physio_id UUID NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
@@ -34,19 +34,6 @@ CREATE POLICY "Physio can read own notes"
   ON physio_notes FOR SELECT
   TO authenticated
   USING (physio_id = auth.uid());
-
--- Patient can read notes addressed to them
-CREATE POLICY "Patient can read own notes"
-  ON physio_notes FOR SELECT
-  TO authenticated
-  USING (patient_id = auth.uid());
-
--- Patient can mark notes as read
-CREATE POLICY "Patient can update read status"
-  ON physio_notes FOR UPDATE
-  TO authenticated
-  USING (patient_id = auth.uid())
-  WITH CHECK (patient_id = auth.uid());
 
 -- Physio can delete their own notes
 CREATE POLICY "Physio can delete own notes"

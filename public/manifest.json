@@ -2,7 +2,7 @@
   "name": "Physio-Track",
   "short_name": "PhysioTrack",
   "description": "Physical rehabilitation tracking app",
-  "start_url": "/dashboard",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#f8fafc",
   "theme_color": "#2a7c7c",
