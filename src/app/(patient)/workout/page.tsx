@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useWorkoutStore } from "@/lib/stores/workout-store";
 import { WorkoutPlayer } from "@/components/workout/workout-player";
@@ -10,8 +10,11 @@ import { Loader2 } from "lucide-react";
 
 export default function WorkoutPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const store = useWorkoutStore();
   const [loading, setLoading] = useState(true);
+
+  const planIdParam = searchParams.get("planId");
 
   useEffect(() => {
     // If already loaded (e.g., coming back from background), skip fetch
@@ -31,7 +34,7 @@ export default function WorkoutPage() {
         return;
       }
 
-      const { data: plan } = await supabase
+      let query = supabase
         .from("workout_plans")
         .select(
           `
@@ -46,6 +49,8 @@ export default function WorkoutPage() {
             rest_time,
             rest_after,
             notes,
+            superset_group,
+            transition_rest,
             exercises (
               id,
               name,
@@ -56,33 +61,44 @@ export default function WorkoutPage() {
           )
         `
         )
-        .eq("patient_id", user.id)
-        .eq("active", true)
-        .maybeSingle();
+        .eq("patient_id", user.id);
+
+      if (planIdParam) {
+        query = query.eq("id", planIdParam);
+      } else {
+        query = query.eq("active", true).limit(1);
+      }
+
+      const { data: plans } = await query;
+      const plan = plans?.[0];
 
       if (!plan || !plan.plan_items?.length) {
         router.push("/dashboard");
         return;
       }
 
-      const items: PlanItemWithExercise[] = plan.plan_items.map((pi: any) => ({
-        id: pi.id,
-        exercise: pi.exercises,
-        sets: pi.sets,
-        reps: pi.reps,
-        duration: pi.duration,
-        rest_time: pi.rest_time,
-        rest_after: pi.rest_after,
-        order: pi.order,
-        notes: pi.notes,
-      }));
+      const items: PlanItemWithExercise[] = plan.plan_items.map(
+        (pi: any) => ({
+          id: pi.id,
+          exercise: pi.exercises,
+          sets: pi.sets,
+          reps: pi.reps,
+          duration: pi.duration,
+          rest_time: pi.rest_time,
+          rest_after: pi.rest_after,
+          order: pi.order,
+          notes: pi.notes,
+          superset_group: pi.superset_group,
+          transition_rest: pi.transition_rest,
+        })
+      );
 
       store.loadPlan(plan.id, plan.name, items);
       setLoading(false);
     }
 
     loadPlan();
-  }, [store, router]);
+  }, [store, router, planIdParam]);
 
   if (loading) {
     return (

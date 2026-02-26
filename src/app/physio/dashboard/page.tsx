@@ -11,12 +11,14 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { TogglePlanButton, DeletePlanButton } from "@/components/physio/plan-actions";
 import { getPainColor } from "@/lib/utils/constants";
 import { formatDuration } from "@/lib/utils/format-time";
 import {
   Calendar,
   Clock,
   Dumbbell,
+  Pencil,
   Plus,
   TrendingUp,
   User,
@@ -29,7 +31,7 @@ export default async function PhysioDashboardPage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  // Get linked patient (1:1 — maybeSingle to avoid crash if 0 or >1)
+  // Get linked patient (1:1 for now)
   const { data: patient } = await supabase
     .from("profiles")
     .select("id, full_name, username")
@@ -57,13 +59,12 @@ export default async function PhysioDashboardPage() {
     );
   }
 
-  // Get patient's active plan
-  const { data: activePlan } = await supabase
+  // Get ALL plans for this patient
+  const { data: allPlans } = await supabase
     .from("workout_plans")
-    .select("id, name, created_at, plan_items(id)")
+    .select("id, name, description, active, created_at, plan_items(id)")
     .eq("patient_id", patient.id)
-    .eq("active", true)
-    .maybeSingle();
+    .order("created_at", { ascending: false });
 
   // Get patient's logs
   const { data: logs } = await supabase
@@ -140,36 +141,61 @@ export default async function PhysioDashboardPage() {
           </Card>
         </div>
 
-        {/* Active plan */}
+        {/* Plans */}
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle className="text-base">Scheda attiva</CardTitle>
+              <CardTitle className="text-base">Schede</CardTitle>
               <Link href="/physio/plans/new">
-                <Button size="sm" variant="outline" className="gap-1">
+                <Button size="sm" className="gap-1">
                   <Plus className="h-3.5 w-3.5" />
-                  {activePlan ? "Modifica" : "Crea"}
+                  Nuova scheda
                 </Button>
               </Link>
             </div>
           </CardHeader>
-          <CardContent>
-            {activePlan ? (
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium">{activePlan.name}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {activePlan.plan_items?.length ?? 0} esercizi
-                  </p>
-                </div>
-                <Badge variant="secondary" className="bg-golden-100 text-golden-700">
-                  Attiva
-                </Badge>
-              </div>
-            ) : (
+          <CardContent className="space-y-3">
+            {!allPlans?.length ? (
               <p className="text-sm text-muted-foreground">
-                Nessuna scheda attiva
+                Nessuna scheda creata
               </p>
+            ) : (
+              allPlans.map((plan) => (
+                <div
+                  key={plan.id}
+                  className="flex items-center justify-between rounded-lg border p-3"
+                >
+                  <div className="space-y-0.5 min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <p className="font-medium text-sm truncate">
+                        {plan.name}
+                      </p>
+                      {plan.active && (
+                        <Badge className="bg-golden-100 text-golden-700 shrink-0">
+                          Attiva
+                        </Badge>
+                      )}
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      {plan.plan_items?.length ?? 0} esercizi &middot;{" "}
+                      {new Date(plan.created_at).toLocaleDateString("it-IT", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </p>
+                  </div>
+                  <div className="flex gap-1 shrink-0">
+                    <TogglePlanButton planId={plan.id} active={plan.active} />
+                    <Link href={`/physio/plans/edit/${plan.id}`}>
+                      <Button size="sm" variant="ghost" className="h-8 text-xs">
+                        <Pencil className="h-3.5 w-3.5" />
+                      </Button>
+                    </Link>
+                    <DeletePlanButton planId={plan.id} />
+                  </div>
+                </div>
+              ))
             )}
           </CardContent>
         </Card>
@@ -193,11 +219,14 @@ export default async function PhysioDashboardPage() {
                   >
                     <div className="space-y-0.5">
                       <p className="text-sm font-medium">
-                        {new Date(log.completed_at).toLocaleDateString("it-IT", {
-                          weekday: "short",
-                          day: "numeric",
-                          month: "short",
-                        })}
+                        {new Date(log.completed_at).toLocaleDateString(
+                          "it-IT",
+                          {
+                            weekday: "short",
+                            day: "numeric",
+                            month: "short",
+                          }
+                        )}
                       </p>
                       <div className="flex gap-3 text-xs text-muted-foreground">
                         {log.duration_seconds && (

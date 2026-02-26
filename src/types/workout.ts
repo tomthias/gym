@@ -23,6 +23,8 @@ export interface PlanItemWithExercise {
   rest_after: number | null;
   order: number;
   notes: string | null;
+  superset_group: number | null;
+  transition_rest: number | null;
 }
 
 export interface WorkoutSession {

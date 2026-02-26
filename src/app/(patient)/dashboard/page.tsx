@@ -32,8 +32,8 @@ export default async function DashboardPage() {
     .eq("id", user.id)
     .single();
 
-  // Fetch active plan with items and exercises
-  const { data: activePlan } = await supabase
+  // Fetch all active plans
+  const { data: activePlans } = await supabase
     .from("workout_plans")
     .select(
       `
@@ -48,6 +48,7 @@ export default async function DashboardPage() {
         reps,
         duration,
         rest_time,
+        superset_group,
         exercises (
           id,
           name,
@@ -58,7 +59,7 @@ export default async function DashboardPage() {
     )
     .eq("patient_id", user.id)
     .eq("active", true)
-    .maybeSingle();
+    .order("created_at", { ascending: false });
 
   // Fetch recent logs
   const { data: recentLogs } = await supabase
@@ -68,12 +69,13 @@ export default async function DashboardPage() {
     .order("completed_at", { ascending: false })
     .limit(7);
 
-  const sessionsThisWeek = recentLogs?.filter((log) => {
-    const logDate = new Date(log.completed_at);
-    const weekAgo = new Date();
-    weekAgo.setDate(weekAgo.getDate() - 7);
-    return logDate >= weekAgo;
-  }).length ?? 0;
+  const sessionsThisWeek =
+    recentLogs?.filter((log) => {
+      const logDate = new Date(log.completed_at);
+      const weekAgo = new Date();
+      weekAgo.setDate(weekAgo.getDate() - 7);
+      return logDate >= weekAgo;
+    }).length ?? 0;
 
   const lastSession = recentLogs?.[0];
 
@@ -82,7 +84,8 @@ export default async function DashboardPage() {
       {/* Welcome */}
       <div>
         <h1 className="text-2xl font-bold">
-          Ciao, {profile?.username ?? profile?.full_name?.split(" ")[0] ?? ""}
+          Ciao,{" "}
+          {profile?.username ?? profile?.full_name?.split(" ")[0] ?? ""}
         </h1>
         <p className="text-muted-foreground">Il tuo percorso di riabilitazione</p>
       </div>
@@ -108,10 +111,13 @@ export default async function DashboardPage() {
             <div>
               <p className="text-2xl font-bold">
                 {lastSession
-                  ? new Date(lastSession.completed_at).toLocaleDateString("it-IT", {
-                      day: "numeric",
-                      month: "short",
-                    })
+                  ? new Date(lastSession.completed_at).toLocaleDateString(
+                      "it-IT",
+                      {
+                        day: "numeric",
+                        month: "short",
+                      }
+                    )
                   : "--"}
               </p>
               <p className="text-xs text-muted-foreground">Ultima sessione</p>
@@ -120,65 +126,75 @@ export default async function DashboardPage() {
         </Card>
       </div>
 
-      {/* Active plan */}
-      {activePlan ? (
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="flex items-center gap-2">
-                  <Activity className="h-5 w-5 text-teal-600" />
-                  {activePlan.name}
-                </CardTitle>
-                <CardDescription>
-                  {activePlan.plan_items?.length ?? 0} esercizi
-                </CardDescription>
-              </div>
-              <Badge variant="secondary" className="bg-golden-100 text-golden-700">
-                Attivo
-              </Badge>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {/* Exercise list preview */}
-            <div className="space-y-2">
-              {activePlan.plan_items
-                ?.sort((a, b) => a.order - b.order)
-                .slice(0, 4)
-                .map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex items-center justify-between rounded-lg bg-muted/50 px-3 py-2"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Dumbbell className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm font-medium">
-                        {(item as any).exercises?.name}
-                      </span>
-                    </div>
-                    <span className="text-xs text-muted-foreground">
-                      {item.sets}x
-                      {item.reps
-                        ? `${item.reps} rep`
-                        : `${item.duration}s`}
-                    </span>
+      {/* Active plans */}
+      {activePlans && activePlans.length > 0 ? (
+        <div className="space-y-4">
+          {activePlans.map((plan) => (
+            <Card key={plan.id}>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="flex items-center gap-2">
+                      <Activity className="h-5 w-5 text-teal-600" />
+                      {plan.name}
+                    </CardTitle>
+                    <CardDescription>
+                      {plan.plan_items?.length ?? 0} esercizi
+                    </CardDescription>
                   </div>
-                ))}
-              {(activePlan.plan_items?.length ?? 0) > 4 && (
-                <p className="text-center text-xs text-muted-foreground">
-                  +{(activePlan.plan_items?.length ?? 0) - 4} altri esercizi
-                </p>
-              )}
-            </div>
+                  <Badge
+                    variant="secondary"
+                    className="bg-golden-100 text-golden-700"
+                  >
+                    Attiva
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {/* Exercise list preview */}
+                <div className="space-y-2">
+                  {plan.plan_items
+                    ?.sort((a: any, b: any) => a.order - b.order)
+                    .slice(0, 4)
+                    .map((item: any) => (
+                      <div
+                        key={item.id}
+                        className="flex items-center justify-between rounded-lg bg-muted/50 px-3 py-2"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Dumbbell className="h-4 w-4 text-muted-foreground" />
+                          <span className="text-sm font-medium">
+                            {item.exercises?.name}
+                          </span>
+                        </div>
+                        <span className="text-xs text-muted-foreground">
+                          {item.sets}x
+                          {item.reps
+                            ? `${item.reps} rep`
+                            : `${item.duration}s`}
+                        </span>
+                      </div>
+                    ))}
+                  {(plan.plan_items?.length ?? 0) > 4 && (
+                    <p className="text-center text-xs text-muted-foreground">
+                      +{(plan.plan_items?.length ?? 0) - 4} altri esercizi
+                    </p>
+                  )}
+                </div>
 
-            <Link href="/workout" className="block">
-              <Button className="w-full gap-2" size="lg">
-                <Play className="h-5 w-5" />
-                Inizia Workout
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
+                <Link
+                  href={`/workout?planId=${plan.id}`}
+                  className="block"
+                >
+                  <Button className="w-full gap-2" size="lg">
+                    <Play className="h-5 w-5" />
+                    Inizia Workout
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       ) : (
         <Card>
           <CardContent className="flex flex-col items-center gap-3 py-12">
