@@ -436,7 +436,7 @@ export function PlanEditor({
   const renderBlocks = buildRenderBlocks(items);
 
   return (
-    <div className="px-4 pt-4 space-y-4 max-w-2xl">
+    <div className="px-4 pt-4 lg:px-0 lg:pt-0 space-y-4">
       {/* Plan info */}
       <div className="space-y-3">
         <div className="space-y-2">

@@ -3,6 +3,11 @@
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 
+function revalidatePhysio() {
+  revalidatePath("/physio/dashboard");
+  revalidatePath("/physio/plans");
+}
+
 export async function togglePlanActive(planId: string, active: boolean) {
   const supabase = await createClient();
   const {
@@ -18,7 +23,7 @@ export async function togglePlanActive(planId: string, active: boolean) {
 
   if (error) throw new Error("Errore nell'aggiornamento della scheda");
 
-  revalidatePath("/physio/dashboard");
+  revalidatePhysio();
 }
 
 export async function deletePlan(planId: string) {
@@ -36,5 +41,56 @@ export async function deletePlan(planId: string) {
 
   if (error) throw new Error("Errore nell'eliminazione della scheda");
 
-  revalidatePath("/physio/dashboard");
+  revalidatePhysio();
+}
+
+export async function duplicatePlan(planId: string) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Non autenticato");
+
+  // Get the original plan
+  const { data: plan } = await supabase
+    .from("workout_plans")
+    .select("*, plan_items(*)")
+    .eq("id", planId)
+    .eq("physio_id", user.id)
+    .single();
+
+  if (!plan) throw new Error("Scheda non trovata");
+
+  // Create duplicated plan
+  const { data: newPlan, error: planError } = await supabase
+    .from("workout_plans")
+    .insert({
+      name: `${plan.name} (copia)`,
+      description: plan.description,
+      patient_id: plan.patient_id,
+      physio_id: user.id,
+      active: false,
+    })
+    .select()
+    .single();
+
+  if (planError || !newPlan) throw new Error("Errore nella duplicazione della scheda");
+
+  // Copy plan items
+  if (plan.plan_items?.length) {
+    const newItems = plan.plan_items.map(
+      ({ id, plan_id, created_at, ...item }: Record<string, unknown>) => ({
+        ...item,
+        plan_id: newPlan.id,
+      })
+    );
+
+    const { error: itemsError } = await supabase
+      .from("plan_items")
+      .insert(newItems);
+
+    if (itemsError) throw new Error("Errore nella copia degli esercizi");
+  }
+
+  revalidatePhysio();
 }

@@ -8,7 +8,7 @@ interface HeaderProps {
 
 export function Header({ title, backHref }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-40 flex h-14 items-center gap-3 border-b bg-white/95 px-4 backdrop-blur-sm">
+    <header className="sticky top-0 z-40 flex h-14 items-center gap-3 border-b bg-background/95 px-4 backdrop-blur-sm">
       {backHref && (
         <Link
           href={backHref}

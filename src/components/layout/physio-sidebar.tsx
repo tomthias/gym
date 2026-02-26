@@ -5,32 +5,20 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   Dumbbell,
-  KeyRound,
-  LogOut,
   Activity,
+  Settings,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
 
 const navItems = [
   { href: "/physio/dashboard", label: "Paziente", icon: LayoutDashboard },
-  { href: "/physio/plans/new", label: "Nuova scheda", icon: Dumbbell },
+  { href: "/physio/plans", label: "Schede", icon: Dumbbell },
   { href: "/physio/exercises", label: "Esercizi", icon: Activity },
-  { href: "/physio/invite", label: "Codice invito", icon: KeyRound },
+  { href: "/physio/settings", label: "Impostazioni", icon: Settings },
 ];
 
 export function PhysioSidebar() {
   const pathname = usePathname();
-  const router = useRouter();
-
-  async function handleLogout() {
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    router.push("/login");
-    router.refresh();
-  }
 
   return (
     <aside className="flex flex-col border-r bg-background w-64 min-h-dvh p-4">
@@ -49,7 +37,7 @@ export function PhysioSidebar() {
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
                 isActive
-                  ? "bg-teal-50 text-teal-700 font-medium"
+                  ? "bg-teal-50 text-teal-700 font-medium dark:bg-teal-950 dark:text-teal-300"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
               )}
             >
@@ -59,15 +47,6 @@ export function PhysioSidebar() {
           );
         })}
       </nav>
-
-      <Button
-        variant="ghost"
-        onClick={handleLogout}
-        className="mt-auto justify-start gap-2 text-muted-foreground"
-      >
-        <LogOut className="h-4 w-4" />
-        Esci
-      </Button>
     </aside>
   );
 }

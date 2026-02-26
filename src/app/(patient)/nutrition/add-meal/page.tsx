@@ -10,7 +10,16 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Clock, Search, Loader2 } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+} from "@/components/ui/sheet";
+import { MacroBar } from "@/components/nutrition/macro-bar";
+import { ChefHat, Clock, Search, Loader2 } from "lucide-react";
 import type { MealSlot } from "@/types/nutrition";
 
 interface RecipeRow {
@@ -25,6 +34,9 @@ interface RecipeRow {
   carbs_grams: number;
   fats_grams: number;
   calories: number;
+  ingredients: string[];
+  steps: string[];
+  tips: string | null;
 }
 
 export default function AddMealPage() {
@@ -37,6 +49,7 @@ export default function AddMealPage() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState<RecipeRow | null>(null);
 
   useEffect(() => {
     async function fetchRecipes() {
@@ -177,7 +190,7 @@ export default function AddMealPage() {
                 <Card
                   key={recipe.id}
                   className="cursor-pointer hover:border-teal-300 transition-colors"
-                  onClick={() => handleSelectRecipe(recipe)}
+                  onClick={() => setSelectedRecipe(recipe)}
                 >
                   <CardContent className="p-3">
                     <div className="flex items-start justify-between">
@@ -205,6 +218,113 @@ export default function AddMealPage() {
                 </Card>
               ))
             )}
+            <Sheet
+              open={!!selectedRecipe}
+              onOpenChange={(open) => !open && setSelectedRecipe(null)}
+            >
+              <SheetContent
+                side="bottom"
+                className="max-h-[85vh] flex flex-col rounded-t-xl"
+              >
+                {selectedRecipe && (
+                  <>
+                    <SheetHeader>
+                      <SheetTitle>{selectedRecipe.name}</SheetTitle>
+                      <SheetDescription asChild>
+                        <div className="flex items-center gap-2 mt-1">
+                          <Badge variant="secondary" className="gap-1">
+                            <Clock className="h-3 w-3" />
+                            {selectedRecipe.prep_time} min
+                          </Badge>
+                          <Badge variant="outline">
+                            {selectedRecipe.difficulty}
+                          </Badge>
+                          {selectedRecipe.category && (
+                            <Badge variant="outline">
+                              {selectedRecipe.category}
+                            </Badge>
+                          )}
+                        </div>
+                      </SheetDescription>
+                    </SheetHeader>
+
+                    <div className="flex-1 overflow-y-auto px-4 space-y-4">
+                      {/* Macros */}
+                      <div className="text-center">
+                        <span className="text-2xl font-bold text-teal-600">
+                          {selectedRecipe.calories}
+                        </span>
+                        <span className="text-sm text-muted-foreground">
+                          {" "}
+                          kcal
+                        </span>
+                      </div>
+                      <MacroBar
+                        proteinGrams={Number(selectedRecipe.protein_grams)}
+                        carbsGrams={Number(selectedRecipe.carbs_grams)}
+                        fatsGrams={Number(selectedRecipe.fats_grams)}
+                      />
+
+                      {/* Ingredienti */}
+                      <div>
+                        <h3 className="font-semibold mb-2 flex items-center gap-1">
+                          <ChefHat className="h-4 w-4" />
+                          Ingredienti
+                        </h3>
+                        <ul className="space-y-1">
+                          {selectedRecipe.ingredients.map((ing, i) => (
+                            <li
+                              key={i}
+                              className="text-sm flex items-start gap-2"
+                            >
+                              <span className="text-teal-500 mt-1">
+                                &#8226;
+                              </span>
+                              {ing}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Preparazione */}
+                      <div>
+                        <h3 className="font-semibold mb-2">Preparazione</h3>
+                        <ol className="space-y-3">
+                          {selectedRecipe.steps.map((step, i) => (
+                            <li key={i} className="flex gap-3 text-sm">
+                              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal-100 text-xs font-medium text-teal-600">
+                                {i + 1}
+                              </span>
+                              <span className="pt-0.5">{step}</span>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+
+                      {/* Tips */}
+                      {selectedRecipe.tips && (
+                        <p className="text-sm italic text-muted-foreground pb-2">
+                          💡 {selectedRecipe.tips}
+                        </p>
+                      )}
+                    </div>
+
+                    <SheetFooter>
+                      <Button
+                        className="w-full"
+                        onClick={() => handleSelectRecipe(selectedRecipe)}
+                        disabled={saving}
+                      >
+                        {saving && (
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        )}
+                        Aggiungi
+                      </Button>
+                    </SheetFooter>
+                  </>
+                )}
+              </SheetContent>
+            </Sheet>
           </TabsContent>
 
           <TabsContent value="manual" className="mt-3">

@@ -17,6 +17,7 @@ import {
   TrendingUp,
   Play,
 } from "lucide-react";
+import { PhysioNotes } from "@/components/patient/physio-notes";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -28,9 +29,31 @@ export default async function DashboardPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, username")
+    .select("full_name, username, physio_id")
     .eq("id", user.id)
     .single();
+
+  // Fetch physio notes + physio name
+  let physioNotes: { id: string; message: string; created_at: string }[] = [];
+  let physioName: string | null = null;
+
+  if (profile?.physio_id) {
+    const [{ data: notes }, { data: physio }] = await Promise.all([
+      supabase
+        .from("physio_notes")
+        .select("id, message, created_at")
+        .eq("patient_id", user.id)
+        .order("created_at", { ascending: false })
+        .limit(3),
+      supabase
+        .from("profiles")
+        .select("full_name")
+        .eq("id", profile.physio_id)
+        .single(),
+    ]);
+    physioNotes = notes ?? [];
+    physioName = physio?.full_name ?? null;
+  }
 
   // Fetch all active plans
   const { data: activePlans } = await supabase
@@ -89,6 +112,9 @@ export default async function DashboardPage() {
         </h1>
         <p className="text-muted-foreground">Il tuo percorso di riabilitazione</p>
       </div>
+
+      {/* Physio notes */}
+      <PhysioNotes notes={physioNotes} physioName={physioName} />
 
       {/* Quick stats */}
       <div className="grid grid-cols-2 gap-3">

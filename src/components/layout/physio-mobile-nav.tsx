@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Dumbbell, Activity, KeyRound } from "lucide-react";
+import { LayoutDashboard, Dumbbell, Activity, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/physio/dashboard", label: "Paziente", icon: LayoutDashboard },
-  { href: "/physio/plans/new", label: "Scheda", icon: Dumbbell },
+  { href: "/physio/plans", label: "Schede", icon: Dumbbell },
   { href: "/physio/exercises", label: "Esercizi", icon: Activity },
-  { href: "/physio/invite", label: "Invito", icon: KeyRound },
+  { href: "/physio/settings", label: "Profilo", icon: Settings },
 ];
 
 export function PhysioMobileNav() {

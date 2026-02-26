@@ -11,7 +11,11 @@ export default function PhysioLayout({
       {/* Desktop sidebar */}
       <div className="hidden lg:flex">
         <PhysioSidebar />
-        <main className="flex-1 pb-8">{children}</main>
+        <main className="flex-1 overflow-y-auto">
+          <div className="mx-auto max-w-4xl px-8 py-6">
+            {children}
+          </div>
+        </main>
       </div>
       {/* Mobile layout */}
       <div className="lg:hidden pb-20">

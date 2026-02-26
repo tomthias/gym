@@ -94,7 +94,7 @@ export default function InvitePage() {
   return (
     <div>
       <Header title="Codice invito" />
-      <div className="px-4 pt-4 space-y-4 max-w-lg">
+      <div className="px-4 pt-4 lg:px-0 lg:pt-0 space-y-4">
         <p className="text-sm text-muted-foreground">
           Genera un codice invito per collegare il tuo paziente. Il codice scade
           dopo {INVITE_CODE_EXPIRY_DAYS} giorni.
