@@ -222,7 +222,7 @@ export default function ExercisesPage() {
 
         {loading ? (
           <div className="flex justify-center py-8">
-            <Loader2 className="h-6 w-6 animate-spin text-medical-500" />
+            <Loader2 className="h-6 w-6 animate-spin text-teal-500" />
           </div>
         ) : exercises.length === 0 ? (
           <p className="text-center py-12 text-muted-foreground">

@@ -62,8 +62,8 @@ export default function WorkoutCompletePage() {
   if (saved) {
     return (
       <div className="flex flex-col items-center justify-center gap-6 px-4 pt-20">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-sage-100">
-          <CheckCircle2 className="h-10 w-10 text-sage-600" />
+        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-golden-100">
+          <CheckCircle2 className="h-10 w-10 text-golden-600" />
         </div>
         <h1 className="text-2xl font-bold">Sessione salvata!</h1>
         <p className="text-muted-foreground text-center">
@@ -79,8 +79,8 @@ export default function WorkoutCompletePage() {
   return (
     <div className="px-4 pt-6 space-y-6">
       <div className="text-center space-y-2">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-sage-100">
-          <CheckCircle2 className="h-8 w-8 text-sage-600" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-golden-100">
+          <CheckCircle2 className="h-8 w-8 text-golden-600" />
         </div>
         <h1 className="text-2xl font-bold">Workout completato!</h1>
         <p className="text-muted-foreground">{store.planName}</p>
@@ -90,21 +90,21 @@ export default function WorkoutCompletePage() {
       <div className="grid grid-cols-3 gap-3">
         <Card>
           <CardContent className="flex flex-col items-center p-3">
-            <Clock className="h-5 w-5 text-medical-500 mb-1" />
+            <Clock className="h-5 w-5 text-teal-500 mb-1" />
             <span className="text-lg font-bold">{formatDuration(durationSeconds)}</span>
             <span className="text-xs text-muted-foreground">Durata</span>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="flex flex-col items-center p-3">
-            <Dumbbell className="h-5 w-5 text-medical-500 mb-1" />
+            <Dumbbell className="h-5 w-5 text-teal-500 mb-1" />
             <span className="text-lg font-bold">{store.items.length}</span>
             <span className="text-xs text-muted-foreground">Esercizi</span>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="flex flex-col items-center p-3">
-            <Layers className="h-5 w-5 text-medical-500 mb-1" />
+            <Layers className="h-5 w-5 text-teal-500 mb-1" />
             <span className="text-lg font-bold">{store.totalSetsCompleted}</span>
             <span className="text-xs text-muted-foreground">Serie</span>
           </CardContent>

@@ -40,7 +40,7 @@ export function CalorieRing({ consumed, budget }: CalorieRingProps) {
           strokeDashoffset={offset}
           className={cn(
             "transition-[stroke-dashoffset] duration-500 ease-out",
-            isOver ? "stroke-destructive" : "stroke-sage-500"
+            isOver ? "stroke-destructive" : "stroke-golden-500"
           )}
         />
       </svg>

@@ -127,8 +127,8 @@ export default function RegisterPage() {
   return (
     <Card>
       <CardHeader className="text-center">
-        <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-medical-100">
-          <Activity className="h-6 w-6 text-medical-600" />
+        <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-teal-100">
+          <Activity className="h-6 w-6 text-teal-600" />
         </div>
         <CardTitle className="text-2xl">Registrati</CardTitle>
         <CardDescription>Crea il tuo account Physio-Track</CardDescription>
@@ -218,14 +218,14 @@ export default function RegisterPage() {
             </div>
           )}
         </CardContent>
-        <CardFooter className="flex flex-col gap-3">
+        <CardFooter className="flex flex-col gap-3 pt-2">
           <Button type="submit" className="w-full" disabled={loading}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Registrati
           </Button>
           <p className="text-sm text-muted-foreground">
             Hai gia un account?{" "}
-            <Link href="/login" className="text-medical-600 hover:underline">
+            <Link href="/login" className="text-teal-600 hover:underline">
               Accedi
             </Link>
           </p>

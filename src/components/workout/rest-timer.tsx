@@ -60,7 +60,7 @@ export function RestTimer({
 
       <div className="text-center space-y-1">
         <p className="text-sm text-muted-foreground">Prossimo:</p>
-        <p className="font-semibold text-medical-600">{nextExerciseName}</p>
+        <p className="font-semibold text-teal-600">{nextExerciseName}</p>
       </div>
 
       <Button variant="outline" size="lg" onClick={onSkip} className="gap-2">

@@ -97,7 +97,7 @@ export default async function PhysioDashboardPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <User className="h-5 w-5 text-medical-600" />
+              <User className="h-5 w-5 text-teal-600" />
               {patient.full_name}
             </CardTitle>
             <CardDescription>@{patient.username}</CardDescription>
@@ -108,7 +108,7 @@ export default async function PhysioDashboardPage() {
         <div className="grid grid-cols-3 gap-3">
           <Card>
             <CardContent className="flex flex-col items-center p-3">
-              <Calendar className="h-5 w-5 text-medical-500 mb-1" />
+              <Calendar className="h-5 w-5 text-teal-500 mb-1" />
               <span className="text-xl font-bold">{sessionsThisWeek}</span>
               <span className="text-xs text-muted-foreground text-center">
                 Sessioni settimana
@@ -117,7 +117,7 @@ export default async function PhysioDashboardPage() {
           </Card>
           <Card>
             <CardContent className="flex flex-col items-center p-3">
-              <TrendingUp className="h-5 w-5 text-sage-500 mb-1" />
+              <TrendingUp className="h-5 w-5 text-golden-500 mb-1" />
               <span className="text-xl font-bold">{logs?.length ?? 0}</span>
               <span className="text-xs text-muted-foreground text-center">
                 Totale sessioni
@@ -162,7 +162,7 @@ export default async function PhysioDashboardPage() {
                     {activePlan.plan_items?.length ?? 0} esercizi
                   </p>
                 </div>
-                <Badge variant="secondary" className="bg-sage-100 text-sage-700">
+                <Badge variant="secondary" className="bg-golden-100 text-golden-700">
                   Attiva
                 </Badge>
               </div>

@@ -55,7 +55,7 @@ export function MealSection({
         {meals.length === 0 ? (
           <Link
             href={`/nutrition/add-meal?slot=${slot}&dayType=${dayType}`}
-            className="flex items-center justify-center rounded-lg border border-dashed py-4 text-sm text-muted-foreground hover:border-medical-300 hover:text-medical-600 transition-colors"
+            className="flex items-center justify-center rounded-lg border border-dashed py-4 text-sm text-muted-foreground hover:border-teal-300 hover:text-teal-600 transition-colors"
           >
             <Plus className="mr-1 h-4 w-4" />
             Aggiungi pasto

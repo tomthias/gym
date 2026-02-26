@@ -43,7 +43,7 @@ export function ExerciseDisplay({ item, currentSet }: ExerciseDisplayProps) {
       )}
 
       {item.notes && (
-        <p className="text-sm text-medical-600 italic">
+        <p className="text-sm text-teal-600 italic">
           {item.notes}
         </p>
       )}
@@ -53,7 +53,7 @@ export function ExerciseDisplay({ item, currentSet }: ExerciseDisplayProps) {
           href={item.exercise.video_url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-sm text-medical-600 hover:underline"
+          className="inline-flex items-center gap-1 text-sm text-teal-600 hover:underline"
         >
           <ExternalLink className="h-3 w-3" />
           Video guida

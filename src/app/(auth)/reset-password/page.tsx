@@ -72,8 +72,8 @@ export default function ResetPasswordPage() {
   return (
     <Card>
       <CardHeader className="text-center">
-        <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-medical-100">
-          <ShieldCheck className="h-6 w-6 text-medical-600" />
+        <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-teal-100">
+          <ShieldCheck className="h-6 w-6 text-teal-600" />
         </div>
         <CardTitle className="text-2xl">Nuova password</CardTitle>
         <CardDescription>Scegli una nuova password per il tuo account</CardDescription>
@@ -108,7 +108,7 @@ export default function ResetPasswordPage() {
             />
           </div>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="pt-2">
           <Button type="submit" className="w-full" disabled={loading}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Aggiorna password

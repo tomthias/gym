@@ -9,6 +9,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { User, AtSign, Mail, Stethoscope } from "lucide-react";
 import { LogoutButton } from "./logout-button";
+import { ThemeToggle } from "./theme-toggle";
 
 export default async function SettingsPage() {
   const supabase = await createClient();
@@ -48,8 +49,8 @@ export default async function SettingsPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-medical-100">
-              <User className="h-5 w-5 text-medical-600" />
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-100">
+              <User className="h-5 w-5 text-teal-600" />
             </div>
             <div className="min-w-0">
               <p className="text-sm text-muted-foreground">Nome</p>
@@ -62,8 +63,8 @@ export default async function SettingsPage() {
           <Separator />
 
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-medical-100">
-              <AtSign className="h-5 w-5 text-medical-600" />
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-100">
+              <AtSign className="h-5 w-5 text-teal-600" />
             </div>
             <div className="min-w-0">
               <p className="text-sm text-muted-foreground">Nome utente</p>
@@ -76,8 +77,8 @@ export default async function SettingsPage() {
           <Separator />
 
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-medical-100">
-              <Mail className="h-5 w-5 text-medical-600" />
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-100">
+              <Mail className="h-5 w-5 text-teal-600" />
             </div>
             <div className="min-w-0">
               <p className="text-sm text-muted-foreground">Email</p>
@@ -90,8 +91,8 @@ export default async function SettingsPage() {
           <Separator />
 
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sage-100">
-              <Stethoscope className="h-5 w-5 text-sage-600" />
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-golden-100">
+              <Stethoscope className="h-5 w-5 text-golden-600" />
             </div>
             <div className="min-w-0">
               <p className="text-sm text-muted-foreground">Fisioterapista</p>
@@ -102,6 +103,8 @@ export default async function SettingsPage() {
           </div>
         </CardContent>
       </Card>
+
+      <ThemeToggle />
 
       <LogoutButton />
     </div>

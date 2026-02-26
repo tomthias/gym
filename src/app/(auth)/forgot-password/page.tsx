@@ -46,8 +46,8 @@ export default function ForgotPasswordPage() {
     return (
       <Card>
         <CardHeader className="text-center">
-          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-sage-100">
-            <CheckCircle className="h-6 w-6 text-sage-600" />
+          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-golden-100">
+            <CheckCircle className="h-6 w-6 text-golden-600" />
           </div>
           <CardTitle className="text-2xl">Email inviata</CardTitle>
           <CardDescription>
@@ -69,8 +69,8 @@ export default function ForgotPasswordPage() {
   return (
     <Card>
       <CardHeader className="text-center">
-        <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-medical-100">
-          <KeyRound className="h-6 w-6 text-medical-600" />
+        <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-teal-100">
+          <KeyRound className="h-6 w-6 text-teal-600" />
         </div>
         <CardTitle className="text-2xl">Password dimenticata</CardTitle>
         <CardDescription>
@@ -95,14 +95,14 @@ export default function ForgotPasswordPage() {
             />
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col gap-3">
+        <CardFooter className="flex flex-col gap-3 pt-2">
           <Button type="submit" className="w-full" disabled={loading}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Invia link di reset
           </Button>
           <p className="text-sm text-muted-foreground">
             Ricordi la password?{" "}
-            <Link href="/login" className="text-medical-600 hover:underline">
+            <Link href="/login" className="text-teal-600 hover:underline">
               Accedi
             </Link>
           </p>

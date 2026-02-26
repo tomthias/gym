@@ -62,7 +62,7 @@ export function PlayerControls({
           <Button
             size="lg"
             onClick={onComplete}
-            className="h-20 w-20 rounded-full bg-sage-500 hover:bg-sage-600"
+            className="h-20 w-20 rounded-full bg-golden-500 hover:bg-golden-600"
           >
             <Check className="h-9 w-9" />
           </Button>

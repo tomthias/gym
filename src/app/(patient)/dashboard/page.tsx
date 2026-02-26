@@ -91,8 +91,8 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-2 gap-3">
         <Card>
           <CardContent className="flex items-center gap-3 p-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-medical-100">
-              <Calendar className="h-5 w-5 text-medical-600" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100">
+              <Calendar className="h-5 w-5 text-teal-600" />
             </div>
             <div>
               <p className="text-2xl font-bold">{sessionsThisWeek}</p>
@@ -102,8 +102,8 @@ export default async function DashboardPage() {
         </Card>
         <Card>
           <CardContent className="flex items-center gap-3 p-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sage-100">
-              <TrendingUp className="h-5 w-5 text-sage-600" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-golden-100">
+              <TrendingUp className="h-5 w-5 text-golden-600" />
             </div>
             <div>
               <p className="text-2xl font-bold">
@@ -127,14 +127,14 @@ export default async function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <CardTitle className="flex items-center gap-2">
-                  <Activity className="h-5 w-5 text-medical-600" />
+                  <Activity className="h-5 w-5 text-teal-600" />
                   {activePlan.name}
                 </CardTitle>
                 <CardDescription>
                   {activePlan.plan_items?.length ?? 0} esercizi
                 </CardDescription>
               </div>
-              <Badge variant="secondary" className="bg-sage-100 text-sage-700">
+              <Badge variant="secondary" className="bg-golden-100 text-golden-700">
                 Attivo
               </Badge>
             </div>

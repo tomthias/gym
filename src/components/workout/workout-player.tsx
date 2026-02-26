@@ -155,7 +155,7 @@ export function WorkoutPlayer() {
             <Card key={item.id}>
               <CardContent className="flex items-center justify-between p-3">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-medical-100 text-sm font-medium text-medical-600">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-teal-100 text-sm font-medium text-teal-600">
                     {i + 1}
                   </span>
                   <div>

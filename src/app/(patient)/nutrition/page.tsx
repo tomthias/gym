@@ -86,7 +86,7 @@ export default function NutritionPage() {
   if (loading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-medical-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-teal-500" />
       </div>
     );
   }
@@ -105,7 +105,7 @@ export default function NutritionPage() {
               onClick={() => setDayType(type)}
               className={cn(
                 "flex-1",
-                dayType === type && "bg-medical-600 hover:bg-medical-700"
+                dayType === type && "bg-teal-600 hover:bg-teal-700"
               )}
             >
               {type === "workout" ? "Giorno allenamento" : "Giorno riposo"}

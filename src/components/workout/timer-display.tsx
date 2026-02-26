@@ -31,7 +31,7 @@ export function TimerDisplay({
   const strokeDashoffset = circumference * (1 - progressFraction);
 
   const isWarning = mode === "countdown" && seconds <= 3 && seconds > 0;
-  const strokeColor = isWarning ? "stroke-destructive" : "stroke-medical-500";
+  const strokeColor = isWarning ? "stroke-destructive" : "stroke-teal-500";
 
   return (
     <div className="relative flex items-center justify-center">

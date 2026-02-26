@@ -12,7 +12,7 @@ export const EXERCISE_CATEGORIES = [
 ] as const;
 
 export const PAIN_COLORS = {
-  low: "text-sage-600 bg-sage-100",
+  low: "text-golden-600 bg-golden-100",
   mid: "text-amber-600 bg-amber-100",
   high: "text-red-600 bg-red-100",
 } as const;

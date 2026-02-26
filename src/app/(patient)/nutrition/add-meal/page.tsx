@@ -164,7 +164,7 @@ export default function AddMealPage() {
 
             {loading ? (
               <div className="flex justify-center py-8">
-                <Loader2 className="h-6 w-6 animate-spin text-medical-500" />
+                <Loader2 className="h-6 w-6 animate-spin text-teal-500" />
               </div>
             ) : filteredRecipes.length === 0 ? (
               <p className="text-center py-8 text-muted-foreground">
@@ -176,7 +176,7 @@ export default function AddMealPage() {
               filteredRecipes.map((recipe) => (
                 <Card
                   key={recipe.id}
-                  className="cursor-pointer hover:border-medical-300 transition-colors"
+                  className="cursor-pointer hover:border-teal-300 transition-colors"
                   onClick={() => handleSelectRecipe(recipe)}
                 >
                   <CardContent className="p-3">
@@ -193,7 +193,7 @@ export default function AddMealPage() {
                           </Badge>
                         </div>
                       </div>
-                      <span className="text-sm font-semibold text-medical-600">
+                      <span className="text-sm font-semibold text-teal-600">
                         {recipe.calories} kcal
                       </span>
                     </div>

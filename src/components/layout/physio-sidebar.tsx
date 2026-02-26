@@ -33,9 +33,9 @@ export function PhysioSidebar() {
   }
 
   return (
-    <aside className="flex flex-col border-r bg-white w-64 min-h-dvh p-4">
+    <aside className="flex flex-col border-r bg-background w-64 min-h-dvh p-4">
       <div className="flex items-center gap-2 mb-8 px-2">
-        <Activity className="h-6 w-6 text-medical-600" />
+        <Activity className="h-6 w-6 text-teal-600" />
         <span className="font-bold text-lg">Physio-Track</span>
       </div>
 
@@ -49,7 +49,7 @@ export function PhysioSidebar() {
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
                 isActive
-                  ? "bg-medical-50 text-medical-700 font-medium"
+                  ? "bg-teal-50 text-teal-700 font-medium"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
               )}
             >

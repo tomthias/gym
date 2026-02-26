@@ -115,7 +115,7 @@ export default function InvitePage() {
 
         {loading ? (
           <div className="flex justify-center py-8">
-            <Loader2 className="h-6 w-6 animate-spin text-medical-500" />
+            <Loader2 className="h-6 w-6 animate-spin text-teal-500" />
           </div>
         ) : codes.length === 0 ? (
           <div className="flex flex-col items-center gap-3 py-12">
@@ -137,7 +137,7 @@ export default function InvitePage() {
                       </p>
                       <div className="flex items-center gap-2">
                         {isUsed ? (
-                          <Badge className="bg-sage-100 text-sage-700">
+                          <Badge className="bg-golden-100 text-golden-700">
                             Usato
                           </Badge>
                         ) : isExpired ? (
@@ -160,7 +160,7 @@ export default function InvitePage() {
                         onClick={() => handleCopy(invite.code)}
                       >
                         {copiedCode === invite.code ? (
-                          <Check className="h-4 w-4 text-sage-600" />
+                          <Check className="h-4 w-4 text-golden-600" />
                         ) : (
                           <Copy className="h-4 w-4" />
                         )}

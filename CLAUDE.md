@@ -79,4 +79,5 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 - **Path alias**: `@/*` maps to `src/*`
 - **Components**: shadcn/ui for all UI primitives
 - **Auth pattern**: Server components use `createClient()` from `@/lib/supabase/server`, client components from `@/lib/supabase/client`
-- **Colors**: Medical blue (primary), sage green (secondary), pain scale (red/amber/green)
+- **Colors**: Teal (#2a7c7c, primary), golden amber (#d4a030, secondary/accent), pain scale (red/amber/green)
+- **Dark mode**: Supported via next-themes, toggle in patient settings page. CSS variables use OKLCH with teal tint in dark mode.

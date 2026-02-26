@@ -40,7 +40,7 @@ export default async function RecipeDetailPage({
         <Card>
           <CardContent className="p-4 space-y-3">
             <div className="text-center">
-              <span className="text-3xl font-bold text-medical-600">
+              <span className="text-3xl font-bold text-teal-600">
                 {recipe.calories}
               </span>
               <span className="text-sm text-muted-foreground"> kcal</span>
@@ -63,7 +63,7 @@ export default async function RecipeDetailPage({
             <ul className="space-y-1">
               {recipe.ingredients.map((ing: string, i: number) => (
                 <li key={i} className="text-sm flex items-start gap-2">
-                  <span className="text-medical-500 mt-1">&#8226;</span>
+                  <span className="text-teal-500 mt-1">&#8226;</span>
                   {ing}
                 </li>
               ))}
@@ -78,7 +78,7 @@ export default async function RecipeDetailPage({
             <ol className="space-y-3">
               {recipe.steps.map((step: string, i: number) => (
                 <li key={i} className="flex gap-3 text-sm">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-medical-100 text-xs font-medium text-medical-600">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal-100 text-xs font-medium text-teal-600">
                     {i + 1}
                   </span>
                   <span className="pt-0.5">{step}</span>
