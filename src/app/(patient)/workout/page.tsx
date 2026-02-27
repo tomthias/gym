@@ -31,10 +31,15 @@ function WorkoutPageContent() {
   const planIdParam = searchParams.get("planId");
 
   useEffect(() => {
-    // If already loaded (e.g., coming back from background), skip fetch
-    if (store.phase !== "idle" && store.planId) {
+    // If resuming the SAME plan (e.g., coming back from background), skip fetch
+    if (store.phase !== "idle" && store.planId && store.planId === planIdParam) {
       setLoading(false);
       return;
+    }
+
+    // If store has a different plan, reset before loading new one
+    if (store.phase !== "idle" && store.planId !== planIdParam) {
+      store.reset();
     }
 
     async function loadPlan() {

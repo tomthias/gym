@@ -251,6 +251,20 @@ export const useWorkoutStore = create<WorkoutState & WorkoutActions>()(
           Date.now() - state._savedAt > 6 * 60 * 60 * 1000
         ) {
           useWorkoutStore.getState().reset();
+          return;
+        }
+        // Filter out items with null exercises (orphaned plan_items)
+        if (state?.items) {
+          const cleanItems = state.items.filter(
+            (item) => item.exercise != null
+          );
+          if (cleanItems.length !== state.items.length) {
+            if (cleanItems.length === 0) {
+              useWorkoutStore.getState().reset();
+            } else {
+              useWorkoutStore.setState({ items: cleanItems });
+            }
+          }
         }
       },
     }
