@@ -91,8 +91,9 @@ function WorkoutPageContent() {
         return;
       }
 
-      const items: PlanItemWithExercise[] = plan.plan_items.map(
-        (pi: any) => ({
+      const items: PlanItemWithExercise[] = plan.plan_items
+        .filter((pi: any) => pi.exercises != null)
+        .map((pi: any) => ({
           id: pi.id,
           exercise: pi.exercises,
           sets: pi.sets,
@@ -104,8 +105,12 @@ function WorkoutPageContent() {
           notes: pi.notes,
           superset_group: pi.superset_group,
           transition_rest: pi.transition_rest,
-        })
-      );
+        }));
+
+      if (!items.length) {
+        router.push("/dashboard");
+        return;
+      }
 
       store.loadPlan(plan.id, plan.name, items);
       setLoading(false);
