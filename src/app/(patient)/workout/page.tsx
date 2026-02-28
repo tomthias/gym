@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useWorkoutStore } from "@/lib/stores/workout-store";
@@ -25,30 +25,44 @@ export default function WorkoutPage() {
 function WorkoutPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const store = useWorkoutStore();
+
+  // Individual selectors — avoid subscribing to the entire store
+  const phase = useWorkoutStore((s) => s.phase);
+  const storePlanId = useWorkoutStore((s) => s.planId);
+  const loadPlanAction = useWorkoutStore((s) => s.loadPlan);
+  const reset = useWorkoutStore((s) => s.reset);
+
   const [loading, setLoading] = useState(true);
+  const loadingRef = useRef(false);
 
   const planIdParam = searchParams.get("planId");
 
   useEffect(() => {
     // If resuming the SAME plan (e.g., coming back from background), skip fetch
-    if (store.phase !== "idle" && store.planId && store.planId === planIdParam) {
+    if (phase !== "idle" && storePlanId && storePlanId === planIdParam) {
       setLoading(false);
       return;
     }
 
-    // If store has a different plan, reset before loading new one
-    if (store.phase !== "idle" && store.planId !== planIdParam) {
-      store.reset();
+    // If store has a different plan, reset before loading new one.
+    // Return so the effect re-runs cleanly with phase="idle".
+    if (phase !== "idle" && storePlanId !== planIdParam) {
+      reset();
+      return;
     }
 
-    async function loadPlan() {
+    // Guard against double-invocation (React Strict Mode / hydration races)
+    if (loadingRef.current) return;
+
+    async function fetchAndLoadPlan() {
+      loadingRef.current = true;
       const supabase = createClient();
       const {
         data: { user },
       } = await supabase.auth.getUser();
 
       if (!user) {
+        loadingRef.current = false;
         router.push("/login");
         return;
       }
@@ -92,6 +106,7 @@ function WorkoutPageContent() {
       const plan = plans?.[0];
 
       if (!plan || !plan.plan_items?.length) {
+        loadingRef.current = false;
         router.push("/dashboard");
         return;
       }
@@ -113,16 +128,18 @@ function WorkoutPageContent() {
         }));
 
       if (!items.length) {
+        loadingRef.current = false;
         router.push("/dashboard");
         return;
       }
 
-      store.loadPlan(plan.id, plan.name, items);
+      loadPlanAction(plan.id, plan.name, items);
+      loadingRef.current = false;
       setLoading(false);
     }
 
-    loadPlan();
-  }, [store, router, planIdParam]);
+    fetchAndLoadPlan();
+  }, [phase, storePlanId, planIdParam, router, loadPlanAction, reset]);
 
   if (loading) {
     return (

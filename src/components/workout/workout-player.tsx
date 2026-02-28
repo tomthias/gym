@@ -59,24 +59,40 @@ function buildPreviewBlocks(items: PlanItemWithExercise[]): PreviewBlock[] {
 
 export function WorkoutPlayer() {
   const router = useRouter();
-  const store = useWorkoutStore();
+
+  // Individual selectors — avoid subscribing to the entire store
+  const phase = useWorkoutStore((s) => s.phase);
+  const items = useWorkoutStore((s) => s.items);
+  const currentItemIndex = useWorkoutStore((s) => s.currentItemIndex);
+  const currentSet = useWorkoutStore((s) => s.currentSet);
+  const planName = useWorkoutStore((s) => s.planName);
+  const planId = useWorkoutStore((s) => s.planId);
+  const storeTimerSeconds = useWorkoutStore((s) => s.timerSeconds);
+  const supersetRound = useWorkoutStore((s) => s.supersetRound);
+  const supersetExerciseIndex = useWorkoutStore((s) => s.supersetExerciseIndex);
+  const startWorkout = useWorkoutStore((s) => s.startWorkout);
+  const completeSet = useWorkoutStore((s) => s.completeSet);
+  const completeRest = useWorkoutStore((s) => s.completeRest);
+  const skipRest = useWorkoutStore((s) => s.skipRest);
+  const resetStore = useWorkoutStore((s) => s.reset);
+
   const { playCountdownTick, playComplete, unlock } = useAudio();
   const wakeLock = useWakeLock();
   const [isPaused, setIsPaused] = useState(false);
 
-  const currentItem = store.items[store.currentItemIndex];
+  const currentItem = items[currentItemIndex];
   const exerciseType = currentItem ? getExerciseType(currentItem) : "reps";
 
   const timer = useTimer({
     onComplete: () => {
-      if (store.phase === "exercising" && exerciseType === "timed") {
+      if (phase === "exercising" && exerciseType === "timed") {
         playComplete();
-        store.completeSet();
+        completeSet();
       }
     },
     onTick: (remaining) => {
       if (
-        store.phase === "exercising" &&
+        phase === "exercising" &&
         exerciseType === "timed" &&
         remaining <= 3 &&
         remaining > 0
@@ -88,10 +104,10 @@ export function WorkoutPlayer() {
 
   // Handle workout start
   const handleStartWorkout = useCallback(() => {
-    unlock(); // Unlock audio context on user gesture
+    unlock();
     wakeLock.request();
-    store.startWorkout();
-  }, [unlock, wakeLock, store]);
+    startWorkout();
+  }, [unlock, wakeLock, startWorkout]);
 
   // Handle starting a timed exercise
   const handleStartTimer = useCallback(() => {
@@ -121,35 +137,35 @@ export function WorkoutPlayer() {
     timer.stop();
     playComplete();
     setIsPaused(false);
-    store.completeSet();
-  }, [timer, playComplete, store]);
+    completeSet();
+  }, [timer, playComplete, completeSet]);
 
   const handleSkipExercise = useCallback(() => {
     timer.stop();
     setIsPaused(false);
-    store.completeSet();
-  }, [timer, store]);
+    completeSet();
+  }, [timer, completeSet]);
 
   const handleRestComplete = useCallback(() => {
-    store.completeRest();
-  }, [store]);
+    completeRest();
+  }, [completeRest]);
 
   const handleSkipRest = useCallback(() => {
-    store.skipRest();
-  }, [store]);
+    skipRest();
+  }, [skipRest]);
 
   const handleQuit = useCallback(() => {
     timer.stop();
     wakeLock.release();
-    store.reset();
+    resetStore();
     router.push("/dashboard");
-  }, [timer, wakeLock, store, router]);
+  }, [timer, wakeLock, resetStore, router]);
 
   // Auto-start stopwatch for reps exercises when entering exercising phase
-  const prevPhaseRef = useRef(store.phase);
+  const prevPhaseRef = useRef(phase);
   useEffect(() => {
     if (
-      store.phase === "exercising" &&
+      phase === "exercising" &&
       prevPhaseRef.current !== "exercising" &&
       currentItem
     ) {
@@ -158,19 +174,19 @@ export function WorkoutPlayer() {
         timer.startStopwatch();
       }
     }
-    prevPhaseRef.current = store.phase;
-  }, [store.phase, currentItem, timer]);
+    prevPhaseRef.current = phase;
+  }, [phase, currentItem, timer]);
 
   // Release wake lock on completed
   useEffect(() => {
-    if (store.phase === "completed") {
+    if (phase === "completed") {
       wakeLock.release();
       timer.stop();
       router.push("/workout/complete");
     }
-  }, [store.phase, wakeLock, timer, router]);
+  }, [phase, wakeLock, timer, router]);
 
-  if (store.phase === "idle" || !store.planId) {
+  if (phase === "idle" || !planId) {
     return (
       <div className="flex flex-col items-center justify-center gap-6 py-20">
         <p className="text-muted-foreground">Nessun workout caricato</p>
@@ -181,16 +197,16 @@ export function WorkoutPlayer() {
     );
   }
 
-  if (store.phase === "ready") {
-    const previewBlocks = buildPreviewBlocks(store.items);
+  if (phase === "ready") {
+    const previewBlocks = buildPreviewBlocks(items);
     let counter = 0;
 
     return (
       <div className="space-y-6 px-4 pt-6">
         <div className="text-center space-y-2">
-          <h1 className="text-2xl font-bold">{store.planName}</h1>
+          <h1 className="text-2xl font-bold">{planName}</h1>
           <p className="text-muted-foreground">
-            {store.items.length} esercizi
+            {items.length} esercizi
           </p>
         </div>
 
@@ -224,8 +240,6 @@ export function WorkoutPlayer() {
 
             // Superset block
             counter++;
-            const blockNumber = counter;
-            // Count superset as one logical item for numbering
             return (
               <div
                 key={`ss-${block.group}`}
@@ -280,15 +294,14 @@ export function WorkoutPlayer() {
     );
   }
 
-  if (store.phase === "resting" && currentItem) {
+  if (phase === "resting" && currentItem) {
     // Determine next exercise name for rest screen
-    const ssGroup = getSupersetGroup(store.items, store.currentItemIndex);
+    const ssGroup = getSupersetGroup(items, currentItemIndex);
     let nextName: string;
 
     if (ssGroup) {
-      const ssIndex = store.supersetExerciseIndex;
-      if (ssIndex > 0 || store.supersetRound > 1) {
-        // We're already inside the superset
+      const ssIndex = supersetExerciseIndex;
+      if (ssIndex > 0 || supersetRound > 1) {
         nextName = currentItem.exercise.name;
       } else {
         nextName = currentItem.exercise.name;
@@ -298,26 +311,26 @@ export function WorkoutPlayer() {
     }
 
     // More precise: the current item IS the next exercise to do (store already advanced)
-    const nextItem = store.items[store.currentItemIndex];
+    const nextItem = items[currentItemIndex];
     nextName = nextItem?.exercise.name ?? "Fine workout";
 
     // Add round info for superserie
     if (ssGroup && ssGroup.length > 1) {
-      const letter = String.fromCharCode(65 + store.supersetExerciseIndex);
-      nextName = `${letter}. ${nextName} (Round ${store.supersetRound})`;
+      const letter = String.fromCharCode(65 + supersetExerciseIndex);
+      nextName = `${letter}. ${nextName} (Round ${supersetRound})`;
     }
 
     return (
       <div className="px-4 pt-6 space-y-4">
         <WorkoutProgressBar
-          currentExercise={store.currentItemIndex + 1}
-          totalExercises={store.items.length}
-          currentSet={store.currentSet}
+          currentExercise={currentItemIndex + 1}
+          totalExercises={items.length}
+          currentSet={currentSet}
           totalSets={currentItem.sets}
         />
         <RestTimer
-          key={`rest-${store.currentItemIndex}-${store.currentSet}-${store.supersetRound}-${store.supersetExerciseIndex}`}
-          duration={store.timerSeconds}
+          key={`rest-${currentItemIndex}-${currentSet}-${supersetRound}-${supersetExerciseIndex}`}
+          duration={storeTimerSeconds}
           nextExerciseName={nextName}
           onComplete={handleRestComplete}
           onSkip={handleSkipRest}
@@ -326,15 +339,15 @@ export function WorkoutPlayer() {
     );
   }
 
-  if (store.phase === "exercising" && currentItem) {
-    const ssGroup = getSupersetGroup(store.items, store.currentItemIndex);
+  if (phase === "exercising" && currentItem) {
+    const ssGroup = getSupersetGroup(items, currentItemIndex);
 
     return (
       <div className="px-4 pt-6 space-y-6">
         <WorkoutProgressBar
-          currentExercise={store.currentItemIndex + 1}
-          totalExercises={store.items.length}
-          currentSet={store.currentSet}
+          currentExercise={currentItemIndex + 1}
+          totalExercises={items.length}
+          currentSet={currentSet}
           totalSets={currentItem.sets}
         />
 
@@ -343,14 +356,14 @@ export function WorkoutPlayer() {
           <SupersetIndicator
             items={ssGroup}
             currentItemId={currentItem.id}
-            round={store.supersetRound}
+            round={supersetRound}
             totalRounds={ssGroup[0].sets}
           />
         )}
 
         <ExerciseDisplay
           item={currentItem}
-          currentSet={ssGroup ? store.supersetRound : store.currentSet}
+          currentSet={ssGroup ? supersetRound : currentSet}
         />
 
         <div className="flex justify-center">

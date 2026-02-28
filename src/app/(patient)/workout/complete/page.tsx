@@ -12,11 +12,18 @@ import { CheckCircle2, Clock, Dumbbell, Layers } from "lucide-react";
 
 export default function WorkoutCompletePage() {
   const router = useRouter();
-  const store = useWorkoutStore();
+
+  // Individual selectors
+  const startedAt = useWorkoutStore((s) => s.startedAt);
+  const storePlanId = useWorkoutStore((s) => s.planId);
+  const items = useWorkoutStore((s) => s.items);
+  const totalSetsCompleted = useWorkoutStore((s) => s.totalSetsCompleted);
+  const planName = useWorkoutStore((s) => s.planName);
+  const resetStore = useWorkoutStore((s) => s.reset);
+
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  const startedAt = store.startedAt;
   const completedAt = new Date().toISOString();
   const durationSeconds = startedAt
     ? Math.floor(
@@ -32,15 +39,15 @@ export default function WorkoutCompletePage() {
         data: { user },
       } = await supabase.auth.getUser();
 
-      if (user && store.planId) {
+      if (user && storePlanId) {
         const { error } = await supabase.from("workout_logs").insert({
           patient_id: user.id,
-          plan_id: store.planId,
+          plan_id: storePlanId,
           started_at: startedAt!,
           completed_at: completedAt,
           duration_seconds: durationSeconds,
-          exercises_completed: store.items.length,
-          total_sets_completed: store.totalSetsCompleted,
+          exercises_completed: items.length,
+          total_sets_completed: totalSetsCompleted,
           feedback_score: score,
           feedback_notes: notes || null,
         });
@@ -52,11 +59,11 @@ export default function WorkoutCompletePage() {
         }
       }
 
-      store.reset();
+      resetStore();
       setSaving(false);
       setSaved(true);
     },
-    [store, startedAt, completedAt, durationSeconds]
+    [storePlanId, startedAt, completedAt, durationSeconds, items.length, totalSetsCompleted, resetStore]
   );
 
   if (saved) {
@@ -83,7 +90,7 @@ export default function WorkoutCompletePage() {
           <CheckCircle2 className="h-8 w-8 text-golden-600" />
         </div>
         <h1 className="text-2xl font-bold">Workout completato!</h1>
-        <p className="text-muted-foreground">{store.planName}</p>
+        <p className="text-muted-foreground">{planName}</p>
       </div>
 
       {/* Stats */}
@@ -98,14 +105,14 @@ export default function WorkoutCompletePage() {
         <Card>
           <CardContent className="flex flex-col items-center p-3">
             <Dumbbell className="h-5 w-5 text-teal-500 mb-1" />
-            <span className="text-lg font-bold">{store.items.length}</span>
+            <span className="text-lg font-bold">{items.length}</span>
             <span className="text-xs text-muted-foreground">Esercizi</span>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="flex flex-col items-center p-3">
             <Layers className="h-5 w-5 text-teal-500 mb-1" />
-            <span className="text-lg font-bold">{store.totalSetsCompleted}</span>
+            <span className="text-lg font-bold">{totalSetsCompleted}</span>
             <span className="text-xs text-muted-foreground">Serie</span>
           </CardContent>
         </Card>
