@@ -52,12 +52,15 @@ export default function EditPlanPage() {
 
       setPatientId(plan.patient_id);
 
-      const loadedItems: PlanItem[] = (plan.plan_items ?? [])
-        .sort((a: any, b: any) => a.order - b.order)
-        .map((pi: any) => ({
+      const planItems = (plan.plan_items ?? []) as Array<
+        typeof plan.plan_items extends Array<infer T> ? T : never
+      >;
+      const loadedItems: PlanItem[] = planItems
+        .sort((a, b) => a.order - b.order)
+        .map((pi) => ({
           tempId: generateTempId(),
           exerciseId: pi.exercise_id,
-          exerciseName: pi.exercises?.name ?? "",
+          exerciseName: (pi.exercises as unknown as { id: string; name: string } | null)?.name ?? "",
           type: pi.duration ? ("timed" as const) : ("reps" as const),
           sets: pi.sets,
           reps: pi.reps ?? 10,

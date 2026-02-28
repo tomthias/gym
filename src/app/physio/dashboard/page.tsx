@@ -61,19 +61,23 @@ export default async function PhysioDashboardPage() {
   }
 
   // Get active plans count
-  const { count: activePlans } = await supabase
+  const { count: activePlans, error: plansError } = await supabase
     .from("workout_plans")
     .select("id", { count: "exact", head: true })
     .eq("patient_id", patient.id)
     .eq("active", true);
 
+  if (plansError) console.error("Failed to fetch active plans:", plansError);
+
   // Get patient's logs (more for charts)
-  const { data: logs } = await supabase
+  const { data: logs, error: logsError } = await supabase
     .from("workout_logs")
     .select("*")
     .eq("patient_id", patient.id)
     .order("completed_at", { ascending: false })
     .limit(30);
+
+  if (logsError) console.error("Failed to fetch workout logs:", logsError);
 
   const sessionsThisWeek =
     logs?.filter((log) => {

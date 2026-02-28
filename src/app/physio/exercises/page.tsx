@@ -37,6 +37,7 @@ import {
 import { EXERCISE_CATEGORIES } from "@/lib/utils/constants";
 import { Loader2, Plus, Pencil, Search, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 interface Exercise {
   id: string;
@@ -138,7 +139,7 @@ export default function ExercisesPage() {
 
     setSaving(false);
     if (error) {
-      alert("Errore nel salvataggio dell'esercizio");
+      toast.error("Errore nel salvataggio dell'esercizio");
       return;
     }
 
@@ -161,7 +162,7 @@ export default function ExercisesPage() {
       const supabase = createClient();
       const { error } = await supabase.from("exercises").delete().eq("id", id);
       if (error) {
-        alert("Errore nell'eliminazione dell'esercizio");
+        toast.error("Errore nell'eliminazione dell'esercizio");
         return;
       }
       fetchExercises();

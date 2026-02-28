@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { StickyNote, Loader2, Save, Check, Trash2 } from "lucide-react";
+import { toast } from "sonner";
 
 interface Note {
   id: string;
@@ -57,7 +58,7 @@ export function SendNote({ patientId }: PhysioNotesProps) {
     setSaving(false);
 
     if (error) {
-      alert("Errore nel salvataggio della nota");
+      toast.error("Errore nel salvataggio della nota");
       return;
     }
 

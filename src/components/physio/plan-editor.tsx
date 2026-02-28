@@ -37,6 +37,7 @@ import {
   Unlink,
   Zap,
 } from "lucide-react";
+import { toast } from "sonner";
 
 interface Exercise {
   id: string;
@@ -164,29 +165,24 @@ export function PlanEditor({
 
   const updateItem = useCallback(
     (tempId: string, updates: Partial<PlanItem>) => {
-      setItems((prev) =>
-        prev.map((item) => {
-          if (item.tempId !== tempId) return item;
-          const updated = { ...item, ...updates };
-          // If sets changed and item is in a superset, sync all items in the group
-          if (updates.sets != null && item.supersetGroup != null) {
-            return updated; // handled below
+      setItems((prev) => {
+        const target = prev.find((i) => i.tempId === tempId);
+        if (!target) return prev;
+
+        // If sets changed and item is in a superset, sync all items in the group
+        const syncSets =
+          updates.sets != null && target.supersetGroup != null;
+
+        return prev.map((item) => {
+          if (item.tempId === tempId) {
+            return { ...item, ...updates };
           }
-          return updated;
-        })
-      );
-      // Sync sets across superset group
-      if (updates.sets != null) {
-        setItems((prev) => {
-          const target = prev.find((i) => i.tempId === tempId);
-          if (!target || target.supersetGroup == null) return prev;
-          return prev.map((i) =>
-            i.supersetGroup === target.supersetGroup
-              ? { ...i, sets: updates.sets! }
-              : i
-          );
+          if (syncSets && item.supersetGroup === target.supersetGroup) {
+            return { ...item, sets: updates.sets! };
+          }
+          return item;
         });
-      }
+      });
     },
     []
   );
@@ -362,19 +358,21 @@ export function PlanEditor({
           .eq("physio_id", user.id);
 
         if (updateError) {
-          alert("Errore nell'aggiornamento della scheda");
+          toast.error("Errore nell'aggiornamento della scheda");
           setSaving(false);
           return;
         }
 
         // Delete old items and insert new
+        // NOTE: not atomic — if insert fails after delete, plan will have no items.
+        // A Postgres RPC with a transaction would be safer but adds complexity.
         const { error: deleteError } = await supabase
           .from("plan_items")
           .delete()
           .eq("plan_id", planId);
 
         if (deleteError) {
-          alert("Errore nell'aggiornamento degli esercizi");
+          toast.error("Errore nell'aggiornamento degli esercizi");
           setSaving(false);
           return;
         }
@@ -384,7 +382,11 @@ export function PlanEditor({
           .insert(planItems.map((pi) => ({ ...pi, plan_id: planId })));
 
         if (insertError) {
-          alert("Errore nell'inserimento degli esercizi");
+          console.error("Insert failed after delete — plan may be empty:", insertError);
+          toast.error(
+            "Errore critico: gli esercizi non sono stati salvati. " +
+            "Per favore riprova il salvataggio senza chiudere la pagina."
+          );
           setSaving(false);
           return;
         }
@@ -403,7 +405,7 @@ export function PlanEditor({
           .single();
 
         if (planError || !plan) {
-          alert("Errore nella creazione della scheda");
+          toast.error("Errore nella creazione della scheda");
           setSaving(false);
           return;
         }
@@ -413,7 +415,7 @@ export function PlanEditor({
           .insert(planItems.map((pi) => ({ ...pi, plan_id: plan.id })));
 
         if (itemsError) {
-          alert("Errore nell'inserimento degli esercizi");
+          toast.error("Errore nell'inserimento degli esercizi");
           setSaving(false);
           return;
         }

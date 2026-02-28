@@ -17,7 +17,7 @@ import { SupersetIndicator } from "./superset-indicator";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Play, X, Zap } from "lucide-react";
+import { Pause, Play, X, Zap } from "lucide-react";
 
 /** Returns all items in the same superset group, sorted by order */
 function getSupersetGroup(
@@ -123,12 +123,24 @@ export function WorkoutPlayer() {
     setIsPaused(false);
   }, [timer]);
 
+  // Pause/resume for timed exercises (used by PlayerControls)
   const handlePause = useCallback(() => {
     timer.pause();
     setIsPaused(true);
   }, [timer]);
 
   const handleResume = useCallback(() => {
+    timer.resume();
+    setIsPaused(false);
+  }, [timer]);
+
+  // Global pause — works in both exercising and resting phases
+  const handleGlobalPause = useCallback(() => {
+    timer.pause();
+    setIsPaused(true);
+  }, [timer]);
+
+  const handleGlobalResume = useCallback(() => {
     timer.resume();
     setIsPaused(false);
   }, [timer]);
@@ -192,6 +204,21 @@ export function WorkoutPlayer() {
         <p className="text-muted-foreground">Nessun workout caricato</p>
         <Button onClick={() => router.push("/dashboard")} variant="outline">
           Torna alla dashboard
+        </Button>
+      </div>
+    );
+  }
+
+  // Global pause overlay
+  if (isPaused && (phase === "exercising" || phase === "resting")) {
+    return (
+      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background/95 backdrop-blur-sm">
+        <Pause className="h-16 w-16 text-teal-500 mb-4" />
+        <h2 className="text-2xl font-bold mb-2">Workout in pausa</h2>
+        <p className="text-muted-foreground mb-8">{planName}</p>
+        <Button size="lg" onClick={handleGlobalResume} className="gap-2">
+          <Play className="h-5 w-5" />
+          Riprendi
         </Button>
       </div>
     );
@@ -334,7 +361,19 @@ export function WorkoutPlayer() {
           nextExerciseName={nextName}
           onComplete={handleRestComplete}
           onSkip={handleSkipRest}
+          isPaused={isPaused}
         />
+        <div className="flex justify-center pt-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleGlobalPause}
+            className="gap-2"
+          >
+            <Pause className="h-4 w-4" />
+            Pausa
+          </Button>
+        </div>
       </div>
     );
   }
@@ -394,7 +433,16 @@ export function WorkoutPlayer() {
           onSkip={handleSkipExercise}
         />
 
-        <div className="flex justify-center pt-4">
+        <div className="flex items-center justify-center gap-4 pt-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleGlobalPause}
+            className="gap-2"
+          >
+            <Pause className="h-4 w-4" />
+            Pausa
+          </Button>
           <Button
             variant="ghost"
             size="sm"

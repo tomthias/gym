@@ -14,6 +14,7 @@ export type Database = {
           id: string;
           role: "patient" | "physio";
           full_name: string;
+          username: string | null;
           email: string | null;
           physio_id: string | null;
           created_at: string;
@@ -23,6 +24,7 @@ export type Database = {
           id: string;
           role: "patient" | "physio";
           full_name: string;
+          username?: string | null;
           email?: string | null;
           physio_id?: string | null;
           created_at?: string;
@@ -32,6 +34,7 @@ export type Database = {
           id?: string;
           role?: "patient" | "physio";
           full_name?: string;
+          username?: string | null;
           email?: string | null;
           physio_id?: string | null;
           updated_at?: string;
@@ -106,6 +109,8 @@ export type Database = {
           rest_time: number;
           rest_after: number | null;
           notes: string | null;
+          superset_group: number | null;
+          transition_rest: number | null;
           created_at: string;
         };
         Insert: {
@@ -119,6 +124,8 @@ export type Database = {
           rest_time?: number;
           rest_after?: number | null;
           notes?: string | null;
+          superset_group?: number | null;
+          transition_rest?: number | null;
           created_at?: string;
         };
         Update: {
@@ -129,6 +136,8 @@ export type Database = {
           rest_time?: number;
           rest_after?: number | null;
           notes?: string | null;
+          superset_group?: number | null;
+          transition_rest?: number | null;
         };
       };
       workout_logs: {

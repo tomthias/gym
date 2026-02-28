@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useWorkoutStore } from "@/lib/stores/workout-store";
@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { formatDuration } from "@/lib/utils/format-time";
 import { CheckCircle2, Clock, Dumbbell, Layers } from "lucide-react";
+import { toast } from "sonner";
 
 export default function WorkoutCompletePage() {
   const router = useRouter();
@@ -24,7 +25,9 @@ export default function WorkoutCompletePage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  const completedAt = new Date().toISOString();
+  // Stabilize completedAt so it doesn't change on every render
+  const completedAtRef = useRef(new Date().toISOString());
+  const completedAt = completedAtRef.current;
   const durationSeconds = startedAt
     ? Math.floor(
         (new Date(completedAt).getTime() - new Date(startedAt).getTime()) / 1000
@@ -39,24 +42,28 @@ export default function WorkoutCompletePage() {
         data: { user },
       } = await supabase.auth.getUser();
 
-      if (user && storePlanId) {
-        const { error } = await supabase.from("workout_logs").insert({
-          patient_id: user.id,
-          plan_id: storePlanId,
-          started_at: startedAt!,
-          completed_at: completedAt,
-          duration_seconds: durationSeconds,
-          exercises_completed: items.length,
-          total_sets_completed: totalSetsCompleted,
-          feedback_score: score,
-          feedback_notes: notes || null,
-        });
+      if (!user || !storePlanId) {
+        toast.error("Errore: impossibile salvare la sessione");
+        setSaving(false);
+        return;
+      }
 
-        if (error) {
-          alert("Errore nel salvataggio della sessione");
-          setSaving(false);
-          return;
-        }
+      const { error } = await supabase.from("workout_logs").insert({
+        patient_id: user.id,
+        plan_id: storePlanId,
+        started_at: startedAt!,
+        completed_at: completedAt,
+        duration_seconds: durationSeconds,
+        exercises_completed: items.length,
+        total_sets_completed: totalSetsCompleted,
+        feedback_score: score,
+        feedback_notes: notes || null,
+      });
+
+      if (error) {
+        toast.error("Errore nel salvataggio della sessione");
+        setSaving(false);
+        return;
       }
 
       resetStore();

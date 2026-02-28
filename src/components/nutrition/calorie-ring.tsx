@@ -19,7 +19,7 @@ export function CalorieRing({ consumed, budget }: CalorieRingProps) {
 
   return (
     <div className="relative flex items-center justify-center">
-      <svg width={svgSize} height={svgSize} className="-rotate-90">
+      <svg width={svgSize} height={svgSize} className="-rotate-90" role="img" aria-label={`${consumed} di ${budget} calorie consumate`}>
         <circle
           cx={radius + stroke}
           cy={radius + stroke}

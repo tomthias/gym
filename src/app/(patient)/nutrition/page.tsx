@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { MEAL_SLOTS, type MealSlot, type DayType } from "@/types/nutrition";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 interface LogEntry {
   id: string;
@@ -69,7 +70,7 @@ export default function NutritionPage() {
       const supabase = createClient();
       const { error } = await supabase.from("nutrition_logs").delete().eq("id", logId);
       if (error) {
-        alert("Errore nell'eliminazione del pasto");
+        toast.error("Errore nell'eliminazione del pasto");
         return;
       }
       setLogs((prev) => prev.filter((l) => l.id !== logId));

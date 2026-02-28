@@ -6,26 +6,10 @@ import { Header } from "@/components/layout/header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { INVITE_CODE_LENGTH, INVITE_CODE_EXPIRY_DAYS } from "@/lib/utils/constants";
+import { INVITE_CODE_EXPIRY_DAYS } from "@/lib/utils/constants";
+import { generateInviteCode, type InviteCode } from "@/lib/utils/invite";
 import { Copy, KeyRound, Loader2, Plus, Check } from "lucide-react";
-
-function generateCode(): string {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // No 0,O,1,I for readability
-  let code = "";
-  for (let i = 0; i < INVITE_CODE_LENGTH; i++) {
-    code += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return code;
-}
-
-interface InviteCode {
-  id: string;
-  code: string;
-  used_by: string | null;
-  used_at: string | null;
-  expires_at: string;
-  created_at: string;
-}
+import { toast } from "sonner";
 
 export default function InvitePage() {
   const [codes, setCodes] = useState<InviteCode[]>([]);
@@ -68,7 +52,7 @@ export default function InvitePage() {
     const { data, error } = await supabase
       .from("invite_codes")
       .insert({
-        code: generateCode(),
+        code: generateInviteCode(),
         physio_id: user.id,
         expires_at: expiresAt.toISOString(),
       })
@@ -76,7 +60,7 @@ export default function InvitePage() {
       .single();
 
     if (error) {
-      alert("Errore nella generazione del codice");
+      toast.error("Errore nella generazione del codice");
       setCreating(false);
       return;
     }

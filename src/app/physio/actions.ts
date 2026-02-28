@@ -2,6 +2,9 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
+import type { Database } from "@/types/database";
+
+type PlanItemRow = Database["public"]["Tables"]["plan_items"]["Row"];
 
 function revalidatePhysio() {
   revalidatePath("/physio/dashboard");
@@ -78,12 +81,19 @@ export async function duplicatePlan(planId: string) {
 
   // Copy plan items
   if (plan.plan_items?.length) {
-    const newItems = plan.plan_items.map(
-      ({ id, plan_id, created_at, ...item }: Record<string, unknown>) => ({
-        ...item,
-        plan_id: newPlan.id,
-      })
-    );
+    const newItems = plan.plan_items.map((item: PlanItemRow) => ({
+      plan_id: newPlan.id,
+      exercise_id: item.exercise_id,
+      order: item.order,
+      sets: item.sets,
+      reps: item.reps,
+      duration: item.duration,
+      rest_time: item.rest_time,
+      rest_after: item.rest_after,
+      notes: item.notes,
+      superset_group: item.superset_group,
+      transition_rest: item.transition_rest,
+    }));
 
     const { error: itemsError } = await supabase
       .from("plan_items")

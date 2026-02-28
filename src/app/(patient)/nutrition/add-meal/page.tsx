@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/sheet";
 import { MacroBar } from "@/components/nutrition/macro-bar";
 import { ChefHat, Clock, Search, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import type { MealSlot } from "@/types/nutrition";
 
 interface RecipeRow {
@@ -66,6 +67,7 @@ function AddMealPageContent() {
   const [selectedRecipe, setSelectedRecipe] = useState<RecipeRow | null>(null);
 
   useEffect(() => {
+    let ignore = false;
     async function fetchRecipes() {
       const supabase = createClient();
       const { data } = await supabase
@@ -75,10 +77,14 @@ function AddMealPageContent() {
         .eq("meal_slot", slot)
         .order("name");
 
-      if (data) setRecipes(data);
-      setLoading(false);
+      if (!ignore) {
+        if (data) setRecipes(data);
+        setLoading(false);
+      }
     }
+    setLoading(true);
     fetchRecipes();
+    return () => { ignore = true; };
   }, [dayType, slot]);
 
   const filteredRecipes = recipes.filter((r) =>
@@ -106,7 +112,7 @@ function AddMealPageContent() {
         });
 
         if (error) {
-          alert("Errore nell'aggiunta del pasto");
+          toast.error("Errore nell'aggiunta del pasto");
           setSaving(false);
           return;
         }
@@ -144,7 +150,7 @@ function AddMealPageContent() {
         });
 
         if (error) {
-          alert("Errore nell'aggiunta del pasto");
+          toast.error("Errore nell'aggiunta del pasto");
           setSaving(false);
           return;
         }

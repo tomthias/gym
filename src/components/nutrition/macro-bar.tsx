@@ -11,7 +11,7 @@ export function MacroBar({ proteinGrams, carbsGrams, fatsGrams }: MacroBarProps)
 
   return (
     <div className="space-y-2">
-      <div className="flex h-3 overflow-hidden rounded-full bg-muted">
+      <div className="flex h-3 overflow-hidden rounded-full bg-muted" role="img" aria-label={`Macronutrienti: proteine ${proteinGrams}g, carboidrati ${carbsGrams}g, grassi ${fatsGrams}g`}>
         {total > 0 && (
           <>
             <div

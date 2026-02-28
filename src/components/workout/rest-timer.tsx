@@ -12,6 +12,7 @@ interface RestTimerProps {
   nextExerciseName: string;
   onComplete: () => void;
   onSkip: () => void;
+  isPaused?: boolean;
 }
 
 export function RestTimer({
@@ -19,6 +20,7 @@ export function RestTimer({
   nextExerciseName,
   onComplete,
   onSkip,
+  isPaused = false,
 }: RestTimerProps) {
   const { playCountdownTick, playComplete } = useAudio();
   const [started, setStarted] = useState(false);
@@ -35,15 +37,29 @@ export function RestTimer({
     },
   });
 
-  // Auto-start the rest timer
+  // Auto-start the rest timer (or skip immediately if duration is 0)
   const startedRef = useRef(false);
   useEffect(() => {
-    if (!startedRef.current && duration > 0) {
+    if (!startedRef.current) {
       startedRef.current = true;
-      setStarted(true);
-      timer.startCountdown(duration);
+      if (duration <= 0) {
+        onComplete();
+      } else {
+        setStarted(true);
+        timer.startCountdown(duration);
+      }
     }
-  }, [duration, timer]);
+  }, [duration, timer, onComplete]);
+
+  // Pause/resume rest timer when global pause is toggled
+  useEffect(() => {
+    if (!started) return;
+    if (isPaused) {
+      timer.pause();
+    } else {
+      timer.resume();
+    }
+  }, [isPaused, started, timer]);
 
   return (
     <div className="flex flex-col items-center justify-center gap-8 py-8">

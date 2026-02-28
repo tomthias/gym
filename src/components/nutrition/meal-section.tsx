@@ -79,6 +79,7 @@ export function MealSection({
                   size="icon"
                   className="h-7 w-7"
                   onClick={() => onRemove(meal.id)}
+                  aria-label={`Rimuovi ${meal.name}`}
                 >
                   <X className="h-3.5 w-3.5" />
                 </Button>
