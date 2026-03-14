@@ -214,6 +214,7 @@ function AddRow({
           exercises={exercises}
           onSelect={onAdd}
           placeholder="Aggiungi esercizio..."
+          clearOnSelect
         />
       </td>
       <td className={cellClass} />
@@ -231,11 +232,13 @@ function ExerciseAutocomplete({
   exercises,
   onSelect,
   placeholder = "Cerca esercizio...",
+  clearOnSelect = false,
 }: {
   value: string;
   exercises: Exercise[];
   onSelect: (exercise: Exercise) => void;
   placeholder?: string;
+  clearOnSelect?: boolean;
 }) {
   const [query, setQuery] = useState(value);
   const [open, setOpen] = useState(false);
@@ -274,7 +277,7 @@ function ExerciseAutocomplete({
 
   const handleSelect = (ex: Exercise) => {
     onSelect(ex);
-    setQuery(ex.name);
+    setQuery(clearOnSelect ? "" : ex.name);
     setOpen(false);
     setHighlightIndex(0);
   };
