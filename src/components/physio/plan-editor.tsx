@@ -37,6 +37,7 @@ import {
   Table,
   Trash2,
   Unlink,
+  Search,
   Zap,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -118,6 +119,8 @@ export function PlanEditor({
   const [items, setItems] = useState<PlanItem[]>(initialPlan?.items ?? []);
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [pickerSearch, setPickerSearch] = useState("");
+  const [quickCreating, setQuickCreating] = useState(false);
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(!initialPlan);
   const [nextSupersetGroup, setNextSupersetGroup] = useState(1);
@@ -176,6 +179,32 @@ export function PlanEditor({
       },
     ]);
     setPickerOpen(false);
+  }, []);
+
+  const quickCreateExercise = useCallback(async (name: string): Promise<Exercise | null> => {
+    const supabase = createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) return null;
+
+    const { data, error } = await supabase
+      .from("exercises")
+      .insert({
+        name,
+        category: "general",
+        created_by: user.id,
+      })
+      .select("id, name, description, category")
+      .single();
+
+    if (error || !data) {
+      toast.error("Errore nella creazione dell'esercizio");
+      return null;
+    }
+
+    setExercises((prev) => [...prev, data].sort((a, b) => a.name.localeCompare(b.name)));
+    return data;
   }, []);
 
   const changeExercise = useCallback((tempId: string, ex: Exercise) => {
@@ -528,6 +557,7 @@ export function PlanEditor({
           onUpdateItem={updateItem}
           onRemoveItem={removeItem}
           onChangeExercise={changeExercise}
+          onQuickCreate={quickCreateExercise}
         />
       ) : (
       <div className="space-y-3">
@@ -626,7 +656,10 @@ export function PlanEditor({
         })}
 
         {/* Add exercise */}
-        <Dialog open={pickerOpen} onOpenChange={setPickerOpen}>
+        <Dialog open={pickerOpen} onOpenChange={(open) => {
+          setPickerOpen(open);
+          if (!open) setPickerSearch("");
+        }}>
           <DialogTrigger asChild>
             <Button variant="outline" className="w-full gap-2">
               <Plus className="h-4 w-4" />
@@ -637,30 +670,76 @@ export function PlanEditor({
             <DialogHeader>
               <DialogTitle>Scegli esercizio</DialogTitle>
             </DialogHeader>
-            <div className="max-h-[60vh] overflow-y-auto space-y-2 pt-2">
-              {exercises.length === 0 ? (
-                <p className="text-center py-4 text-muted-foreground">
-                  Nessun esercizio. Creane uno dalla libreria.
-                </p>
-              ) : (
-                exercises.map((ex) => (
-                  <button
-                    key={ex.id}
-                    onClick={() => addExercise(ex)}
-                    className="flex w-full items-center justify-between rounded-lg border p-3 hover:bg-muted transition-colors text-left"
-                  >
-                    <div>
-                      <p className="font-medium text-sm">{ex.name}</p>
-                      {ex.description && (
-                        <p className="text-xs text-muted-foreground truncate max-w-[250px]">
-                          {ex.description}
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Cerca esercizio..."
+                value={pickerSearch}
+                onChange={(e) => setPickerSearch(e.target.value)}
+                className="pl-9"
+              />
+            </div>
+            <div className="max-h-[50vh] overflow-y-auto space-y-2">
+              {(() => {
+                const filtered = pickerSearch
+                  ? exercises.filter((ex) =>
+                      ex.name.toLowerCase().includes(pickerSearch.toLowerCase())
+                    )
+                  : exercises;
+                const trimmed = pickerSearch.trim();
+                const hasExactMatch = exercises.some(
+                  (ex) => ex.name.toLowerCase() === trimmed.toLowerCase()
+                );
+                const showCreate = trimmed.length >= 2 && !hasExactMatch;
+
+                return (
+                  <>
+                    {showCreate && (
+                      <button
+                        onClick={async () => {
+                          setQuickCreating(true);
+                          const ex = await quickCreateExercise(trimmed);
+                          setQuickCreating(false);
+                          if (ex) {
+                            addExercise(ex);
+                            setPickerSearch("");
+                          }
+                        }}
+                        disabled={quickCreating}
+                        className="flex w-full items-center gap-2 rounded-lg border border-teal-200 dark:border-teal-800 bg-teal-50/50 dark:bg-teal-950/30 p-3 hover:bg-teal-50 dark:hover:bg-teal-950/50 transition-colors text-left"
+                      >
+                        <Plus className="h-4 w-4 text-teal-600 dark:text-teal-400 shrink-0" />
+                        <p className="font-medium text-sm text-teal-700 dark:text-teal-300">
+                          {quickCreating ? "Creazione..." : <>Crea &ldquo;{trimmed}&rdquo;</>}
                         </p>
-                      )}
-                    </div>
-                    <Plus className="h-4 w-4 text-teal-600 shrink-0" />
-                  </button>
-                ))
-              )}
+                      </button>
+                    )}
+                    {filtered.length === 0 && !showCreate ? (
+                      <p className="text-center py-4 text-muted-foreground">
+                        Nessun esercizio trovato.
+                      </p>
+                    ) : (
+                      filtered.map((ex) => (
+                        <button
+                          key={ex.id}
+                          onClick={() => addExercise(ex)}
+                          className="flex w-full items-center justify-between rounded-lg border p-3 hover:bg-muted transition-colors text-left"
+                        >
+                          <div>
+                            <p className="font-medium text-sm">{ex.name}</p>
+                            {ex.description && (
+                              <p className="text-xs text-muted-foreground truncate max-w-[250px]">
+                                {ex.description}
+                              </p>
+                            )}
+                          </div>
+                          <Plus className="h-4 w-4 text-teal-600 shrink-0" />
+                        </button>
+                      ))
+                    )}
+                  </>
+                );
+              })()}
             </div>
           </DialogContent>
         </Dialog>

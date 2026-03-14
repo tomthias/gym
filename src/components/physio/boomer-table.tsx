@@ -29,6 +29,7 @@ interface BoomerTableProps {
   onUpdateItem: (tempId: string, updates: Partial<PlanItem>) => void;
   onRemoveItem: (tempId: string) => void;
   onChangeExercise: (tempId: string, exercise: Exercise) => void;
+  onQuickCreate: (name: string) => Promise<Exercise | null>;
 }
 
 const thClass =
@@ -42,6 +43,7 @@ export function BoomerTable({
   onUpdateItem,
   onRemoveItem,
   onChangeExercise,
+  onQuickCreate,
 }: BoomerTableProps) {
   const labels = generateRowLabels(items);
   const tableRef = useRef<HTMLDivElement>(null);
@@ -74,7 +76,7 @@ export function BoomerTable({
     <div className="space-y-3">
       <div
         ref={tableRef}
-        className="overflow-x-auto rounded-lg border border-excel-border dark:border-excel-border-dark"
+        className="overflow-x-auto rounded-lg border border-excel-border dark:border-excel-border-dark font-[family-name:var(--font-dm-sans)]"
       >
         <table className="w-full border-collapse">
           <thead>
@@ -103,9 +105,10 @@ export function BoomerTable({
                 onUpdate={onUpdateItem}
                 onRemove={onRemoveItem}
                 onChangeExercise={onChangeExercise}
+                onQuickCreate={onQuickCreate}
               />
             ))}
-            <AddRow exercises={exercises} onAdd={onAddExercise} />
+            <AddRow exercises={exercises} onAdd={onAddExercise} onQuickCreate={onQuickCreate} />
           </tbody>
         </table>
       </div>
@@ -135,6 +138,7 @@ function BoomerRow({
   onUpdate,
   onRemove,
   onChangeExercise,
+  onQuickCreate,
 }: {
   item: PlanItem;
   label: string;
@@ -142,6 +146,7 @@ function BoomerRow({
   onUpdate: (tempId: string, updates: Partial<PlanItem>) => void;
   onRemove: (tempId: string) => void;
   onChangeExercise: (tempId: string, exercise: Exercise) => void;
+  onQuickCreate: (name: string) => Promise<Exercise | null>;
 }) {
   const [serieText, setSerieText] = useState(() => formatSerieReps(item));
   const [restText, setRestText] = useState(() => formatRest(item));
@@ -196,6 +201,10 @@ function BoomerRow({
           value={item.exerciseName}
           exercises={exercises}
           onSelect={(ex) => onChangeExercise(item.tempId, ex)}
+          onQuickCreate={async (name) => {
+            const ex = await onQuickCreate(name);
+            if (ex) onChangeExercise(item.tempId, ex);
+          }}
         />
       </td>
       <td className={cellClass}>
@@ -283,9 +292,11 @@ function mergeNotes(carico: string, noteFisio: string): string {
 function AddRow({
   exercises,
   onAdd,
+  onQuickCreate,
 }: {
   exercises: Exercise[];
   onAdd: (exercise: Exercise) => void;
+  onQuickCreate: (name: string) => Promise<Exercise | null>;
 }) {
   const cellClass =
     "bg-excel-yellow/50 dark:bg-excel-yellow-dark/50 border border-excel-border dark:border-excel-border-dark";
@@ -300,6 +311,10 @@ function AddRow({
           value=""
           exercises={exercises}
           onSelect={onAdd}
+          onQuickCreate={async (name) => {
+            const ex = await onQuickCreate(name);
+            if (ex) onAdd(ex);
+          }}
           placeholder="Aggiungi esercizio..."
           clearOnSelect
         />
@@ -319,18 +334,21 @@ function ExerciseAutocomplete({
   value,
   exercises,
   onSelect,
+  onQuickCreate,
   placeholder = "Cerca esercizio...",
   clearOnSelect = false,
 }: {
   value: string;
   exercises: Exercise[];
   onSelect: (exercise: Exercise) => void;
+  onQuickCreate?: (name: string) => Promise<void>;
   placeholder?: string;
   clearOnSelect?: boolean;
 }) {
   const [query, setQuery] = useState(value);
   const [open, setOpen] = useState(false);
   const [highlightIndex, setHighlightIndex] = useState(0);
+  const [creating, setCreating] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -345,6 +363,14 @@ function ExerciseAutocomplete({
         ex.name.toLowerCase().includes(query.toLowerCase())
       )
     : exercises;
+
+  const trimmedQuery = query.trim();
+  const hasExactMatch = exercises.some(
+    (ex) => ex.name.toLowerCase() === trimmedQuery.toLowerCase()
+  );
+  const showQuickCreate = trimmedQuery.length >= 2 && !hasExactMatch && onQuickCreate;
+  // Total items count: filtered exercises + optional quick-create button
+  const totalItems = filtered.length + (showQuickCreate ? 1 : 0);
 
   // Close on outside click (check both input container and portal dropdown)
   useEffect(() => {
@@ -369,6 +395,16 @@ function ExerciseAutocomplete({
     setHighlightIndex(0);
   };
 
+  const handleQuickCreate = async () => {
+    if (!onQuickCreate || !trimmedQuery || creating) return;
+    setCreating(true);
+    await onQuickCreate(trimmedQuery);
+    setQuery(clearOnSelect ? "" : trimmedQuery);
+    setOpen(false);
+    setHighlightIndex(0);
+    setCreating(false);
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!open) {
       if (e.key === "ArrowDown" || e.key === "Enter") {
@@ -381,7 +417,7 @@ function ExerciseAutocomplete({
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
-        setHighlightIndex((i) => Math.min(i + 1, filtered.length - 1));
+        setHighlightIndex((i) => Math.min(i + 1, totalItems - 1));
         break;
       case "ArrowUp":
         e.preventDefault();
@@ -389,8 +425,10 @@ function ExerciseAutocomplete({
         break;
       case "Enter":
         e.preventDefault();
-        if (filtered[highlightIndex]) {
+        if (highlightIndex < filtered.length && filtered[highlightIndex]) {
           handleSelect(filtered[highlightIndex]);
+        } else if (showQuickCreate && highlightIndex === filtered.length) {
+          handleQuickCreate();
         }
         break;
       case "Escape":
@@ -416,6 +454,8 @@ function ExerciseAutocomplete({
     }
   }, [open, query]);
 
+  const hasDropdownContent = filtered.length > 0 || showQuickCreate;
+
   return (
     <div ref={containerRef} className="relative">
       <input
@@ -432,7 +472,7 @@ function ExerciseAutocomplete({
         placeholder={placeholder}
       />
       {open &&
-        filtered.length > 0 &&
+        hasDropdownContent &&
         createPortal(
           <div
             ref={dropdownRef}
@@ -456,6 +496,26 @@ function ExerciseAutocomplete({
                 <span className="uppercase">{ex.name}</span>
               </button>
             ))}
+            {showQuickCreate && (
+              <button
+                className={`w-full text-left px-3 py-2 text-sm transition-colors border-t border-excel-border dark:border-excel-border-dark flex items-center gap-2 ${
+                  highlightIndex === filtered.length
+                    ? "bg-teal-50 dark:bg-teal-950 font-medium"
+                    : "hover:bg-teal-50/50 dark:hover:bg-teal-950/50"
+                }`}
+                onMouseEnter={() => setHighlightIndex(filtered.length)}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  handleQuickCreate();
+                }}
+                disabled={creating}
+              >
+                <Plus className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400 shrink-0" />
+                <span className="text-teal-700 dark:text-teal-300">
+                  {creating ? "Creazione..." : <>Crea &ldquo;<span className="uppercase">{trimmedQuery}</span>&rdquo;</>}
+                </span>
+              </button>
+            )}
           </div>,
           document.body
         )}
