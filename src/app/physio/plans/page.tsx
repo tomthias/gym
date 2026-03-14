@@ -97,7 +97,7 @@ export default async function PlansPage() {
             </CardContent>
           </Card>
         ) : (
-          <div className="space-y-3">
+          <div className="flex flex-col gap-4">
             {plans.map((plan) => (
               <Link key={plan.id} href={`/physio/plans/${plan.id}`}>
                 <Card className="hover:border-teal-300 dark:hover:border-teal-700 transition-colors cursor-pointer">
