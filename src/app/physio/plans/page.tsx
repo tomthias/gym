@@ -14,6 +14,7 @@ import {
   TogglePlanButton,
   DeletePlanButton,
   DuplicatePlanButton,
+  StopPropagation,
 } from "@/components/physio/plan-actions";
 import { Dumbbell, Pencil, Plus } from "lucide-react";
 
@@ -126,7 +127,7 @@ export default async function PlansPage() {
                         </p>
                       </div>
                       {/* Stop propagation so action buttons don't trigger navigation */}
-                      <div className="flex gap-1 shrink-0" onClick={(e) => e.preventDefault()}>
+                      <StopPropagation className="flex gap-1 shrink-0">
                         <TogglePlanButton planId={plan.id} active={plan.active} />
                         <Link href={`/physio/plans/edit/${plan.id}`}>
                           <Button size="sm" variant="ghost" className="h-8">
@@ -135,7 +136,7 @@ export default async function PlansPage() {
                         </Link>
                         <DuplicatePlanButton planId={plan.id} />
                         <DeletePlanButton planId={plan.id} />
-                      </div>
+                      </StopPropagation>
                     </div>
                   </CardContent>
                 </Card>
