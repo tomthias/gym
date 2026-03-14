@@ -28,16 +28,20 @@ import {
   ArrowUp,
   Clock,
   GripVertical,
+  LayoutGrid,
   Link2,
   Loader2,
   Plus,
   Repeat,
   Save,
+  Table,
   Trash2,
   Unlink,
   Zap,
 } from "lucide-react";
 import { toast } from "sonner";
+import { BoomerTable } from "@/components/physio/boomer-table";
+import { getExerciseDefaults } from "@/lib/utils/exercise-defaults";
 
 interface Exercise {
   id: string;
@@ -117,6 +121,16 @@ export function PlanEditor({
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(!initialPlan);
   const [nextSupersetGroup, setNextSupersetGroup] = useState(1);
+  const [boomerMode, setBoomerMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("physio-boomer-mode") === "true";
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("physio-boomer-mode", boomerMode ? "true" : "false");
+  }, [boomerMode]);
 
   // Initialize nextSupersetGroup from existing items
   useEffect(() => {
@@ -143,24 +157,46 @@ export function PlanEditor({
   }, []);
 
   const addExercise = useCallback((ex: Exercise) => {
+    const defaults = getExerciseDefaults(ex.name);
     setItems((prev) => [
       ...prev,
       {
         tempId: generateTempId(),
         exerciseId: ex.id,
         exerciseName: ex.name,
-        type: "reps",
-        sets: 3,
-        reps: 10,
-        duration: 30,
-        restTime: 60,
+        type: defaults.type,
+        sets: defaults.sets,
+        reps: defaults.reps,
+        duration: defaults.duration,
+        restTime: defaults.restTime,
         restAfter: 90,
-        notes: "",
+        notes: defaults.notes,
         supersetGroup: null,
         transitionRest: 10,
       },
     ]);
     setPickerOpen(false);
+  }, []);
+
+  const changeExercise = useCallback((tempId: string, ex: Exercise) => {
+    const defaults = getExerciseDefaults(ex.name);
+    setItems((prev) =>
+      prev.map((item) =>
+        item.tempId === tempId
+          ? {
+              ...item,
+              exerciseId: ex.id,
+              exerciseName: ex.name,
+              type: defaults.type,
+              sets: defaults.sets,
+              reps: defaults.reps,
+              duration: defaults.duration,
+              restTime: defaults.restTime,
+              notes: defaults.notes,
+            }
+          : item
+      )
+    );
   }, []);
 
   const updateItem = useCallback(
@@ -461,10 +497,39 @@ export function PlanEditor({
         </div>
       </div>
 
-      {/* Exercise list */}
-      <div className="space-y-3">
+      {/* Mode toggle + exercise count */}
+      <div className="flex items-center justify-between">
         <h3 className="font-semibold">Esercizi ({items.length})</h3>
+        <button
+          onClick={() => setBoomerMode(!boomerMode)}
+          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          {boomerMode ? (
+            <>
+              <LayoutGrid className="h-4 w-4" />
+              <span>Modalita Standard</span>
+            </>
+          ) : (
+            <>
+              <Table className="h-4 w-4" />
+              <span>Modalita Tabella</span>
+            </>
+          )}
+        </button>
+      </div>
 
+      {/* Exercise list — Boomer mode (table) or Standard mode (cards) */}
+      {boomerMode ? (
+        <BoomerTable
+          items={items}
+          exercises={exercises}
+          onAddExercise={addExercise}
+          onUpdateItem={updateItem}
+          onRemoveItem={removeItem}
+          onChangeExercise={changeExercise}
+        />
+      ) : (
+      <div className="space-y-3">
         {renderBlocks.map((block) => {
           if (block.type === "standalone") {
             const { item, index } = block;
@@ -599,6 +664,7 @@ export function PlanEditor({
           </DialogContent>
         </Dialog>
       </div>
+      )}
 
       {/* Save buttons */}
       {mode === "create" ? (

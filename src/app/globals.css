@@ -70,6 +70,15 @@
   --color-golden-800: #6b5018;
   --color-golden-900: #483510;
 
+  /* Boomer mode — Excel-style table colors */
+  --color-excel-green: #2d5016;
+  --color-excel-green-dark: #1a3a0a;
+  --color-excel-cream: #fffde6;
+  --color-excel-yellow: #f5e6a3;
+  --color-excel-yellow-dark: #3a3520;
+  --color-excel-border: #c4a852;
+  --color-excel-border-dark: #6b5018;
+
   /* Pain scale colors (medical requirement — do not change) */
   --color-pain-low: #22c55e;
   --color-pain-mid: #f59e0b;
