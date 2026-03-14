@@ -512,7 +512,7 @@ export function PlanEditor({
           ) : (
             <>
               <Table className="h-4 w-4" />
-              <span>Modalita Tabella</span>
+              <span>Boomer Mode</span>
             </>
           )}
         </button>

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Plus, Trash2 } from "lucide-react";
 import type { PlanItem } from "@/components/physio/plan-editor";
 import {
@@ -241,6 +242,7 @@ function ExerciseAutocomplete({
   const [highlightIndex, setHighlightIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Sync query when value changes externally
   useEffect(() => {
@@ -253,12 +255,15 @@ function ExerciseAutocomplete({
       )
     : exercises;
 
-  // Close on outside click
+  // Close on outside click (check both input container and portal dropdown)
   useEffect(() => {
     function handleClick(e: MouseEvent) {
+      const target = e.target as Node;
       if (
         containerRef.current &&
-        !containerRef.current.contains(e.target as Node)
+        !containerRef.current.contains(target) &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(target)
       ) {
         setOpen(false);
       }
@@ -305,6 +310,22 @@ function ExerciseAutocomplete({
     }
   };
 
+  // Position the dropdown using a portal so it's not clipped by table overflow
+  const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
+
+  useLayoutEffect(() => {
+    if (open && inputRef.current) {
+      const rect = inputRef.current.getBoundingClientRect();
+      setDropdownStyle({
+        position: "fixed",
+        top: rect.bottom,
+        left: rect.left,
+        width: rect.width,
+        zIndex: 9999,
+      });
+    }
+  }, [open, query]);
+
   return (
     <div ref={containerRef} className="relative">
       <input
@@ -320,27 +341,34 @@ function ExerciseAutocomplete({
         className="w-full bg-transparent border-0 outline-none text-sm px-2 py-1.5 font-medium uppercase"
         placeholder={placeholder}
       />
-      {open && filtered.length > 0 && (
-        <div className="absolute z-50 top-full left-0 w-full max-h-48 overflow-y-auto bg-white dark:bg-neutral-800 border border-excel-border dark:border-excel-border-dark rounded-b shadow-lg">
-          {filtered.map((ex, i) => (
-            <button
-              key={ex.id}
-              className={`w-full text-left px-3 py-2 text-sm transition-colors ${
-                i === highlightIndex
-                  ? "bg-excel-yellow dark:bg-excel-yellow-dark font-medium"
-                  : "hover:bg-excel-yellow/50 dark:hover:bg-excel-yellow-dark/50"
-              }`}
-              onMouseEnter={() => setHighlightIndex(i)}
-              onMouseDown={(e) => {
-                e.preventDefault(); // Prevent blur before click registers
-                handleSelect(ex);
-              }}
-            >
-              <span className="uppercase">{ex.name}</span>
-            </button>
-          ))}
-        </div>
-      )}
+      {open &&
+        filtered.length > 0 &&
+        createPortal(
+          <div
+            ref={dropdownRef}
+            style={dropdownStyle}
+            className="max-h-48 overflow-y-auto bg-white dark:bg-neutral-800 border border-excel-border dark:border-excel-border-dark rounded-b shadow-lg"
+          >
+            {filtered.map((ex, i) => (
+              <button
+                key={ex.id}
+                className={`w-full text-left px-3 py-2 text-sm transition-colors ${
+                  i === highlightIndex
+                    ? "bg-excel-yellow dark:bg-excel-yellow-dark font-medium"
+                    : "hover:bg-excel-yellow/50 dark:hover:bg-excel-yellow-dark/50"
+                }`}
+                onMouseEnter={() => setHighlightIndex(i)}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  handleSelect(ex);
+                }}
+              >
+                <span className="uppercase">{ex.name}</span>
+              </button>
+            ))}
+          </div>,
+          document.body
+        )}
     </div>
   );
 }
