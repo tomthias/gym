@@ -12,7 +12,7 @@ export default function PhysioLayout({
       <div className="hidden lg:flex">
         <PhysioSidebar />
         <main className="flex-1 overflow-y-auto">
-          <div className="mx-auto max-w-4xl px-8 py-6">
+          <div className="mx-auto w-4/5 py-6">
             {children}
           </div>
         </main>
