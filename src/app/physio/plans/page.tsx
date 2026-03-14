@@ -25,13 +25,15 @@ export default async function PlansPage() {
   if (!user) redirect("/login");
 
   // Get linked patient
-  const { data: patient } = await supabase
+  const { data: patient, error: patientError } = await supabase
     .from("profiles")
     .select("id, full_name")
     .eq("physio_id", user.id)
     .eq("role", "patient")
     .limit(1)
     .maybeSingle();
+
+  if (patientError) console.error("Error fetching patient:", patientError);
 
   if (!patient) {
     return (
@@ -52,11 +54,13 @@ export default async function PlansPage() {
     );
   }
 
-  const { data: plans } = await supabase
+  const { data: plans, error: plansError } = await supabase
     .from("workout_plans")
     .select("id, name, description, active, created_at, plan_items(id)")
     .eq("patient_id", patient.id)
     .order("created_at", { ascending: false });
+
+  if (plansError) console.error("Error fetching plans:", plansError);
 
   return (
     <div>

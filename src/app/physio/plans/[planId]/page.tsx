@@ -19,7 +19,7 @@ export default async function ViewPlanPage({ params }: Props) {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: plan } = await supabase
+  const { data: plan, error: planError } = await supabase
     .from("workout_plans")
     .select(
       `
@@ -34,6 +34,8 @@ export default async function ViewPlanPage({ params }: Props) {
     .eq("id", planId)
     .eq("physio_id", user.id)
     .single();
+
+  if (planError) console.error("Error fetching plan:", planError);
 
   if (!plan) {
     return (
@@ -62,6 +64,7 @@ export default async function ViewPlanPage({ params }: Props) {
   }>;
 
   const sortedItems = planItems
+    .filter((pi) => pi.exercises != null)
     .sort((a, b) => a.order - b.order)
     .map((pi) => ({
       exerciseName: pi.exercises?.name ?? "",
