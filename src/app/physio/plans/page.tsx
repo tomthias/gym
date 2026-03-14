@@ -94,45 +94,48 @@ export default async function PlansPage() {
         ) : (
           <div className="space-y-3">
             {plans.map((plan) => (
-              <Card key={plan.id}>
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="space-y-1 min-w-0 flex-1">
-                      <div className="flex items-center gap-2">
-                        <p className="font-medium truncate">{plan.name}</p>
-                        {plan.active && (
-                          <Badge className="bg-golden-100 text-golden-700 shrink-0">
-                            Attiva
-                          </Badge>
+              <Link key={plan.id} href={`/physio/plans/${plan.id}`}>
+                <Card className="hover:border-teal-300 dark:hover:border-teal-700 transition-colors cursor-pointer">
+                  <CardContent className="p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="space-y-1 min-w-0 flex-1">
+                        <div className="flex items-center gap-2">
+                          <p className="font-medium truncate">{plan.name}</p>
+                          {plan.active && (
+                            <Badge className="bg-golden-100 text-golden-700 shrink-0">
+                              Attiva
+                            </Badge>
+                          )}
+                        </div>
+                        {plan.description && (
+                          <p className="text-sm text-muted-foreground line-clamp-1">
+                            {plan.description}
+                          </p>
                         )}
-                      </div>
-                      {plan.description && (
-                        <p className="text-sm text-muted-foreground line-clamp-1">
-                          {plan.description}
+                        <p className="text-xs text-muted-foreground">
+                          {plan.plan_items?.length ?? 0} esercizi &middot;{" "}
+                          {new Date(plan.created_at).toLocaleDateString("it-IT", {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                          })}
                         </p>
-                      )}
-                      <p className="text-xs text-muted-foreground">
-                        {plan.plan_items?.length ?? 0} esercizi &middot;{" "}
-                        {new Date(plan.created_at).toLocaleDateString("it-IT", {
-                          day: "numeric",
-                          month: "short",
-                          year: "numeric",
-                        })}
-                      </p>
+                      </div>
+                      {/* Stop propagation so action buttons don't trigger navigation */}
+                      <div className="flex gap-1 shrink-0" onClick={(e) => e.preventDefault()}>
+                        <TogglePlanButton planId={plan.id} active={plan.active} />
+                        <Link href={`/physio/plans/edit/${plan.id}`}>
+                          <Button size="sm" variant="ghost" className="h-8">
+                            <Pencil className="h-3.5 w-3.5" />
+                          </Button>
+                        </Link>
+                        <DuplicatePlanButton planId={plan.id} />
+                        <DeletePlanButton planId={plan.id} />
+                      </div>
                     </div>
-                    <div className="flex gap-1 shrink-0">
-                      <TogglePlanButton planId={plan.id} active={plan.active} />
-                      <Link href={`/physio/plans/edit/${plan.id}`}>
-                        <Button size="sm" variant="ghost" className="h-8">
-                          <Pencil className="h-3.5 w-3.5" />
-                        </Button>
-                      </Link>
-                      <DuplicatePlanButton planId={plan.id} />
-                      <DeletePlanButton planId={plan.id} />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         )}
