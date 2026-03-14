@@ -523,6 +523,7 @@ export function PlanEditor({
         <BoomerTable
           items={items}
           exercises={exercises}
+          planName={planName}
           onAddExercise={addExercise}
           onUpdateItem={updateItem}
           onRemoveItem={removeItem}

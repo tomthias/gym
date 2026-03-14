@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Plus, Trash2 } from "lucide-react";
+import { toJpeg } from "html-to-image";
+import { Download, Plus, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import type { PlanItem } from "@/components/physio/plan-editor";
 import {
   formatSerieReps,
@@ -22,44 +24,71 @@ interface Exercise {
 interface BoomerTableProps {
   items: PlanItem[];
   exercises: Exercise[];
+  planName: string;
   onAddExercise: (exercise: Exercise) => void;
   onUpdateItem: (tempId: string, updates: Partial<PlanItem>) => void;
   onRemoveItem: (tempId: string) => void;
   onChangeExercise: (tempId: string, exercise: Exercise) => void;
 }
 
+const thClass =
+  "bg-excel-green dark:bg-excel-green-dark text-excel-cream px-4 py-3 text-sm font-bold uppercase tracking-wider border border-excel-border dark:border-excel-border-dark";
+
 export function BoomerTable({
   items,
   exercises,
+  planName,
   onAddExercise,
   onUpdateItem,
   onRemoveItem,
   onChangeExercise,
 }: BoomerTableProps) {
   const labels = generateRowLabels(items);
+  const tableRef = useRef<HTMLDivElement>(null);
+  const [downloading, setDownloading] = useState(false);
+
+  const handleDownload = useCallback(async () => {
+    if (!tableRef.current || items.length === 0) return;
+    setDownloading(true);
+    try {
+      const dataUrl = await toJpeg(tableRef.current, {
+        quality: 0.95,
+        backgroundColor: "#ffffff",
+        style: {
+          // Remove rounded corners for clean screenshot
+          borderRadius: "0",
+        },
+      });
+      const link = document.createElement("a");
+      link.download = `${planName || "scheda"}.jpg`;
+      link.href = dataUrl;
+      link.click();
+    } catch {
+      // Silently fail — user can retry
+    } finally {
+      setDownloading(false);
+    }
+  }, [items.length, planName]);
 
   return (
     <div className="space-y-3">
-      <div className="overflow-x-auto rounded-lg border border-excel-border dark:border-excel-border-dark">
+      <div
+        ref={tableRef}
+        className="overflow-x-auto rounded-lg border border-excel-border dark:border-excel-border-dark"
+      >
         <table className="w-full border-collapse">
           <thead>
             <tr>
-              <th className="bg-excel-green dark:bg-excel-green-dark text-excel-cream px-3 py-2.5 text-xs font-bold uppercase tracking-wider border border-excel-border dark:border-excel-border-dark w-[50px]">
-                &nbsp;
-              </th>
-              <th className="bg-excel-green dark:bg-excel-green-dark text-excel-cream px-3 py-2.5 text-xs font-bold uppercase tracking-wider border border-excel-border dark:border-excel-border-dark min-w-[180px]">
-                Esercizio
-              </th>
-              <th className="bg-excel-green dark:bg-excel-green-dark text-excel-cream px-3 py-2.5 text-xs font-bold uppercase tracking-wider border border-excel-border dark:border-excel-border-dark min-w-[110px]">
-                Serie x Reps
-              </th>
-              <th className="bg-excel-green dark:bg-excel-green-dark text-excel-cream px-3 py-2.5 text-xs font-bold uppercase tracking-wider border border-excel-border dark:border-excel-border-dark min-w-[70px]">
-                Rest
-              </th>
-              <th className="bg-excel-green dark:bg-excel-green-dark text-excel-cream px-3 py-2.5 text-xs font-bold uppercase tracking-wider border border-excel-border dark:border-excel-border-dark min-w-[150px]">
-                Carico
-              </th>
-              <th className="bg-excel-green dark:bg-excel-green-dark text-excel-cream px-1 py-2.5 border border-excel-border dark:border-excel-border-dark w-[36px]">
+              <th className={`${thClass} w-[50px]`}>&nbsp;</th>
+              <th className={`${thClass} min-w-[200px]`}>Esercizio</th>
+              <th className={`${thClass} min-w-[120px]`}>Serie x Reps</th>
+              <th className={`${thClass} min-w-[80px]`}>Rest</th>
+              <th className={`${thClass} min-w-[150px]`}>Carico</th>
+              <th className={`${thClass} min-w-[200px]`}>Note Fisio</th>
+              <th
+                className={`${thClass} w-[36px] print:hidden`}
+                data-html2canvas-ignore
+              >
                 &nbsp;
               </th>
             </tr>
@@ -80,6 +109,19 @@ export function BoomerTable({
           </tbody>
         </table>
       </div>
+
+      {items.length > 0 && (
+        <Button
+          variant="outline"
+          size="sm"
+          className="gap-2"
+          onClick={handleDownload}
+          disabled={downloading}
+        >
+          <Download className="h-4 w-4" />
+          {downloading ? "Scaricando..." : "Scarica JPG"}
+        </Button>
+      )}
     </div>
   );
 }
@@ -103,22 +145,26 @@ function BoomerRow({
 }) {
   const [serieText, setSerieText] = useState(() => formatSerieReps(item));
   const [restText, setRestText] = useState(() => formatRest(item));
-  const [caricoText, setCaricoText] = useState(item.notes);
+  const [caricoText, setCaricoText] = useState(
+    extractCarico(item.notes)
+  );
+  const [noteFisioText, setNoteFisioText] = useState(
+    extractNoteFisio(item.notes)
+  );
 
   // Sync local state when items change externally (e.g. switching from standard mode)
   useEffect(() => {
     setSerieText(formatSerieReps(item));
     setRestText(formatRest(item));
-    setCaricoText(item.notes);
+    setCaricoText(extractCarico(item.notes));
+    setNoteFisioText(extractNoteFisio(item.notes));
   }, [item.tempId, item.sets, item.reps, item.duration, item.type, item.restTime, item.supersetGroup, item.notes]);
 
   const commitSerie = () => {
     const parsed = parseSerieReps(serieText);
     if (Object.keys(parsed).length > 0) {
-      // If BFR-style notes, merge with existing carico unless carico already has content
       const updates: Partial<PlanItem> = { ...parsed };
       if (parsed.notes && !caricoText) {
-        // Don't overwrite carico — BFR schema goes in notes but keep carico separate
         delete updates.notes;
       }
       onUpdate(item.tempId, updates);
@@ -130,16 +176,19 @@ function BoomerRow({
     onUpdate(item.tempId, { restTime });
   };
 
-  const commitCarico = () => {
-    onUpdate(item.tempId, { notes: caricoText });
+  const commitNotes = () => {
+    onUpdate(item.tempId, { notes: mergeNotes(caricoText, noteFisioText) });
   };
 
   const cellClass =
     "bg-excel-yellow dark:bg-excel-yellow-dark dark:text-excel-cream border border-excel-border dark:border-excel-border-dark";
 
+  const inputClass =
+    "w-full bg-transparent border-0 outline-none text-sm px-3 py-3 font-medium uppercase";
+
   return (
     <tr>
-      <td className="bg-excel-green dark:bg-excel-green-dark text-excel-cream text-center font-bold text-sm px-3 py-2 border border-excel-border dark:border-excel-border-dark">
+      <td className="bg-excel-green dark:bg-excel-green-dark text-excel-cream text-center font-bold text-sm px-4 py-3 border border-excel-border dark:border-excel-border-dark">
         {label}
       </td>
       <td className={cellClass}>
@@ -155,7 +204,7 @@ function BoomerRow({
           onChange={(e) => setSerieText(e.target.value)}
           onBlur={commitSerie}
           onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()}
-          className="w-full bg-transparent border-0 outline-none text-sm px-2 py-1.5 text-center font-medium uppercase"
+          className={`${inputClass} text-center`}
           placeholder="3X10"
         />
       </td>
@@ -165,7 +214,7 @@ function BoomerRow({
           onChange={(e) => setRestText(e.target.value)}
           onBlur={commitRest}
           onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()}
-          className="w-full bg-transparent border-0 outline-none text-sm px-2 py-1.5 text-center font-medium uppercase"
+          className={`${inputClass} text-center`}
           placeholder="1'"
         />
       </td>
@@ -173,13 +222,23 @@ function BoomerRow({
         <input
           value={caricoText}
           onChange={(e) => setCaricoText(e.target.value)}
-          onBlur={commitCarico}
+          onBlur={commitNotes}
           onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()}
-          className="w-full bg-transparent border-0 outline-none text-sm px-2 py-1.5 uppercase"
+          className={inputClass}
           placeholder="/"
         />
       </td>
-      <td className={`${cellClass} text-center`}>
+      <td className={cellClass}>
+        <input
+          value={noteFisioText}
+          onChange={(e) => setNoteFisioText(e.target.value)}
+          onBlur={commitNotes}
+          onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()}
+          className={`${inputClass} normal-case`}
+          placeholder=""
+        />
+      </td>
+      <td className={`${cellClass} text-center print:hidden`}>
         <button
           onClick={() => onRemove(item.tempId)}
           className="p-1 text-red-400 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 transition-colors"
@@ -189,6 +248,34 @@ function BoomerRow({
       </td>
     </tr>
   );
+}
+
+// --- Notes helpers ---
+// The DB has a single `notes` field. We split it into "carico" and "note fisio"
+// using a separator. Format: "CARICO_TEXT|||NOTE_FISIO_TEXT"
+
+const NOTES_SEPARATOR = "|||";
+
+function extractCarico(notes: string): string {
+  if (!notes) return "";
+  const idx = notes.indexOf(NOTES_SEPARATOR);
+  if (idx === -1) return notes;
+  return notes.substring(0, idx);
+}
+
+function extractNoteFisio(notes: string): string {
+  if (!notes) return "";
+  const idx = notes.indexOf(NOTES_SEPARATOR);
+  if (idx === -1) return "";
+  return notes.substring(idx + NOTES_SEPARATOR.length);
+}
+
+function mergeNotes(carico: string, noteFisio: string): string {
+  const c = carico.trim();
+  const n = noteFisio.trim();
+  if (!c && !n) return "";
+  if (!n) return c;
+  return `${c}${NOTES_SEPARATOR}${n}`;
 }
 
 // --- AddRow (empty row at bottom with autocomplete) ---
@@ -205,7 +292,7 @@ function AddRow({
 
   return (
     <tr>
-      <td className="bg-excel-green/60 dark:bg-excel-green-dark/60 text-excel-cream/60 text-center font-bold text-sm px-3 py-2 border border-excel-border dark:border-excel-border-dark">
+      <td className="bg-excel-green/60 dark:bg-excel-green-dark/60 text-excel-cream/60 text-center font-bold text-sm px-4 py-3 border border-excel-border dark:border-excel-border-dark">
         <Plus className="h-3.5 w-3.5 mx-auto" />
       </td>
       <td className={cellClass}>
@@ -217,6 +304,7 @@ function AddRow({
           clearOnSelect
         />
       </td>
+      <td className={cellClass} />
       <td className={cellClass} />
       <td className={cellClass} />
       <td className={cellClass} />
@@ -265,8 +353,7 @@ function ExerciseAutocomplete({
       if (
         containerRef.current &&
         !containerRef.current.contains(target) &&
-        dropdownRef.current &&
-        !dropdownRef.current.contains(target)
+        (!dropdownRef.current || !dropdownRef.current.contains(target))
       ) {
         setOpen(false);
       }
@@ -341,7 +428,7 @@ function ExerciseAutocomplete({
         }}
         onFocus={() => setOpen(true)}
         onKeyDown={handleKeyDown}
-        className="w-full bg-transparent border-0 outline-none text-sm px-2 py-1.5 font-medium uppercase"
+        className="w-full bg-transparent border-0 outline-none text-sm px-3 py-3 font-medium uppercase"
         placeholder={placeholder}
       />
       {open &&
