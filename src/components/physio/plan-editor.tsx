@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
@@ -124,6 +124,11 @@ export function PlanEditor({
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(!initialPlan);
   const [nextSupersetGroup, setNextSupersetGroup] = useState(1);
+  // Ref keeps items in sync so handleSave always reads the latest values,
+  // even when a Boomer-table blur hasn't propagated yet.
+  const itemsRef = useRef(items);
+  itemsRef.current = items;
+
   const [boomerMode, setBoomerMode] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("physio-boomer-mode") === "true";
@@ -385,7 +390,16 @@ export function PlanEditor({
 
   const handleSave = useCallback(
     async (activate: boolean) => {
-      if (!items.length) return;
+      // Flush pending Boomer-table edits: blur the active input so its
+      // onBlur handler commits local state back into items.
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+      // Yield to let React process the blur-triggered state update.
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const currentItems = itemsRef.current;
+      if (!currentItems.length) return;
       setSaving(true);
 
       const supabase = createClient();
@@ -397,7 +411,7 @@ export function PlanEditor({
         return;
       }
 
-      const planItems = items.map((item, index) => ({
+      const planItems = currentItems.map((item, index) => ({
         exercise_id: item.exerciseId,
         order: index + 1,
         sets: item.sets,
@@ -489,7 +503,7 @@ export function PlanEditor({
       setSaving(false);
       router.push("/physio/dashboard");
     },
-    [items, planName, planDescription, mode, planId, patientId, router]
+    [planName, planDescription, mode, planId, patientId, router]
   );
 
   if (loading) {
