@@ -1,6 +1,27 @@
 import type { InvoiceLineItem } from "@/types/database";
 import path from "path";
 
+// Polyfill DOMMatrix for Node.js (pdfjs-dist requires it but we only extract text)
+if (typeof globalThis.DOMMatrix === "undefined") {
+  // @ts-expect-error minimal polyfill for pdfjs-dist text extraction
+  globalThis.DOMMatrix = class DOMMatrix {
+    constructor(init?: number[] | string) {
+      const m = init && Array.isArray(init) ? init : [1, 0, 0, 1, 0, 0];
+      this.a = m[0] ?? 1; this.b = m[1] ?? 0;
+      this.c = m[2] ?? 0; this.d = m[3] ?? 1;
+      this.e = m[4] ?? 0; this.f = m[5] ?? 0;
+    }
+    a: number; b: number; c: number; d: number; e: number; f: number;
+    isIdentity = false;
+    is2D = true;
+    inverse() { return new DOMMatrix(); }
+    multiply() { return new DOMMatrix(); }
+    scale() { return new DOMMatrix(); }
+    translate() { return new DOMMatrix(); }
+    transformPoint() { return { x: 0, y: 0, z: 0, w: 1 }; }
+  };
+}
+
 export interface ParsedInvoice {
   invoice_number: string;
   invoice_date: string; // ISO date YYYY-MM-DD
