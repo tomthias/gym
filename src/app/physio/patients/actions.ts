@@ -3,6 +3,36 @@
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
+
+const uuidSchema = z.string().uuid("ID non valido");
+
+const editPatientSchema = z.object({
+  fullName: z.string().min(1, "Nome obbligatorio").max(100),
+  username: z.string().min(3, "Username minimo 3 caratteri").max(30),
+  email: z.string().email("Email non valida"),
+});
+
+const saveInvoiceSchema = z.object({
+  patientId: uuidSchema,
+  invoiceNumber: z.string().min(1, "Numero fattura obbligatorio"),
+  invoiceDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Data non valida (YYYY-MM-DD)"),
+  paymentMethod: z.string().nullable(),
+  subtotal: z.number().min(0, "Totale competenze non valido"),
+  stampDuty: z.number().min(0, "Marca da bollo non valida"),
+  grandTotal: z.number().min(0, "Totale documento non valido"),
+  lineItems: z.array(
+    z.object({
+      description: z.string().min(1),
+      session_date: z.string().nullable(),
+      quantity: z.number().positive(),
+      unit_price: z.number().min(0),
+      discount_percent: z.number().min(0).max(100),
+      total: z.number().min(0),
+    })
+  ).min(1, "Almeno una riga richiesta"),
+  pdfStoragePath: z.string().min(1),
+});
 
 function revalidatePatients() {
   revalidatePath("/physio/patients");
@@ -12,6 +42,9 @@ export async function editPatient(
   patientId: string,
   data: { fullName: string; username: string; email: string }
 ) {
+  const validId = uuidSchema.parse(patientId);
+  const validData = editPatientSchema.parse(data);
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -22,7 +55,7 @@ export async function editPatient(
   const { data: patient } = await supabase
     .from("profiles")
     .select("id, email")
-    .eq("id", patientId)
+    .eq("id", validId)
     .eq("physio_id", user.id)
     .single();
 
@@ -34,19 +67,19 @@ export async function editPatient(
   const { error: profileError } = await admin
     .from("profiles")
     .update({
-      full_name: data.fullName,
-      username: data.username.trim().toLowerCase(),
-      email: data.email,
+      full_name: validData.fullName,
+      username: validData.username.trim().toLowerCase(),
+      email: validData.email,
     })
-    .eq("id", patientId);
+    .eq("id", validId);
 
   if (profileError) throw new Error("Errore nell'aggiornamento del profilo");
 
   // If email changed, update auth.users too
-  if (data.email !== patient.email) {
+  if (validData.email !== patient.email) {
     const { error: authError } = await admin.auth.admin.updateUserById(
-      patientId,
-      { email: data.email }
+      validId,
+      { email: validData.email }
     );
     if (authError)
       throw new Error("Errore nell'aggiornamento dell'email di accesso");
@@ -56,6 +89,8 @@ export async function editPatient(
 }
 
 export async function resetPatientPassword(patientId: string) {
+  const validId = uuidSchema.parse(patientId);
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -66,7 +101,7 @@ export async function resetPatientPassword(patientId: string) {
   const { data: patient } = await supabase
     .from("profiles")
     .select("id, full_name")
-    .eq("id", patientId)
+    .eq("id", validId)
     .eq("physio_id", user.id)
     .single();
 
@@ -84,7 +119,7 @@ export async function resetPatientPassword(patientId: string) {
   const newPassword = `fisio-${firstName}-${digits}`;
 
   const admin = createAdminClient();
-  const { error } = await admin.auth.admin.updateUserById(patientId, {
+  const { error } = await admin.auth.admin.updateUserById(validId, {
     password: newPassword,
   });
 
@@ -94,6 +129,8 @@ export async function resetPatientPassword(patientId: string) {
 }
 
 export async function unlinkPatient(patientId: string) {
+  const validId = uuidSchema.parse(patientId);
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -104,7 +141,7 @@ export async function unlinkPatient(patientId: string) {
   const { data: patient } = await supabase
     .from("profiles")
     .select("id")
-    .eq("id", patientId)
+    .eq("id", validId)
     .eq("physio_id", user.id)
     .single();
 
@@ -114,7 +151,7 @@ export async function unlinkPatient(patientId: string) {
   const { error } = await admin
     .from("profiles")
     .update({ physio_id: null })
-    .eq("id", patientId);
+    .eq("id", validId);
 
   if (error) throw new Error("Errore nella rimozione del paziente");
 
@@ -132,6 +169,9 @@ export async function uploadInvoice(formData: FormData) {
   const file = formData.get("file") as File;
 
   if (!patientId || !file) throw new Error("Dati mancanti");
+  uuidSchema.parse(patientId);
+  if (file.type !== "application/pdf") throw new Error("Il file deve essere un PDF");
+  if (file.size > 10 * 1024 * 1024) throw new Error("File troppo grande (max 10MB)");
 
   // Verify patient belongs to this physio
   const { data: patient } = await supabase
@@ -181,31 +221,45 @@ export async function saveInvoice(data: {
   }>;
   pdfStoragePath: string;
 }) {
+  const validData = saveInvoiceSchema.parse(data);
+
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) throw new Error("Non autenticato");
 
+  // Verify patient belongs to this physio
+  const { data: patient } = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("id", validData.patientId)
+    .eq("physio_id", user.id)
+    .single();
+
+  if (!patient) throw new Error("Paziente non trovato");
+
   const { error } = await supabase.from("invoices").insert({
     physio_id: user.id,
-    patient_id: data.patientId,
-    invoice_number: data.invoiceNumber,
-    invoice_date: data.invoiceDate,
-    payment_method: data.paymentMethod,
-    subtotal: data.subtotal,
-    stamp_duty: data.stampDuty,
-    grand_total: data.grandTotal,
-    line_items: data.lineItems,
-    pdf_storage_path: data.pdfStoragePath,
+    patient_id: validData.patientId,
+    invoice_number: validData.invoiceNumber,
+    invoice_date: validData.invoiceDate,
+    payment_method: validData.paymentMethod,
+    subtotal: validData.subtotal,
+    stamp_duty: validData.stampDuty,
+    grand_total: validData.grandTotal,
+    line_items: validData.lineItems,
+    pdf_storage_path: validData.pdfStoragePath,
   });
 
   if (error) throw new Error("Errore nel salvataggio della fattura");
 
-  revalidatePath(`/physio/patients/${data.patientId}/invoices`);
+  revalidatePath(`/physio/patients/${validData.patientId}/invoices`);
 }
 
 export async function deleteInvoice(invoiceId: string) {
+  const validId = uuidSchema.parse(invoiceId);
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -216,7 +270,7 @@ export async function deleteInvoice(invoiceId: string) {
   const { data: invoice } = await supabase
     .from("invoices")
     .select("id, patient_id, pdf_storage_path")
-    .eq("id", invoiceId)
+    .eq("id", validId)
     .eq("physio_id", user.id)
     .single();
 
@@ -229,7 +283,7 @@ export async function deleteInvoice(invoiceId: string) {
   const { error } = await supabase
     .from("invoices")
     .delete()
-    .eq("id", invoiceId);
+    .eq("id", validId);
 
   if (error) throw new Error("Errore nell'eliminazione della fattura");
 
@@ -237,6 +291,8 @@ export async function deleteInvoice(invoiceId: string) {
 }
 
 export async function toggleInvoiceStatus(invoiceId: string) {
+  const validId = uuidSchema.parse(invoiceId);
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -246,7 +302,7 @@ export async function toggleInvoiceStatus(invoiceId: string) {
   const { data: invoice } = await supabase
     .from("invoices")
     .select("id, patient_id, status")
-    .eq("id", invoiceId)
+    .eq("id", validId)
     .eq("physio_id", user.id)
     .single();
 
@@ -257,7 +313,7 @@ export async function toggleInvoiceStatus(invoiceId: string) {
   const { error } = await supabase
     .from("invoices")
     .update({ status: newStatus })
-    .eq("id", invoiceId);
+    .eq("id", validId);
 
   if (error) throw new Error("Errore nell'aggiornamento dello stato");
 

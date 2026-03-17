@@ -45,6 +45,11 @@ export async function middleware(request: NextRequest) {
   const publicRoutes = ["/login", "/register", "/callback", "/confirm", "/forgot-password", "/reset-password"];
   const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
 
+  // Protect API routes (return 401 instead of redirect)
+  if (!user && pathname.startsWith("/api/")) {
+    return NextResponse.json({ error: "Non autenticato" }, { status: 401 });
+  }
+
   // If not authenticated and trying to access protected route
   if (!user && !isPublicRoute) {
     const url = request.nextUrl.clone();

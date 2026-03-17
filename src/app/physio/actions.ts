@@ -3,6 +3,9 @@
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import type { Database } from "@/types/database";
+import { z } from "zod";
+
+const uuidSchema = z.string().uuid("ID non valido");
 
 type PlanItemRow = Database["public"]["Tables"]["plan_items"]["Row"];
 
@@ -11,6 +14,8 @@ function revalidatePhysio() {
 }
 
 export async function togglePlanActive(planId: string, active: boolean) {
+  const validId = uuidSchema.parse(planId);
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -20,7 +25,7 @@ export async function togglePlanActive(planId: string, active: boolean) {
   const { error } = await supabase
     .from("workout_plans")
     .update({ active })
-    .eq("id", planId)
+    .eq("id", validId)
     .eq("physio_id", user.id);
 
   if (error) throw new Error("Errore nell'aggiornamento della scheda");
@@ -29,6 +34,8 @@ export async function togglePlanActive(planId: string, active: boolean) {
 }
 
 export async function deletePlan(planId: string) {
+  const validId = uuidSchema.parse(planId);
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -38,7 +45,7 @@ export async function deletePlan(planId: string) {
   const { error } = await supabase
     .from("workout_plans")
     .delete()
-    .eq("id", planId)
+    .eq("id", validId)
     .eq("physio_id", user.id);
 
   if (error) throw new Error("Errore nell'eliminazione della scheda");
@@ -47,6 +54,8 @@ export async function deletePlan(planId: string) {
 }
 
 export async function duplicatePlan(planId: string) {
+  const validId = uuidSchema.parse(planId);
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -57,7 +66,7 @@ export async function duplicatePlan(planId: string) {
   const { data: plan } = await supabase
     .from("workout_plans")
     .select("*, plan_items(*)")
-    .eq("id", planId)
+    .eq("id", validId)
     .eq("physio_id", user.id)
     .single();
 
