@@ -48,13 +48,17 @@ async function extractTextFromPdf(buffer: Buffer): Promise<string> {
   // Use pdfjs-dist directly (more compatible with Vercel serverless than pdf-parse)
   const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
 
+  // Point worker to the actual file so pdfjs-dist works in Node.js / Vercel serverless
+  const pkgDir = path.dirname(require.resolve("pdfjs-dist/package.json"));
+  pdfjsLib.GlobalWorkerOptions.workerSrc = path.join(
+    pkgDir,
+    "legacy/build/pdf.worker.mjs"
+  );
+
   // standardFontDataUrl is optional – skip it if path resolution fails
   let standardFontDataUrl: string | undefined;
   try {
-    standardFontDataUrl = path.join(
-      path.dirname(require.resolve("pdfjs-dist/package.json")),
-      "standard_fonts/"
-    );
+    standardFontDataUrl = path.join(pkgDir, "standard_fonts/");
   } catch {
     // not available in this environment, continue without it
   }
