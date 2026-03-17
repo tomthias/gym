@@ -84,6 +84,7 @@ function WorkoutPageContent() {
             notes,
             superset_group,
             transition_rest,
+            per_lato,
             exercises (
               id,
               name,
@@ -111,11 +112,12 @@ function WorkoutPageContent() {
         return;
       }
 
+      type ExerciseRow = { id: string; name: string; description: string | null; category: string; video_url: string | null };
       const items: PlanItemWithExercise[] = plan.plan_items
-        .filter((pi: any) => pi.exercises != null)
-        .map((pi: any) => ({
+        .filter((pi) => pi.exercises != null)
+        .map((pi) => ({
           id: pi.id,
-          exercise: pi.exercises,
+          exercise: pi.exercises as unknown as ExerciseRow,
           sets: pi.sets,
           reps: pi.reps,
           duration: pi.duration,
@@ -125,6 +127,7 @@ function WorkoutPageContent() {
           notes: pi.notes,
           superset_group: pi.superset_group,
           transition_rest: pi.transition_rest,
+          per_lato: pi.per_lato ?? false,
         }));
 
       if (!items.length) {

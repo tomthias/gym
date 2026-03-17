@@ -64,6 +64,7 @@ export interface PlanItem {
   notes: string;
   supersetGroup: number | null;
   transitionRest: number;
+  perLato: boolean;
 }
 
 function generateTempId() {
@@ -181,6 +182,7 @@ export function PlanEditor({
         notes: defaults.notes,
         supersetGroup: null,
         transitionRest: 10,
+        perLato: false,
       },
     ]);
     setPickerOpen(false);
@@ -422,6 +424,7 @@ export function PlanEditor({
         notes: item.notes || null,
         superset_group: item.supersetGroup,
         transition_rest: item.transitionRest,
+        per_lato: item.perLato,
       }));
 
       if (mode === "edit" && planId) {
@@ -945,20 +948,36 @@ function ExerciseCard({
           </div>
 
           {item.type === "reps" ? (
-            <div className="space-y-1">
-              <Label className="text-xs">Ripetizioni</Label>
-              <Input
-                type="number"
-                min={1}
-                value={item.reps}
-                onChange={(e) =>
-                  onUpdate(item.tempId, {
-                    reps: Number(e.target.value) || 1,
-                  })
-                }
-                className="h-8 text-xs"
-              />
-            </div>
+            <>
+              <div className="space-y-1">
+                <Label className="text-xs">Ripetizioni</Label>
+                <Input
+                  type="number"
+                  min={1}
+                  value={item.reps}
+                  onChange={(e) =>
+                    onUpdate(item.tempId, {
+                      reps: Number(e.target.value) || 1,
+                    })
+                  }
+                  className="h-8 text-xs"
+                />
+              </div>
+              <div className="flex items-center gap-2 self-end pb-1">
+                <input
+                  type="checkbox"
+                  id={`per-lato-${item.tempId}`}
+                  checked={item.perLato}
+                  onChange={(e) =>
+                    onUpdate(item.tempId, { perLato: e.target.checked })
+                  }
+                  className="h-4 w-4 rounded border-border accent-teal-600"
+                />
+                <Label htmlFor={`per-lato-${item.tempId}`} className="text-xs cursor-pointer">
+                  Per lato
+                </Label>
+              </div>
+            </>
           ) : (
             <div className="space-y-1">
               <Label className="text-xs">Durata</Label>

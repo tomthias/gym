@@ -9,7 +9,9 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { User, AtSign, Mail, Stethoscope } from "lucide-react";
 import { LogoutButton } from "./logout-button";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { UpdateEmailForm } from "./update-email-form";
+import { UpdatePasswordForm } from "./update-password-form";
 
 export default async function SettingsPage() {
   const supabase = await createClient();
@@ -103,6 +105,10 @@ export default async function SettingsPage() {
           </div>
         </CardContent>
       </Card>
+
+      <UpdateEmailForm currentEmail={profile?.email || user.email || ""} />
+
+      <UpdatePasswordForm />
 
       <ThemeToggle />
 

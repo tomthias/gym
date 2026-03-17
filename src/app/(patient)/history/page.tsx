@@ -59,7 +59,7 @@ export default async function HistoryPage() {
                   <div className="flex items-start justify-between">
                     <div className="space-y-1">
                       <p className="font-semibold">
-                        {(log as any).workout_plans?.name ?? "Sessione"}
+                        {(log.workout_plans as unknown as { name: string } | null)?.name ?? "Sessione"}
                       </p>
                       <div className="flex items-center gap-1 text-sm text-muted-foreground">
                         <Calendar className="h-3.5 w-3.5" />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Header } from "@/components/layout/header";
@@ -36,7 +36,7 @@ export default function EditPlanPage() {
           id, name, description, patient_id,
           plan_items (
             id, exercise_id, "order", sets, reps, duration,
-            rest_time, rest_after, notes, superset_group, transition_rest,
+            rest_time, rest_after, notes, superset_group, transition_rest, per_lato,
             exercises (id, name)
           )
         `
@@ -70,6 +70,7 @@ export default function EditPlanPage() {
           notes: pi.notes ?? "",
           supersetGroup: pi.superset_group,
           transitionRest: pi.transition_rest ?? 10,
+          perLato: pi.per_lato ?? false,
         }));
 
       setInitialPlan({

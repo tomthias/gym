@@ -16,40 +16,52 @@ export function useTimer(options?: UseTimerOptions) {
   const isRunningRef = useRef(false);
   const lastDisplayedSecondRef = useRef<number>(-1);
   const optionsRef = useRef(options);
-  optionsRef.current = options;
+  const tickRef = useRef<FrameRequestCallback | null>(null);
 
-  const tick = useCallback(() => {
-    if (!isRunningRef.current || startTimeRef.current === null) return;
+  // Sync options ref outside of render
+  useEffect(() => {
+    optionsRef.current = options;
+  });
 
-    const now = performance.now();
-    const elapsedMs = now - startTimeRef.current;
-    const elapsedSec = Math.floor(elapsedMs / 1000);
+  // Keep tick function in a ref so it can self-reference via RAF
+  useEffect(() => {
+    tickRef.current = () => {
+      if (!isRunningRef.current || startTimeRef.current === null) return;
 
-    if (durationRef.current > 0) {
-      // Countdown mode
-      const remaining = Math.max(0, durationRef.current - elapsedSec);
+      const now = performance.now();
+      const elapsedMs = now - startTimeRef.current;
+      const elapsedSec = Math.floor(elapsedMs / 1000);
 
-      if (remaining !== lastDisplayedSecondRef.current) {
-        lastDisplayedSecondRef.current = remaining;
-        setDisplaySeconds(remaining);
-        optionsRef.current?.onTick?.(remaining);
+      if (durationRef.current > 0) {
+        // Countdown mode
+        const remaining = Math.max(0, durationRef.current - elapsedSec);
+
+        if (remaining !== lastDisplayedSecondRef.current) {
+          lastDisplayedSecondRef.current = remaining;
+          setDisplaySeconds(remaining);
+          optionsRef.current?.onTick?.(remaining);
+        }
+
+        if (remaining <= 0) {
+          isRunningRef.current = false;
+          optionsRef.current?.onComplete?.();
+          return;
+        }
+      } else {
+        // Stopwatch mode (counting up)
+        if (elapsedSec !== lastDisplayedSecondRef.current) {
+          lastDisplayedSecondRef.current = elapsedSec;
+          setDisplaySeconds(elapsedSec);
+          optionsRef.current?.onTick?.(elapsedSec);
+        }
       }
 
-      if (remaining <= 0) {
-        isRunningRef.current = false;
-        optionsRef.current?.onComplete?.();
-        return;
-      }
-    } else {
-      // Stopwatch mode (counting up)
-      if (elapsedSec !== lastDisplayedSecondRef.current) {
-        lastDisplayedSecondRef.current = elapsedSec;
-        setDisplaySeconds(elapsedSec);
-        optionsRef.current?.onTick?.(elapsedSec);
-      }
-    }
+      rafIdRef.current = requestAnimationFrame(tickRef.current!);
+    };
+  });
 
-    rafIdRef.current = requestAnimationFrame(tick);
+  const scheduleTick = useCallback(() => {
+    rafIdRef.current = requestAnimationFrame(tickRef.current!);
   }, []);
 
   const startCountdown = useCallback(
@@ -60,9 +72,9 @@ export function useTimer(options?: UseTimerOptions) {
       lastDisplayedSecondRef.current = seconds;
       setDisplaySeconds(seconds);
       isRunningRef.current = true;
-      rafIdRef.current = requestAnimationFrame(tick);
+      scheduleTick();
     },
-    [tick]
+    [scheduleTick]
   );
 
   const startStopwatch = useCallback(() => {
@@ -72,8 +84,8 @@ export function useTimer(options?: UseTimerOptions) {
     lastDisplayedSecondRef.current = 0;
     setDisplaySeconds(0);
     isRunningRef.current = true;
-    rafIdRef.current = requestAnimationFrame(tick);
-  }, [tick]);
+    scheduleTick();
+  }, [scheduleTick]);
 
   const pause = useCallback(() => {
     if (!isRunningRef.current || startTimeRef.current === null) return;
@@ -86,8 +98,8 @@ export function useTimer(options?: UseTimerOptions) {
     if (isRunningRef.current) return;
     startTimeRef.current = performance.now() - pausedElapsedRef.current;
     isRunningRef.current = true;
-    rafIdRef.current = requestAnimationFrame(tick);
-  }, [tick]);
+    scheduleTick();
+  }, [scheduleTick]);
 
   const stop = useCallback(() => {
     isRunningRef.current = false;
@@ -102,13 +114,13 @@ export function useTimer(options?: UseTimerOptions) {
       if (document.visibilityState === "visible" && isRunningRef.current) {
         // Force a tick to catch up
         if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-        rafIdRef.current = requestAnimationFrame(tick);
+        scheduleTick();
       }
     }
     document.addEventListener("visibilitychange", handleVisibility);
     return () =>
       document.removeEventListener("visibilitychange", handleVisibility);
-  }, [tick]);
+  }, [scheduleTick]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -119,7 +131,6 @@ export function useTimer(options?: UseTimerOptions) {
 
   return {
     displaySeconds,
-    isRunning: isRunningRef.current,
     startCountdown,
     startStopwatch,
     pause,

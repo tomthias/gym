@@ -11,49 +11,58 @@ import type { PlanItem } from "@/components/physio/plan-editor";
  */
 export function parseSerieReps(
   text: string
-): Partial<Pick<PlanItem, "sets" | "reps" | "duration" | "type" | "notes">> {
+): Partial<Pick<PlanItem, "sets" | "reps" | "duration" | "type" | "notes" | "perLato">> {
   const trimmed = text.trim();
   if (!trimmed) return {};
 
+  // Strip trailing "per lato" (case-insensitive) and track it
+  const perLatoMatch = trimmed.match(/^(.+?)\s+per\s+lato$/i);
+  const cleanText = perLatoMatch ? perLatoMatch[1].trim() : trimmed;
+  const perLato = !!perLatoMatch;
+
   // Pattern: "5'" or "10'" — minutes timed (single block)
-  const minuteMatch = trimmed.match(/^(\d+)'$/);
+  const minuteMatch = cleanText.match(/^(\d+)'$/);
   if (minuteMatch) {
     return {
       sets: 1,
       duration: parseInt(minuteMatch[1]) * 60,
       type: "timed",
+      ...(perLato && { perLato }),
     };
   }
 
   // Pattern: "3X30\"" or "3x30"" — sets x seconds (timed)
-  const timedMatch = trimmed.match(/^(\d+)\s*[Xx]\s*(\d+)["""]$/);
+  const timedMatch = cleanText.match(/^(\d+)\s*[Xx]\s*(\d+)["""]$/);
   if (timedMatch) {
     return {
       sets: parseInt(timedMatch[1]),
       duration: parseInt(timedMatch[2]),
       type: "timed",
+      ...(perLato && { perLato }),
     };
   }
 
   // Pattern: "3X10" or "3x10" — sets x reps
-  const repsMatch = trimmed.match(/^(\d+)\s*[Xx]\s*(\d+)$/);
+  const repsMatch = cleanText.match(/^(\d+)\s*[Xx]\s*(\d+)$/);
   if (repsMatch) {
     return {
       sets: parseInt(repsMatch[1]),
       reps: parseInt(repsMatch[2]),
       type: "reps",
+      ...(perLato && { perLato }),
     };
   }
 
   // Pattern: "30-15-15-15" — BFR/variable rep scheme
-  const bfrMatch = trimmed.match(/^(\d+)(-\d+)+$/);
+  const bfrMatch = cleanText.match(/^(\d+)(-\d+)+$/);
   if (bfrMatch) {
-    const parts = trimmed.split("-").map(Number);
+    const parts = cleanText.split("-").map(Number);
     return {
       sets: parts.length,
       reps: parts[0],
       type: "reps",
-      notes: `Schema: ${trimmed}`,
+      notes: `Schema: ${cleanText}`,
+      ...(perLato && { perLato }),
     };
   }
 
@@ -64,18 +73,20 @@ export function parseSerieReps(
  * Format PlanItem fields into shorthand display text.
  */
 export function formatSerieReps(item: PlanItem): string {
+  const suffix = item.perLato ? " PER LATO" : "";
+
   // Check if notes contain a BFR schema pattern
   const schemaMatch = item.notes?.match(/Schema:\s*([\d-]+)/i);
-  if (schemaMatch) return schemaMatch[1];
+  if (schemaMatch) return schemaMatch[1] + suffix;
 
   if (item.type === "timed") {
     if (item.sets === 1 && item.duration >= 60 && item.duration % 60 === 0) {
-      return `${item.duration / 60}'`;
+      return `${item.duration / 60}'` + suffix;
     }
-    return `${item.sets}X${item.duration}"`;
+    return `${item.sets}X${item.duration}"` + suffix;
   }
 
-  return `${item.sets}X${item.reps}`;
+  return `${item.sets}X${item.reps}` + suffix;
 }
 
 /**

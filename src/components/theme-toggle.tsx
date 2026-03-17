@@ -7,10 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export function PhysioThemeToggle() {
+export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- required by next-themes to avoid hydration mismatch
   useEffect(() => setMounted(true), []);
 
   if (!mounted) return null;

@@ -50,7 +50,7 @@ export function ComplianceReport({
   const yesterdayStr = yesterday.toISOString().slice(0, 10);
 
   if (sortedDates[0] === today || sortedDates[0] === yesterdayStr) {
-    let checkDate = new Date(sortedDates[0]);
+    const checkDate = new Date(sortedDates[0]);
     for (const dateStr of sortedDates) {
       const expected = checkDate.toISOString().slice(0, 10);
       if (dateStr === expected) {

@@ -71,7 +71,11 @@ export function SendNote({ patientId }: PhysioNotesProps) {
   const handleDelete = useCallback(
     async (noteId: string) => {
       const supabase = createClient();
-      await supabase.from("physio_notes").delete().eq("id", noteId);
+      const { error } = await supabase.from("physio_notes").delete().eq("id", noteId);
+      if (error) {
+        toast.error("Errore nell'eliminazione della nota");
+        return;
+      }
       fetchNotes();
     },
     [fetchNotes]

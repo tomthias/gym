@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useWorkoutStore } from "@/lib/stores/workout-store";
@@ -26,8 +26,7 @@ export default function WorkoutCompletePage() {
   const [saved, setSaved] = useState(false);
 
   // Stabilize completedAt so it doesn't change on every render
-  const completedAtRef = useRef(new Date().toISOString());
-  const completedAt = completedAtRef.current;
+  const [completedAt] = useState(() => new Date().toISOString());
   const durationSeconds = startedAt
     ? Math.floor(
         (new Date(completedAt).getTime() - new Date(startedAt).getTime()) / 1000

@@ -1,79 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { INVITE_CODE_EXPIRY_DAYS } from "@/lib/utils/constants";
-import { generateInviteCode, type InviteCode } from "@/lib/utils/invite";
+import { useInviteCodes } from "@/lib/hooks/use-invite-codes";
 import { Copy, KeyRound, Loader2, Plus, Check } from "lucide-react";
-import { toast } from "sonner";
 
 export function InviteCodeSection() {
-  const [codes, setCodes] = useState<InviteCode[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [creating, setCreating] = useState(false);
-  const [copiedCode, setCopiedCode] = useState<string | null>(null);
-
-  const fetchCodes = useCallback(async () => {
-    const supabase = createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) return;
-
-    const { data } = await supabase
-      .from("invite_codes")
-      .select("*")
-      .eq("physio_id", user.id)
-      .order("created_at", { ascending: false })
-      .limit(5);
-
-    if (data) setCodes(data);
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    fetchCodes();
-  }, [fetchCodes]);
-
-  const handleCreate = useCallback(async () => {
-    setCreating(true);
-    const supabase = createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) return;
-
-    const expiresAt = new Date();
-    expiresAt.setDate(expiresAt.getDate() + INVITE_CODE_EXPIRY_DAYS);
-
-    const { data, error } = await supabase
-      .from("invite_codes")
-      .insert({
-        code: generateInviteCode(),
-        physio_id: user.id,
-        expires_at: expiresAt.toISOString(),
-      })
-      .select()
-      .single();
-
-    if (error) {
-      toast.error("Errore nella generazione del codice");
-      setCreating(false);
-      return;
-    }
-
-    if (data) setCodes((prev) => [data, ...prev].slice(0, 5));
-    setCreating(false);
-  }, []);
-
-  const handleCopy = useCallback((code: string) => {
-    navigator.clipboard.writeText(code);
-    setCopiedCode(code);
-    setTimeout(() => setCopiedCode(null), 2000);
-  }, []);
+  const { codes, loading, creating, copiedCode, handleCreate, handleCopy } =
+    useInviteCodes({ limit: 5 });
 
   return (
     <Card>

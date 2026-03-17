@@ -25,6 +25,7 @@ export interface PlanItemWithExercise {
   notes: string | null;
   superset_group: number | null;
   transition_rest: number | null;
+  per_lato: boolean;
 }
 
 export interface WorkoutSession {

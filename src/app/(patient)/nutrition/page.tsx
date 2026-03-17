@@ -6,7 +6,7 @@ import { Header } from "@/components/layout/header";
 import { DailySummaryCard } from "@/components/nutrition/daily-summary-card";
 import { MealSection } from "@/components/nutrition/meal-section";
 import { Button } from "@/components/ui/button";
-import { MEAL_SLOTS, type MealSlot, type DayType } from "@/types/nutrition";
+import { MEAL_SLOTS, type DayType } from "@/types/nutrition";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";

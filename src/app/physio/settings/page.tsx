@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { User, AtSign, Mail, Users } from "lucide-react";
-import { PhysioThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { PhysioLogoutButton } from "./logout-button";
 import { InviteCodeSection } from "./invite-code-section";
 
@@ -106,7 +106,7 @@ export default async function PhysioSettingsPage() {
         <InviteCodeSection />
 
         {/* Theme */}
-        <PhysioThemeToggle />
+        <ThemeToggle />
 
         {/* Logout */}
         <PhysioLogoutButton />

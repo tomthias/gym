@@ -31,6 +31,11 @@ export function ExerciseDisplay({ item, currentSet }: ExerciseDisplayProps) {
             </>
           )}
         </Badge>
+        {item.per_lato && (
+          <Badge variant="secondary" className="bg-golden-100 text-golden-700 dark:bg-golden-900 dark:text-golden-300">
+            Per lato
+          </Badge>
+        )}
         <Badge variant="outline">
           Serie {currentSet}/{item.sets}
         </Badge>

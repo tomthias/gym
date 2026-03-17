@@ -154,27 +154,30 @@ export default async function DashboardPage() {
                 {/* Exercise list preview */}
                 <div className="space-y-2">
                   {plan.plan_items
-                    ?.sort((a: any, b: any) => a.order - b.order)
+                    ?.sort((a, b) => a.order - b.order)
                     .slice(0, 4)
-                    .map((item: any) => (
-                      <div
-                        key={item.id}
-                        className="flex items-center justify-between rounded-lg bg-muted/50 px-3 py-2"
-                      >
-                        <div className="flex items-center gap-2">
-                          <Dumbbell className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-sm font-medium">
-                            {item.exercises?.name}
+                    .map((item) => {
+                      const exercise = item.exercises as unknown as { id: string; name: string; category: string } | null;
+                      return (
+                        <div
+                          key={item.id}
+                          className="flex items-center justify-between rounded-lg bg-muted/50 px-3 py-2"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Dumbbell className="h-4 w-4 text-muted-foreground" />
+                            <span className="text-sm font-medium">
+                              {exercise?.name}
+                            </span>
+                          </div>
+                          <span className="text-xs text-muted-foreground">
+                            {item.sets}x
+                            {item.reps
+                              ? `${item.reps} rep`
+                              : `${item.duration}s`}
                           </span>
                         </div>
-                        <span className="text-xs text-muted-foreground">
-                          {item.sets}x
-                          {item.reps
-                            ? `${item.reps} rep`
-                            : `${item.duration}s`}
-                        </span>
-                      </div>
-                    ))}
+                      );
+                    })}
                   {(plan.plan_items?.length ?? 0) > 4 && (
                     <p className="text-center text-xs text-muted-foreground">
                       +{(plan.plan_items?.length ?? 0) - 4} altri esercizi

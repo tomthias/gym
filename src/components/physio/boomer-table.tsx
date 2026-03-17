@@ -4,6 +4,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { createPortal } from "react-dom";
 import { toJpeg } from "html-to-image";
 import { Download, Plus, Trash2 } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import type { PlanItem } from "@/components/physio/plan-editor";
 import {
@@ -66,7 +67,7 @@ export function BoomerTable({
       link.href = dataUrl;
       link.click();
     } catch {
-      // Silently fail — user can retry
+      toast.error("Errore nel download dell'immagine");
     } finally {
       setDownloading(false);
     }
@@ -163,12 +164,16 @@ function BoomerRow({
     setRestText(formatRest(item));
     setCaricoText(extractCarico(item.notes));
     setNoteFisioText(extractNoteFisio(item.notes));
-  }, [item.tempId, item.sets, item.reps, item.duration, item.type, item.restTime, item.supersetGroup, item.notes]);
+  }, [item]);
 
   const commitSerie = () => {
     const parsed = parseSerieReps(serieText);
     if (Object.keys(parsed).length > 0) {
       const updates: Partial<PlanItem> = { ...parsed };
+      // Explicitly reset perLato when not detected in text
+      if (!("perLato" in updates)) {
+        updates.perLato = false;
+      }
       if (parsed.notes && !caricoText) {
         delete updates.notes;
       }

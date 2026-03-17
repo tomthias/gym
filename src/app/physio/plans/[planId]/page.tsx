@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Download, Pencil } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { PlanViewTable } from "@/components/physio/plan-view-table";
 
 interface Props {

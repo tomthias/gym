@@ -117,12 +117,6 @@ export function WorkoutPlayer() {
     }
   }, [currentItem, timer]);
 
-  // Handle starting a stopwatch for reps
-  const handleStartStopwatch = useCallback(() => {
-    timer.startStopwatch();
-    setIsPaused(false);
-  }, [timer]);
-
   // Pause/resume for timed exercises (used by PlayerControls)
   const handlePause = useCallback(() => {
     timer.pause();
@@ -255,7 +249,7 @@ export function WorkoutPlayer() {
                         <p className="text-xs text-muted-foreground">
                           {block.item.sets}x
                           {block.item.reps
-                            ? ` ${block.item.reps} rep`
+                            ? ` ${block.item.reps} rep${block.item.per_lato ? " per lato" : ""}`
                             : ` ${block.item.duration}s`}
                         </p>
                       </div>
@@ -294,7 +288,7 @@ export function WorkoutPlayer() {
                           <p className="text-xs text-muted-foreground">
                             {item.sets}x
                             {item.reps
-                              ? ` ${item.reps} rep`
+                              ? ` ${item.reps} rep${item.per_lato ? " per lato" : ""}`
                               : ` ${item.duration}s`}
                           </p>
                         </div>
@@ -322,24 +316,11 @@ export function WorkoutPlayer() {
   }
 
   if (phase === "resting" && currentItem) {
-    // Determine next exercise name for rest screen
     const ssGroup = getSupersetGroup(items, currentItemIndex);
-    let nextName: string;
 
-    if (ssGroup) {
-      const ssIndex = supersetExerciseIndex;
-      if (ssIndex > 0 || supersetRound > 1) {
-        nextName = currentItem.exercise.name;
-      } else {
-        nextName = currentItem.exercise.name;
-      }
-    } else {
-      nextName = currentItem.exercise.name;
-    }
-
-    // More precise: the current item IS the next exercise to do (store already advanced)
+    // The current item IS the next exercise to do (store already advanced)
     const nextItem = items[currentItemIndex];
-    nextName = nextItem?.exercise.name ?? "Fine workout";
+    let nextName = nextItem?.exercise.name ?? "Fine workout";
 
     // Add round info for superserie
     if (ssGroup && ssGroup.length > 1) {
