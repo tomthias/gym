@@ -27,14 +27,20 @@ async function extractTextFromPdf(buffer: Buffer): Promise<string> {
   // Use pdfjs-dist directly (more compatible with Vercel serverless than pdf-parse)
   const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
 
-  const standardFontDataUrl = path.join(
-    path.dirname(require.resolve("pdfjs-dist/package.json")),
-    "standard_fonts/"
-  );
+  // standardFontDataUrl is optional – skip it if path resolution fails
+  let standardFontDataUrl: string | undefined;
+  try {
+    standardFontDataUrl = path.join(
+      path.dirname(require.resolve("pdfjs-dist/package.json")),
+      "standard_fonts/"
+    );
+  } catch {
+    // not available in this environment, continue without it
+  }
 
   const doc = await pdfjsLib.getDocument({
     data: new Uint8Array(buffer),
-    standardFontDataUrl,
+    ...(standardFontDataUrl ? { standardFontDataUrl } : {}),
   }).promise;
 
   let fullText = "";
@@ -42,19 +48,45 @@ async function extractTextFromPdf(buffer: Buffer): Promise<string> {
     const page = await doc.getPage(i);
     const content = await page.getTextContent();
 
-    let lastY: number | null = null;
+    // Collect items with their position (PDF y=0 is at the bottom)
+    const items: { str: string; x: number; y: number }[] = [];
     for (const item of content.items) {
-      if (!("str" in item) || item.str === "") continue;
-      const y = item.transform[5];
-      if (lastY !== null && Math.abs(y - lastY) > 2) {
-        fullText += "\n";
-      } else if (lastY !== null) {
-        fullText += " ";
-      }
-      fullText += item.str;
-      lastY = y;
+      if (!("str" in item) || item.str.trim() === "") continue;
+      items.push({
+        str: item.str,
+        x: item.transform[4],
+        y: item.transform[5],
+      });
     }
-    fullText += "\n";
+
+    // Sort top-to-bottom (y descending), then left-to-right (x ascending)
+    items.sort((a, b) => b.y - a.y || a.x - b.x);
+
+    // Group items that share the same visual line (Y within 5 units)
+    const Y_TOLERANCE = 5;
+    const lines: { str: string; x: number }[][] = [];
+    let currentLine: { str: string; x: number; y: number }[] = [];
+    let lineRefY: number | null = null;
+
+    for (const item of items) {
+      if (lineRefY === null || Math.abs(item.y - lineRefY) <= Y_TOLERANCE) {
+        currentLine.push(item);
+        if (lineRefY === null) lineRefY = item.y;
+      } else {
+        currentLine.sort((a, b) => a.x - b.x);
+        lines.push(currentLine);
+        currentLine = [item];
+        lineRefY = item.y;
+      }
+    }
+    if (currentLine.length > 0) {
+      currentLine.sort((a, b) => a.x - b.x);
+      lines.push(currentLine);
+    }
+
+    for (const line of lines) {
+      fullText += line.map((i) => i.str).join(" ") + "\n";
+    }
   }
 
   return fullText;
