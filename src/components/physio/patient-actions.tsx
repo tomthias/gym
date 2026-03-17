@@ -60,10 +60,14 @@ export function EditPatientDialog({
     setError("");
     setSaving(true);
     try {
-      await editPatient(patient.id, { fullName, username, email });
-      onClose();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Errore nel salvataggio");
+      const result = await editPatient(patient.id, { fullName, username, email });
+      if (!result.success) {
+        setError(result.error);
+      } else {
+        onClose();
+      }
+    } catch {
+      setError("Errore nel salvataggio");
     } finally {
       setSaving(false);
     }
@@ -149,11 +153,15 @@ export function ResetPasswordDialog({
     setError("");
     setLoading(true);
     try {
-      const newPassword = await resetPatientPassword(patient.id);
-      setPassword(newPassword);
-      setStep("result");
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Errore nel reset");
+      const result = await resetPatientPassword(patient.id);
+      if (!result.success) {
+        setError(result.error);
+      } else {
+        setPassword(result.password);
+        setStep("result");
+      }
+    } catch {
+      setError("Errore nel reset");
     } finally {
       setLoading(false);
     }
@@ -260,11 +268,15 @@ export function UnlinkPatientDialog({
     setError("");
     setLoading(true);
     try {
-      await unlinkPatient(patient.id);
-      onClose();
-      router.push("/physio/patients");
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Errore nella rimozione");
+      const result = await unlinkPatient(patient.id);
+      if (!result.success) {
+        setError(result.error);
+      } else {
+        onClose();
+        router.push("/physio/patients");
+      }
+    } catch {
+      setError("Errore nella rimozione");
     } finally {
       setLoading(false);
     }

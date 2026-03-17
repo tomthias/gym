@@ -41,121 +41,153 @@ function revalidatePatients() {
 export async function editPatient(
   patientId: string,
   data: { fullName: string; username: string; email: string }
-) {
-  const validId = uuidSchema.parse(patientId);
-  const validData = editPatientSchema.parse(data);
+): Promise<{ success: true } | { success: false; error: string }> {
+  const idResult = uuidSchema.safeParse(patientId);
+  if (!idResult.success) return { success: false, error: "ID non valido" };
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("Non autenticato");
+  const dataResult = editPatientSchema.safeParse(data);
+  if (!dataResult.success)
+    return { success: false, error: dataResult.error.issues[0].message };
 
-  // Verify patient belongs to this physio
-  const { data: patient } = await supabase
-    .from("profiles")
-    .select("id, email")
-    .eq("id", validId)
-    .eq("physio_id", user.id)
-    .single();
+  try {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) return { success: false, error: "Non autenticato" };
 
-  if (!patient) throw new Error("Paziente non trovato");
+    // Verify patient belongs to this physio
+    const { data: patient } = await supabase
+      .from("profiles")
+      .select("id, email")
+      .eq("id", idResult.data)
+      .eq("physio_id", user.id)
+      .single();
 
-  const admin = createAdminClient();
+    if (!patient) return { success: false, error: "Paziente non trovato" };
 
-  // Update profile
-  const { error: profileError } = await admin
-    .from("profiles")
-    .update({
-      full_name: validData.fullName,
-      username: validData.username.trim().toLowerCase(),
-      email: validData.email,
-    })
-    .eq("id", validId);
+    const admin = createAdminClient();
 
-  if (profileError) throw new Error("Errore nell'aggiornamento del profilo");
+    // Update profile
+    const { error: profileError } = await admin
+      .from("profiles")
+      .update({
+        full_name: dataResult.data.fullName,
+        username: dataResult.data.username.trim().toLowerCase(),
+        email: dataResult.data.email,
+      })
+      .eq("id", idResult.data);
 
-  // If email changed, update auth.users too
-  if (validData.email !== patient.email) {
-    const { error: authError } = await admin.auth.admin.updateUserById(
-      validId,
-      { email: validData.email }
-    );
-    if (authError)
-      throw new Error("Errore nell'aggiornamento dell'email di accesso");
+    if (profileError)
+      return { success: false, error: "Errore nell'aggiornamento del profilo" };
+
+    // If email changed, update auth.users too
+    if (dataResult.data.email !== patient.email) {
+      const { error: authError } = await admin.auth.admin.updateUserById(
+        idResult.data,
+        { email: dataResult.data.email }
+      );
+      if (authError)
+        return {
+          success: false,
+          error: "Errore nell'aggiornamento dell'email di accesso",
+        };
+    }
+
+    revalidatePatients();
+    return { success: true };
+  } catch {
+    return { success: false, error: "Errore imprevisto nel salvataggio" };
   }
-
-  revalidatePatients();
 }
 
-export async function resetPatientPassword(patientId: string) {
-  const validId = uuidSchema.parse(patientId);
+export async function resetPatientPassword(
+  patientId: string
+): Promise<
+  { success: true; password: string } | { success: false; error: string }
+> {
+  const idResult = uuidSchema.safeParse(patientId);
+  if (!idResult.success) return { success: false, error: "ID non valido" };
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("Non autenticato");
+  try {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) return { success: false, error: "Non autenticato" };
 
-  // Verify patient belongs to this physio
-  const { data: patient } = await supabase
-    .from("profiles")
-    .select("id, full_name")
-    .eq("id", validId)
-    .eq("physio_id", user.id)
-    .single();
+    // Verify patient belongs to this physio
+    const { data: patient } = await supabase
+      .from("profiles")
+      .select("id, full_name")
+      .eq("id", idResult.data)
+      .eq("physio_id", user.id)
+      .single();
 
-  if (!patient) throw new Error("Paziente non trovato");
+    if (!patient) return { success: false, error: "Paziente non trovato" };
 
-  // Generate readable password: fisio-{firstname}-{4digits}
-  const firstName = (patient.full_name ?? "utente")
-    .split(/\s+/)[0]
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]/g, "")
-    .slice(0, 10);
-  const digits = String(Math.floor(Math.random() * 10000)).padStart(4, "0");
-  const newPassword = `fisio-${firstName}-${digits}`;
+    // Generate readable password: fisio-{firstname}-{4digits}
+    const firstName = (patient.full_name ?? "utente")
+      .split(/\s+/)[0]
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]/g, "")
+      .slice(0, 10);
+    const digits = String(Math.floor(Math.random() * 10000)).padStart(4, "0");
+    const newPassword = `fisio-${firstName}-${digits}`;
 
-  const admin = createAdminClient();
-  const { error } = await admin.auth.admin.updateUserById(validId, {
-    password: newPassword,
-  });
+    const admin = createAdminClient();
+    const { error } = await admin.auth.admin.updateUserById(idResult.data, {
+      password: newPassword,
+    });
 
-  if (error) throw new Error("Errore nel reset della password");
+    if (error)
+      return { success: false, error: "Errore nel reset della password" };
 
-  return newPassword;
+    return { success: true, password: newPassword };
+  } catch {
+    return { success: false, error: "Errore imprevisto nel reset" };
+  }
 }
 
-export async function unlinkPatient(patientId: string) {
-  const validId = uuidSchema.parse(patientId);
+export async function unlinkPatient(
+  patientId: string
+): Promise<{ success: true } | { success: false; error: string }> {
+  const idResult = uuidSchema.safeParse(patientId);
+  if (!idResult.success) return { success: false, error: "ID non valido" };
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("Non autenticato");
+  try {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) return { success: false, error: "Non autenticato" };
 
-  // Verify patient belongs to this physio
-  const { data: patient } = await supabase
-    .from("profiles")
-    .select("id")
-    .eq("id", validId)
-    .eq("physio_id", user.id)
-    .single();
+    // Verify patient belongs to this physio
+    const { data: patient } = await supabase
+      .from("profiles")
+      .select("id")
+      .eq("id", idResult.data)
+      .eq("physio_id", user.id)
+      .single();
 
-  if (!patient) throw new Error("Paziente non trovato");
+    if (!patient) return { success: false, error: "Paziente non trovato" };
 
-  const admin = createAdminClient();
-  const { error } = await admin
-    .from("profiles")
-    .update({ physio_id: null })
-    .eq("id", validId);
+    const admin = createAdminClient();
+    const { error } = await admin
+      .from("profiles")
+      .update({ physio_id: null })
+      .eq("id", idResult.data);
 
-  if (error) throw new Error("Errore nella rimozione del paziente");
+    if (error)
+      return { success: false, error: "Errore nella rimozione del paziente" };
 
-  revalidatePatients();
+    revalidatePatients();
+    return { success: true };
+  } catch {
+    return { success: false, error: "Errore imprevisto nella rimozione" };
+  }
 }
 
 export async function uploadInvoice(formData: FormData) {
