@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   // Keep pdfjs-dist out of the serverless bundle (has native/wasm deps)
   serverExternalPackages: ["pdfjs-dist"],
 
+  // Force Vercel to include pdfjs-dist worker + font files in serverless functions
+  outputFileTracingIncludes: {
+    "/physio/patients/*": ["./node_modules/pdfjs-dist/**/*"],
+  },
+
   // PWA and security headers
   headers: async () => [
     {
