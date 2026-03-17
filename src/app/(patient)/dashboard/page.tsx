@@ -26,48 +26,48 @@ export default async function DashboardPage() {
 
   if (!user) redirect("/login");
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("full_name, username, physio_id")
-    .eq("id", user.id)
-    .single();
-
-  // Fetch all active plans
-  const { data: activePlans } = await supabase
-    .from("workout_plans")
-    .select(
-      `
-      id,
-      name,
-      description,
-      created_at,
-      plan_items (
-        id,
-        order,
-        sets,
-        reps,
-        duration,
-        rest_time,
-        superset_group,
-        exercises (
+  // Fetch profile, active plans, and recent logs in parallel
+  const [{ data: profile }, { data: activePlans }, { data: recentLogs }] =
+    await Promise.all([
+      supabase
+        .from("profiles")
+        .select("full_name, username, physio_id")
+        .eq("id", user.id)
+        .single(),
+      supabase
+        .from("workout_plans")
+        .select(
+          `
           id,
           name,
-          category
+          description,
+          created_at,
+          plan_items (
+            id,
+            order,
+            sets,
+            reps,
+            duration,
+            rest_time,
+            superset_group,
+            exercises (
+              id,
+              name,
+              category
+            )
+          )
+        `
         )
-      )
-    `
-    )
-    .eq("patient_id", user.id)
-    .eq("active", true)
-    .order("created_at", { ascending: false });
-
-  // Fetch recent logs
-  const { data: recentLogs } = await supabase
-    .from("workout_logs")
-    .select("id, completed_at, duration_seconds, feedback_score")
-    .eq("patient_id", user.id)
-    .order("completed_at", { ascending: false })
-    .limit(7);
+        .eq("patient_id", user.id)
+        .eq("active", true)
+        .order("created_at", { ascending: false }),
+      supabase
+        .from("workout_logs")
+        .select("id, completed_at, duration_seconds, feedback_score")
+        .eq("patient_id", user.id)
+        .order("completed_at", { ascending: false })
+        .limit(7),
+    ]);
 
   const sessionsThisWeek =
     recentLogs?.filter((log) => {

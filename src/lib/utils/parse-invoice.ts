@@ -1,4 +1,5 @@
 import type { InvoiceLineItem } from "@/types/database";
+import path from "path";
 
 export interface ParsedInvoice {
   invoice_number: string;
@@ -22,12 +23,45 @@ function parseItalianDate(dateStr: string): string {
   return `${parts[2]}-${parts[1].padStart(2, "0")}-${parts[0].padStart(2, "0")}`;
 }
 
+async function extractTextFromPdf(buffer: Buffer): Promise<string> {
+  // Use pdfjs-dist directly (more compatible with Vercel serverless than pdf-parse)
+  const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
+
+  const standardFontDataUrl = path.join(
+    path.dirname(require.resolve("pdfjs-dist/package.json")),
+    "standard_fonts/"
+  );
+
+  const doc = await pdfjsLib.getDocument({
+    data: new Uint8Array(buffer),
+    standardFontDataUrl,
+  }).promise;
+
+  let fullText = "";
+  for (let i = 1; i <= doc.numPages; i++) {
+    const page = await doc.getPage(i);
+    const content = await page.getTextContent();
+
+    let lastY: number | null = null;
+    for (const item of content.items) {
+      if (!("str" in item) || item.str === "") continue;
+      const y = item.transform[5];
+      if (lastY !== null && Math.abs(y - lastY) > 2) {
+        fullText += "\n";
+      } else if (lastY !== null) {
+        fullText += " ";
+      }
+      fullText += item.str;
+      lastY = y;
+    }
+    fullText += "\n";
+  }
+
+  return fullText;
+}
+
 export async function parseInvoicePdf(buffer: Buffer): Promise<ParsedInvoice> {
-  // Dynamic import to keep pdf-parse server-only
-  const { PDFParse } = await import("pdf-parse");
-  const parser = new PDFParse({ data: buffer });
-  const result = await parser.getText();
-  const text = result.text;
+  const text = await extractTextFromPdf(buffer);
 
   // Invoice number: FT-XX-YYYY-E
   const invoiceNumberMatch = text.match(/(FT-\d+-\d+-\w)/);

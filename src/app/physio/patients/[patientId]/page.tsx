@@ -46,20 +46,20 @@ export default async function PatientDashboardPage({
 
   if (!patient) redirect("/physio/patients");
 
-  // Get active plans count
-  const { count: activePlans } = await supabase
-    .from("workout_plans")
-    .select("id", { count: "exact", head: true })
-    .eq("patient_id", patient.id)
-    .eq("active", true);
-
-  // Get patient's logs
-  const { data: logs } = await supabase
-    .from("workout_logs")
-    .select("*")
-    .eq("patient_id", patient.id)
-    .order("completed_at", { ascending: false })
-    .limit(30);
+  // Fetch active plans count and logs in parallel
+  const [{ count: activePlans }, { data: logs }] = await Promise.all([
+    supabase
+      .from("workout_plans")
+      .select("id", { count: "exact", head: true })
+      .eq("patient_id", patient.id)
+      .eq("active", true),
+    supabase
+      .from("workout_logs")
+      .select("*")
+      .eq("patient_id", patient.id)
+      .order("completed_at", { ascending: false })
+      .limit(30),
+  ]);
 
   const sessionsThisWeek =
     logs?.filter((log) => {
