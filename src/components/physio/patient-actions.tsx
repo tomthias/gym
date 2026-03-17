@@ -210,28 +210,30 @@ export function ResetPasswordDialog({
   }
 
   return (
-    <AlertDialog open={open} onOpenChange={(v) => !v && handleClose()}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Reset password</AlertDialogTitle>
-          <AlertDialogDescription>
+    <Dialog open={open} onOpenChange={(v) => !v && handleClose()}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Reset password</DialogTitle>
+          <DialogDescription>
             Vuoi generare una nuova password per{" "}
             <span className="font-medium">{patient.full_name}</span>? La
             password attuale sara sostituita.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
+          </DialogDescription>
+        </DialogHeader>
         {error && (
           <p className="text-sm text-destructive text-center">{error}</p>
         )}
-        <AlertDialogFooter>
-          <AlertDialogCancel disabled={loading}>Annulla</AlertDialogCancel>
-          <AlertDialogAction onClick={handleReset} disabled={loading}>
+        <DialogFooter>
+          <Button variant="outline" onClick={handleClose} disabled={loading}>
+            Annulla
+          </Button>
+          <Button onClick={handleReset} disabled={loading}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Genera nuova password
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
 

@@ -3,7 +3,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { revalidatePath } from "next/cache";
-import { randomBytes } from "crypto";
 
 function revalidatePatients() {
   revalidatePath("/physio/patients");
@@ -66,15 +65,23 @@ export async function resetPatientPassword(patientId: string) {
   // Verify patient belongs to this physio
   const { data: patient } = await supabase
     .from("profiles")
-    .select("id")
+    .select("id, full_name")
     .eq("id", patientId)
     .eq("physio_id", user.id)
     .single();
 
   if (!patient) throw new Error("Paziente non trovato");
 
-  // Generate random 12-char password
-  const newPassword = randomBytes(9).toString("base64url");
+  // Generate readable password: fisio-{firstname}-{4digits}
+  const firstName = (patient.full_name ?? "utente")
+    .split(/\s+/)[0]
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]/g, "")
+    .slice(0, 10);
+  const digits = String(Math.floor(Math.random() * 10000)).padStart(4, "0");
+  const newPassword = `fisio-${firstName}-${digits}`;
 
   const admin = createAdminClient();
   const { error } = await admin.auth.admin.updateUserById(patientId, {
