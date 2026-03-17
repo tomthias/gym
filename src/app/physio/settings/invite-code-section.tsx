@@ -21,7 +21,7 @@ export function InviteCodeSection() {
           </CardTitle>
           <Button
             size="sm"
-            onClick={handleCreate}
+            onClick={() => handleCreate()}
             disabled={creating}
             className="gap-1.5"
           >
@@ -71,6 +71,9 @@ export function InviteCodeSection() {
                       ) : (
                         <Badge variant="secondary">Attivo</Badge>
                       )}
+                      <Badge variant="outline">
+                        {invite.role === "physio" ? "Fisio" : "Paziente"}
+                      </Badge>
                       <span className="text-xs text-muted-foreground">
                         {new Date(invite.expires_at).toLocaleDateString("it-IT")}
                       </span>

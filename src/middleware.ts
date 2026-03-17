@@ -42,7 +42,7 @@ export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Public routes that don't require auth
-  const publicRoutes = ["/login", "/register", "/callback", "/forgot-password", "/reset-password"];
+  const publicRoutes = ["/login", "/register", "/callback", "/confirm", "/forgot-password", "/reset-password"];
   const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
 
   // If not authenticated and trying to access protected route
@@ -66,7 +66,7 @@ export async function middleware(request: NextRequest) {
     }
 
     const url = request.nextUrl.clone();
-    url.pathname = profile.role === "physio" ? "/physio/dashboard" : "/dashboard";
+    url.pathname = profile.role === "physio" ? "/physio/patients" : "/dashboard";
     return NextResponse.redirect(url);
   }
 
@@ -77,7 +77,8 @@ export async function middleware(request: NextRequest) {
       pathname.startsWith("/workout") ||
       pathname.startsWith("/history") ||
       pathname.startsWith("/nutrition") ||
-      pathname.startsWith("/settings");
+      pathname.startsWith("/settings") ||
+      pathname.startsWith("/invoices");
     const isPhysioRoute = pathname.startsWith("/physio");
 
     if (isPatientRoute || isPhysioRoute) {
@@ -96,7 +97,7 @@ export async function middleware(request: NextRequest) {
 
       const url = request.nextUrl.clone();
       if (isPatientRoute && profile.role === "physio") {
-        url.pathname = "/physio/dashboard";
+        url.pathname = "/physio/patients";
         return NextResponse.redirect(url);
       }
       if (isPhysioRoute && profile.role === "patient") {

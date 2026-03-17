@@ -63,7 +63,7 @@ export default function ResetPasswordPage() {
         .single<{ role: "patient" | "physio" }>();
 
       router.push(
-        profile?.role === "physio" ? "/physio/dashboard" : "/dashboard"
+        profile?.role === "physio" ? "/physio/patients" : "/dashboard"
       );
       router.refresh();
     }

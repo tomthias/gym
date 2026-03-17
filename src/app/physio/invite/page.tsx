@@ -1,9 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import { Header } from "@/components/layout/header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { INVITE_CODE_EXPIRY_DAYS } from "@/lib/utils/constants";
 import { useInviteCodes } from "@/lib/hooks/use-invite-codes";
 import { Copy, KeyRound, Loader2, Plus, Check } from "lucide-react";
@@ -11,28 +19,43 @@ import { Copy, KeyRound, Loader2, Plus, Check } from "lucide-react";
 export default function InvitePage() {
   const { codes, loading, creating, copiedCode, handleCreate, handleCopy } =
     useInviteCodes();
+  const [newRole, setNewRole] = useState<"patient" | "physio">("patient");
 
   return (
     <div>
       <Header title="Codice invito" />
       <div className="px-4 pt-4 lg:px-0 lg:pt-0 space-y-4">
         <p className="text-sm text-muted-foreground">
-          Genera un codice invito per collegare il tuo paziente. Il codice scade
+          Genera un codice invito per collegare un nuovo utente. Il codice scade
           dopo {INVITE_CODE_EXPIRY_DAYS} giorni.
         </p>
 
-        <Button
-          onClick={handleCreate}
-          disabled={creating}
-          className="w-full gap-2"
-        >
-          {creating ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <Plus className="h-4 w-4" />
-          )}
-          Genera nuovo codice
-        </Button>
+        <div className="flex gap-2">
+          <Select
+            value={newRole}
+            onValueChange={(v) => setNewRole(v as "patient" | "physio")}
+          >
+            <SelectTrigger className="w-[160px]">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="patient">Paziente</SelectItem>
+              <SelectItem value="physio">Fisioterapista</SelectItem>
+            </SelectContent>
+          </Select>
+          <Button
+            onClick={() => handleCreate(newRole)}
+            disabled={creating}
+            className="flex-1 gap-2"
+          >
+            {creating ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Plus className="h-4 w-4" />
+            )}
+            Genera codice
+          </Button>
+        </div>
 
         {loading ? (
           <div className="flex justify-center py-8">
@@ -66,6 +89,9 @@ export default function InvitePage() {
                         ) : (
                           <Badge variant="secondary">Attivo</Badge>
                         )}
+                        <Badge variant="outline">
+                          {invite.role === "physio" ? "Fisio" : "Paziente"}
+                        </Badge>
                         <span className="text-xs text-muted-foreground">
                           Scade:{" "}
                           {new Date(invite.expires_at).toLocaleDateString(

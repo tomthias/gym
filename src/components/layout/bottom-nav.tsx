@@ -13,13 +13,20 @@ const navItems = [
   { href: "/settings", label: "Profilo", icon: User },
 ];
 
-export function BottomNav() {
+interface BottomNavProps {
+  showNutrition?: boolean;
+}
+
+export function BottomNav({ showNutrition = true }: BottomNavProps) {
   const pathname = usePathname();
+  const items = showNutrition
+    ? navItems
+    : navItems.filter((item) => item.href !== "/nutrition");
 
   return (
     <nav aria-label="Navigazione principale" className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/95 backdrop-blur-sm pb-[env(safe-area-inset-bottom)]">
       <div className="flex h-16 items-center justify-around">
-        {navItems.map(({ href, label, icon: Icon }) => {
+        {items.map(({ href, label, icon: Icon }) => {
           const isActive = pathname.startsWith(href);
           return (
             <Link

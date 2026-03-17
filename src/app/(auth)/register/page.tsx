@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -15,25 +14,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Activity, Loader2 } from "lucide-react";
+import { Activity, Loader2, Mail } from "lucide-react";
 
 export default function RegisterPage() {
-  const router = useRouter();
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState<"patient" | "physio">("patient");
   const [inviteCode, setInviteCode] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
@@ -59,37 +50,36 @@ export default function RegisterPage() {
       return;
     }
 
-    // If patient, validate invite code
-    let physioId: string | null = null;
-    if (role === "patient") {
-      if (!inviteCode.trim()) {
-        setError("Inserisci il codice invito della tua fisioterapista");
-        setLoading(false);
-        return;
-      }
-
-      const { data: invite, error: inviteError } = await supabase
-        .from("invite_codes")
-        .select("*")
-        .eq("code", inviteCode.trim().toUpperCase())
-        .is("used_by", null)
-        .gt("expires_at", new Date().toISOString())
-        .single();
-
-      if (inviteError || !invite) {
-        setError("Codice invito non valido o scaduto");
-        setLoading(false);
-        return;
-      }
-
-      physioId = invite.physio_id;
+    // Validate invite code
+    if (!inviteCode.trim()) {
+      setError("Inserisci il codice invito della tua fisioterapista");
+      setLoading(false);
+      return;
     }
+
+    const { data: invite, error: inviteError } = await supabase
+      .from("invite_codes")
+      .select("*")
+      .eq("code", inviteCode.trim().toUpperCase())
+      .is("used_by", null)
+      .gt("expires_at", new Date().toISOString())
+      .single();
+
+    if (inviteError || !invite) {
+      setError("Codice invito non valido o scaduto");
+      setLoading(false);
+      return;
+    }
+
+    const role = invite.role as "patient" | "physio";
+    const physioId = role === "patient" ? invite.physio_id : null;
 
     // Register user — physio_id passed in metadata, handled atomically by DB trigger
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
       password,
       options: {
+        emailRedirectTo: `${window.location.origin}/confirm`,
         data: {
           full_name: fullName,
           username: username.trim().toLowerCase(),
@@ -106,7 +96,7 @@ export default function RegisterPage() {
     }
 
     // Mark invite code as used
-    if (role === "patient" && authData.user) {
+    if (authData.user) {
       const { error: inviteUpdateError } = await supabase
         .from("invite_codes")
         .update({
@@ -120,8 +110,33 @@ export default function RegisterPage() {
       }
     }
 
-    router.push(role === "physio" ? "/physio/dashboard" : "/dashboard");
-    router.refresh();
+    setEmailSent(true);
+    setLoading(false);
+  }
+
+  if (emailSent) {
+    return (
+      <Card>
+        <CardHeader className="text-center">
+          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-teal-100">
+            <Mail className="h-6 w-6 text-teal-600" />
+          </div>
+          <CardTitle className="text-2xl">Controlla la tua email</CardTitle>
+          <CardDescription>
+            Abbiamo inviato un link di conferma a <strong>{email}</strong>.
+            Clicca il link nell&apos;email per attivare il tuo account.
+          </CardDescription>
+        </CardHeader>
+        <CardFooter className="justify-center">
+          <p className="text-sm text-muted-foreground">
+            Non hai ricevuto l&apos;email?{" "}
+            <Link href="/register" className="text-teal-600 hover:underline" onClick={() => setEmailSent(false)}>
+              Riprova
+            </Link>
+          </p>
+        </CardFooter>
+      </Card>
+    );
   }
 
   return (
@@ -187,36 +202,20 @@ export default function RegisterPage() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="role">Ruolo</Label>
-            <Select
-              value={role}
-              onValueChange={(v) => setRole(v as "patient" | "physio")}
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="patient">Paziente</SelectItem>
-                <SelectItem value="physio">Fisioterapista</SelectItem>
-              </SelectContent>
-            </Select>
+            <Label htmlFor="inviteCode">Codice invito</Label>
+            <Input
+              id="inviteCode"
+              placeholder="Es. A3K9F2"
+              value={inviteCode}
+              onChange={(e) => setInviteCode(e.target.value)}
+              maxLength={6}
+              required
+              className="uppercase tracking-widest text-center text-lg"
+            />
+            <p className="text-xs text-muted-foreground">
+              Chiedi il codice alla tua fisioterapista
+            </p>
           </div>
-          {role === "patient" && (
-            <div className="space-y-2">
-              <Label htmlFor="inviteCode">Codice invito</Label>
-              <Input
-                id="inviteCode"
-                placeholder="Es. A3K9F2"
-                value={inviteCode}
-                onChange={(e) => setInviteCode(e.target.value)}
-                maxLength={6}
-                className="uppercase tracking-widest text-center text-lg"
-              />
-              <p className="text-xs text-muted-foreground">
-                Chiedi il codice alla tua fisioterapista
-              </p>
-            </div>
-          )}
         </CardContent>
         <CardFooter className="flex flex-col gap-3 pt-2">
           <Button type="submit" className="w-full" disabled={loading}>

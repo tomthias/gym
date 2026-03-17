@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Header } from "@/components/layout/header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +13,17 @@ export default async function RecipeDetailPage({
 }) {
   const { id } = await params;
   const supabase = await createClient();
+
+  // Redirect if user has no calorie budget (nutrition not enabled)
+  const { data: { user } } = await supabase.auth.getUser();
+  if (user) {
+    const { data: budget } = await supabase
+      .from("calorie_budgets")
+      .select("patient_id")
+      .eq("patient_id", user.id)
+      .maybeSingle();
+    if (!budget) redirect("/dashboard");
+  }
 
   const { data: recipe } = await supabase
     .from("recipes")

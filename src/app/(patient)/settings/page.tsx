@@ -7,11 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { User, AtSign, Mail, Stethoscope } from "lucide-react";
+import { User, AtSign, Mail, Stethoscope, FileText, ChevronRight } from "lucide-react";
 import { LogoutButton } from "./logout-button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { UpdateEmailForm } from "./update-email-form";
 import { UpdatePasswordForm } from "./update-password-form";
+import Link from "next/link";
 
 export default async function SettingsPage() {
   const supabase = await createClient();
@@ -109,6 +110,31 @@ export default async function SettingsPage() {
       <UpdateEmailForm currentEmail={profile?.email || user.email || ""} />
 
       <UpdatePasswordForm />
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Documenti</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Link
+            href="/invoices"
+            className="flex items-center justify-between rounded-lg border p-4 hover:bg-accent transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-100">
+                <FileText className="h-5 w-5 text-teal-600" />
+              </div>
+              <div>
+                <p className="font-medium">Le mie fatture</p>
+                <p className="text-sm text-muted-foreground">
+                  Visualizza e scarica le fatture
+                </p>
+              </div>
+            </div>
+            <ChevronRight className="h-5 w-5 text-muted-foreground" />
+          </Link>
+        </CardContent>
+      </Card>
 
       <ThemeToggle />
 

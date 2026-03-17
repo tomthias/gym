@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Header } from "@/components/layout/header";
 import { DailySummaryCard } from "@/components/nutrition/daily-summary-card";
@@ -24,6 +25,7 @@ interface LogEntry {
 }
 
 export default function NutritionPage() {
+  const router = useRouter();
   const [dayType, setDayType] = useState<DayType>("workout");
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [budget, setBudget] = useState({ workout: 2100, rest: 1900 });
@@ -51,13 +53,17 @@ export default function NutritionPage() {
         .maybeSingle(),
     ]);
 
-    if (logsRes.data) setLogs(logsRes.data as LogEntry[]);
-    if (budgetRes.data) {
-      setBudget({
-        workout: budgetRes.data.workout_day_calories,
-        rest: budgetRes.data.rest_day_calories,
-      });
+    // Redirect if user has no calorie budget (nutrition not enabled)
+    if (!budgetRes.data) {
+      router.push("/dashboard");
+      return;
     }
+
+    if (logsRes.data) setLogs(logsRes.data as LogEntry[]);
+    setBudget({
+      workout: budgetRes.data.workout_day_calories,
+      rest: budgetRes.data.rest_day_calories,
+    });
     setLoading(false);
   }, [today]);
 

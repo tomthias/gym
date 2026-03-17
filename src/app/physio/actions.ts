@@ -7,8 +7,7 @@ import type { Database } from "@/types/database";
 type PlanItemRow = Database["public"]["Tables"]["plan_items"]["Row"];
 
 function revalidatePhysio() {
-  revalidatePath("/physio/dashboard");
-  revalidatePath("/physio/plans");
+  revalidatePath("/physio/patients", "layout");
 }
 
 export async function togglePlanActive(planId: string, active: boolean) {

@@ -80,6 +80,7 @@ interface PlanEditorProps {
     description: string;
     items: PlanItem[];
   };
+  redirectPath?: string;
 }
 
 /** Groups consecutive items by supersetGroup for rendering */
@@ -113,6 +114,7 @@ export function PlanEditor({
   planId,
   patientId,
   initialPlan,
+  redirectPath = "/physio/plans",
 }: PlanEditorProps) {
   const router = useRouter();
   const [planName, setPlanName] = useState(initialPlan?.name ?? "Piano Riabilitazione");
@@ -504,7 +506,7 @@ export function PlanEditor({
       }
 
       setSaving(false);
-      router.push("/physio/plans");
+      router.push(redirectPath);
     },
     [planName, planDescription, mode, planId, patientId, router]
   );

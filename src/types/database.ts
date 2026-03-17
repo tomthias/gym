@@ -6,6 +6,15 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
+export interface InvoiceLineItem {
+  description: string;
+  session_date: string | null;
+  quantity: number;
+  unit_price: number;
+  discount_percent: number;
+  total: number;
+}
+
 export type Database = {
   public: {
     Tables: {
@@ -281,11 +290,54 @@ export type Database = {
           rest_day_calories?: number;
         };
       };
+      invoices: {
+        Row: {
+          id: string;
+          physio_id: string;
+          patient_id: string;
+          invoice_number: string;
+          invoice_date: string;
+          payment_method: string | null;
+          subtotal: number;
+          stamp_duty: number;
+          grand_total: number;
+          status: "unpaid" | "paid";
+          line_items: InvoiceLineItem[];
+          pdf_storage_path: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          physio_id: string;
+          patient_id: string;
+          invoice_number: string;
+          invoice_date: string;
+          payment_method?: string | null;
+          subtotal: number;
+          stamp_duty?: number;
+          grand_total: number;
+          status?: "unpaid" | "paid";
+          line_items: InvoiceLineItem[];
+          pdf_storage_path: string;
+          created_at?: string;
+        };
+        Update: {
+          invoice_number?: string;
+          invoice_date?: string;
+          payment_method?: string | null;
+          subtotal?: number;
+          stamp_duty?: number;
+          grand_total?: number;
+          status?: "unpaid" | "paid";
+          line_items?: InvoiceLineItem[];
+        };
+      };
       invite_codes: {
         Row: {
           id: string;
           code: string;
           physio_id: string;
+          role: "patient" | "physio";
           used_by: string | null;
           used_at: string | null;
           expires_at: string;
@@ -295,6 +347,7 @@ export type Database = {
           id?: string;
           code: string;
           physio_id: string;
+          role?: "patient" | "physio";
           used_by?: string | null;
           used_at?: string | null;
           expires_at: string;

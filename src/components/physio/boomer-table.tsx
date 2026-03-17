@@ -15,6 +15,56 @@ import {
   parseRest,
 } from "@/lib/utils/plan-format";
 
+// --- Resizable column header ---
+
+function ResizableTh({
+  children,
+  width,
+  onResize,
+  className,
+  ...rest
+}: React.ThHTMLAttributes<HTMLTableCellElement> & {
+  width: number;
+  onResize: (delta: number) => void;
+}) {
+  const handleRef = useRef<HTMLDivElement>(null);
+
+  const onMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      const startX = e.clientX;
+
+      const onMouseMove = (ev: MouseEvent) => {
+        onResize(ev.clientX - startX);
+      };
+
+      const onMouseUp = () => {
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+        document.body.style.cursor = "";
+        document.body.style.userSelect = "";
+      };
+
+      document.body.style.cursor = "col-resize";
+      document.body.style.userSelect = "none";
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("mouseup", onMouseUp);
+    },
+    [onResize]
+  );
+
+  return (
+    <th className={`${className} relative`} style={{ width }} {...rest}>
+      {children}
+      <div
+        ref={handleRef}
+        onMouseDown={onMouseDown}
+        className="absolute right-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-white/30 transition-colors"
+      />
+    </th>
+  );
+}
+
 interface Exercise {
   id: string;
   name: string;
@@ -50,6 +100,28 @@ export function BoomerTable({
   const tableRef = useRef<HTMLDivElement>(null);
   const [downloading, setDownloading] = useState(false);
 
+  // Column widths state for resizable headers
+  const [colWidths, setColWidths] = useState([50, 200, 120, 80, 150, 200, 36]);
+  const startWidthRef = useRef<number[]>([]);
+
+  const makeOnResize = useCallback(
+    (colIndex: number) => {
+      let started = false;
+      return (delta: number) => {
+        if (!started) {
+          startWidthRef.current = [...colWidths];
+          started = true;
+        }
+        setColWidths(() => {
+          const next = [...startWidthRef.current];
+          next[colIndex] = Math.max(40, startWidthRef.current[colIndex] + delta);
+          return next;
+        });
+      };
+    },
+    [colWidths]
+  );
+
   const handleDownload = useCallback(async () => {
     if (!tableRef.current || items.length === 0) return;
     setDownloading(true);
@@ -79,17 +151,23 @@ export function BoomerTable({
         ref={tableRef}
         className="overflow-x-auto rounded-lg border border-excel-border dark:border-excel-border-dark font-[family-name:var(--font-dm-sans)]"
       >
-        <table className="w-full border-collapse">
+        <table className="border-collapse" style={{ tableLayout: "fixed", width: colWidths.reduce((a, b) => a + b, 0) }}>
+          <colgroup>
+            {colWidths.map((w, i) => (
+              <col key={i} style={{ width: w }} />
+            ))}
+          </colgroup>
           <thead>
             <tr>
-              <th className={`${thClass} w-[50px]`}>&nbsp;</th>
-              <th className={`${thClass} min-w-[200px]`}>Esercizio</th>
-              <th className={`${thClass} min-w-[120px]`}>Serie x Reps</th>
-              <th className={`${thClass} min-w-[80px]`}>Rest</th>
-              <th className={`${thClass} min-w-[150px]`}>Carico</th>
-              <th className={`${thClass} min-w-[200px]`}>Note Fisio</th>
+              <ResizableTh className={thClass} width={colWidths[0]} onResize={makeOnResize(0)}>&nbsp;</ResizableTh>
+              <ResizableTh className={thClass} width={colWidths[1]} onResize={makeOnResize(1)}>Esercizio</ResizableTh>
+              <ResizableTh className={thClass} width={colWidths[2]} onResize={makeOnResize(2)}>Serie x Reps</ResizableTh>
+              <ResizableTh className={thClass} width={colWidths[3]} onResize={makeOnResize(3)}>Rest</ResizableTh>
+              <ResizableTh className={thClass} width={colWidths[4]} onResize={makeOnResize(4)}>Carico</ResizableTh>
+              <ResizableTh className={thClass} width={colWidths[5]} onResize={makeOnResize(5)}>Note Fisio</ResizableTh>
               <th
-                className={`${thClass} w-[36px] print:hidden`}
+                className={`${thClass} print:hidden`}
+                style={{ width: colWidths[6] }}
                 data-html2canvas-ignore
               >
                 &nbsp;

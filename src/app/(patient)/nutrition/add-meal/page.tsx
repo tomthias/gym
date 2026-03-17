@@ -70,6 +70,21 @@ function AddMealPageContent() {
     let ignore = false;
     async function fetchRecipes() {
       const supabase = createClient();
+
+      // Redirect if user has no calorie budget (nutrition not enabled)
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: budget } = await supabase
+          .from("calorie_budgets")
+          .select("patient_id")
+          .eq("patient_id", user.id)
+          .maybeSingle();
+        if (!budget) {
+          router.push("/dashboard");
+          return;
+        }
+      }
+
       const { data } = await supabase
         .from("recipes")
         .select("*")
@@ -85,7 +100,7 @@ function AddMealPageContent() {
     setLoading(true);
     fetchRecipes();
     return () => { ignore = true; };
-  }, [dayType, slot]);
+  }, [dayType, slot, router]);
 
   const filteredRecipes = recipes.filter((r) =>
     r.name.toLowerCase().includes(search.toLowerCase())

@@ -40,7 +40,7 @@ export function useInviteCodes({ limit }: UseInviteCodesOptions = {}) {
     fetchCodes(); // eslint-disable-line react-hooks/set-state-in-effect -- async fetch pattern
   }, [fetchCodes]);
 
-  const handleCreate = useCallback(async () => {
+  const handleCreate = useCallback(async (role: "patient" | "physio" = "patient") => {
     setCreating(true);
     const supabase = createClient();
     const {
@@ -59,6 +59,7 @@ export function useInviteCodes({ limit }: UseInviteCodesOptions = {}) {
       .insert({
         code: generateInviteCode(),
         physio_id: user.id,
+        role,
         expires_at: expiresAt.toISOString(),
       })
       .select()

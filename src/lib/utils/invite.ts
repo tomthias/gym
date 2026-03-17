@@ -3,6 +3,7 @@ import { INVITE_CODE_LENGTH } from "./constants";
 export interface InviteCode {
   id: string;
   code: string;
+  role: "patient" | "physio";
   used_by: string | null;
   used_at: string | null;
   expires_at: string;

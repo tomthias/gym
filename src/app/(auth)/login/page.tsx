@@ -69,7 +69,7 @@ export default function LoginPage() {
         .eq("id", user.id)
         .single<{ role: "patient" | "physio" }>();
 
-      router.push(profile?.role === "physio" ? "/physio/dashboard" : "/dashboard");
+      router.push(profile?.role === "physio" ? "/physio/patients" : "/dashboard");
       router.refresh();
     }
   }

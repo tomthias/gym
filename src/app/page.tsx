@@ -17,5 +17,5 @@ export default async function Home() {
     .eq("id", user.id)
     .single<{ role: "patient" | "physio" }>();
 
-  redirect(profile?.role === "physio" ? "/physio/dashboard" : "/dashboard");
+  redirect(profile?.role === "physio" ? "/physio/patients" : "/dashboard");
 }
