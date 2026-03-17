@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Keep pdf-parse out of the serverless bundle (uses pdfjs-dist native deps)
+  serverExternalPackages: ["pdf-parse"],
+
   // PWA and security headers
   headers: async () => [
     {

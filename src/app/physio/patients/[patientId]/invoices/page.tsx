@@ -25,12 +25,16 @@ export default async function PatientInvoicesPage({ params }: Props) {
 
   if (!patient) redirect("/physio/patients");
 
-  const { data: invoices } = await supabase
+  const { data: invoices, error: invoicesError } = await supabase
     .from("invoices")
     .select("*")
     .eq("patient_id", patientId)
     .eq("physio_id", user.id)
     .order("invoice_date", { ascending: false });
+
+  if (invoicesError) {
+    console.error("Invoices query error:", invoicesError);
+  }
 
   return (
     <div>
