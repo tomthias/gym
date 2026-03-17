@@ -36,6 +36,7 @@ interface ViewItem {
   restTime: number;
   notes: string;
   supersetGroup: number | null;
+  perLato: boolean;
 }
 
 interface PlanViewTableProps {

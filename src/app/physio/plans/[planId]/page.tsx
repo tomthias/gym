@@ -26,7 +26,7 @@ export default async function ViewPlanPage({ params }: Props) {
       id, name, description, active, created_at,
       plan_items (
         id, exercise_id, "order", sets, reps, duration,
-        rest_time, rest_after, notes, superset_group, transition_rest,
+        rest_time, rest_after, notes, superset_group, transition_rest, per_lato,
         exercises (id, name)
       )
     `
@@ -60,6 +60,7 @@ export default async function ViewPlanPage({ params }: Props) {
     notes: string | null;
     superset_group: number | null;
     transition_rest: number | null;
+    per_lato: boolean | null;
     exercises: { id: string; name: string } | null;
   }>;
 
@@ -75,6 +76,7 @@ export default async function ViewPlanPage({ params }: Props) {
       restTime: pi.rest_time,
       notes: pi.notes ?? "",
       supersetGroup: pi.superset_group,
+      perLato: pi.per_lato ?? false,
     }));
 
   return (

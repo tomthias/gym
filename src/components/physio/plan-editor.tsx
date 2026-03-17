@@ -504,7 +504,7 @@ export function PlanEditor({
       }
 
       setSaving(false);
-      router.push("/physio/dashboard");
+      router.push("/physio/plans");
     },
     [planName, planDescription, mode, planId, patientId, router]
   );
