@@ -198,8 +198,14 @@ export async function uploadInvoice(formData: FormData) {
   try {
     const parsed = await parseInvoicePdf(buffer);
     return { success: true, parsed, storagePath };
-  } catch {
-    return { success: false, parsed: null, storagePath };
+  } catch (err) {
+    console.error('[uploadInvoice] parse error:', err);
+    return {
+      success: false,
+      parsed: null,
+      storagePath,
+      parseError: err instanceof Error ? err.message : String(err),
+    };
   }
 }
 

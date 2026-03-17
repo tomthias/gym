@@ -69,7 +69,10 @@ export function InvoiceUpload({ patientId }: { patientId: string }) {
         setParsed(result.parsed);
         setShowConfirm(true);
       } else {
-        // Parse failed → show manual entry
+        // Parse failed → show manual entry with error detail
+        if ('parseError' in result && result.parseError) {
+          setError(`Parsing automatico fallito: ${result.parseError}`);
+        }
         setShowManual(true);
       }
     } catch (e) {
