@@ -401,7 +401,7 @@ export function WorkoutPlayer() {
       </div>
 
       {/* Floating Bottom Navigation for Active Exercise */}
-      {phase === "exercising" && currentItem && (
+      {phase === "exercising" && currentItem && !isPaused && (
         <div className="fixed bottom-0 left-0 right-0 px-6 pb-[calc(2rem+env(safe-area-inset-bottom)+4rem)] pt-16 bg-gradient-to-t from-background via-background/95 to-transparent flex flex-col items-center">
           <div className="w-full max-w-sm flex flex-col gap-4">
             <PlayerControls
