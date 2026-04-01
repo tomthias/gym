@@ -64,7 +64,7 @@ export function RestTimer({
   return (
     <div className="flex flex-col items-center justify-center gap-10 py-10 w-full px-4">
       <div className="text-center">
-        <h2 className="text-3xl font-extrabold text-neutral-500 uppercase tracking-widest">Riposo</h2>
+        <h2 className="text-3xl font-extrabold text-muted-foreground uppercase tracking-widest">Riposo</h2>
       </div>
 
       <TimerDisplay
@@ -75,11 +75,11 @@ export function RestTimer({
       />
 
       <div className="text-center space-y-3 mt-6">
-        <p className="text-lg text-neutral-500 uppercase tracking-widest font-bold">Prossimo Esercizio</p>
-        <p className="text-3xl md:text-4xl font-extrabold text-indigo-400 text-balance leading-tight">{nextExerciseName}</p>
+        <p className="text-lg text-muted-foreground uppercase tracking-widest font-bold">Prossimo Esercizio</p>
+        <p className="text-3xl md:text-4xl font-extrabold text-primary text-balance leading-tight">{nextExerciseName}</p>
       </div>
 
-      <Button size="lg" onClick={onSkip} className="h-16 mt-8 w-full max-w-sm rounded-2xl bg-neutral-900 border-2 border-neutral-800 hover:border-neutral-700 hover:bg-neutral-800 text-neutral-300 gap-2 text-xl font-bold transition-all shadow-lg">
+      <Button size="lg" onClick={onSkip} className="h-16 mt-8 w-full max-w-sm rounded-2xl bg-muted border-2 border-border hover:border-border/80 hover:bg-muted/80 text-foreground gap-2 text-xl font-bold transition-all shadow-lg">
         <SkipForward className="h-6 w-6" />
         Salta e inizia
       </Button>

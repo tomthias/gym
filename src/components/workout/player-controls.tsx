@@ -32,7 +32,7 @@ export function PlayerControls({
             <Button
               size="lg"
               onClick={onStart}
-              className="h-20 w-full rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-2xl font-bold tracking-wide shadow-xl shadow-indigo-900/20"
+              className="h-20 w-full rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground text-2xl font-bold tracking-wide shadow-xl shadow-primary/20"
             >
               <Play className="h-8 w-8 mr-3 fill-current" />
               Avvia Timer
@@ -51,7 +51,7 @@ export function PlayerControls({
               <Button
                 size="lg"
                 onClick={onComplete}
-                className="h-20 w-24 rounded-2xl border-none outline-none bg-neutral-800 hover:bg-neutral-700 text-neutral-400"
+                className="h-20 w-24 rounded-2xl border-none outline-none bg-muted hover:bg-muted/80 text-muted-foreground"
               >
                 <Check className="h-8 w-8" />
               </Button>
@@ -62,7 +62,7 @@ export function PlayerControls({
               <Button
                 size="lg"
                 onClick={onResume}
-                className="h-20 flex-1 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-2xl font-bold tracking-wide shadow-xl shadow-indigo-900/20"
+                className="h-20 flex-1 rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground text-2xl font-bold tracking-wide shadow-xl shadow-primary/20"
               >
                 <Play className="h-8 w-8 mr-3 fill-current" />
                 Riprendi
@@ -70,7 +70,7 @@ export function PlayerControls({
               <Button
                 size="lg"
                 onClick={onComplete}
-                className="h-20 w-24 rounded-2xl border-none outline-none bg-neutral-800 hover:bg-neutral-700 text-neutral-400"
+                className="h-20 w-24 rounded-2xl border-none outline-none bg-muted hover:bg-muted/80 text-muted-foreground"
               >
                 <Check className="h-8 w-8" />
               </Button>
@@ -81,7 +81,7 @@ export function PlayerControls({
         <Button
           size="lg"
           onClick={onComplete}
-          className="h-20 w-full rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-2xl font-bold tracking-wide shadow-xl shadow-indigo-900/20"
+          className="h-20 w-full rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground text-2xl font-bold tracking-wide shadow-xl shadow-primary/20"
         >
           <Check className="h-8 w-8 mr-3" />
           Fatto
@@ -92,7 +92,7 @@ export function PlayerControls({
         variant="ghost"
         size="lg"
         onClick={onSkip}
-        className="h-14 w-full rounded-2xl text-neutral-500 hover:bg-neutral-900 hover:text-neutral-300 text-lg font-bold"
+        className="h-14 w-full rounded-2xl text-muted-foreground hover:bg-muted hover:text-foreground text-lg font-bold"
       >
         <SkipForward className="h-5 w-5 mr-2" />
         Salta

@@ -72,15 +72,15 @@ function QuitDialog({ onConfirm, children }: { onConfirm: () => void; children: 
       <AlertDialogTrigger asChild>
         {children}
       </AlertDialogTrigger>
-      <AlertDialogContent className="bg-neutral-900 border-neutral-800 text-white rounded-3xl">
+      <AlertDialogContent className="bg-card border-border text-foreground rounded-3xl">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-2xl font-bold">Sei sicuro di uscire?</AlertDialogTitle>
-          <AlertDialogDescription className="text-neutral-400 text-lg">
-            Tutti i progressi andranno persi e il workout verrà interrotto. La cache locale verrà svuotata.
+          <AlertDialogDescription className="text-muted-foreground text-lg">
+            Il workout verrà interrotto. Potrai riprendere in seguito dalla dashboard.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className="mt-4 gap-3">
-          <AlertDialogCancel className="h-14 rounded-2xl bg-neutral-800 border-none text-neutral-300 font-bold hover:bg-neutral-700 hover:text-white">
+          <AlertDialogCancel className="h-14 rounded-2xl bg-muted border-none text-foreground font-bold hover:bg-muted/80">
             Indietro
           </AlertDialogCancel>
           <AlertDialogAction 
@@ -226,8 +226,8 @@ export function WorkoutPlayer() {
 
   if (phase === "idle" || !planId) {
     return (
-      <div className="flex flex-col min-h-screen items-center justify-center bg-zinc-950 text-white gap-6 py-20 px-6">
-        <p className="text-neutral-400 text-2xl font-bold">Inizializzazione...</p>
+      <div className="flex flex-col min-h-screen items-center justify-center bg-background text-foreground gap-6 py-20 px-6">
+        <p className="text-muted-foreground text-2xl font-bold">Inizializzazione...</p>
       </div>
     );
   }
@@ -235,11 +235,11 @@ export function WorkoutPlayer() {
   // Global pause overlay
   if (isPaused && (phase === "exercising" || phase === "resting")) {
     return (
-      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-zinc-950/98 backdrop-blur-md text-white px-6">
-        <Pause className="h-28 w-28 text-indigo-500 mb-8" />
+      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background/98 backdrop-blur-md text-foreground px-6">
+        <Pause className="h-28 w-28 text-primary mb-8" />
         <h2 className="text-5xl font-extrabold mb-4 tracking-tight">In pausa</h2>
-        <p className="text-2xl text-neutral-400 mb-16 text-center">{planName}</p>
-        <Button size="lg" onClick={handleGlobalResume} className="h-24 w-full max-w-sm rounded-[2rem] bg-indigo-600 hover:bg-indigo-500 text-white text-3xl font-bold shadow-2xl shadow-indigo-900/40">
+        <p className="text-2xl text-muted-foreground mb-16 text-center">{planName}</p>
+        <Button size="lg" onClick={handleGlobalResume} className="h-24 w-full max-w-sm rounded-[2rem] bg-primary hover:bg-primary/90 text-primary-foreground text-3xl font-bold shadow-2xl shadow-primary/30">
           <Play className="h-10 w-10 mr-4 fill-current" />
           Riprendi
         </Button>
@@ -252,10 +252,10 @@ export function WorkoutPlayer() {
     let counter = 0;
 
     return (
-      <div className="flex flex-col min-h-[100dvh] bg-zinc-950 text-neutral-50 pb-40 relative">
+      <div className="flex flex-col min-h-[100dvh] bg-background text-foreground pb-40 relative">
         <div className="px-6 pt-12 pb-8">
           <h1 className="text-[2.75rem] font-extrabold tracking-tight mb-3 leading-none text-balance">{planName}</h1>
-          <p className="text-xl text-indigo-400 font-bold uppercase tracking-wider">
+          <p className="text-xl text-primary font-bold uppercase tracking-wider">
             {items.length} esercizi • {items.reduce((acc, curr) => acc + curr.sets, 0)} Set
           </p>
         </div>
@@ -268,16 +268,16 @@ export function WorkoutPlayer() {
               return (
                 <div key={block.item.id} className="flex items-center gap-5 py-4 px-2">
                   <div className="relative flex-shrink-0">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-neutral-800 bg-neutral-900 text-neutral-300">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-border bg-muted text-muted-foreground">
                       {isTimed ? <Timer className="h-6 w-6" /> : <Dumbbell className="h-6 w-6" />}
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-2xl font-bold truncate text-neutral-100">
+                    <p className="text-2xl font-bold truncate text-foreground">
                       {block.item.exercise.name}
                     </p>
-                    <p className="text-lg text-neutral-400 mt-1 font-medium">
-                      <span className="text-white">{block.item.sets} set</span> • {block.item.reps ? `${block.item.reps} rip` : `${block.item.duration}s`}
+                    <p className="text-lg text-muted-foreground mt-1 font-medium">
+                      <span className="text-foreground">{block.item.sets} set</span> • {block.item.reps ? `${block.item.reps} rip` : `${block.item.duration}s`}
                     </p>
                   </div>
                 </div>
@@ -287,7 +287,7 @@ export function WorkoutPlayer() {
             // Superset block with DropSet style vertical link connecting the circles
             return (
               <div key={`ss-${block.group}`} className="relative py-4 px-2">
-                <div className="mb-4 ml-[5.5rem] text-sm font-extrabold text-indigo-400 uppercase tracking-widest">
+                <div className="mb-4 ml-[5.5rem] text-sm font-extrabold text-primary uppercase tracking-widest">
                   Superserie • {block.items[0].sets} Round
                 </div>
                 {block.items.map((item, i) => {
@@ -306,16 +306,16 @@ export function WorkoutPlayer() {
                       )}
                       
                       <div className="relative z-10 flex-shrink-0">
-                        <div className="flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-indigo-500/30 bg-zinc-950 text-indigo-400 shadow-[0_0_15px_rgba(99,102,241,0.1)]">
+                        <div className="flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-primary/30 bg-background text-primary shadow-[0_0_15px_hsl(var(--primary)/0.1)]">
                           {isTimed ? <Timer className="h-6 w-6" /> : <Dumbbell className="h-6 w-6" />}
                         </div>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-2xl font-bold truncate text-neutral-100">
+                        <p className="text-2xl font-bold truncate text-foreground">
                           {item.exercise.name}
                         </p>
-                        <p className="text-lg text-neutral-400 mt-1 font-medium">
-                          <span className="text-indigo-400">{item.sets} set</span> • {item.reps ? `${item.reps} rip` : `${item.duration}s`}
+                        <p className="text-lg text-muted-foreground mt-1 font-medium">
+                          <span className="text-primary">{item.sets} set</span> • {item.reps ? `${item.reps} rip` : `${item.duration}s`}
                         </p>
                       </div>
                     </div>
@@ -327,14 +327,14 @@ export function WorkoutPlayer() {
         </div>
 
         {/* Floating Bottom Bar */}
-        <div className="fixed bottom-0 left-0 right-0 p-6 pt-16 bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent flex gap-4 pointer-events-none">
+        <div className="fixed bottom-0 left-0 right-0 p-6 pb-[calc(1.5rem+env(safe-area-inset-bottom)+4rem)] pt-16 bg-gradient-to-t from-background via-background to-transparent flex gap-4 pointer-events-none">
           <div className="flex gap-4 w-full pointer-events-auto">
             <QuitDialog onConfirm={handleQuit}>
-              <Button variant="outline" size="lg" className="h-20 px-8 rounded-2xl border-none bg-neutral-900 hover:bg-neutral-800 text-neutral-400 focus:ring-0">
+              <Button variant="outline" size="lg" className="h-20 px-8 rounded-2xl border-none bg-muted hover:bg-muted/80 text-muted-foreground focus:ring-0">
                 <X className="h-8 w-8" />
               </Button>
             </QuitDialog>
-            <Button onClick={handleStartWorkout} size="lg" className="h-20 flex-1 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-2xl font-bold tracking-wide shadow-2xl shadow-indigo-900/30">
+            <Button onClick={handleStartWorkout} size="lg" className="h-20 flex-1 rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground text-2xl font-bold tracking-wide shadow-2xl shadow-primary/30">
               Inizia <ArrowRight className="ml-3 h-7 w-7" />
             </Button>
           </div>
@@ -344,7 +344,7 @@ export function WorkoutPlayer() {
   }
 
   return (
-    <div className="flex flex-col min-h-[100dvh] bg-zinc-950 text-neutral-50 pb-[180px]">
+    <div className="flex flex-col min-h-[100dvh] bg-background text-foreground pb-[180px]">
       <div className="px-6 pt-10">
         <WorkoutProgressBar
           currentExercise={currentItemIndex + 1}
@@ -373,7 +373,7 @@ export function WorkoutPlayer() {
             {/* Superset indicator */}
             {getSupersetGroup(items, currentItemIndex) && (getSupersetGroup(items, currentItemIndex)?.length ?? 0) > 1 && (
               <div className="mb-6 flex justify-center">
-                <span className="bg-indigo-500/10 text-indigo-400 font-extrabold px-5 py-2 rounded-full text-base uppercase tracking-widest border border-indigo-500/20">
+                <span className="bg-primary/10 text-primary font-extrabold px-5 py-2 rounded-full text-base uppercase tracking-widest border border-primary/20">
                   Superserie • Round {supersetRound}/{(getSupersetGroup(items, currentItemIndex) ?? [])[0]?.sets}
                 </span>
               </div>
@@ -402,7 +402,7 @@ export function WorkoutPlayer() {
 
       {/* Floating Bottom Navigation for Active Exercise */}
       {phase === "exercising" && currentItem && (
-        <div className="fixed bottom-0 left-0 right-0 px-6 pb-8 pt-16 bg-gradient-to-t from-zinc-950 via-zinc-950/95 to-transparent flex flex-col items-center">
+        <div className="fixed bottom-0 left-0 right-0 px-6 pb-[calc(2rem+env(safe-area-inset-bottom)+4rem)] pt-16 bg-gradient-to-t from-background via-background/95 to-transparent flex flex-col items-center">
           <div className="w-full max-w-sm flex flex-col gap-4">
             <PlayerControls
               exerciseType={exerciseType}
@@ -423,7 +423,7 @@ export function WorkoutPlayer() {
                 variant="outline"
                 size="lg"
                 onClick={handleGlobalPause}
-                className="flex-1 h-14 rounded-2xl border-neutral-800 bg-neutral-900 shadow-md hover:bg-neutral-800 text-neutral-300 gap-2 text-lg font-bold"
+                className="flex-1 h-14 rounded-2xl border-border bg-muted shadow-md hover:bg-muted/80 text-foreground gap-2 text-lg font-bold"
               >
                 <Pause className="h-5 w-5 fill-current" /> Pausa
               </Button>
@@ -431,7 +431,7 @@ export function WorkoutPlayer() {
                 <Button
                   variant="ghost"
                   size="lg"
-                  className="flex-1 h-14 rounded-2xl text-neutral-500 hover:text-red-400 hover:bg-red-950/30 text-lg font-bold"
+                  className="flex-1 h-14 rounded-2xl text-muted-foreground hover:text-red-500 hover:bg-red-500/10 text-lg font-bold"
                 >
                   <X className="h-5 w-5 mr-2" /> Esci
                 </Button>
@@ -440,16 +440,16 @@ export function WorkoutPlayer() {
           </div>
         </div>
       )}
-      
+
       {/* Floating Bottom Navigation for Resting Phase pause and quit */}
       {phase === "resting" && currentItem && (
-        <div className="fixed bottom-0 left-0 right-0 px-6 pb-8 pt-16 bg-gradient-to-t from-zinc-950 via-zinc-950/95 to-transparent flex flex-col items-center">
+        <div className="fixed bottom-0 left-0 right-0 px-6 pb-[calc(2rem+env(safe-area-inset-bottom)+4rem)] pt-16 bg-gradient-to-t from-background via-background/95 to-transparent flex flex-col items-center">
           <div className="w-full max-w-sm flex items-center justify-center gap-4">
             <Button
               variant="outline"
               size="lg"
               onClick={handleGlobalPause}
-              className="flex-1 h-14 rounded-2xl border-neutral-800 bg-neutral-900 shadow-md hover:bg-neutral-800 text-neutral-300 gap-2 text-lg font-bold"
+              className="flex-1 h-14 rounded-2xl border-border bg-muted shadow-md hover:bg-muted/80 text-foreground gap-2 text-lg font-bold"
             >
               <Pause className="h-5 w-5 fill-current" /> Pausa
             </Button>
@@ -457,7 +457,7 @@ export function WorkoutPlayer() {
               <Button
                 variant="ghost"
                 size="lg"
-                className="flex-1 h-14 rounded-2xl text-neutral-500 hover:text-red-400 hover:bg-red-950/30 text-lg font-bold"
+                className="flex-1 h-14 rounded-2xl text-muted-foreground hover:text-red-500 hover:bg-red-500/10 text-lg font-bold"
               >
                 <X className="h-5 w-5 mr-2" /> Esci
               </Button>
