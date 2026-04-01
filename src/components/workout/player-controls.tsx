@@ -25,57 +25,76 @@ export function PlayerControls({
   onSkip,
 }: PlayerControlsProps) {
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div className="flex items-center gap-4">
-        {exerciseType === "timed" ? (
-          <>
-            {!isTimerRunning && !isPaused && (
+    <div className="flex flex-col items-stretch w-full gap-4">
+      {exerciseType === "timed" ? (
+        <>
+          {!isTimerRunning && !isPaused && (
+            <Button
+              size="lg"
+              onClick={onStart}
+              className="h-20 w-full rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-2xl font-bold tracking-wide shadow-xl shadow-indigo-900/20"
+            >
+              <Play className="h-8 w-8 mr-3 fill-current" />
+              Avvia Timer
+            </Button>
+          )}
+          {isTimerRunning && (
+            <div className="flex gap-4">
               <Button
                 size="lg"
-                onClick={onStart}
-                className="h-16 w-16 rounded-full"
-              >
-                <Play className="h-7 w-7" />
-              </Button>
-            )}
-            {isTimerRunning && (
-              <Button
-                size="lg"
-                variant="outline"
                 onClick={onPause}
-                className="h-16 w-16 rounded-full"
+                className="h-20 flex-1 rounded-2xl bg-amber-500 hover:bg-amber-400 text-neutral-950 text-2xl font-bold tracking-wide shadow-xl shadow-amber-900/20"
               >
-                <Pause className="h-7 w-7" />
+                <Pause className="h-8 w-8 mr-3 fill-current" />
+                Pausa
               </Button>
-            )}
-            {isPaused && (
+              <Button
+                size="lg"
+                onClick={onComplete}
+                className="h-20 w-24 rounded-2xl border-none outline-none bg-neutral-800 hover:bg-neutral-700 text-neutral-400"
+              >
+                <Check className="h-8 w-8" />
+              </Button>
+            </div>
+          )}
+          {isPaused && (
+            <div className="flex gap-4">
               <Button
                 size="lg"
                 onClick={onResume}
-                className="h-16 w-16 rounded-full"
+                className="h-20 flex-1 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-2xl font-bold tracking-wide shadow-xl shadow-indigo-900/20"
               >
-                <Play className="h-7 w-7" />
+                <Play className="h-8 w-8 mr-3 fill-current" />
+                Riprendi
               </Button>
-            )}
-          </>
-        ) : (
-          <Button
-            size="lg"
-            onClick={onComplete}
-            className="h-20 w-20 rounded-full bg-golden-500 hover:bg-golden-600"
-          >
-            <Check className="h-9 w-9" />
-          </Button>
-        )}
-      </div>
+              <Button
+                size="lg"
+                onClick={onComplete}
+                className="h-20 w-24 rounded-2xl border-none outline-none bg-neutral-800 hover:bg-neutral-700 text-neutral-400"
+              >
+                <Check className="h-8 w-8" />
+              </Button>
+            </div>
+          )}
+        </>
+      ) : (
+        <Button
+          size="lg"
+          onClick={onComplete}
+          className="h-20 w-full rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-2xl font-bold tracking-wide shadow-xl shadow-indigo-900/20"
+        >
+          <Check className="h-8 w-8 mr-3" />
+          Fatto
+        </Button>
+      )}
 
       <Button
         variant="ghost"
-        size="sm"
+        size="lg"
         onClick={onSkip}
-        className="text-muted-foreground"
+        className="h-14 w-full rounded-2xl text-neutral-500 hover:bg-neutral-900 hover:text-neutral-300 text-lg font-bold"
       >
-        <SkipForward className="mr-1 h-4 w-4" />
+        <SkipForward className="h-5 w-5 mr-2" />
         Salta
       </Button>
     </div>

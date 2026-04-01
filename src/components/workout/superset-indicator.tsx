@@ -1,5 +1,4 @@
 import type { PlanItemWithExercise } from "@/types/workout";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { Zap } from "lucide-react";
 
@@ -17,13 +16,13 @@ export function SupersetIndicator({
   totalRounds,
 }: SupersetIndicatorProps) {
   return (
-    <div className="rounded-lg bg-golden-50 dark:bg-golden-950/30 border border-golden-200 dark:border-golden-800 p-3">
-      <div className="flex items-center justify-between mb-2">
-        <Badge className="bg-golden-100 text-golden-700 gap-1">
-          <Zap className="h-3 w-3" />
-          Superserie
-        </Badge>
-        <span className="text-xs text-muted-foreground">
+    <div className="rounded-2xl bg-neutral-900 border border-neutral-800 p-4 shadow-sm">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2 text-indigo-400 font-bold uppercase tracking-wider text-sm">
+          <Zap className="h-4 w-4" />
+          <span>Superserie</span>
+        </div>
+        <span className="text-sm font-bold text-neutral-400">
           Round {round}/{totalRounds}
         </span>
       </div>
@@ -32,13 +31,13 @@ export function SupersetIndicator({
           <div
             key={item.id}
             className={cn(
-              "flex-1 rounded px-2 py-1 text-center text-xs font-medium transition-colors truncate",
+              "flex-1 rounded-xl px-3 py-2 text-center text-sm font-bold transition-colors truncate",
               item.id === currentItemId
-                ? "bg-golden-500 text-white"
-                : "bg-golden-100 dark:bg-golden-900/50 text-golden-600 dark:text-golden-400"
+                ? "bg-indigo-600 text-white shadow-md"
+                : "bg-neutral-800 text-neutral-500"
             )}
           >
-            {String.fromCharCode(65 + i)}. {item.exercise.name.split(" ")[0]}
+            {item.exercise.name.split(" ")[0]}
           </div>
         ))}
       </div>

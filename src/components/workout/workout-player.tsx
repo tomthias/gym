@@ -15,9 +15,18 @@ import { PlayerControls } from "./player-controls";
 import { RestTimer } from "./rest-timer";
 import { SupersetIndicator } from "./superset-indicator";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { Pause, Play, X, Zap } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Pause, Play, X, Link2, Dumbbell, Timer, ArrowRight, CheckCircle2 } from "lucide-react";
 
 /** Returns all items in the same superset group, sorted by order */
 function getSupersetGroup(
@@ -55,6 +64,35 @@ function buildPreviewBlocks(items: PlanItemWithExercise[]): PreviewBlock[] {
     }
   }
   return blocks;
+}
+
+function QuitDialog({ onConfirm, children }: { onConfirm: () => void; children: React.ReactNode }) {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        {children}
+      </AlertDialogTrigger>
+      <AlertDialogContent className="bg-neutral-900 border-neutral-800 text-white rounded-3xl">
+        <AlertDialogHeader>
+          <AlertDialogTitle className="text-2xl font-bold">Sei sicuro di uscire?</AlertDialogTitle>
+          <AlertDialogDescription className="text-neutral-400 text-lg">
+            Tutti i progressi andranno persi e il workout verrà interrotto. La cache locale verrà svuotata.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter className="mt-4 gap-3">
+          <AlertDialogCancel className="h-14 rounded-2xl bg-neutral-800 border-none text-neutral-300 font-bold hover:bg-neutral-700 hover:text-white">
+            Indietro
+          </AlertDialogCancel>
+          <AlertDialogAction 
+            onClick={onConfirm}
+            className="h-14 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-bold tracking-wide"
+          >
+            Sì, Esci
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
 }
 
 export function WorkoutPlayer() {
@@ -102,14 +140,12 @@ export function WorkoutPlayer() {
     },
   });
 
-  // Handle workout start
   const handleStartWorkout = useCallback(() => {
     unlock();
     wakeLock.request();
     startWorkout();
   }, [unlock, wakeLock, startWorkout]);
 
-  // Handle starting a timed exercise
   const handleStartTimer = useCallback(() => {
     if (currentItem?.duration) {
       timer.startCountdown(currentItem.duration);
@@ -117,7 +153,6 @@ export function WorkoutPlayer() {
     }
   }, [currentItem, timer]);
 
-  // Pause/resume for timed exercises (used by PlayerControls)
   const handlePause = useCallback(() => {
     timer.pause();
     setIsPaused(true);
@@ -128,7 +163,6 @@ export function WorkoutPlayer() {
     setIsPaused(false);
   }, [timer]);
 
-  // Global pause — works in both exercising and resting phases
   const handleGlobalPause = useCallback(() => {
     timer.pause();
     setIsPaused(true);
@@ -167,7 +201,6 @@ export function WorkoutPlayer() {
     router.push("/dashboard");
   }, [timer, wakeLock, resetStore, router]);
 
-  // Auto-start stopwatch for reps exercises when entering exercising phase
   const prevPhaseRef = useRef(phase);
   useEffect(() => {
     if (
@@ -183,7 +216,6 @@ export function WorkoutPlayer() {
     prevPhaseRef.current = phase;
   }, [phase, currentItem, timer]);
 
-  // Release wake lock on completed
   useEffect(() => {
     if (phase === "completed") {
       wakeLock.release();
@@ -194,11 +226,8 @@ export function WorkoutPlayer() {
 
   if (phase === "idle" || !planId) {
     return (
-      <div className="flex flex-col items-center justify-center gap-6 py-20">
-        <p className="text-muted-foreground">Nessun workout caricato</p>
-        <Button onClick={() => router.push("/dashboard")} variant="outline">
-          Torna alla dashboard
-        </Button>
+      <div className="flex flex-col min-h-screen items-center justify-center bg-zinc-950 text-white gap-6 py-20 px-6">
+        <p className="text-neutral-400 text-2xl font-bold">Inizializzazione...</p>
       </div>
     );
   }
@@ -206,12 +235,12 @@ export function WorkoutPlayer() {
   // Global pause overlay
   if (isPaused && (phase === "exercising" || phase === "resting")) {
     return (
-      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background/95 backdrop-blur-sm">
-        <Pause className="h-16 w-16 text-teal-500 mb-4" />
-        <h2 className="text-2xl font-bold mb-2">Workout in pausa</h2>
-        <p className="text-muted-foreground mb-8">{planName}</p>
-        <Button size="lg" onClick={handleGlobalResume} className="gap-2">
-          <Play className="h-5 w-5" />
+      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-zinc-950/98 backdrop-blur-md text-white px-6">
+        <Pause className="h-28 w-28 text-indigo-500 mb-8" />
+        <h2 className="text-5xl font-extrabold mb-4 tracking-tight">In pausa</h2>
+        <p className="text-2xl text-neutral-400 mb-16 text-center">{planName}</p>
+        <Button size="lg" onClick={handleGlobalResume} className="h-24 w-full max-w-sm rounded-[2rem] bg-indigo-600 hover:bg-indigo-500 text-white text-3xl font-bold shadow-2xl shadow-indigo-900/40">
+          <Play className="h-10 w-10 mr-4 fill-current" />
           Riprendi
         </Button>
       </div>
@@ -223,219 +252,219 @@ export function WorkoutPlayer() {
     let counter = 0;
 
     return (
-      <div className="space-y-6 px-4 pt-6">
-        <div className="text-center space-y-2">
-          <h1 className="text-2xl font-bold">{planName}</h1>
-          <p className="text-muted-foreground">
-            {items.length} esercizi
+      <div className="flex flex-col min-h-[100dvh] bg-zinc-950 text-neutral-50 pb-40 relative">
+        <div className="px-6 pt-12 pb-8">
+          <h1 className="text-[2.75rem] font-extrabold tracking-tight mb-3 leading-none text-balance">{planName}</h1>
+          <p className="text-xl text-indigo-400 font-bold uppercase tracking-wider">
+            {items.length} esercizi • {items.reduce((acc, curr) => acc + curr.sets, 0)} Set
           </p>
         </div>
 
-        <div className="space-y-2">
+        <div className="px-4 space-y-2">
           {previewBlocks.map((block) => {
             if (block.type === "standalone") {
               counter++;
+              const isTimed = block.item.duration ? true : false;
               return (
-                <Card key={block.item.id}>
-                  <CardContent className="flex items-center justify-between p-3">
-                    <div className="flex items-center gap-3">
-                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-teal-100 text-sm font-medium text-teal-600">
-                        {counter}
-                      </span>
-                      <div>
-                        <p className="font-medium text-sm">
-                          {block.item.exercise.name}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          {block.item.sets}x
-                          {block.item.reps
-                            ? ` ${block.item.reps} rep${block.item.per_lato ? " per lato" : ""}`
-                            : ` ${block.item.duration}s`}
-                        </p>
-                      </div>
+                <div key={block.item.id} className="flex items-center gap-5 py-4 px-2">
+                  <div className="relative flex-shrink-0">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-neutral-800 bg-neutral-900 text-neutral-300">
+                      {isTimed ? <Timer className="h-6 w-6" /> : <Dumbbell className="h-6 w-6" />}
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-2xl font-bold truncate text-neutral-100">
+                      {block.item.exercise.name}
+                    </p>
+                    <p className="text-lg text-neutral-400 mt-1 font-medium">
+                      <span className="text-white">{block.item.sets} set</span> • {block.item.reps ? `${block.item.reps} rip` : `${block.item.duration}s`}
+                    </p>
+                  </div>
+                </div>
               );
             }
 
-            // Superset block
-            counter++;
+            // Superset block with DropSet style vertical link connecting the circles
             return (
-              <div
-                key={`ss-${block.group}`}
-                className="rounded-lg border-2 border-golden-300 p-2 space-y-1"
-              >
-                <div className="flex items-center gap-1 px-1">
-                  <Badge className="bg-golden-100 text-golden-700 text-xs gap-1">
-                    <Zap className="h-3 w-3" /> Superserie
-                  </Badge>
-                  <span className="text-xs text-muted-foreground">
-                    {block.items[0].sets} round
-                  </span>
+              <div key={`ss-${block.group}`} className="relative py-4 px-2">
+                <div className="mb-4 ml-[5.5rem] text-sm font-extrabold text-indigo-400 uppercase tracking-widest">
+                  Superserie • {block.items[0].sets} Round
                 </div>
-                {block.items.map((item, i) => (
-                  <Card key={item.id}>
-                    <CardContent className="flex items-center justify-between p-3">
-                      <div className="flex items-center gap-3">
-                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-golden-100 text-sm font-bold text-golden-700">
-                          {String.fromCharCode(65 + i)}
-                        </span>
-                        <div>
-                          <p className="font-medium text-sm">
-                            {item.exercise.name}
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            {item.sets}x
-                            {item.reps
-                              ? ` ${item.reps} rep${item.per_lato ? " per lato" : ""}`
-                              : ` ${item.duration}s`}
-                          </p>
+                {block.items.map((item, i) => {
+                  counter++;
+                  const isTimed = item.duration ? true : false;
+                  const isLast = i === block.items.length - 1;
+                  return (
+                    <div key={item.id} className={`relative flex items-center gap-5 ${!isLast ? "mb-6" : ""}`}>
+                      {/* Vertical line connector (Superset Link) */}
+                      {!isLast && (
+                        <div className="absolute left-8 top-[4rem] bottom-[-2.5rem] w-0.5 bg-neutral-800 z-0">
+                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-zinc-950 p-1 rounded-full">
+                            <Link2 className="h-5 w-5 text-neutral-600 rotate-90" />
+                          </div>
+                        </div>
+                      )}
+                      
+                      <div className="relative z-10 flex-shrink-0">
+                        <div className="flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-indigo-500/30 bg-zinc-950 text-indigo-400 shadow-[0_0_15px_rgba(99,102,241,0.1)]">
+                          {isTimed ? <Timer className="h-6 w-6" /> : <Dumbbell className="h-6 w-6" />}
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                      <div className="flex-1 min-w-0">
+                        <p className="text-2xl font-bold truncate text-neutral-100">
+                          {item.exercise.name}
+                        </p>
+                        <p className="text-lg text-neutral-400 mt-1 font-medium">
+                          <span className="text-indigo-400">{item.sets} set</span> • {item.reps ? `${item.reps} rip` : `${item.duration}s`}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             );
           })}
         </div>
 
-        <div className="flex gap-3">
-          <Button variant="outline" onClick={handleQuit} className="flex-1">
-            <X className="mr-2 h-4 w-4" />
-            Annulla
-          </Button>
-          <Button onClick={handleStartWorkout} className="flex-1 gap-2">
-            <Play className="h-4 w-4" />
-            Inizia
-          </Button>
+        {/* Floating Bottom Bar */}
+        <div className="fixed bottom-0 left-0 right-0 p-6 pt-16 bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent flex gap-4 pointer-events-none">
+          <div className="flex gap-4 w-full pointer-events-auto">
+            <QuitDialog onConfirm={handleQuit}>
+              <Button variant="outline" size="lg" className="h-20 px-8 rounded-2xl border-none bg-neutral-900 hover:bg-neutral-800 text-neutral-400 focus:ring-0">
+                <X className="h-8 w-8" />
+              </Button>
+            </QuitDialog>
+            <Button onClick={handleStartWorkout} size="lg" className="h-20 flex-1 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-2xl font-bold tracking-wide shadow-2xl shadow-indigo-900/30">
+              Inizia <ArrowRight className="ml-3 h-7 w-7" />
+            </Button>
+          </div>
         </div>
       </div>
     );
   }
 
-  if (phase === "resting" && currentItem) {
-    const ssGroup = getSupersetGroup(items, currentItemIndex);
-
-    // The current item IS the next exercise to do (store already advanced)
-    const nextItem = items[currentItemIndex];
-    let nextName = nextItem?.exercise.name ?? "Fine workout";
-
-    // Add round info for superserie
-    if (ssGroup && ssGroup.length > 1) {
-      const letter = String.fromCharCode(65 + supersetExerciseIndex);
-      nextName = `${letter}. ${nextName} (Round ${supersetRound})`;
-    }
-
-    return (
-      <div className="px-4 pt-6 space-y-4">
+  return (
+    <div className="flex flex-col min-h-[100dvh] bg-zinc-950 text-neutral-50 pb-[180px]">
+      <div className="px-6 pt-10">
         <WorkoutProgressBar
           currentExercise={currentItemIndex + 1}
           totalExercises={items.length}
           currentSet={currentSet}
-          totalSets={currentItem.sets}
+          totalSets={currentItem?.sets ?? 1}
         />
-        <RestTimer
-          key={`rest-${currentItemIndex}-${currentSet}-${supersetRound}-${supersetExerciseIndex}`}
-          duration={storeTimerSeconds}
-          nextExerciseName={nextName}
-          onComplete={handleRestComplete}
-          onSkip={handleSkipRest}
-          isPaused={isPaused}
-        />
-        <div className="flex justify-center pt-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleGlobalPause}
-            className="gap-2"
-          >
-            <Pause className="h-4 w-4" />
-            Pausa
-          </Button>
-        </div>
       </div>
-    );
-  }
 
-  if (phase === "exercising" && currentItem) {
-    const ssGroup = getSupersetGroup(items, currentItemIndex);
-
-    return (
-      <div className="px-4 pt-6 space-y-6">
-        <WorkoutProgressBar
-          currentExercise={currentItemIndex + 1}
-          totalExercises={items.length}
-          currentSet={currentSet}
-          totalSets={currentItem.sets}
-        />
-
-        {/* Superset indicator */}
-        {ssGroup && ssGroup.length > 1 && (
-          <SupersetIndicator
-            items={ssGroup}
-            currentItemId={currentItem.id}
-            round={supersetRound}
-            totalRounds={ssGroup[0].sets}
-          />
-        )}
-
-        <ExerciseDisplay
-          item={currentItem}
-          currentSet={ssGroup ? supersetRound : currentSet}
-        />
-
-        <div className="flex justify-center">
-          <TimerDisplay
-            seconds={timer.displaySeconds}
-            totalSeconds={
-              exerciseType === "timed"
-                ? (currentItem.duration ?? 0)
-                : undefined
+      <div className="flex-1 flex flex-col justify-center max-w-2xl mx-auto w-full px-4 relative mt-8">
+        {phase === "resting" && currentItem ? (
+          <RestTimer
+            key={`rest-${currentItemIndex}-${currentSet}-${supersetRound}-${supersetExerciseIndex}`}
+            duration={storeTimerSeconds}
+            nextExerciseName={
+              (getSupersetGroup(items, currentItemIndex)?.length ?? 0) > 1 
+                ? `${String.fromCharCode(65 + supersetExerciseIndex)}. ${items[currentItemIndex]?.exercise.name} (Round ${supersetRound})`
+                : items[currentItemIndex]?.exercise.name ?? "Fine workout"
             }
-            mode={exerciseType === "timed" ? "countdown" : "stopwatch"}
-            size="large"
+            onComplete={handleRestComplete}
+            onSkip={handleSkipRest}
+            isPaused={isPaused}
           />
-        </div>
+        ) : (
+          <>
+            {/* Superset indicator */}
+            {getSupersetGroup(items, currentItemIndex) && (getSupersetGroup(items, currentItemIndex)?.length ?? 0) > 1 && (
+              <div className="mb-6 flex justify-center">
+                <span className="bg-indigo-500/10 text-indigo-400 font-extrabold px-5 py-2 rounded-full text-base uppercase tracking-widest border border-indigo-500/20">
+                  Superserie • Round {supersetRound}/{(getSupersetGroup(items, currentItemIndex) ?? [])[0]?.sets}
+                </span>
+              </div>
+            )}
 
-        <PlayerControls
-          exerciseType={exerciseType}
-          isTimerRunning={
-            !isPaused &&
-            timer.displaySeconds > 0 &&
-            exerciseType === "timed"
-          }
-          isPaused={isPaused}
-          onStart={handleStartTimer}
-          onPause={handlePause}
-          onResume={handleResume}
-          onComplete={handleCompleteSet}
-          onSkip={handleSkipExercise}
-        />
+            <ExerciseDisplay
+              item={currentItem}
+              currentSet={getSupersetGroup(items, currentItemIndex) ? supersetRound : currentSet}
+            />
 
-        <div className="flex items-center justify-center gap-4 pt-4">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleGlobalPause}
-            className="gap-2"
-          >
-            <Pause className="h-4 w-4" />
-            Pausa
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleQuit}
-            className="text-muted-foreground"
-          >
-            Esci dal workout
-          </Button>
-        </div>
+            <div className="flex justify-center mt-12 mb-8">
+              <TimerDisplay
+                seconds={timer.displaySeconds}
+                totalSeconds={
+                  exerciseType === "timed"
+                    ? (currentItem.duration ?? 0)
+                    : undefined
+                }
+                mode={exerciseType === "timed" ? "countdown" : "stopwatch"}
+                size="large"
+              />
+            </div>
+          </>
+        )}
       </div>
-    );
-  }
 
-  return null;
+      {/* Floating Bottom Navigation for Active Exercise */}
+      {phase === "exercising" && currentItem && (
+        <div className="fixed bottom-0 left-0 right-0 px-6 pb-8 pt-16 bg-gradient-to-t from-zinc-950 via-zinc-950/95 to-transparent flex flex-col items-center">
+          <div className="w-full max-w-sm flex flex-col gap-4">
+            <PlayerControls
+              exerciseType={exerciseType}
+              isTimerRunning={
+                !isPaused &&
+                timer.displaySeconds > 0 &&
+                exerciseType === "timed"
+              }
+              isPaused={isPaused}
+              onStart={handleStartTimer}
+              onPause={handlePause}
+              onResume={handleResume}
+              onComplete={handleCompleteSet}
+              onSkip={handleSkipExercise}
+            />
+            <div className="flex items-center justify-center gap-4 w-full">
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={handleGlobalPause}
+                className="flex-1 h-14 rounded-2xl border-neutral-800 bg-neutral-900 shadow-md hover:bg-neutral-800 text-neutral-300 gap-2 text-lg font-bold"
+              >
+                <Pause className="h-5 w-5 fill-current" /> Pausa
+              </Button>
+              <QuitDialog onConfirm={handleQuit}>
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  className="flex-1 h-14 rounded-2xl text-neutral-500 hover:text-red-400 hover:bg-red-950/30 text-lg font-bold"
+                >
+                  <X className="h-5 w-5 mr-2" /> Esci
+                </Button>
+              </QuitDialog>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Floating Bottom Navigation for Resting Phase pause and quit */}
+      {phase === "resting" && currentItem && (
+        <div className="fixed bottom-0 left-0 right-0 px-6 pb-8 pt-16 bg-gradient-to-t from-zinc-950 via-zinc-950/95 to-transparent flex flex-col items-center">
+          <div className="w-full max-w-sm flex items-center justify-center gap-4">
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={handleGlobalPause}
+              className="flex-1 h-14 rounded-2xl border-neutral-800 bg-neutral-900 shadow-md hover:bg-neutral-800 text-neutral-300 gap-2 text-lg font-bold"
+            >
+              <Pause className="h-5 w-5 fill-current" /> Pausa
+            </Button>
+            <QuitDialog onConfirm={handleQuit}>
+              <Button
+                variant="ghost"
+                size="lg"
+                className="flex-1 h-14 rounded-2xl text-neutral-500 hover:text-red-400 hover:bg-red-950/30 text-lg font-bold"
+              >
+                <X className="h-5 w-5 mr-2" /> Esci
+              </Button>
+            </QuitDialog>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }

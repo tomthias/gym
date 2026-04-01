@@ -16,8 +16,8 @@ export function TimerDisplay({
   mode,
   size = "normal",
 }: TimerDisplayProps) {
-  const radius = size === "large" ? 110 : 80;
-  const stroke = 8;
+  const radius = size === "large" ? 150 : 80;
+  const stroke = size === "large" ? 12 : 8;
   const circumference = 2 * Math.PI * radius;
   const svgSize = (radius + stroke) * 2;
 
@@ -68,8 +68,8 @@ export function TimerDisplay({
       <div className="absolute flex flex-col items-center">
         <span
           className={cn(
-            "font-mono font-bold tabular-nums",
-            size === "large" ? "text-5xl" : "text-4xl",
+            "font-mono font-bold tabular-nums tracking-tighter",
+            size === "large" ? "text-[5.5rem] leading-none" : "text-4xl",
             isWarning && "text-destructive"
           )}
         >
