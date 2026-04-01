@@ -404,39 +404,56 @@ export function WorkoutPlayer() {
       {phase === "exercising" && currentItem && !isPaused && (
         <div className="fixed bottom-0 left-0 right-0 px-6 pb-[calc(2rem+env(safe-area-inset-bottom)+4rem)] pt-16 bg-gradient-to-t from-background via-background/95 to-transparent flex flex-col items-center">
           <div className="w-full max-w-sm flex flex-col gap-4">
-            <PlayerControls
-              exerciseType={exerciseType}
-              isTimerRunning={
+            {(() => {
+              const isTimerRunning =
                 !isPaused &&
                 timer.displaySeconds > 0 &&
-                exerciseType === "timed"
-              }
-              isPaused={isPaused}
-              onStart={handleStartTimer}
-              onPause={handlePause}
-              onResume={handleResume}
-              onComplete={handleCompleteSet}
-              onSkip={handleSkipExercise}
-            />
-            <div className="flex items-center justify-center gap-4 w-full">
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={handleGlobalPause}
-                className="flex-1 h-14 rounded-2xl border-border bg-muted shadow-md hover:bg-muted/80 text-foreground gap-2 text-lg font-bold"
-              >
-                <Pause className="h-5 w-5 fill-current" /> Pausa
-              </Button>
-              <QuitDialog onConfirm={handleQuit}>
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  className="flex-1 h-14 rounded-2xl text-muted-foreground hover:text-red-500 hover:bg-red-500/10 text-lg font-bold"
-                >
-                  <X className="h-5 w-5 mr-2" /> Esci
-                </Button>
-              </QuitDialog>
-            </div>
+                exerciseType === "timed";
+              return isTimerRunning || isPaused ? (
+                <PlayerControls
+                  exerciseType={exerciseType}
+                  isTimerRunning={isTimerRunning}
+                  isPaused={isPaused}
+                  onStart={handleStartTimer}
+                  onPause={handlePause}
+                  onResume={handleResume}
+                  onComplete={handleCompleteSet}
+                  onSkip={handleSkipExercise}
+                />
+              ) : (
+                <>
+                  <PlayerControls
+                    exerciseType={exerciseType}
+                    isTimerRunning={false}
+                    isPaused={false}
+                    onStart={handleStartTimer}
+                    onPause={handlePause}
+                    onResume={handleResume}
+                    onComplete={handleCompleteSet}
+                    onSkip={handleSkipExercise}
+                  />
+                  <div className="flex items-center justify-center gap-4 w-full">
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      onClick={handleGlobalPause}
+                      className="flex-1 h-14 rounded-2xl border-border bg-muted shadow-md hover:bg-muted/80 text-foreground gap-2 text-lg font-bold"
+                    >
+                      <Pause className="h-5 w-5 fill-current" /> Pausa
+                    </Button>
+                    <QuitDialog onConfirm={handleQuit}>
+                      <Button
+                        variant="ghost"
+                        size="lg"
+                        className="flex-1 h-14 rounded-2xl text-muted-foreground hover:text-red-500 hover:bg-red-500/10 text-lg font-bold"
+                      >
+                        <X className="h-5 w-5 mr-2" /> Esci
+                      </Button>
+                    </QuitDialog>
+                  </div>
+                </>
+              );
+            })()}
           </div>
         </div>
       )}
