@@ -12,6 +12,10 @@ import { User, AtSign, Mail, Users } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { PhysioLogoutButton } from "./logout-button";
 import { InviteCodeSection } from "./invite-code-section";
+import { UpdateProfileForm } from "@/app/settings/update-profile-form";
+import { UpdateEmailForm } from "@/app/settings/update-email-form";
+import { UpdatePasswordForm } from "./update-password-form";
+import { DangerZone } from "@/app/settings/danger-zone";
 
 export default async function PhysioSettingsPage() {
   const supabase = await createClient();
@@ -102,11 +106,26 @@ export default async function PhysioSettingsPage() {
           </CardContent>
         </Card>
 
+        <UpdateProfileForm
+          fullName={profile?.full_name ?? ""}
+          username={profile?.username ?? null}
+        />
+
+        <UpdateEmailForm
+          currentEmail={profile?.email || user.email || ""}
+          pendingEmail={user.new_email ?? null}
+        />
+
+        <UpdatePasswordForm />
+
         {/* Invite codes */}
         <InviteCodeSection />
 
         {/* Theme */}
         <ThemeToggle />
+
+        {/* Danger zone */}
+        <DangerZone fullName={profile?.full_name ?? ""} />
 
         {/* Logout */}
         <PhysioLogoutButton />

@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/dialog";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -23,7 +22,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Check, Copy, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import {
   editPatient,
   resetPatientPassword,
@@ -52,22 +52,21 @@ export function EditPatientDialog({
   const [username, setUsername] = useState(patient.username ?? "");
   const [email, setEmail] = useState(patient.email ?? "");
   const [saving, setSaving] = useState(false);
-  const [error, setError] = useState("");
 
   const emailChanged = email !== (patient.email ?? "");
 
   async function handleSave() {
-    setError("");
     setSaving(true);
     try {
       const result = await editPatient(patient.id, { fullName, username, email });
       if (!result.success) {
-        setError(result.error);
+        toast.error(result.error);
       } else {
+        toast.success("Paziente aggiornato");
         onClose();
       }
     } catch {
-      setError("Errore nel salvataggio");
+      toast.error("Errore nel salvataggio");
     } finally {
       setSaving(false);
     }
@@ -83,9 +82,6 @@ export function EditPatientDialog({
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4 py-2">
-          {error && (
-            <p className="text-sm text-destructive text-center">{error}</p>
-          )}
           <div className="space-y-2">
             <Label htmlFor="edit-fullname">Nome completo</Label>
             <Input
@@ -143,101 +139,43 @@ export function ResetPasswordDialog({
   open: boolean;
   onClose: () => void;
 }) {
-  const [step, setStep] = useState<"confirm" | "result">("confirm");
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [error, setError] = useState("");
 
   async function handleReset() {
-    setError("");
     setLoading(true);
     try {
       const result = await resetPatientPassword(patient.id);
       if (!result.success) {
-        setError(result.error);
+        toast.error(result.error);
       } else {
-        setPassword(result.password);
-        setStep("result");
+        toast.success(`Email di reset inviata a ${patient.full_name}`);
+        onClose();
       }
     } catch {
-      setError("Errore nel reset");
+      toast.error("Errore nel reset");
     } finally {
       setLoading(false);
     }
   }
 
-  async function handleCopy() {
-    await navigator.clipboard.writeText(password);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }
-
-  function handleClose() {
-    setStep("confirm");
-    setPassword("");
-    setCopied(false);
-    setError("");
-    onClose();
-  }
-
-  if (step === "result") {
-    return (
-      <Dialog open={open} onOpenChange={(v) => !v && handleClose()}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Nuova password generata</DialogTitle>
-            <DialogDescription>
-              Comunica questa password al paziente. Non sara piu visibile dopo
-              la chiusura.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex items-center gap-2 py-4">
-            <code className="flex-1 rounded-lg border bg-muted px-4 py-3 font-mono text-lg tracking-wider text-center select-all">
-              {password}
-            </code>
-            <Button
-              variant="outline"
-              size="icon"
-              className="shrink-0 h-12 w-12"
-              onClick={handleCopy}
-            >
-              {copied ? (
-                <Check className="h-5 w-5 text-teal-600" />
-              ) : (
-                <Copy className="h-5 w-5" />
-              )}
-            </Button>
-          </div>
-          <DialogFooter>
-            <Button onClick={handleClose}>Chiudi</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    );
-  }
-
   return (
-    <Dialog open={open} onOpenChange={(v) => !v && handleClose()}>
+    <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Reset password</DialogTitle>
           <DialogDescription>
-            Vuoi generare una nuova password per{" "}
-            <span className="font-medium">{patient.full_name}</span>? La
-            password attuale sara sostituita.
+            Verrà inviata un&apos;email di reset a{" "}
+            <span className="font-medium">{patient.full_name}</span>. Il
+            paziente riceverà un link per impostare una nuova password.
           </DialogDescription>
         </DialogHeader>
-        {error && (
-          <p className="text-sm text-destructive text-center">{error}</p>
-        )}
         <DialogFooter>
-          <Button variant="outline" onClick={handleClose} disabled={loading}>
+          <Button variant="outline" onClick={onClose} disabled={loading}>
             Annulla
           </Button>
           <Button onClick={handleReset} disabled={loading}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Genera nuova password
+            Invia email di reset
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -259,24 +197,23 @@ export function UnlinkPatientDialog({
   const router = useRouter();
   const [confirmName, setConfirmName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const canConfirm =
     confirmName.trim().toLowerCase() === patient.full_name.toLowerCase();
 
   async function handleUnlink() {
-    setError("");
     setLoading(true);
     try {
       const result = await unlinkPatient(patient.id);
       if (!result.success) {
-        setError(result.error);
+        toast.error(result.error);
       } else {
+        toast.success("Paziente scollegato");
         onClose();
         router.push("/physio/patients");
       }
     } catch {
-      setError("Errore nella rimozione");
+      toast.error("Errore nella rimozione");
     } finally {
       setLoading(false);
     }
@@ -284,7 +221,6 @@ export function UnlinkPatientDialog({
 
   function handleClose() {
     setConfirmName("");
-    setError("");
     onClose();
   }
 
@@ -311,9 +247,6 @@ export function UnlinkPatientDialog({
             onChange={(e) => setConfirmName(e.target.value)}
             placeholder={patient.full_name}
           />
-          {error && (
-            <p className="text-sm text-destructive">{error}</p>
-          )}
         </div>
         <AlertDialogFooter>
           <AlertDialogCancel disabled={loading} onClick={handleClose}>

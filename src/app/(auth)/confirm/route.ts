@@ -21,6 +21,14 @@ export async function GET(request: Request) {
         data: { user },
       } = await supabase.auth.getUser();
 
+      // Sync profiles.email after email change confirmation
+      if (type === "email_change" && user?.email) {
+        await supabase
+          .from("profiles")
+          .update({ email: user.email })
+          .eq("id", user.id);
+      }
+
       if (user) {
         const { data: profile } = await supabase
           .from("profiles")

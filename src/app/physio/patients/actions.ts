@@ -103,9 +103,7 @@ export async function editPatient(
 
 export async function resetPatientPassword(
   patientId: string
-): Promise<
-  { success: true; password: string } | { success: false; error: string }
-> {
+): Promise<{ success: true } | { success: false; error: string }> {
   const idResult = uuidSchema.safeParse(patientId);
   if (!idResult.success) return { success: false, error: "ID non valido" };
 
@@ -119,33 +117,27 @@ export async function resetPatientPassword(
     // Verify patient belongs to this physio
     const { data: patient } = await supabase
       .from("profiles")
-      .select("id, full_name")
+      .select("id, email")
       .eq("id", idResult.data)
       .eq("physio_id", user.id)
       .single();
 
     if (!patient) return { success: false, error: "Paziente non trovato" };
 
-    // Generate readable password: fisio-{firstname}-{4digits}
-    const firstName = (patient.full_name ?? "utente")
-      .split(/\s+/)[0]
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-z0-9]/g, "")
-      .slice(0, 10);
-    const digits = String(Math.floor(Math.random() * 10000)).padStart(4, "0");
-    const newPassword = `fisio-${firstName}-${digits}`;
+    const patientEmail = patient.email;
+    if (!patientEmail)
+      return { success: false, error: "Email del paziente non trovata" };
 
     const admin = createAdminClient();
-    const { error } = await admin.auth.admin.updateUserById(idResult.data, {
-      password: newPassword,
+    const { error } = await admin.auth.admin.generateLink({
+      type: "recovery",
+      email: patientEmail,
     });
 
     if (error)
-      return { success: false, error: "Errore nel reset della password" };
+      return { success: false, error: "Errore nell'invio dell'email di reset" };
 
-    return { success: true, password: newPassword };
+    return { success: true };
   } catch {
     return { success: false, error: "Errore imprevisto nel reset" };
   }

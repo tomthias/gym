@@ -10,8 +10,10 @@ import { Separator } from "@/components/ui/separator";
 import { User, AtSign, Mail, Stethoscope, FileText, ChevronRight } from "lucide-react";
 import { LogoutButton } from "./logout-button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { UpdateEmailForm } from "./update-email-form";
+import { UpdateProfileForm } from "@/app/settings/update-profile-form";
+import { UpdateEmailForm } from "@/app/settings/update-email-form";
 import { UpdatePasswordForm } from "./update-password-form";
+import { DangerZone } from "@/app/settings/danger-zone";
 import Link from "next/link";
 
 export default async function SettingsPage() {
@@ -107,7 +109,15 @@ export default async function SettingsPage() {
         </CardContent>
       </Card>
 
-      <UpdateEmailForm currentEmail={profile?.email || user.email || ""} />
+      <UpdateProfileForm
+        fullName={profile?.full_name ?? ""}
+        username={profile?.username ?? null}
+      />
+
+      <UpdateEmailForm
+        currentEmail={profile?.email || user.email || ""}
+        pendingEmail={user.new_email ?? null}
+      />
 
       <UpdatePasswordForm />
 
@@ -137,6 +147,8 @@ export default async function SettingsPage() {
       </Card>
 
       <ThemeToggle />
+
+      <DangerZone fullName={profile?.full_name ?? ""} />
 
       <LogoutButton />
     </div>
