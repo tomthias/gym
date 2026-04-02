@@ -65,6 +65,45 @@ export async function updateProfile(data: {
   }
 }
 
+const updateEmailSchema = z.object({
+  email: z.string().email("Formato email non valido"),
+});
+
+export async function updateEmail(
+  newEmail: string
+): Promise<{ success: true } | { success: false; error: string }> {
+  const result = updateEmailSchema.safeParse({ email: newEmail.trim() });
+  if (!result.success)
+    return { success: false, error: result.error.issues[0].message };
+
+  try {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) return { success: false, error: "Non autenticato" };
+
+    const admin = createAdminClient();
+    const { error: authError } = await admin.auth.admin.updateUserById(
+      user.id,
+      { email: result.data.email }
+    );
+    if (authError)
+      return { success: false, error: "Errore nell'aggiornamento dell'email" };
+
+    await admin
+      .from("profiles")
+      .update({ email: result.data.email })
+      .eq("id", user.id);
+
+    revalidatePath("/settings");
+    revalidatePath("/physio/settings");
+    return { success: true };
+  } catch {
+    return { success: false, error: "Errore imprevisto" };
+  }
+}
+
 export async function deleteAccount(): Promise<
   { success: true } | { success: false; error: string }
 > {
