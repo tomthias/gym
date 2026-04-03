@@ -41,8 +41,8 @@ export default function WorkoutCompletePage() {
         data: { user },
       } = await supabase.auth.getUser();
 
-      if (!user || !storePlanId) {
-        toast.error("Errore: impossibile salvare la sessione");
+      if (!user || !storePlanId || !startedAt) {
+        toast.error("Errore: sessione non valida, riprova il workout");
         setSaving(false);
         return;
       }
@@ -50,7 +50,7 @@ export default function WorkoutCompletePage() {
       const { error } = await supabase.from("workout_logs").insert({
         patient_id: user.id,
         plan_id: storePlanId,
-        started_at: startedAt!,
+        started_at: startedAt,
         completed_at: completedAt,
         duration_seconds: durationSeconds,
         exercises_completed: items.length,
@@ -60,6 +60,7 @@ export default function WorkoutCompletePage() {
       });
 
       if (error) {
+        console.error("workout_logs insert error:", error);
         toast.error("Errore nel salvataggio della sessione");
         setSaving(false);
         return;
