@@ -26,7 +26,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Pause, Play, X, Link2, Dumbbell, Timer, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Pause, Play, X, Link2, ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
+import { ExerciseDetailSheet, getCategoryIcon } from "./exercise-detail-sheet";
 
 /** Returns all items in the same superset group, sorted by order */
 function getSupersetGroup(
@@ -117,6 +118,7 @@ export function WorkoutPlayer() {
   const { playCountdownTick, playComplete, unlock } = useAudio();
   const wakeLock = useWakeLock();
   const [isPaused, setIsPaused] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<PlanItemWithExercise | null>(null);
 
   const currentItem = items[currentItemIndex];
   const exerciseType = currentItem ? getExerciseType(currentItem) : "reps";
@@ -266,21 +268,26 @@ export function WorkoutPlayer() {
               counter++;
               const isTimed = block.item.duration ? true : false;
               return (
-                <div key={block.item.id} className="flex items-center gap-5 py-4 px-2">
+                <button
+                  key={block.item.id}
+                  onClick={() => setSelectedItem(block.item)}
+                  className="w-full flex items-center gap-5 py-4 px-2 rounded-2xl active:bg-muted/60 transition-colors text-left"
+                >
                   <div className="relative flex-shrink-0">
                     <div className="flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-border bg-muted text-muted-foreground">
-                      {isTimed ? <Timer className="h-6 w-6" /> : <Dumbbell className="h-6 w-6" />}
+                      {getCategoryIcon(block.item.exercise.category, "h-6 w-6")}
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-2xl font-bold truncate text-foreground">
+                    <p className="text-2xl font-bold line-clamp-2 text-foreground leading-tight">
                       {block.item.exercise.name}
                     </p>
                     <p className="text-lg text-muted-foreground mt-1 font-medium">
                       <span className="text-foreground">{block.item.sets} set</span> • {block.item.reps ? `${block.item.reps} rip` : `${block.item.duration}s`}
                     </p>
                   </div>
-                </div>
+                  <ChevronRight className="h-5 w-5 text-muted-foreground/50 flex-shrink-0" />
+                </button>
               );
             }
 
@@ -295,7 +302,11 @@ export function WorkoutPlayer() {
                   const isTimed = item.duration ? true : false;
                   const isLast = i === block.items.length - 1;
                   return (
-                    <div key={item.id} className={`relative flex items-center gap-5 ${!isLast ? "mb-6" : ""}`}>
+                    <button
+                      key={item.id}
+                      onClick={() => setSelectedItem(item)}
+                      className={`relative w-full flex items-center gap-5 rounded-2xl active:bg-muted/60 transition-colors text-left ${!isLast ? "mb-6" : ""}`}
+                    >
                       {/* Vertical line connector (Superset Link) */}
                       {!isLast && (
                         <div className="absolute left-8 top-[4rem] bottom-[-2.5rem] w-0.5 bg-neutral-800 z-0">
@@ -304,21 +315,22 @@ export function WorkoutPlayer() {
                           </div>
                         </div>
                       )}
-                      
+
                       <div className="relative z-10 flex-shrink-0">
                         <div className="flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-primary/30 bg-background text-primary shadow-[0_0_15px_hsl(var(--primary)/0.1)]">
-                          {isTimed ? <Timer className="h-6 w-6" /> : <Dumbbell className="h-6 w-6" />}
+                          {getCategoryIcon(item.exercise.category, "h-6 w-6")}
                         </div>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-2xl font-bold truncate text-foreground">
+                        <p className="text-2xl font-bold line-clamp-2 text-foreground leading-tight">
                           {item.exercise.name}
                         </p>
                         <p className="text-lg text-muted-foreground mt-1 font-medium">
                           <span className="text-primary">{item.sets} set</span> • {item.reps ? `${item.reps} rip` : `${item.duration}s`}
                         </p>
                       </div>
-                    </div>
+                      <ChevronRight className="h-5 w-5 text-muted-foreground/50 flex-shrink-0" />
+                    </button>
                   );
                 })}
               </div>
@@ -339,6 +351,12 @@ export function WorkoutPlayer() {
             </Button>
           </div>
         </div>
+
+        <ExerciseDetailSheet
+          item={selectedItem}
+          open={selectedItem !== null}
+          onClose={() => setSelectedItem(null)}
+        />
       </div>
     );
   }
