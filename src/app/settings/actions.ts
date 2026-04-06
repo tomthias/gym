@@ -1,7 +1,6 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { createAdminClient } from "@/lib/supabase/admin";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
@@ -83,21 +82,12 @@ export async function updateEmail(
     } = await supabase.auth.getUser();
     if (!user) return { success: false, error: "Non autenticato" };
 
-    const admin = createAdminClient();
-    const { error: authError } = await admin.auth.admin.updateUserById(
-      user.id,
-      { email: result.data.email }
-    );
+    const { error: authError } = await supabase.auth.updateUser({
+      email: result.data.email,
+    });
     if (authError)
-      return { success: false, error: "Errore nell'aggiornamento dell'email" };
+      return { success: false, error: authError.message };
 
-    await admin
-      .from("profiles")
-      .update({ email: result.data.email })
-      .eq("id", user.id);
-
-    revalidatePath("/settings");
-    revalidatePath("/physio/settings");
     return { success: true };
   } catch {
     return { success: false, error: "Errore imprevisto" };
