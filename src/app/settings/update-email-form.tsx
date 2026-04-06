@@ -39,8 +39,7 @@ export function UpdateEmailForm({
       return;
     }
 
-    setSavedEmail(trimmed);
-    toast.success("Email aggiornata con successo");
+    toast.success("Email di conferma inviata al nuovo indirizzo");
     setLoading(false);
   }
 
