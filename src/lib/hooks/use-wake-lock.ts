@@ -11,9 +11,20 @@ export function useWakeLock() {
   const activeRef = useRef(false);
 
   const acquire = useCallback(async () => {
+    // Don't request if already holding an active (non-released) sentinel
+    if (wakeLockRef.current && !wakeLockRef.current.released) return;
     try {
       if ("wakeLock" in navigator) {
-        wakeLockRef.current = await navigator.wakeLock.request("screen");
+        const sentinel = await navigator.wakeLock.request("screen");
+        sentinel.addEventListener("release", () => {
+          wakeLockRef.current = null;
+          // The OS/browser released the sentinel while the page is still visible
+          // (e.g. battery-saver mode kicked in). Re-acquire if still needed.
+          if (activeRef.current && document.visibilityState === "visible") {
+            acquire();
+          }
+        });
+        wakeLockRef.current = sentinel;
       }
     } catch {
       // Wake lock request failed (not supported, low battery, etc.)
