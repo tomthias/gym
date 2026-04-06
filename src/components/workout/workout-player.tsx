@@ -234,6 +234,14 @@ export function WorkoutPlayer() {
     );
   }
 
+  if (phase === "completed") {
+    return (
+      <div className="flex min-h-[100dvh] items-center justify-center bg-background">
+        <CheckCircle2 className="h-16 w-16 text-primary animate-pulse" />
+      </div>
+    );
+  }
+
   // Global pause overlay
   if (isPaused && (phase === "exercising" || phase === "resting")) {
     return (

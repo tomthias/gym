@@ -38,9 +38,8 @@ function WorkoutPageContent() {
   const planIdParam = searchParams.get("planId");
 
   useEffect(() => {
-    // Se è in corso il workout o sta riposando, skip fetch per non perdere i progressi.
-    // Altrimenti (se è ready o completed) ricarica sempre per avere l'ultima versione.
-    if ((phase === "exercising" || phase === "resting") && storePlanId && storePlanId === planIdParam) {
+    // Se è in corso il workout, sta riposando, o è appena completato, skip fetch per non perdere i progressi.
+    if ((phase === "exercising" || phase === "resting" || phase === "completed") && storePlanId && storePlanId === planIdParam) {
       setLoading(false);
       return;
     }
