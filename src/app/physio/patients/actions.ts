@@ -85,7 +85,7 @@ export async function editPatient(
     if (dataResult.data.email !== patient.email) {
       const { error: authError } = await admin.auth.admin.updateUserById(
         idResult.data,
-        { email: dataResult.data.email }
+        { email: dataResult.data.email, email_confirm: true }
       );
       if (authError)
         return {

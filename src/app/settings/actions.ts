@@ -83,12 +83,23 @@ export async function updateEmail(
     } = await supabase.auth.getUser();
     if (!user) return { success: false, error: "Non autenticato" };
 
-    const { error: authError } = await supabase.auth.updateUser({
+    const admin = createAdminClient();
+    const { error: authError } = await admin.auth.admin.updateUserById(user.id, {
       email: result.data.email,
+      email_confirm: true,
     });
     if (authError)
       return { success: false, error: authError.message };
 
+    const { error: profileError } = await admin
+      .from("profiles")
+      .update({ email: result.data.email })
+      .eq("id", user.id);
+    if (profileError)
+      return { success: false, error: "Errore nell'aggiornamento del profilo" };
+
+    revalidatePath("/settings");
+    revalidatePath("/physio/settings");
     return { success: true };
   } catch {
     return { success: false, error: "Errore imprevisto" };
