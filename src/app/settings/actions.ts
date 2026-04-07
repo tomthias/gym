@@ -101,8 +101,9 @@ export async function updateEmail(
     revalidatePath("/settings");
     revalidatePath("/physio/settings");
     return { success: true };
-  } catch {
-    return { success: false, error: "Errore imprevisto" };
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    return { success: false, error: `Errore imprevisto: ${msg}` };
   }
 }
 

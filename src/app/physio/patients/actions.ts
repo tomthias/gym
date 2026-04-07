@@ -96,8 +96,9 @@ export async function editPatient(
 
     revalidatePatients();
     return { success: true };
-  } catch {
-    return { success: false, error: "Errore imprevisto nel salvataggio" };
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    return { success: false, error: `Errore imprevisto: ${msg}` };
   }
 }
 
