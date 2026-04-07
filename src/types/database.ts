@@ -56,6 +56,7 @@ export type Database = {
           description: string | null;
           category: string;
           video_url: string | null;
+          image_urls: string[];
           created_by: string | null;
           is_global: boolean;
           created_at: string;
@@ -66,6 +67,7 @@ export type Database = {
           description?: string | null;
           category?: string;
           video_url?: string | null;
+          image_urls?: string[];
           created_by?: string | null;
           is_global?: boolean;
           created_at?: string;
@@ -75,6 +77,7 @@ export type Database = {
           description?: string | null;
           category?: string;
           video_url?: string | null;
+          image_urls?: string[];
           is_global?: boolean;
         };
       };

@@ -90,7 +90,8 @@ function WorkoutPageContent() {
               name,
               description,
               category,
-              video_url
+              video_url,
+              image_urls
             )
           )
         `
@@ -112,7 +113,7 @@ function WorkoutPageContent() {
         return;
       }
 
-      type ExerciseRow = { id: string; name: string; description: string | null; category: string; video_url: string | null };
+      type ExerciseRow = { id: string; name: string; description: string | null; category: string; video_url: string | null; image_urls: string[] };
       const items: PlanItemWithExercise[] = plan.plan_items
         .filter((pi) => pi.exercises != null)
         .map((pi) => ({

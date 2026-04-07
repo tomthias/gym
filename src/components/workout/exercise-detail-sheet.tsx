@@ -25,6 +25,7 @@ import {
   ExternalLink,
   Scale,
 } from "lucide-react";
+import { ExerciseImageCarousel } from "@/components/workout/exercise-image-carousel";
 
 export function getCategoryIcon(category: string, className = "h-5 w-5") {
   switch (category) {
@@ -154,6 +155,14 @@ export function ExerciseDetailSheet({
               value={restLabel}
             />
           </div>
+
+          {/* Support images */}
+          {(item.exercise.image_urls?.length ?? 0) > 0 && (
+            <ExerciseImageCarousel
+              images={item.exercise.image_urls}
+              exerciseName={item.exercise.name}
+            />
+          )}
 
           {/* Carico (load) */}
           {caricoTrimmed && (

@@ -38,6 +38,7 @@ import { EXERCISE_CATEGORIES } from "@/lib/utils/constants";
 import { Loader2, Plus, Pencil, Search, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { ExerciseImageUploader } from "@/components/physio/exercise-image-uploader";
 
 interface Exercise {
   id: string;
@@ -45,6 +46,7 @@ interface Exercise {
   description: string | null;
   category: string;
   video_url: string | null;
+  image_urls: string[];
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -62,6 +64,7 @@ export default function ExercisesPage() {
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
 
   // Search & filter
   const [searchQuery, setSearchQuery] = useState("");
@@ -72,6 +75,7 @@ export default function ExercisesPage() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("general");
   const [videoUrl, setVideoUrl] = useState("");
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
 
   const fetchExercises = useCallback(async () => {
@@ -86,6 +90,10 @@ export default function ExercisesPage() {
 
   useEffect(() => {
     fetchExercises();
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) setUserId(data.user.id);
+    });
   }, [fetchExercises]);
 
   const filteredExercises = useMemo(() => {
@@ -105,6 +113,7 @@ export default function ExercisesPage() {
     setDescription("");
     setCategory("general");
     setVideoUrl("");
+    setImageUrls([]);
     setEditingId(null);
   }, []);
 
@@ -125,6 +134,7 @@ export default function ExercisesPage() {
           description: description || null,
           category,
           video_url: videoUrl || null,
+          image_urls: imageUrls,
         })
         .eq("id", editingId));
     } else {
@@ -133,6 +143,7 @@ export default function ExercisesPage() {
         description: description || null,
         category,
         video_url: videoUrl || null,
+        image_urls: imageUrls,
         created_by: user.id,
       }));
     }
@@ -146,13 +157,14 @@ export default function ExercisesPage() {
     resetForm();
     setDialogOpen(false);
     fetchExercises();
-  }, [name, description, category, videoUrl, editingId, resetForm, fetchExercises]);
+  }, [name, description, category, videoUrl, imageUrls, editingId, resetForm, fetchExercises]);
 
   const handleEdit = useCallback((ex: Exercise) => {
     setName(ex.name);
     setDescription(ex.description ?? "");
     setCategory(ex.category);
     setVideoUrl(ex.video_url ?? "");
+    setImageUrls(ex.image_urls ?? []);
     setEditingId(ex.id);
     setDialogOpen(true);
   }, []);
@@ -160,6 +172,26 @@ export default function ExercisesPage() {
   const handleDelete = useCallback(
     async (id: string) => {
       const supabase = createClient();
+
+      // Remove images from Storage before deleting the exercise
+      const { data: ex } = await supabase
+        .from("exercises")
+        .select("image_urls")
+        .eq("id", id)
+        .single();
+      if (ex?.image_urls?.length) {
+        const marker = "/exercise-images/";
+        const paths = ex.image_urls
+          .map((url: string) => {
+            const i = url.indexOf(marker);
+            return i !== -1 ? decodeURIComponent(url.slice(i + marker.length)) : null;
+          })
+          .filter(Boolean) as string[];
+        if (paths.length) {
+          await supabase.storage.from("exercise-images").remove(paths);
+        }
+      }
+
       const { error } = await supabase.from("exercises").delete().eq("id", id);
       if (error) {
         toast.error("Errore nell'eliminazione dell'esercizio");
@@ -198,7 +230,7 @@ export default function ExercisesPage() {
                 <span className="hidden sm:inline">Nuovo</span>
               </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="max-h-[90dvh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle>
                   {editingId ? "Modifica esercizio" : "Nuovo esercizio"}
@@ -247,6 +279,21 @@ export default function ExercisesPage() {
                     onChange={(e) => setVideoUrl(e.target.value)}
                     placeholder="https://youtube.com/..."
                   />
+                </div>
+                <div className="space-y-2">
+                  <Label>Immagini di supporto (opzionale)</Label>
+                  {editingId && userId ? (
+                    <ExerciseImageUploader
+                      exerciseId={editingId}
+                      physioId={userId}
+                      existingUrls={imageUrls}
+                      onUrlsChange={setImageUrls}
+                    />
+                  ) : (
+                    <p className="text-xs text-muted-foreground">
+                      Salva l&apos;esercizio per aggiungere immagini di supporto.
+                    </p>
+                  )}
                 </div>
                 <Button
                   onClick={handleSave}

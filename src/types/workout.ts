@@ -15,6 +15,7 @@ export interface PlanItemWithExercise {
     description: string | null;
     category: string;
     video_url: string | null;
+    image_urls: string[];
   };
   sets: number;
   reps: number | null;

@@ -3,6 +3,7 @@
 import type { PlanItemWithExercise } from "@/types/workout";
 import { getExerciseType } from "@/types/workout";
 import { Clock, Repeat, ExternalLink, Info } from "lucide-react";
+import { ExerciseImageCarousel } from "@/components/workout/exercise-image-carousel";
 
 interface ExerciseDisplayProps {
   item: PlanItemWithExercise;
@@ -60,6 +61,15 @@ export function ExerciseDisplay({ item, currentSet }: ExerciseDisplayProps) {
               {item.exercise.description}
             </p>
           )}
+        </div>
+      )}
+
+      {(item.exercise.image_urls?.length ?? 0) > 0 && (
+        <div className="max-w-sm mx-auto w-full">
+          <ExerciseImageCarousel
+            images={item.exercise.image_urls}
+            exerciseName={item.exercise.name}
+          />
         </div>
       )}
 
