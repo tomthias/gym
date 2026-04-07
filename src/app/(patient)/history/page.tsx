@@ -44,7 +44,7 @@ export default async function HistoryPage() {
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-muted">
               <Clock className="h-8 w-8 text-muted-foreground" />
             </div>
-            <p className="text-muted-foreground">Nessuna sessione completata</p>
+            <p className="text-muted-foreground">Nessuna sessione completata..</p>
           </div>
         ) : (
           logs.map((log) => {
