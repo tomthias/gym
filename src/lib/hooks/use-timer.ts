@@ -106,6 +106,7 @@ export function useTimer(options?: UseTimerOptions) {
     if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
     startTimeRef.current = null;
     lastDisplayedSecondRef.current = -1;
+    setDisplaySeconds(0);
   }, []);
 
   // Handle visibility change (tab background/foreground)

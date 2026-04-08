@@ -197,7 +197,7 @@ export function WorkoutPlayer() {
     transitionTimeoutRef.current = setTimeout(() => {
       setShowTransition(false);
       completeRest();
-    }, 1200);
+    }, 5000);
   }, [completeRest]);
 
   const handleSkipRest = useCallback(() => {
@@ -263,14 +263,16 @@ export function WorkoutPlayer() {
     return (
       <div
         className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-primary text-primary-foreground px-8"
-        style={{ animation: "fadeInOut 1.2s ease-in-out forwards" }}
+        style={{ animation: "fadeIn 0.3s ease-out forwards" }}
       >
         <style>{`
-          @keyframes fadeInOut {
+          @keyframes fadeIn {
             0%   { opacity: 0; transform: scale(0.95); }
-            20%  { opacity: 1; transform: scale(1); }
-            80%  { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(1.02); }
+            100% { opacity: 1; transform: scale(1); }
+          }
+          @keyframes shrink {
+            0%   { width: 100%; }
+            100% { width: 0%; }
           }
         `}</style>
         <p className="text-2xl font-bold uppercase tracking-widest mb-6 opacity-80">Pronti?</p>
@@ -285,6 +287,13 @@ export function WorkoutPlayer() {
         {currentItem.duration && (
           <p className="text-3xl font-bold mt-6 opacity-80">{currentItem.duration}s</p>
         )}
+        {/* Countdown progress bar */}
+        <div className="absolute bottom-0 left-0 right-0 h-2 bg-primary-foreground/20">
+          <div
+            className="h-full bg-primary-foreground/70 rounded-full"
+            style={{ animation: "shrink 5s linear forwards" }}
+          />
+        </div>
       </div>
     );
   }

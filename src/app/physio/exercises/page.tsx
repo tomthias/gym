@@ -47,6 +47,8 @@ interface Exercise {
   category: string;
   video_url: string | null;
   image_urls: string[];
+  is_global: boolean;
+  created_by: string | null;
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -372,15 +374,17 @@ export default function ExercisesPage() {
                     </div>
                   </div>
                   <div className="flex gap-1">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8"
-                      onClick={() => handleEdit(ex)}
-                    >
-                      <Pencil className="h-3.5 w-3.5" />
-                    </Button>
-                    <AlertDialog>
+                    {!ex.is_global && (
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => handleEdit(ex)}
+                      >
+                        <Pencil className="h-3.5 w-3.5" />
+                      </Button>
+                    )}
+                    {!ex.is_global && <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button
                           variant="ghost"
@@ -409,7 +413,7 @@ export default function ExercisesPage() {
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>
-                    </AlertDialog>
+                    </AlertDialog>}
                   </div>
                 </CardContent>
               </Card>
