@@ -28,7 +28,7 @@ export function ExerciseDisplay({ item, currentSet, isActive = false }: Exercise
             {item.reps}
           </span>
           <span className="text-xl font-bold text-muted-foreground uppercase tracking-widest">
-            {item.per_lato ? "rip per lato" : "ripetizioni"}
+            {item.per_lato ? "per lato" : "ripetizioni"}
           </span>
         </div>
       )}
@@ -45,14 +45,14 @@ export function ExerciseDisplay({ item, currentSet, isActive = false }: Exercise
             ) : (
               <>
                 <Repeat className="h-7 w-7" />
-                {item.reps} rip
+                {item.reps} {item.per_lato ? "× lato" : "rip"}
               </>
             )}
           </div>
         )}
 
 
-        {item.per_lato && (
+        {item.per_lato && !(isActive && type === "reps") && (
           <div className="flex items-center gap-2 bg-golden-100 text-golden-800 dark:bg-golden-900 dark:text-golden-300 px-5 py-3 rounded-2xl text-2xl font-bold shadow-sm">
             Per lato
           </div>
