@@ -149,9 +149,9 @@ export function BoomerTable({
     <div className="space-y-3">
       <div
         ref={tableRef}
-        className="overflow-x-auto rounded-lg border border-excel-border dark:border-excel-border-dark font-[family-name:var(--font-dm-sans)]"
+        className="w-full overflow-x-auto rounded-lg border border-excel-border dark:border-excel-border-dark font-[family-name:var(--font-dm-sans)]"
       >
-        <table className="border-collapse" style={{ tableLayout: "fixed", width: colWidths.reduce((a, b) => a + b, 0) }}>
+        <table className="border-collapse" style={{ tableLayout: "fixed", width: `max(100%, ${colWidths.reduce((a, b) => a + b, 0)}px)` }}>
           <colgroup>
             {colWidths.map((w, i) => (
               <col key={i} style={{ width: w }} />

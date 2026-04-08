@@ -119,6 +119,8 @@ export function WorkoutPlayer() {
   const wakeLock = useWakeLock();
   const [isPaused, setIsPaused] = useState(false);
   const [selectedItem, setSelectedItem] = useState<PlanItemWithExercise | null>(null);
+  const [showTransition, setShowTransition] = useState(false);
+  const transitionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const currentItem = items[currentItemIndex];
   const exerciseType = currentItem ? getExerciseType(currentItem) : "reps";
@@ -150,6 +152,7 @@ export function WorkoutPlayer() {
 
   const handleStartTimer = useCallback(() => {
     if (currentItem?.duration) {
+      timer.stop(); // ensure clean state before starting
       timer.startCountdown(currentItem.duration);
       setIsPaused(false);
     }
@@ -189,7 +192,12 @@ export function WorkoutPlayer() {
   }, [timer, completeSet]);
 
   const handleRestComplete = useCallback(() => {
-    completeRest();
+    setShowTransition(true);
+    if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
+    transitionTimeoutRef.current = setTimeout(() => {
+      setShowTransition(false);
+      completeRest();
+    }, 1200);
   }, [completeRest]);
 
   const handleSkipRest = useCallback(() => {
@@ -211,6 +219,7 @@ export function WorkoutPlayer() {
       currentItem
     ) {
       const type = getExerciseType(currentItem);
+      timer.stop(); // always clear stale state before new exercise
       if (type === "reps") {
         timer.startStopwatch();
       }
@@ -226,6 +235,13 @@ export function WorkoutPlayer() {
     }
   }, [phase, wakeLock, timer, router]);
 
+  // Cleanup transition timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
+    };
+  }, []);
+
   if (phase === "idle" || !planId) {
     return (
       <div className="flex flex-col min-h-screen items-center justify-center bg-background text-foreground gap-6 py-20 px-6">
@@ -238,6 +254,37 @@ export function WorkoutPlayer() {
     return (
       <div className="flex min-h-[100dvh] items-center justify-center bg-background">
         <CheckCircle2 className="h-16 w-16 text-primary animate-pulse" />
+      </div>
+    );
+  }
+
+  // Exercise transition flash overlay ("Pronti?")
+  if (showTransition && currentItem) {
+    return (
+      <div
+        className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-primary text-primary-foreground px-8"
+        style={{ animation: "fadeInOut 1.2s ease-in-out forwards" }}
+      >
+        <style>{`
+          @keyframes fadeInOut {
+            0%   { opacity: 0; transform: scale(0.95); }
+            20%  { opacity: 1; transform: scale(1); }
+            80%  { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.02); }
+          }
+        `}</style>
+        <p className="text-2xl font-bold uppercase tracking-widest mb-6 opacity-80">Pronti?</p>
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-balance leading-tight">
+          {currentItem.exercise.name}
+        </h2>
+        {currentItem.reps && (
+          <p className="text-3xl font-bold mt-6 opacity-80">
+            {currentItem.reps} {currentItem.per_lato ? "rip per lato" : "rip"}
+          </p>
+        )}
+        {currentItem.duration && (
+          <p className="text-3xl font-bold mt-6 opacity-80">{currentItem.duration}s</p>
+        )}
       </div>
     );
   }
@@ -408,20 +455,28 @@ export function WorkoutPlayer() {
             <ExerciseDisplay
               item={currentItem}
               currentSet={getSupersetGroup(items, currentItemIndex) ? supersetRound : currentSet}
+              isActive
             />
 
-            <div className="flex justify-center mt-12 mb-8">
-              <TimerDisplay
-                seconds={timer.displaySeconds}
-                totalSeconds={
-                  exerciseType === "timed"
-                    ? (currentItem.duration ?? 0)
-                    : undefined
-                }
-                mode={exerciseType === "timed" ? "countdown" : "stopwatch"}
-                size="large"
-              />
-            </div>
+            {exerciseType === "timed" ? (
+              <div className="flex justify-center mt-12 mb-8">
+                <TimerDisplay
+                  seconds={timer.displaySeconds}
+                  totalSeconds={currentItem.duration ?? 0}
+                  mode="countdown"
+                  size="large"
+                />
+              </div>
+            ) : (
+              /* Rep exercises: show elapsed stopwatch small, unobtrusive */
+              <div className="flex justify-center mt-8 mb-4">
+                <TimerDisplay
+                  seconds={timer.displaySeconds}
+                  mode="stopwatch"
+                  size="normal"
+                />
+              </div>
+            )}
           </>
         )}
       </div>

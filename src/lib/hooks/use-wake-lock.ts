@@ -9,6 +9,7 @@ export function useWakeLock() {
   // becomes hidden / the screen turns off, but we still want to re-acquire
   // it as soon as the page is visible again.
   const activeRef = useRef(false);
+  const heartbeatRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const acquire = useCallback(async () => {
     // Don't request if already holding an active (non-released) sentinel
@@ -31,20 +32,39 @@ export function useWakeLock() {
     }
   }, []);
 
+  const stopHeartbeat = useCallback(() => {
+    if (heartbeatRef.current !== null) {
+      clearInterval(heartbeatRef.current);
+      heartbeatRef.current = null;
+    }
+  }, []);
+
+  const startHeartbeat = useCallback(() => {
+    stopHeartbeat();
+    // Re-acquire every 30s as a safety net against silent Android drops
+    heartbeatRef.current = setInterval(() => {
+      if (activeRef.current && (!wakeLockRef.current || wakeLockRef.current.released)) {
+        acquire();
+      }
+    }, 30_000);
+  }, [acquire, stopHeartbeat]);
+
   const request = useCallback(async () => {
     activeRef.current = true;
     await acquire();
-  }, [acquire]);
+    startHeartbeat();
+  }, [acquire, startHeartbeat]);
 
   const release = useCallback(async () => {
     activeRef.current = false;
+    stopHeartbeat();
     try {
       await wakeLockRef.current?.release();
       wakeLockRef.current = null;
     } catch {
       // Already released
     }
-  }, []);
+  }, [stopHeartbeat]);
 
   // Re-acquire on visibility change (e.g. user switches back to the app)
   useEffect(() => {

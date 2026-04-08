@@ -8,9 +8,11 @@ import { ExerciseImageCarousel } from "@/components/workout/exercise-image-carou
 interface ExerciseDisplayProps {
   item: PlanItemWithExercise;
   currentSet: number;
+  /** When true (active workout), rep count is shown as a large hero number */
+  isActive?: boolean;
 }
 
-export function ExerciseDisplay({ item, currentSet }: ExerciseDisplayProps) {
+export function ExerciseDisplay({ item, currentSet, isActive = false }: ExerciseDisplayProps) {
   const type = getExerciseType(item);
 
   return (
@@ -19,20 +21,36 @@ export function ExerciseDisplay({ item, currentSet }: ExerciseDisplayProps) {
         {item.exercise.name}
       </h2>
 
-      <div className="flex flex-wrap items-center justify-center gap-3">
-        <div className="flex items-center gap-2 bg-primary/10 text-primary px-5 py-3 rounded-2xl text-2xl font-bold shadow-sm">
-          {type === "timed" ? (
-            <>
-              <Clock className="h-7 w-7" />
-              {item.duration}s
-            </>
-          ) : (
-            <>
-              <Repeat className="h-7 w-7" />
-              {item.reps} rip
-            </>
-          )}
+      {/* Rep exercises in active mode: show a large hero rep count */}
+      {type === "reps" && isActive && (
+        <div className="flex flex-col items-center gap-1 my-2">
+          <span className="text-[5rem] leading-none font-extrabold tabular-nums text-primary drop-shadow-sm">
+            {item.reps}
+          </span>
+          <span className="text-xl font-bold text-muted-foreground uppercase tracking-widest">
+            {item.per_lato ? "rip per lato" : "ripetizioni"}
+          </span>
         </div>
+      )}
+
+      <div className="flex flex-wrap items-center justify-center gap-3">
+        {/* For timed or non-active mode, show the standard metric badge */}
+        {(type === "timed" || !isActive) && (
+          <div className="flex items-center gap-2 bg-primary/10 text-primary px-5 py-3 rounded-2xl text-2xl font-bold shadow-sm">
+            {type === "timed" ? (
+              <>
+                <Clock className="h-7 w-7" />
+                {item.duration}s
+              </>
+            ) : (
+              <>
+                <Repeat className="h-7 w-7" />
+                {item.reps} rip
+              </>
+            )}
+          </div>
+        )}
+
 
         {item.per_lato && (
           <div className="flex items-center gap-2 bg-golden-100 text-golden-800 dark:bg-golden-900 dark:text-golden-300 px-5 py-3 rounded-2xl text-2xl font-bold shadow-sm">
