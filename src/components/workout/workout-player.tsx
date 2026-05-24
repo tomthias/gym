@@ -315,39 +315,41 @@ export function WorkoutPlayer() {
 
   if (phase === "ready") {
     const previewBlocks = buildPreviewBlocks(items);
-    let counter = 0;
+    const totalSets = items.reduce((acc, curr) => acc + curr.sets, 0);
 
     return (
-      <div className="flex flex-col min-h-[100dvh] bg-background text-foreground pb-40 relative">
-        <div className="px-6 pt-12 pb-8">
-          <h1 className="text-[2.75rem] font-extrabold tracking-tight mb-3 leading-none text-balance">{planName}</h1>
-          <p className="text-xl text-primary font-bold uppercase tracking-wider">
-            {items.length} esercizi • {items.reduce((acc, curr) => acc + curr.sets, 0)} Set
-          </p>
+      <div className="flex flex-col min-h-[100dvh] bg-background text-foreground pb-60 relative">
+        <div className="px-6 pt-12 pb-6">
+          <p className="text-xs font-bold text-primary uppercase tracking-[0.25em] mb-3">Pronto a iniziare</p>
+          <h1 className="text-[2.75rem] font-extrabold tracking-tight leading-[0.95] text-balance mb-5">{planName}</h1>
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="inline-flex items-center rounded-full bg-primary/10 px-3.5 py-1.5 text-sm font-bold text-primary">
+              {items.length} esercizi
+            </span>
+            <span className="inline-flex items-center rounded-full bg-muted px-3.5 py-1.5 text-sm font-bold text-foreground">
+              {totalSets} set totali
+            </span>
+          </div>
         </div>
 
-        <div className="px-4 space-y-2">
+        <div className="px-4 space-y-3">
           {previewBlocks.map((block) => {
             if (block.type === "standalone") {
-              counter++;
-              const isTimed = block.item.duration ? true : false;
               return (
                 <button
                   key={block.item.id}
                   onClick={() => setSelectedItem(block.item)}
-                  className="w-full flex items-center gap-5 py-4 px-2 rounded-2xl active:bg-muted/60 transition-colors text-left"
+                  className="w-full flex items-center gap-4 py-3.5 px-3 rounded-2xl bg-card border border-border/60 active:bg-muted/50 transition-colors text-left"
                 >
-                  <div className="relative flex-shrink-0">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-border bg-muted text-muted-foreground">
-                      {getCategoryIcon(block.item.exercise.category, "h-6 w-6")}
-                    </div>
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-muted text-muted-foreground flex-shrink-0">
+                    {getCategoryIcon(block.item.exercise.category, "h-6 w-6")}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-2xl font-bold line-clamp-2 text-foreground leading-tight">
+                    <p className="text-lg font-bold line-clamp-2 text-foreground leading-tight">
                       {block.item.exercise.name}
                     </p>
-                    <p className="text-lg text-muted-foreground mt-1 font-medium">
-                      <span className="text-foreground">{block.item.sets} set</span> • {block.item.reps ? `${block.item.reps} rip` : `${block.item.duration}s`}
+                    <p className="text-sm text-muted-foreground mt-1 font-medium">
+                      <span className="text-foreground font-semibold">{block.item.sets} set</span> · {block.item.reps ? `${block.item.reps} rip` : `${block.item.duration}s`}
                     </p>
                   </div>
                   <ChevronRight className="h-5 w-5 text-muted-foreground/50 flex-shrink-0" />
@@ -355,63 +357,55 @@ export function WorkoutPlayer() {
               );
             }
 
-            // Superset block with DropSet style vertical link connecting the circles
+            // Superset block — grouped in a tinted card for visual cohesion
             return (
-              <div key={`ss-${block.group}`} className="relative py-4 px-2">
-                <div className="mb-4 ml-[5.5rem] text-sm font-extrabold text-primary uppercase tracking-widest">
-                  Superserie • {block.items[0].sets} Round
+              <div key={`ss-${block.group}`} className="rounded-2xl bg-primary/[0.06] border border-primary/15 p-2.5">
+                <div className="flex items-center justify-between px-2 pt-1 pb-2.5">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-extrabold text-primary uppercase tracking-widest">
+                    <Link2 className="h-3.5 w-3.5" />
+                    Superserie
+                  </span>
+                  <span className="text-xs font-bold text-primary/70 uppercase tracking-wider">
+                    {block.items[0].sets} Round
+                  </span>
                 </div>
-                {block.items.map((item, i) => {
-                  counter++;
-                  const isTimed = item.duration ? true : false;
-                  const isLast = i === block.items.length - 1;
-                  return (
+                <div className="space-y-1.5">
+                  {block.items.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => setSelectedItem(item)}
-                      className={`relative w-full flex items-center gap-5 rounded-2xl active:bg-muted/60 transition-colors text-left ${!isLast ? "mb-6" : ""}`}
+                      className="w-full flex items-center gap-4 py-3 px-2.5 rounded-xl bg-card border border-border/50 active:bg-muted/40 transition-colors text-left"
                     >
-                      {/* Vertical line connector (Superset Link) */}
-                      {!isLast && (
-                        <div className="absolute left-8 top-[4rem] bottom-[-2.5rem] w-0.5 bg-neutral-800 z-0">
-                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-zinc-950 p-1 rounded-full">
-                            <Link2 className="h-5 w-5 text-neutral-600 rotate-90" />
-                          </div>
-                        </div>
-                      )}
-
-                      <div className="relative z-10 flex-shrink-0">
-                        <div className="flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-primary/30 bg-background text-primary shadow-[0_0_15px_hsl(var(--primary)/0.1)]">
-                          {getCategoryIcon(item.exercise.category, "h-6 w-6")}
-                        </div>
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary flex-shrink-0">
+                        {getCategoryIcon(item.exercise.category, "h-5 w-5")}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-2xl font-bold line-clamp-2 text-foreground leading-tight">
+                        <p className="text-base font-bold line-clamp-2 text-foreground leading-tight">
                           {item.exercise.name}
                         </p>
-                        <p className="text-lg text-muted-foreground mt-1 font-medium">
-                          <span className="text-primary">{item.sets} set</span> • {item.reps ? `${item.reps} rip` : `${item.duration}s`}
+                        <p className="text-sm text-muted-foreground mt-0.5 font-medium">
+                          <span className="text-primary font-semibold">{item.sets} set</span> · {item.reps ? `${item.reps} rip` : `${item.duration}s`}
                         </p>
                       </div>
                       <ChevronRight className="h-5 w-5 text-muted-foreground/50 flex-shrink-0" />
                     </button>
-                  );
-                })}
+                  ))}
+                </div>
               </div>
             );
           })}
         </div>
 
         {/* Floating Bottom Bar */}
-        <div className="fixed bottom-0 left-0 right-0 p-6 pb-[calc(1.5rem+env(safe-area-inset-bottom)+4rem)] pt-16 bg-gradient-to-t from-background via-background to-transparent flex gap-4 pointer-events-none">
-          <div className="flex gap-4 w-full pointer-events-auto">
+        <div className="fixed bottom-0 left-0 right-0 px-4 pb-[calc(1rem+env(safe-area-inset-bottom)+4rem)] pt-10 bg-gradient-to-t from-background via-background/95 to-transparent flex gap-3 pointer-events-none">
+          <div className="flex gap-3 w-full pointer-events-auto">
             <QuitDialog onConfirm={handleQuit}>
-              <Button variant="outline" size="lg" className="h-20 px-8 rounded-2xl border-none bg-muted hover:bg-muted/80 text-muted-foreground focus:ring-0">
-                <X className="h-8 w-8" />
+              <Button variant="outline" size="lg" className="h-16 px-6 rounded-2xl border-none bg-muted hover:bg-muted/80 text-muted-foreground focus:ring-0">
+                <X className="h-6 w-6" />
               </Button>
             </QuitDialog>
-            <Button onClick={handleStartWorkout} size="lg" className="h-20 flex-1 rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground text-2xl font-bold tracking-wide shadow-2xl shadow-primary/30">
-              Inizia <ArrowRight className="ml-3 h-7 w-7" />
+            <Button onClick={handleStartWorkout} size="lg" className="h-16 flex-1 rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground text-xl font-bold tracking-wide shadow-lg shadow-primary/25">
+              Inizia <ArrowRight className="ml-2.5 h-6 w-6" />
             </Button>
           </div>
         </div>
