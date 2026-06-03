@@ -121,6 +121,7 @@ export function WorkoutPlayer() {
   const [selectedItem, setSelectedItem] = useState<PlanItemWithExercise | null>(null);
   const [showTransition, setShowTransition] = useState(false);
   const transitionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastTransitionTapRef = useRef(0);
 
   const currentItem = items[currentItemIndex];
   const exerciseType = currentItem ? getExerciseType(currentItem) : "reps";
@@ -191,14 +192,28 @@ export function WorkoutPlayer() {
     completeSet();
   }, [timer, completeSet]);
 
+  const dismissTransition = useCallback(() => {
+    if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
+    setShowTransition(false);
+    completeRest();
+  }, [completeRest]);
+
   const handleRestComplete = useCallback(() => {
     setShowTransition(true);
     if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
-    transitionTimeoutRef.current = setTimeout(() => {
-      setShowTransition(false);
-      completeRest();
-    }, 5000);
-  }, [completeRest]);
+    transitionTimeoutRef.current = setTimeout(dismissTransition, 5000);
+  }, [dismissTransition]);
+
+  // Double-tap to skip the "Pronti?" flash (app is used almost entirely on mobile)
+  const handleTransitionTap = useCallback(() => {
+    const now = Date.now();
+    if (now - lastTransitionTapRef.current < 300) {
+      lastTransitionTapRef.current = 0;
+      dismissTransition();
+    } else {
+      lastTransitionTapRef.current = now;
+    }
+  }, [dismissTransition]);
 
   const handleSkipRest = useCallback(() => {
     skipRest();
@@ -262,7 +277,10 @@ export function WorkoutPlayer() {
   if (showTransition && currentItem) {
     return (
       <div
-        className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-primary text-primary-foreground px-8"
+        onClick={handleTransitionTap}
+        role="button"
+        tabIndex={0}
+        className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-primary text-primary-foreground px-8 cursor-pointer select-none touch-manipulation"
         style={{ animation: "fadeIn 0.3s ease-out forwards" }}
       >
         <style>{`
@@ -287,6 +305,9 @@ export function WorkoutPlayer() {
         {currentItem.duration && (
           <p className="text-3xl font-bold mt-6 opacity-80">{currentItem.duration}s</p>
         )}
+        <p className="absolute bottom-8 left-0 right-0 text-center text-sm font-semibold uppercase tracking-widest opacity-50">
+          Tocca due volte per saltare
+        </p>
         {/* Countdown progress bar */}
         <div className="absolute bottom-0 left-0 right-0 h-2 bg-primary-foreground/20">
           <div
