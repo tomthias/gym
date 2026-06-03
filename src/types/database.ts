@@ -123,6 +123,7 @@ export type Database = {
           notes: string | null;
           superset_group: number | null;
           transition_rest: number | null;
+          per_lato: boolean;
           created_at: string;
         };
         Insert: {
@@ -138,6 +139,7 @@ export type Database = {
           notes?: string | null;
           superset_group?: number | null;
           transition_rest?: number | null;
+          per_lato?: boolean;
           created_at?: string;
         };
         Update: {
@@ -150,6 +152,7 @@ export type Database = {
           notes?: string | null;
           superset_group?: number | null;
           transition_rest?: number | null;
+          per_lato?: boolean;
         };
       };
       workout_logs: {

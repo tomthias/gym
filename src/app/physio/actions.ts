@@ -101,6 +101,7 @@ export async function duplicatePlan(planId: string) {
       notes: item.notes,
       superset_group: item.superset_group,
       transition_rest: item.transition_rest,
+      per_lato: item.per_lato,
     }));
 
     const { error: itemsError } = await supabase

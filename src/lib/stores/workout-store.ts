@@ -262,7 +262,23 @@ export const useWorkoutStore = create<WorkoutState & WorkoutActions>()(
             if (cleanItems.length === 0) {
               useWorkoutStore.getState().reset();
             } else {
-              useWorkoutStore.setState({ items: cleanItems });
+              // Clamp the cursor so it can't point past the shortened list,
+              // otherwise items[currentItemIndex] would be undefined and crash
+              // the player. Reset set/superset tracking if the cursor moved.
+              const clampedIndex = Math.min(
+                state.currentItemIndex,
+                cleanItems.length - 1
+              );
+              const moved = clampedIndex !== state.currentItemIndex;
+              useWorkoutStore.setState({
+                items: cleanItems,
+                currentItemIndex: clampedIndex,
+                ...(moved && {
+                  currentSet: 1,
+                  supersetRound: 1,
+                  supersetExerciseIndex: 0,
+                }),
+              });
             }
           }
         }

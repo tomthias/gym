@@ -82,10 +82,15 @@ export default function ExercisesPage() {
 
   const fetchExercises = useCallback(async () => {
     const supabase = createClient();
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("exercises")
       .select("*")
       .order("name");
+    if (error) {
+      toast.error("Errore nel caricamento della libreria esercizi");
+      setLoading(false);
+      return;
+    }
     if (data) setExercises(data);
     setLoading(false);
   }, []);
