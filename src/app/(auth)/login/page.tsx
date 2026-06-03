@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { resolveUsernameToEmail } from "./actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,15 +33,14 @@ export default function LoginPage() {
     const supabase = createClient();
     const input = identifier.trim();
 
-    // If input looks like a username (no @), resolve to email via RPC
+    // If input looks like a username (no @), resolve to email server-side.
     let email = input;
     if (!input.includes("@")) {
-      const { data: resolvedEmail } = await supabase.rpc("get_email_by_username", {
-        lookup_username: input,
-      });
+      const resolvedEmail = await resolveUsernameToEmail(input);
 
       if (!resolvedEmail) {
-        setError("Nome utente non trovato");
+        // Generic message: don't reveal whether the username exists.
+        setError("Credenziali non valide");
         setLoading(false);
         return;
       }
@@ -53,7 +53,7 @@ export default function LoginPage() {
     });
 
     if (error) {
-      setError(error.message);
+      setError("Credenziali non valide");
       setLoading(false);
       return;
     }

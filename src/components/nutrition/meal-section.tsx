@@ -45,9 +45,9 @@ export function MealSection({
               </Badge>
             )}
           </div>
-          <Link href={`/nutrition/add-meal?slot=${slot}&dayType=${dayType}`}>
-            <Button variant="ghost" size="icon" className="h-8 w-8">
-              <Plus className="h-4 w-4" />
+          <Link href={`/nutrition/add-meal?slot=${slot}&dayType=${dayType}`} aria-label={`Aggiungi a ${label}`}>
+            <Button variant="ghost" size="icon" className="h-11 w-11">
+              <Plus className="h-5 w-5" />
             </Button>
           </Link>
         </div>

@@ -12,7 +12,8 @@ export function Header({ title, backHref }: HeaderProps) {
       {backHref && (
         <Link
           href={backHref}
-          className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-muted"
+          aria-label="Indietro"
+          className="-ml-1.5 flex h-11 w-11 items-center justify-center rounded-lg hover:bg-muted active:bg-muted"
         >
           <ArrowLeft className="h-5 w-5" />
         </Link>

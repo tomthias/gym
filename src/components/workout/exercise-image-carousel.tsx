@@ -39,32 +39,36 @@ export function ExerciseImageCarousel({
           <button
             type="button"
             onClick={() => setIdx((i) => (i - 1 + images.length) % images.length)}
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-1 transition-colors"
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 active:bg-black/70 text-white rounded-full p-2.5 transition-colors"
             aria-label="Immagine precedente"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-6 h-6" />
           </button>
 
           <button
             type="button"
             onClick={() => setIdx((i) => (i + 1) % images.length)}
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-1 transition-colors"
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 active:bg-black/70 text-white rounded-full p-2.5 transition-colors"
             aria-label="Immagine successiva"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-6 h-6" />
           </button>
 
-          <div className="flex justify-center gap-1.5 py-2">
+          <div className="flex justify-center gap-1 py-1">
             {images.map((_, i) => (
               <button
                 key={i}
                 type="button"
                 onClick={() => setIdx(i)}
-                className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                  i === idx ? "bg-primary" : "bg-muted-foreground/30"
-                }`}
+                className="flex h-7 w-7 items-center justify-center"
                 aria-label={`Vai all'immagine ${i + 1}`}
-              />
+              >
+                <span
+                  className={`h-2 w-2 rounded-full transition-colors ${
+                    i === idx ? "bg-primary" : "bg-muted-foreground/30"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </>

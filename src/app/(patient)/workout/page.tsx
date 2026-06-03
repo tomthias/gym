@@ -6,7 +6,8 @@ import { createClient } from "@/lib/supabase/client";
 import { useWorkoutStore } from "@/lib/stores/workout-store";
 import { WorkoutPlayer } from "@/components/workout/workout-player";
 import type { PlanItemWithExercise } from "@/types/workout";
-import { Loader2 } from "lucide-react";
+import { Loader2, AlertCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function WorkoutPage() {
   return (
@@ -33,6 +34,8 @@ function WorkoutPageContent() {
   const reset = useWorkoutStore((s) => s.reset);
 
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
+  const [retry, setRetry] = useState(0);
   const loadingRef = useRef(false);
 
   const planIdParam = searchParams.get("planId");
@@ -56,6 +59,7 @@ function WorkoutPageContent() {
 
     async function fetchAndLoadPlan() {
       loadingRef.current = true;
+      setLoadError(false);
       const supabase = createClient();
       const {
         data: { user },
@@ -104,7 +108,16 @@ function WorkoutPageContent() {
         query = query.eq("active", true).limit(1);
       }
 
-      const { data: plans } = await query;
+      const { data: plans, error: plansError } = await query;
+
+      if (plansError) {
+        console.error("Errore caricamento scheda:", plansError);
+        loadingRef.current = false;
+        setLoadError(true);
+        setLoading(false);
+        return;
+      }
+
       const plan = plans?.[0];
 
       if (!plan || !plan.plan_items?.length) {
@@ -143,7 +156,27 @@ function WorkoutPageContent() {
     }
 
     fetchAndLoadPlan();
-  }, [phase, storePlanId, planIdParam, router, loadPlanAction, reset]);
+  }, [phase, storePlanId, planIdParam, router, loadPlanAction, reset, retry]);
+
+  if (loadError) {
+    return (
+      <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 px-6 text-center">
+        <AlertCircle className="h-10 w-10 text-destructive" />
+        <p className="text-muted-foreground">
+          Non è stato possibile caricare la scheda. Controlla la connessione e riprova.
+        </p>
+        <Button
+          onClick={() => {
+            loadingRef.current = false;
+            setLoading(true);
+            setRetry((n) => n + 1);
+          }}
+        >
+          Riprova
+        </Button>
+      </div>
+    );
+  }
 
   if (loading) {
     return (

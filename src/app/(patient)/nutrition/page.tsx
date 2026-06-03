@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Header } from "@/components/layout/header";
 import { DailySummaryCard } from "@/components/nutrition/daily-summary-card";
@@ -9,7 +8,7 @@ import { MealSection } from "@/components/nutrition/meal-section";
 import { Button } from "@/components/ui/button";
 import { MEAL_SLOTS, type DayType } from "@/types/nutrition";
 import { cn } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
+import { Loader2, AlertCircle, UtensilsCrossed } from "lucide-react";
 import { toast } from "sonner";
 
 interface LogEntry {
@@ -25,11 +24,11 @@ interface LogEntry {
 }
 
 export default function NutritionPage() {
-  const router = useRouter();
   const [dayType, setDayType] = useState<DayType>("workout");
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [budget, setBudget] = useState({ workout: 2100, rest: 1900 });
   const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState<"ok" | "error" | "no-budget">("ok");
 
   const today = new Date().toISOString().split("T")[0];
 
@@ -40,6 +39,7 @@ export default function NutritionPage() {
     } = await supabase.auth.getUser();
     if (!user) return;
 
+    setStatus("ok");
     const [logsRes, budgetRes] = await Promise.all([
       supabase
         .from("nutrition_logs")
@@ -53,9 +53,18 @@ export default function NutritionPage() {
         .maybeSingle(),
     ]);
 
-    // Redirect if user has no calorie budget (nutrition not enabled)
+    // A query error is a connection/permission problem — show a retry, don't redirect.
+    if (budgetRes.error || logsRes.error) {
+      console.error("Errore caricamento nutrizione:", budgetRes.error ?? logsRes.error);
+      setStatus("error");
+      setLoading(false);
+      return;
+    }
+
+    // No budget configured yet: the physio hasn't enabled nutrition for this patient.
     if (!budgetRes.data) {
-      router.push("/dashboard");
+      setStatus("no-budget");
+      setLoading(false);
       return;
     }
 
@@ -94,6 +103,35 @@ export default function NutritionPage() {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-teal-500" />
+      </div>
+    );
+  }
+
+  if (status === "error") {
+    return (
+      <div>
+        <Header title="Nutrizione" />
+        <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 px-6 text-center">
+          <AlertCircle className="h-10 w-10 text-destructive" />
+          <p className="text-muted-foreground">
+            Non è stato possibile caricare i dati nutrizionali. Controlla la connessione e riprova.
+          </p>
+          <Button onClick={() => { setLoading(true); fetchData(); }}>Riprova</Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (status === "no-budget") {
+    return (
+      <div>
+        <Header title="Nutrizione" />
+        <div className="flex min-h-[50vh] flex-col items-center justify-center gap-3 px-6 text-center">
+          <UtensilsCrossed className="h-10 w-10 text-muted-foreground" />
+          <p className="text-muted-foreground max-w-xs">
+            Il tuo piano nutrizionale non è ancora stato configurato. Contatta la tua fisioterapista per attivarlo.
+          </p>
+        </div>
       </div>
     );
   }

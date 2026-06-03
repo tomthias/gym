@@ -2,8 +2,9 @@
 
 import type { PlanItemWithExercise } from "@/types/workout";
 import { getExerciseType } from "@/types/workout";
-import { Clock, Repeat, ExternalLink, Info } from "lucide-react";
+import { Clock, Repeat, Info } from "lucide-react";
 import { ExerciseImageCarousel } from "@/components/workout/exercise-image-carousel";
+import { VideoEmbed } from "@/components/workout/video-embed";
 
 interface ExerciseDisplayProps {
   item: PlanItemWithExercise;
@@ -92,16 +93,8 @@ export function ExerciseDisplay({ item, currentSet, isActive = false }: Exercise
       )}
 
       {item.exercise.video_url && (
-        <div className="pt-2">
-          <a
-            href={item.exercise.video_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-teal-50 text-teal-700 hover:bg-teal-100 dark:bg-teal-950 dark:text-teal-400 dark:hover:bg-teal-900 transition-colors text-lg font-medium shadow-sm"
-          >
-            <ExternalLink className="h-5 w-5" />
-            Guarda il video tutorial
-          </a>
+        <div className="max-w-sm mx-auto w-full pt-2">
+          <VideoEmbed url={item.exercise.video_url} title={item.exercise.name} />
         </div>
       )}
     </div>

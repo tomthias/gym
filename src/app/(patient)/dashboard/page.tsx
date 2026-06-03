@@ -27,8 +27,11 @@ export default async function DashboardPage() {
   if (!user) redirect("/login");
 
   // Fetch profile, active plans, and recent logs in parallel
-  const [{ data: profile }, { data: activePlans }, { data: recentLogs }] =
-    await Promise.all([
+  const [
+    { data: profile, error: profileError },
+    { data: activePlans },
+    { data: recentLogs },
+  ] = await Promise.all([
       supabase
         .from("profiles")
         .select("full_name, username, physio_id")
@@ -68,6 +71,22 @@ export default async function DashboardPage() {
         .order("completed_at", { ascending: false })
         .limit(7),
     ]);
+
+  // The profile row is created on signup; a failure here means a real
+  // connection/permission problem rather than an empty state.
+  if (profileError || !profile) {
+    return (
+      <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 px-6 text-center">
+        <Activity className="h-10 w-10 text-destructive" />
+        <p className="text-muted-foreground">
+          Non è stato possibile caricare i tuoi dati. Controlla la connessione e riprova.
+        </p>
+        <Button asChild>
+          <Link href="/dashboard">Riprova</Link>
+        </Button>
+      </div>
+    );
+  }
 
   const sessionsThisWeek =
     recentLogs?.filter((log) => {

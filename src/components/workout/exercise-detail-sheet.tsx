@@ -8,7 +8,6 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   Timer,
   Dumbbell,
@@ -22,10 +21,10 @@ import {
   User,
   StickyNote,
   Info,
-  ExternalLink,
   Scale,
 } from "lucide-react";
 import { ExerciseImageCarousel } from "@/components/workout/exercise-image-carousel";
+import { VideoEmbed } from "@/components/workout/video-embed";
 
 export function getCategoryIcon(category: string, className = "h-5 w-5") {
   switch (category) {
@@ -191,22 +190,9 @@ export function ExerciseDetailSheet({
             />
           )}
 
-          {/* Video link */}
+          {/* Video tutorial */}
           {item.exercise.video_url && (
-            <Button
-              variant="outline"
-              className="w-full h-12 rounded-xl font-semibold gap-2"
-              asChild
-            >
-              <a
-                href={item.exercise.video_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ExternalLink className="h-4 w-4" />
-                Guarda il video
-              </a>
-            </Button>
+            <VideoEmbed url={item.exercise.video_url} title={item.exercise.name} />
           )}
         </div>
       </SheetContent>
