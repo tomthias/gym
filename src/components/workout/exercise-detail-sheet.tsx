@@ -25,6 +25,8 @@ import {
 } from "lucide-react";
 import { ExerciseImageCarousel } from "@/components/workout/exercise-image-carousel";
 import { VideoEmbed } from "@/components/workout/video-embed";
+import { useI18n } from "@/lib/i18n/client";
+import { workout } from "@/lib/i18n/messages/workout";
 
 export function getCategoryIcon(category: string, className = "h-5 w-5") {
   switch (category) {
@@ -45,16 +47,10 @@ export function getCategoryIcon(category: string, className = "h-5 w-5") {
   }
 }
 
-export function getCategoryLabel(category: string): string {
-  const labels: Record<string, string> = {
-    cardio: "Cardio",
-    core: "Core",
-    lower_body: "Arti inferiori",
-    upper_body: "Arti superiori",
-    balance: "Equilibrio",
-    flexibility: "Flessibilità",
-    general: "Generale",
-  };
+export function getCategoryLabel(
+  category: string,
+  labels: Record<string, string> = workout.it.categories
+): string {
   return labels[category] ?? category;
 }
 
@@ -69,6 +65,9 @@ export function ExerciseDetailSheet({
   open,
   onClose,
 }: ExerciseDetailSheetProps) {
+  const { t } = useI18n();
+  const m = t.workout.detail;
+
   if (!item) return null;
 
   const isTimed = item.duration != null;
@@ -108,12 +107,12 @@ export function ExerciseDetailSheet({
               className="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1"
             >
               {getCategoryIcon(category, "h-3.5 w-3.5")}
-              {getCategoryLabel(category)}
+              {getCategoryLabel(category, t.workout.categories)}
             </Badge>
             {item.per_lato && (
               <Badge variant="outline" className="text-xs font-semibold px-2.5 py-1 flex items-center gap-1.5">
                 <User className="h-3.5 w-3.5" />
-                Per lato
+                {m.perSide}
               </Badge>
             )}
           </div>
@@ -128,7 +127,7 @@ export function ExerciseDetailSheet({
           <div className="grid grid-cols-3 gap-3">
             <StatCard
               icon={<Repeat className="h-4 w-4 text-primary" />}
-              label="Serie"
+              label={m.sets}
               value={`${item.sets}`}
             />
             <StatCard
@@ -139,7 +138,7 @@ export function ExerciseDetailSheet({
                   <RotateCcw className="h-4 w-4 text-primary" />
                 )
               }
-              label={isTimed ? "Durata" : "Ripetizioni"}
+              label={isTimed ? m.duration : m.reps}
               value={
                 isTimed
                   ? item.duration! >= 60
@@ -150,7 +149,7 @@ export function ExerciseDetailSheet({
             />
             <StatCard
               icon={<Timer className="h-4 w-4 text-primary" />}
-              label="Recupero"
+              label={m.rest}
               value={restLabel}
             />
           </div>
@@ -167,7 +166,7 @@ export function ExerciseDetailSheet({
           {caricoTrimmed && (
             <InfoSection
               icon={<Scale className="h-4 w-4" />}
-              title="Carico"
+              title={m.load}
               content={caricoTrimmed}
             />
           )}
@@ -176,7 +175,7 @@ export function ExerciseDetailSheet({
           {noteFisioTrimmed && (
             <InfoSection
               icon={<StickyNote className="h-4 w-4" />}
-              title="Note del fisioterapista"
+              title={m.physioNotes}
               content={noteFisioTrimmed}
             />
           )}
@@ -185,7 +184,7 @@ export function ExerciseDetailSheet({
           {item.exercise.description && (
             <InfoSection
               icon={<Info className="h-4 w-4" />}
-              title="Descrizione"
+              title={m.description}
               content={item.exercise.description}
             />
           )}

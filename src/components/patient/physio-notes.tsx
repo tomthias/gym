@@ -1,5 +1,8 @@
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { MessageSquare } from "lucide-react";
+import { useI18n } from "@/lib/i18n/client";
 
 interface PhysioNote {
   id: string;
@@ -13,6 +16,8 @@ interface PhysioNotesProps {
 }
 
 export function PhysioNotes({ notes, physioName }: PhysioNotesProps) {
+  const { t, tag } = useI18n();
+
   if (!notes.length) return null;
 
   return (
@@ -27,10 +32,10 @@ export function PhysioNotes({ notes, physioName }: PhysioNotesProps) {
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2 mb-0.5">
                   <p className="text-xs font-medium text-golden-700 dark:text-golden-400">
-                    {physioName || "Il tuo fisioterapista"}
+                    {physioName || t.common.yourPhysio}
                   </p>
                   <span className="text-xs text-muted-foreground">
-                    {new Date(note.created_at).toLocaleDateString("it-IT", {
+                    {new Date(note.created_at).toLocaleDateString(tag, {
                       day: "numeric",
                       month: "short",
                     })}

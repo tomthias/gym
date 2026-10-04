@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useI18n } from "@/lib/i18n/client";
 
 interface ExerciseImageCarouselProps {
   images: string[];
@@ -12,6 +13,8 @@ export function ExerciseImageCarousel({
   images,
   exerciseName,
 }: ExerciseImageCarouselProps) {
+  const { t } = useI18n();
+  const m = t.workout.carousel;
   const [idx, setIdx] = useState(0);
 
   if (images.length === 0) return null;
@@ -23,7 +26,7 @@ export function ExerciseImageCarousel({
       <div className="aspect-[4/3] relative">
         <img
           src={images[idx]}
-          alt={`${exerciseName} - immagine ${idx + 1}`}
+          alt={m.imageAlt(exerciseName, idx + 1)}
           className="w-full h-full object-contain"
         />
 
@@ -40,7 +43,7 @@ export function ExerciseImageCarousel({
             type="button"
             onClick={() => setIdx((i) => (i - 1 + images.length) % images.length)}
             className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 active:bg-black/70 text-white rounded-full p-2.5 transition-colors"
-            aria-label="Immagine precedente"
+            aria-label={m.previous}
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
@@ -49,7 +52,7 @@ export function ExerciseImageCarousel({
             type="button"
             onClick={() => setIdx((i) => (i + 1) % images.length)}
             className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 active:bg-black/70 text-white rounded-full p-2.5 transition-colors"
-            aria-label="Immagine successiva"
+            aria-label={m.next}
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -61,7 +64,7 @@ export function ExerciseImageCarousel({
                 type="button"
                 onClick={() => setIdx(i)}
                 className="flex h-7 w-7 items-center justify-center"
-                aria-label={`Vai all'immagine ${i + 1}`}
+                aria-label={m.goTo(i + 1)}
               >
                 <span
                   className={`h-2 w-2 rounded-full transition-colors ${

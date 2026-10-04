@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Plus, X } from "lucide-react";
 import type { MealSlot } from "@/types/nutrition";
+import { useI18n } from "@/lib/i18n/client";
 
 interface MealEntry {
   id: string;
@@ -31,6 +32,7 @@ export function MealSection({
   dayType,
   onRemove,
 }: MealSectionProps) {
+  const { t } = useI18n();
   const totalCalories = meals.reduce((sum, m) => sum + m.calories, 0);
 
   return (
@@ -45,7 +47,7 @@ export function MealSection({
               </Badge>
             )}
           </div>
-          <Link href={`/nutrition/add-meal?slot=${slot}&dayType=${dayType}`} aria-label={`Aggiungi a ${label}`}>
+          <Link href={`/nutrition/add-meal?slot=${slot}&dayType=${dayType}`} aria-label={t.nutrition.addTo(label)}>
             <Button variant="ghost" size="icon" className="h-11 w-11">
               <Plus className="h-5 w-5" />
             </Button>
@@ -58,7 +60,7 @@ export function MealSection({
             className="flex items-center justify-center rounded-lg border border-dashed py-4 text-sm text-muted-foreground hover:border-teal-300 hover:text-teal-600 transition-colors"
           >
             <Plus className="mr-1 h-4 w-4" />
-            Aggiungi pasto
+            {t.nutrition.addMeal}
           </Link>
         ) : (
           <div className="space-y-2">
@@ -70,8 +72,8 @@ export function MealSection({
                 <div>
                   <p className="text-sm font-medium">{meal.name}</p>
                   <p className="text-xs text-muted-foreground">
-                    {meal.calories} kcal &middot; P:{meal.proteinGrams}g C:
-                    {meal.carbsGrams}g F:{meal.fatsGrams}g
+                    {meal.calories} kcal &middot;{" "}
+                    {t.nutrition.macros.compact(meal.proteinGrams, meal.carbsGrams, meal.fatsGrams)}
                   </p>
                 </div>
                 <Button
@@ -79,7 +81,7 @@ export function MealSection({
                   size="icon"
                   className="h-7 w-7"
                   onClick={() => onRemove(meal.id)}
-                  aria-label={`Rimuovi ${meal.name}`}
+                  aria-label={t.nutrition.remove(meal.name)}
                 >
                   <X className="h-3.5 w-3.5" />
                 </Button>

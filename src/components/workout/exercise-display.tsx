@@ -5,6 +5,7 @@ import { getExerciseType } from "@/types/workout";
 import { Clock, Repeat, Info } from "lucide-react";
 import { ExerciseImageCarousel } from "@/components/workout/exercise-image-carousel";
 import { VideoEmbed } from "@/components/workout/video-embed";
+import { useI18n } from "@/lib/i18n/client";
 
 interface ExerciseDisplayProps {
   item: PlanItemWithExercise;
@@ -14,6 +15,8 @@ interface ExerciseDisplayProps {
 }
 
 export function ExerciseDisplay({ item, currentSet, isActive = false }: ExerciseDisplayProps) {
+  const { t } = useI18n();
+  const m = t.workout.display;
   const type = getExerciseType(item);
 
   return (
@@ -29,7 +32,7 @@ export function ExerciseDisplay({ item, currentSet, isActive = false }: Exercise
             {item.reps}
           </span>
           <span className="text-xl font-bold text-muted-foreground uppercase tracking-widest">
-            {item.per_lato ? "per lato" : "ripetizioni"}
+            {item.per_lato ? m.perSide : m.repetitions}
           </span>
         </div>
       )}
@@ -46,7 +49,7 @@ export function ExerciseDisplay({ item, currentSet, isActive = false }: Exercise
             ) : (
               <>
                 <Repeat className="h-7 w-7" />
-                {item.reps} {item.per_lato ? "× lato" : "rip"}
+                {item.reps} {item.per_lato ? m.perSideShort : m.repsShort}
               </>
             )}
           </div>
@@ -55,12 +58,12 @@ export function ExerciseDisplay({ item, currentSet, isActive = false }: Exercise
 
         {item.per_lato && !(isActive && type === "reps") && (
           <div className="flex items-center gap-2 bg-golden-100 text-golden-800 dark:bg-golden-900 dark:text-golden-300 px-5 py-3 rounded-2xl text-2xl font-bold shadow-sm">
-            Per lato
+            {m.perSideBadge}
           </div>
         )}
 
         <div className="flex items-center gap-2 bg-secondary text-secondary-foreground px-5 py-3 rounded-2xl text-2xl font-bold shadow-sm">
-          Serie {currentSet}/{item.sets}
+          {m.setOf(currentSet, item.sets)}
         </div>
       </div>
 

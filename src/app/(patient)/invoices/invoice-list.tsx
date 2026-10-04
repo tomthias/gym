@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Download } from "lucide-react";
+import { useI18n } from "@/lib/i18n/client";
 
 interface PatientInvoice {
   id: string;
@@ -27,6 +28,8 @@ export function PatientInvoiceList({
 }: {
   invoices: PatientInvoice[];
 }) {
+  const { t: { invoices: t }, tag } = useI18n();
+
   async function handleDownload(storagePath: string) {
     const supabase = createClient();
     const { data } = await supabase.storage
@@ -44,10 +47,10 @@ export function PatientInvoiceList({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>N. fattura</TableHead>
-              <TableHead>Data</TableHead>
-              <TableHead className="text-right">Totale</TableHead>
-              <TableHead className="text-center">Stato</TableHead>
+              <TableHead>{t.number}</TableHead>
+              <TableHead>{t.date}</TableHead>
+              <TableHead className="text-right">{t.total}</TableHead>
+              <TableHead className="text-center">{t.status}</TableHead>
               <TableHead className="w-16" />
             </TableRow>
           </TableHeader>
@@ -58,7 +61,7 @@ export function PatientInvoiceList({
                   {inv.invoice_number}
                 </TableCell>
                 <TableCell>
-                  {new Date(inv.invoice_date).toLocaleDateString("it-IT", {
+                  {new Date(inv.invoice_date).toLocaleDateString(tag, {
                     day: "numeric",
                     month: "short",
                     year: "numeric",
@@ -71,7 +74,7 @@ export function PatientInvoiceList({
                   <Badge
                     variant={inv.status === "paid" ? "default" : "secondary"}
                   >
-                    {inv.status === "paid" ? "Pagata" : "Da pagare"}
+                    {inv.status === "paid" ? t.paid : t.unpaid}
                   </Badge>
                 </TableCell>
                 <TableCell>
@@ -80,7 +83,7 @@ export function PatientInvoiceList({
                     size="icon"
                     className="h-8 w-8"
                     onClick={() => handleDownload(inv.pdf_storage_path)}
-                    aria-label="Scarica PDF"
+                    aria-label={t.download}
                   >
                     <Download className="h-4 w-4" />
                   </Button>
@@ -103,7 +106,7 @@ export function PatientInvoiceList({
                 {inv.invoice_number}
               </p>
               <p className="text-sm text-muted-foreground">
-                {new Date(inv.invoice_date).toLocaleDateString("it-IT", {
+                {new Date(inv.invoice_date).toLocaleDateString(tag, {
                   day: "numeric",
                   month: "short",
                   year: "numeric",
@@ -117,7 +120,7 @@ export function PatientInvoiceList({
                   variant={inv.status === "paid" ? "default" : "secondary"}
                   className="text-xs"
                 >
-                  {inv.status === "paid" ? "Pagata" : "Da pagare"}
+                  {inv.status === "paid" ? t.paid : t.unpaid}
                 </Badge>
               </div>
             </div>
@@ -126,7 +129,7 @@ export function PatientInvoiceList({
               size="icon"
               className="shrink-0 h-10 w-10"
               onClick={() => handleDownload(inv.pdf_storage_path)}
-              aria-label="Scarica PDF"
+              aria-label={t.download}
             >
               <Download className="h-4 w-4" />
             </Button>

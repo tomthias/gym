@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { getI18n } from "@/lib/i18n/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import {
@@ -25,6 +26,8 @@ export default async function DashboardPage() {
   } = await supabase.auth.getUser();
 
   if (!user) redirect("/login");
+
+  const { t: { dashboard: t }, tag } = await getI18n();
 
   // Fetch profile, active plans, and recent logs in parallel
   const [
@@ -79,10 +82,10 @@ export default async function DashboardPage() {
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 px-6 text-center">
         <Activity className="h-10 w-10 text-destructive" />
         <p className="text-muted-foreground">
-          Non è stato possibile caricare i tuoi dati. Controlla la connessione e riprova.
+          {t.loadError}
         </p>
         <Button asChild>
-          <Link href="/dashboard">Riprova</Link>
+          <Link href="/dashboard">{t.retry}</Link>
         </Button>
       </div>
     );
@@ -103,10 +106,10 @@ export default async function DashboardPage() {
       {/* Welcome */}
       <div>
         <h1 className="text-2xl font-bold">
-          Ciao,{" "}
+          {t.greeting}{" "}
           {profile?.username ?? profile?.full_name?.split(" ")[0] ?? ""}
         </h1>
-        <p className="text-muted-foreground">Il tuo percorso di riabilitazione</p>
+        <p className="text-muted-foreground">{t.subtitle}</p>
       </div>
 
       {/* Quick stats */}
@@ -118,7 +121,7 @@ export default async function DashboardPage() {
             </div>
             <div>
               <p className="text-2xl font-bold">{sessionsThisWeek}</p>
-              <p className="text-xs text-muted-foreground">Questa settimana</p>
+              <p className="text-xs text-muted-foreground">{t.thisWeek}</p>
             </div>
           </CardContent>
         </Card>
@@ -131,7 +134,7 @@ export default async function DashboardPage() {
               <p className="text-2xl font-bold">
                 {lastSession
                   ? new Date(lastSession.completed_at).toLocaleDateString(
-                      "it-IT",
+                      tag,
                       {
                         day: "numeric",
                         month: "short",
@@ -139,7 +142,7 @@ export default async function DashboardPage() {
                     )
                   : "--"}
               </p>
-              <p className="text-xs text-muted-foreground">Ultima sessione</p>
+              <p className="text-xs text-muted-foreground">{t.lastSession}</p>
             </div>
           </CardContent>
         </Card>
@@ -158,14 +161,14 @@ export default async function DashboardPage() {
                       {plan.name}
                     </CardTitle>
                     <CardDescription>
-                      {plan.plan_items?.length ?? 0} esercizi
+                      {t.exercises(plan.plan_items?.length ?? 0)}
                     </CardDescription>
                   </div>
                   <Badge
                     variant="secondary"
                     className="bg-golden-100 text-golden-700"
                   >
-                    Attiva
+                    {t.active}
                   </Badge>
                 </div>
               </CardHeader>
@@ -191,7 +194,7 @@ export default async function DashboardPage() {
                           <span className="text-xs text-muted-foreground">
                             {item.sets}x
                             {item.reps
-                              ? `${item.reps} rep`
+                              ? t.reps(item.reps)
                               : `${item.duration}s`}
                           </span>
                         </div>
@@ -199,7 +202,7 @@ export default async function DashboardPage() {
                     })}
                   {(plan.plan_items?.length ?? 0) > 4 && (
                     <p className="text-center text-xs text-muted-foreground">
-                      +{(plan.plan_items?.length ?? 0) - 4} altri esercizi
+                      {t.moreExercises((plan.plan_items?.length ?? 0) - 4)}
                     </p>
                   )}
                 </div>
@@ -210,7 +213,7 @@ export default async function DashboardPage() {
                 >
                   <Button className="w-full gap-2" size="lg">
                     <Play className="h-5 w-5" />
-                    Inizia Workout
+                    {t.startWorkout}
                   </Button>
                 </Link>
               </CardContent>
@@ -224,7 +227,7 @@ export default async function DashboardPage() {
               <Dumbbell className="h-8 w-8 text-muted-foreground" />
             </div>
             <p className="text-center text-muted-foreground">
-              La tua fisioterapista non ha ancora assegnato una scheda
+              {t.noPlan}
             </p>
           </CardContent>
         </Card>

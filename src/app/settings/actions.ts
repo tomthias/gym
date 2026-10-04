@@ -4,24 +4,26 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { getI18n } from "@/lib/i18n/server";
+import type { Messages } from "@/lib/i18n/messages";
 
-const updateProfileSchema = z.object({
-  fullName: z.string().min(1, "Il nome è obbligatorio").max(100),
-  username: z
-    .string()
-    .min(3, "L'username deve avere almeno 3 caratteri")
-    .max(30, "L'username non può superare 30 caratteri")
-    .regex(
-      /^[a-z0-9_]+$/,
-      "L'username può contenere solo lettere minuscole, numeri e underscore"
-    ),
-});
+function updateProfileSchema(t: Messages["settings"]["errors"]) {
+  return z.object({
+    fullName: z.string().min(1, t.nameRequired).max(100),
+    username: z
+      .string()
+      .min(3, t.usernameMin)
+      .max(30, t.usernameMax)
+      .regex(/^[a-z0-9_]+$/, t.usernameFormat),
+  });
+}
 
 export async function updateProfile(data: {
   fullName: string;
   username: string;
 }): Promise<{ success: true } | { success: false; error: string }> {
-  const result = updateProfileSchema.safeParse({
+  const { t: { settings: { errors: t } } } = await getI18n();
+  const result = updateProfileSchema(t).safeParse({
     ...data,
     username: data.username.trim().toLowerCase(),
   });
@@ -33,7 +35,7 @@ export async function updateProfile(data: {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    if (!user) return { success: false, error: "Non autenticato" };
+    if (!user) return { success: false, error: t.notAuthenticated };
 
     // Check username uniqueness (excluding current user)
     const { data: existing } = await supabase
@@ -44,7 +46,7 @@ export async function updateProfile(data: {
       .maybeSingle();
 
     if (existing)
-      return { success: false, error: "Username già in uso, scegline un altro" };
+      return { success: false, error: t.usernameTaken };
 
     const { error: updateError } = await supabase
       .from("profiles")
@@ -55,24 +57,27 @@ export async function updateProfile(data: {
       .eq("id", user.id);
 
     if (updateError)
-      return { success: false, error: "Errore nell'aggiornamento del profilo" };
+      return { success: false, error: t.profileUpdate };
 
     revalidatePath("/settings");
     revalidatePath("/physio/settings");
     return { success: true };
   } catch {
-    return { success: false, error: "Errore imprevisto" };
+    return { success: false, error: t.unexpected };
   }
 }
 
-const updateEmailSchema = z.object({
-  email: z.string().email("Formato email non valido"),
-});
+function updateEmailSchema(t: Messages["settings"]["errors"]) {
+  return z.object({
+    email: z.string().email(t.invalidEmail),
+  });
+}
 
 export async function updateEmail(
   newEmail: string
 ): Promise<{ success: true } | { success: false; error: string }> {
-  const result = updateEmailSchema.safeParse({ email: newEmail.trim() });
+  const { t: { settings: { errors: t } } } = await getI18n();
+  const result = updateEmailSchema(t).safeParse({ email: newEmail.trim() });
   if (!result.success)
     return { success: false, error: result.error.issues[0].message };
 
@@ -81,7 +86,7 @@ export async function updateEmail(
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    if (!user) return { success: false, error: "Non autenticato" };
+    if (!user) return { success: false, error: t.notAuthenticated };
 
     const admin = createAdminClient();
     const { error: authError } = await admin.auth.admin.updateUserById(user.id, {
@@ -96,26 +101,27 @@ export async function updateEmail(
       .update({ email: result.data.email })
       .eq("id", user.id);
     if (profileError)
-      return { success: false, error: "Errore nell'aggiornamento del profilo" };
+      return { success: false, error: t.profileUpdate };
 
     revalidatePath("/settings");
     revalidatePath("/physio/settings");
     return { success: true };
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
-    return { success: false, error: `Errore imprevisto: ${msg}` };
+    return { success: false, error: t.unexpectedWithDetail(msg) };
   }
 }
 
 export async function deleteAccount(): Promise<
   { success: true } | { success: false; error: string }
 > {
+  const { t: { settings: { errors: t } } } = await getI18n();
   try {
     const supabase = await createClient();
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    if (!user) return { success: false, error: "Non autenticato" };
+    if (!user) return { success: false, error: t.notAuthenticated };
 
     const admin = createAdminClient();
 
@@ -125,10 +131,10 @@ export async function deleteAccount(): Promise<
     // Delete auth user
     const { error } = await admin.auth.admin.deleteUser(user.id);
     if (error)
-      return { success: false, error: "Errore nell'eliminazione dell'account" };
+      return { success: false, error: t.deleteAccount };
 
     return { success: true };
   } catch {
-    return { success: false, error: "Errore imprevisto" };
+    return { success: false, error: t.unexpected };
   }
 }

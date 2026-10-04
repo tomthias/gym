@@ -8,6 +8,7 @@ import { WorkoutPlayer } from "@/components/workout/workout-player";
 import type { PlanItemWithExercise } from "@/types/workout";
 import { Loader2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/lib/i18n/client";
 
 export default function WorkoutPage() {
   return (
@@ -25,6 +26,7 @@ export default function WorkoutPage() {
 
 function WorkoutPageContent() {
   const router = useRouter();
+  const { t } = useI18n();
   const searchParams = useSearchParams();
 
   // Individual selectors — avoid subscribing to the entire store
@@ -163,7 +165,7 @@ function WorkoutPageContent() {
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 px-6 text-center">
         <AlertCircle className="h-10 w-10 text-destructive" />
         <p className="text-muted-foreground">
-          Non è stato possibile caricare la scheda. Controlla la connessione e riprova.
+          {t.workout.page.loadError}
         </p>
         <Button
           onClick={() => {
@@ -172,7 +174,7 @@ function WorkoutPageContent() {
             setRetry((n) => n + 1);
           }}
         >
-          Riprova
+          {t.workout.page.retry}
         </Button>
       </div>
     );

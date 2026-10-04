@@ -19,9 +19,11 @@ import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 import { deleteAccount } from "./actions";
+import { useI18n } from "@/lib/i18n/client";
 
 export function DeleteAccountDialog({ fullName }: { fullName: string }) {
   const router = useRouter();
+  const { t: { settings: { dangerZone: t, errors } } } = useI18n();
   const [confirmName, setConfirmName] = useState("");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -42,7 +44,7 @@ export function DeleteAccountDialog({ fullName }: { fullName: string }) {
       await supabase.auth.signOut();
       router.push("/login");
     } catch {
-      toast.error("Errore imprevisto");
+      toast.error(errors.unexpected);
       setLoading(false);
     }
   }
@@ -56,21 +58,20 @@ export function DeleteAccountDialog({ fullName }: { fullName: string }) {
     <AlertDialog open={open} onOpenChange={handleOpenChange}>
       <AlertDialogTrigger asChild>
         <Button variant="destructive" className="w-full">
-          Elimina account
+          {t.deleteAccount}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Elimina account</AlertDialogTitle>
+          <AlertDialogTitle>{t.deleteAccount}</AlertDialogTitle>
           <AlertDialogDescription>
-            Questa azione è irreversibile. Il tuo account e tutti i dati
-            associati verranno eliminati definitivamente.
+            {t.deleteDescription}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <div className="space-y-2 py-2">
           <Label htmlFor="confirm-delete-name">
-            Scrivi{" "}
-            <span className="font-medium">{fullName}</span> per confermare
+            {t.typeBefore}{" "}
+            <span className="font-medium">{fullName}</span> {t.typeAfter}
           </Label>
           <Input
             id="confirm-delete-name"
@@ -80,14 +81,14 @@ export function DeleteAccountDialog({ fullName }: { fullName: string }) {
           />
         </div>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={loading}>Annulla</AlertDialogCancel>
+          <AlertDialogCancel disabled={loading}>{t.cancel}</AlertDialogCancel>
           <Button
             variant="destructive"
             onClick={handleDelete}
             disabled={!canConfirm || loading}
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Elimina definitivamente
+            {t.deleteForever}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

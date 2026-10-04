@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import { useI18n } from "@/lib/i18n/client";
 
 interface AddMealFormProps {
   onSubmit: (data: {
@@ -18,6 +19,8 @@ interface AddMealFormProps {
 }
 
 export function AddMealForm({ onSubmit, loading }: AddMealFormProps) {
+  const { t } = useI18n();
+  const tf = t.nutrition.form;
   const [name, setName] = useState("");
   const [calories, setCalories] = useState("");
   const [protein, setProtein] = useState("");
@@ -36,11 +39,11 @@ export function AddMealForm({ onSubmit, loading }: AddMealFormProps) {
     const fat = Number(fats) || 0;
 
     if (cal < 0 || prot < 0 || carb < 0 || fat < 0) {
-      setError("I valori non possono essere negativi");
+      setError(tf.negative);
       return;
     }
     if (cal > 5000 || prot > 500 || carb > 500 || fat > 500) {
-      setError("I valori inseriti sono troppo alti");
+      setError(tf.tooHigh);
       return;
     }
 
@@ -59,10 +62,10 @@ export function AddMealForm({ onSubmit, loading }: AddMealFormProps) {
         <p className="text-sm text-destructive text-center">{error}</p>
       )}
       <div className="space-y-2">
-        <Label htmlFor="meal-name">Nome pasto</Label>
+        <Label htmlFor="meal-name">{tf.mealName}</Label>
         <Input
           id="meal-name"
-          placeholder="Es. Insalata di pollo"
+          placeholder={tf.mealNamePlaceholder}
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
@@ -70,7 +73,7 @@ export function AddMealForm({ onSubmit, loading }: AddMealFormProps) {
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-2">
-          <Label htmlFor="meal-cal">Calorie (kcal)</Label>
+          <Label htmlFor="meal-cal">{tf.calories}</Label>
           <Input
             id="meal-cal"
             type="number"
@@ -81,7 +84,7 @@ export function AddMealForm({ onSubmit, loading }: AddMealFormProps) {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="meal-prot">Proteine (g)</Label>
+          <Label htmlFor="meal-prot">{tf.protein}</Label>
           <Input
             id="meal-prot"
             type="number"
@@ -92,7 +95,7 @@ export function AddMealForm({ onSubmit, loading }: AddMealFormProps) {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="meal-carbs">Carboidrati (g)</Label>
+          <Label htmlFor="meal-carbs">{tf.carbs}</Label>
           <Input
             id="meal-carbs"
             type="number"
@@ -103,7 +106,7 @@ export function AddMealForm({ onSubmit, loading }: AddMealFormProps) {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="meal-fats">Grassi (g)</Label>
+          <Label htmlFor="meal-fats">{tf.fats}</Label>
           <Input
             id="meal-fats"
             type="number"
@@ -116,7 +119,7 @@ export function AddMealForm({ onSubmit, loading }: AddMealFormProps) {
       </div>
       <Button type="submit" className="w-full" disabled={loading || !name}>
         {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-        Aggiungi
+        {t.nutrition.add}
       </Button>
     </form>
   );

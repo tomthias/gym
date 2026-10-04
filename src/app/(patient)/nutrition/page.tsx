@@ -10,6 +10,7 @@ import { MEAL_SLOTS, type DayType } from "@/types/nutrition";
 import { cn } from "@/lib/utils";
 import { Loader2, AlertCircle, UtensilsCrossed } from "lucide-react";
 import { toast } from "sonner";
+import { useI18n } from "@/lib/i18n/client";
 
 interface LogEntry {
   id: string;
@@ -24,6 +25,7 @@ interface LogEntry {
 }
 
 export default function NutritionPage() {
+  const { t } = useI18n();
   const [dayType, setDayType] = useState<DayType>("workout");
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [budget, setBudget] = useState({ workout: 2100, rest: 1900 });
@@ -85,12 +87,12 @@ export default function NutritionPage() {
       const supabase = createClient();
       const { error } = await supabase.from("nutrition_logs").delete().eq("id", logId);
       if (error) {
-        toast.error("Errore nell'eliminazione del pasto");
+        toast.error(t.nutrition.removeError);
         return;
       }
       setLogs((prev) => prev.filter((l) => l.id !== logId));
     },
-    []
+    [t]
   );
 
   const totalCalories = logs.reduce((sum, l) => sum + l.calories, 0);
@@ -110,13 +112,13 @@ export default function NutritionPage() {
   if (status === "error") {
     return (
       <div>
-        <Header title="Nutrizione" />
+        <Header title={t.nutrition.title} />
         <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 px-6 text-center">
           <AlertCircle className="h-10 w-10 text-destructive" />
           <p className="text-muted-foreground">
-            Non è stato possibile caricare i dati nutrizionali. Controlla la connessione e riprova.
+            {t.nutrition.loadError}
           </p>
-          <Button onClick={() => { setLoading(true); fetchData(); }}>Riprova</Button>
+          <Button onClick={() => { setLoading(true); fetchData(); }}>{t.nutrition.retry}</Button>
         </div>
       </div>
     );
@@ -125,11 +127,11 @@ export default function NutritionPage() {
   if (status === "no-budget") {
     return (
       <div>
-        <Header title="Nutrizione" />
+        <Header title={t.nutrition.title} />
         <div className="flex min-h-[50vh] flex-col items-center justify-center gap-3 px-6 text-center">
           <UtensilsCrossed className="h-10 w-10 text-muted-foreground" />
           <p className="text-muted-foreground max-w-xs">
-            Il tuo piano nutrizionale non è ancora stato configurato. Contatta la tua fisioterapista per attivarlo.
+            {t.nutrition.noBudget}
           </p>
         </div>
       </div>
@@ -138,7 +140,7 @@ export default function NutritionPage() {
 
   return (
     <div>
-      <Header title="Nutrizione" />
+      <Header title={t.nutrition.title} />
       <div className="px-4 pt-4 space-y-4">
         {/* Day type toggle */}
         <div className="flex gap-2">
@@ -153,7 +155,7 @@ export default function NutritionPage() {
                 dayType === type && "bg-teal-600 hover:bg-teal-700"
               )}
             >
-              {type === "workout" ? "Giorno allenamento" : "Giorno riposo"}
+              {type === "workout" ? t.nutrition.workoutDay : t.nutrition.restDay}
             </Button>
           ))}
         </div>
@@ -166,11 +168,11 @@ export default function NutritionPage() {
           fatsGrams={Math.round(totalFats)}
         />
 
-        {MEAL_SLOTS.map(({ key, label }) => {
+        {MEAL_SLOTS.map(({ key }) => {
           const slotLogs = logs.filter((l) => l.meal_slot === key);
           const meals = slotLogs.map((l) => ({
             id: l.id,
-            name: l.recipes?.name ?? l.custom_name ?? "Pasto",
+            name: l.recipes?.name ?? l.custom_name ?? t.nutrition.defaultMealName,
             calories: l.calories,
             proteinGrams: Number(l.protein_grams),
             carbsGrams: Number(l.carbs_grams),
@@ -181,7 +183,7 @@ export default function NutritionPage() {
             <MealSection
               key={key}
               slot={key}
-              label={label}
+              label={t.nutrition.mealSlots[key]}
               meals={meals}
               dayType={dayType}
               onRemove={handleRemove}

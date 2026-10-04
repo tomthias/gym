@@ -13,6 +13,7 @@ import {
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { updateEmail } from "./actions";
+import { useI18n } from "@/lib/i18n/client";
 
 export function UpdateEmailForm({
   currentEmail,
@@ -20,6 +21,7 @@ export function UpdateEmailForm({
   currentEmail: string;
   pendingEmail?: string | null;
 }) {
+  const { t: { settings: { emailForm: t } } } = useI18n();
   const [email, setEmail] = useState(currentEmail);
   const [savedEmail, setSavedEmail] = useState(currentEmail);
   const [loading, setLoading] = useState(false);
@@ -39,7 +41,7 @@ export function UpdateEmailForm({
       return;
     }
 
-    toast.success("Email aggiornata con successo");
+    toast.success(t.updated);
     setSavedEmail(trimmed);
     setLoading(false);
   }
@@ -47,12 +49,12 @@ export function UpdateEmailForm({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg">Modifica email</CardTitle>
+        <CardTitle className="text-lg">{t.title}</CardTitle>
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="new-email">Nuova email</Label>
+            <Label htmlFor="new-email">{t.newEmail}</Label>
             <Input
               id="new-email"
               type="email"
@@ -67,7 +69,7 @@ export function UpdateEmailForm({
             className="w-full"
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Aggiorna email
+            {t.submit}
           </Button>
         </CardContent>
       </form>

@@ -6,9 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n/client";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  const { t } = useI18n();
   const [mounted, setMounted] = useState(false);
 
   // eslint-disable-next-line react-hooks/set-state-in-effect -- required by next-themes to avoid hydration mismatch
@@ -19,7 +21,7 @@ export function ThemeToggle() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg">Tema</CardTitle>
+        <CardTitle className="text-lg">{t.settings.theme.title}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex gap-2">
@@ -34,7 +36,7 @@ export function ThemeToggle() {
             )}
           >
             <Sun className="h-5 w-5" />
-            Chiaro
+            {t.settings.theme.light}
           </Button>
           <Button
             variant="outline"
@@ -47,7 +49,7 @@ export function ThemeToggle() {
             )}
           >
             <Moon className="h-5 w-5" />
-            Scuro
+            {t.settings.theme.dark}
           </Button>
         </div>
       </CardContent>

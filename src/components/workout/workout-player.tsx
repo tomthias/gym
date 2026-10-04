@@ -6,6 +6,7 @@ import { useWorkoutStore } from "@/lib/stores/workout-store";
 import { useTimer } from "@/lib/hooks/use-timer";
 import { useAudio } from "@/lib/hooks/use-audio";
 import { useWakeLock } from "@/lib/hooks/use-wake-lock";
+import { useI18n } from "@/lib/i18n/client";
 import { getExerciseType } from "@/types/workout";
 import type { PlanItemWithExercise } from "@/types/workout";
 import { WorkoutProgressBar } from "./progress-bar";
@@ -68,6 +69,7 @@ function buildPreviewBlocks(items: PlanItemWithExercise[]): PreviewBlock[] {
 }
 
 function QuitDialog({ onConfirm, children }: { onConfirm: () => void; children: React.ReactNode }) {
+  const { t } = useI18n();
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -75,20 +77,20 @@ function QuitDialog({ onConfirm, children }: { onConfirm: () => void; children: 
       </AlertDialogTrigger>
       <AlertDialogContent className="bg-card border-border text-foreground rounded-3xl">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-2xl font-bold">Sei sicuro di uscire?</AlertDialogTitle>
+          <AlertDialogTitle className="text-2xl font-bold">{t.workout.player.quitTitle}</AlertDialogTitle>
           <AlertDialogDescription className="text-muted-foreground text-lg">
-            Il workout verrà interrotto. Potrai riprendere in seguito dalla dashboard.
+            {t.workout.player.quitDescription}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className="mt-4 gap-3">
           <AlertDialogCancel className="h-14 rounded-2xl bg-muted border-none text-foreground font-bold hover:bg-muted/80">
-            Indietro
+            {t.workout.player.quitCancel}
           </AlertDialogCancel>
           <AlertDialogAction 
             onClick={onConfirm}
             className="h-14 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-bold tracking-wide"
           >
-            Sì, Esci
+            {t.workout.player.quitConfirm}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
@@ -98,6 +100,8 @@ function QuitDialog({ onConfirm, children }: { onConfirm: () => void; children: 
 
 export function WorkoutPlayer() {
   const router = useRouter();
+  const { t } = useI18n();
+  const m = t.workout.player;
 
   // Individual selectors — avoid subscribing to the entire store
   const phase = useWorkoutStore((s) => s.phase);
@@ -260,7 +264,7 @@ export function WorkoutPlayer() {
   if (phase === "idle" || !planId) {
     return (
       <div className="flex flex-col min-h-screen items-center justify-center bg-background text-foreground gap-6 py-20 px-6">
-        <p className="text-muted-foreground text-2xl font-bold">Inizializzazione...</p>
+        <p className="text-muted-foreground text-2xl font-bold">{m.initializing}</p>
       </div>
     );
   }
@@ -293,20 +297,20 @@ export function WorkoutPlayer() {
             100% { width: 0%; }
           }
         `}</style>
-        <p className="text-2xl font-bold uppercase tracking-widest mb-6 opacity-80">Pronti?</p>
+        <p className="text-2xl font-bold uppercase tracking-widest mb-6 opacity-80">{m.getReady}</p>
         <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-balance leading-tight">
           {currentItem.exercise.name}
         </h2>
         {currentItem.reps && (
           <p className="text-3xl font-bold mt-6 opacity-80">
-            {currentItem.reps} {currentItem.per_lato ? "rip per lato" : "rip"}
+            {currentItem.reps} {currentItem.per_lato ? m.repsPerSide : m.repsShort}
           </p>
         )}
         {currentItem.duration && (
           <p className="text-3xl font-bold mt-6 opacity-80">{currentItem.duration}s</p>
         )}
         <p className="absolute bottom-8 left-0 right-0 text-center text-sm font-semibold uppercase tracking-widest opacity-50">
-          Tocca due volte per saltare
+          {m.doubleTapToSkip}
         </p>
         {/* Countdown progress bar */}
         <div className="absolute bottom-0 left-0 right-0 h-2 bg-primary-foreground/20">
@@ -324,11 +328,11 @@ export function WorkoutPlayer() {
     return (
       <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background/98 backdrop-blur-md text-foreground px-6">
         <Pause className="h-28 w-28 text-primary mb-8" />
-        <h2 className="text-5xl font-extrabold mb-4 tracking-tight">In pausa</h2>
+        <h2 className="text-5xl font-extrabold mb-4 tracking-tight">{m.paused}</h2>
         <p className="text-2xl text-muted-foreground mb-16 text-center">{planName}</p>
         <Button size="lg" onClick={handleGlobalResume} className="h-24 w-full max-w-sm rounded-[2rem] bg-primary hover:bg-primary/90 text-primary-foreground text-3xl font-bold shadow-2xl shadow-primary/30">
           <Play className="h-10 w-10 mr-4 fill-current" />
-          Riprendi
+          {m.resume}
         </Button>
       </div>
     );
@@ -341,14 +345,14 @@ export function WorkoutPlayer() {
     return (
       <div className="flex flex-col min-h-[100dvh] bg-background text-foreground pb-60 relative">
         <div className="px-6 pt-12 pb-6">
-          <p className="text-xs font-bold text-primary uppercase tracking-[0.25em] mb-3">Pronto a iniziare</p>
+          <p className="text-xs font-bold text-primary uppercase tracking-[0.25em] mb-3">{m.readyToStart}</p>
           <h1 className="text-[2.75rem] font-extrabold tracking-tight leading-[0.95] text-balance mb-5">{planName}</h1>
           <div className="flex items-center gap-2 flex-wrap">
             <span className="inline-flex items-center rounded-full bg-primary/10 px-3.5 py-1.5 text-sm font-bold text-primary">
-              {items.length} esercizi
+              {m.exercisesCount(items.length)}
             </span>
             <span className="inline-flex items-center rounded-full bg-muted px-3.5 py-1.5 text-sm font-bold text-foreground">
-              {totalSets} set totali
+              {m.totalSets(totalSets)}
             </span>
           </div>
         </div>
@@ -370,7 +374,7 @@ export function WorkoutPlayer() {
                       {block.item.exercise.name}
                     </p>
                     <p className="text-sm text-muted-foreground mt-1 font-medium">
-                      <span className="text-foreground font-semibold">{block.item.sets} set</span> · {block.item.reps ? `${block.item.reps} rip` : `${block.item.duration}s`}
+                      <span className="text-foreground font-semibold">{m.sets(block.item.sets)}</span> · {block.item.reps ? `${block.item.reps} ${m.repsShort}` : `${block.item.duration}s`}
                     </p>
                   </div>
                   <ChevronRight className="h-5 w-5 text-muted-foreground/50 flex-shrink-0" />
@@ -384,10 +388,10 @@ export function WorkoutPlayer() {
                 <div className="flex items-center justify-between px-2 pt-1 pb-2.5">
                   <span className="inline-flex items-center gap-1.5 text-xs font-extrabold text-primary uppercase tracking-widest">
                     <Link2 className="h-3.5 w-3.5" />
-                    Superserie
+                    {m.superset}
                   </span>
                   <span className="text-xs font-bold text-primary/70 uppercase tracking-wider">
-                    {block.items[0].sets} Round
+                    {m.rounds(block.items[0].sets)}
                   </span>
                 </div>
                 <div className="space-y-1.5">
@@ -405,7 +409,7 @@ export function WorkoutPlayer() {
                           {item.exercise.name}
                         </p>
                         <p className="text-sm text-muted-foreground mt-0.5 font-medium">
-                          <span className="text-primary font-semibold">{item.sets} set</span> · {item.reps ? `${item.reps} rip` : `${item.duration}s`}
+                          <span className="text-primary font-semibold">{m.sets(item.sets)}</span> · {item.reps ? `${item.reps} ${m.repsShort}` : `${item.duration}s`}
                         </p>
                       </div>
                       <ChevronRight className="h-5 w-5 text-muted-foreground/50 flex-shrink-0" />
@@ -426,7 +430,7 @@ export function WorkoutPlayer() {
               </Button>
             </QuitDialog>
             <Button onClick={handleStartWorkout} size="lg" className="h-16 flex-1 rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground text-xl font-bold tracking-wide shadow-lg shadow-primary/25">
-              Inizia <ArrowRight className="ml-2.5 h-6 w-6" />
+              {m.start} <ArrowRight className="ml-2.5 h-6 w-6" />
             </Button>
           </div>
         </div>
@@ -458,8 +462,8 @@ export function WorkoutPlayer() {
             duration={storeTimerSeconds}
             nextExerciseName={
               (getSupersetGroup(items, currentItemIndex)?.length ?? 0) > 1 
-                ? `${String.fromCharCode(65 + supersetExerciseIndex)}. ${items[currentItemIndex]?.exercise.name} (Round ${supersetRound})`
-                : items[currentItemIndex]?.exercise.name ?? "Fine workout"
+                ? m.nextInSuperset(String.fromCharCode(65 + supersetExerciseIndex), items[currentItemIndex]?.exercise.name, supersetRound)
+                : items[currentItemIndex]?.exercise.name ?? m.endOfWorkout
             }
             onComplete={handleRestComplete}
             onSkip={handleSkipRest}
@@ -471,7 +475,7 @@ export function WorkoutPlayer() {
             {getSupersetGroup(items, currentItemIndex) && (getSupersetGroup(items, currentItemIndex)?.length ?? 0) > 1 && (
               <div className="mb-6 flex justify-center">
                 <span className="bg-primary/10 text-primary font-extrabold px-5 py-2 rounded-full text-base uppercase tracking-widest border border-primary/20">
-                  Superserie • Round {supersetRound}/{(getSupersetGroup(items, currentItemIndex) ?? [])[0]?.sets}
+                  {m.supersetRound(supersetRound, (getSupersetGroup(items, currentItemIndex) ?? [])[0]?.sets)}
                 </span>
               </div>
             )}
@@ -544,7 +548,7 @@ export function WorkoutPlayer() {
                       onClick={handleGlobalPause}
                       className="flex-1 h-14 rounded-2xl border-border bg-muted shadow-md hover:bg-muted/80 text-foreground gap-2 text-lg font-bold"
                     >
-                      <Pause className="h-5 w-5 fill-current" /> Pausa
+                      <Pause className="h-5 w-5 fill-current" /> {m.pause}
                     </Button>
                     <QuitDialog onConfirm={handleQuit}>
                       <Button
@@ -552,7 +556,7 @@ export function WorkoutPlayer() {
                         size="lg"
                         className="flex-1 h-14 rounded-2xl text-muted-foreground hover:text-red-500 hover:bg-red-500/10 text-lg font-bold"
                       >
-                        <X className="h-5 w-5 mr-2" /> Esci
+                        <X className="h-5 w-5 mr-2" /> {m.quit}
                       </Button>
                     </QuitDialog>
                   </div>
@@ -573,7 +577,7 @@ export function WorkoutPlayer() {
               onClick={handleGlobalPause}
               className="flex-1 h-14 rounded-2xl border-border bg-muted shadow-md hover:bg-muted/80 text-foreground gap-2 text-lg font-bold"
             >
-              <Pause className="h-5 w-5 fill-current" /> Pausa
+              <Pause className="h-5 w-5 fill-current" /> {m.pause}
             </Button>
             <QuitDialog onConfirm={handleQuit}>
               <Button
@@ -581,7 +585,7 @@ export function WorkoutPlayer() {
                 size="lg"
                 className="flex-1 h-14 rounded-2xl text-muted-foreground hover:text-red-500 hover:bg-red-500/10 text-lg font-bold"
               >
-                <X className="h-5 w-5 mr-2" /> Esci
+                <X className="h-5 w-5 mr-2" /> {m.quit}
               </Button>
             </QuitDialog>
           </div>

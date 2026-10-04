@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -15,20 +16,21 @@ import {
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { updateProfile } from "./actions";
+import { useI18n } from "@/lib/i18n/client";
+import type { Messages } from "@/lib/i18n/messages";
 
-const schema = z.object({
-  fullName: z.string().min(1, "Il nome è obbligatorio").max(100),
-  username: z
-    .string()
-    .min(3, "Minimo 3 caratteri")
-    .max(30, "Massimo 30 caratteri")
-    .regex(
-      /^[a-z0-9_]+$/,
-      "Solo lettere minuscole, numeri e underscore"
-    ),
-});
+function createSchema(t: Messages["settings"]["profileForm"]) {
+  return z.object({
+    fullName: z.string().min(1, t.nameRequired).max(100),
+    username: z
+      .string()
+      .min(3, t.usernameMin)
+      .max(30, t.usernameMax)
+      .regex(/^[a-z0-9_]+$/, t.usernameFormat),
+  });
+}
 
-type FormValues = z.infer<typeof schema>;
+type FormValues = z.infer<ReturnType<typeof createSchema>>;
 
 export function UpdateProfileForm({
   fullName,
@@ -37,6 +39,8 @@ export function UpdateProfileForm({
   fullName: string;
   username: string | null;
 }) {
+  const { t: { settings: { profileForm: t } } } = useI18n();
+  const schema = useMemo(() => createSchema(t), [t]);
   const {
     register,
     handleSubmit,
@@ -53,7 +57,7 @@ export function UpdateProfileForm({
   async function onSubmit(values: FormValues) {
     const result = await updateProfile(values);
     if (result.success) {
-      toast.success("Profilo aggiornato");
+      toast.success(t.saved);
     } else {
       toast.error(result.error);
     }
@@ -62,19 +66,19 @@ export function UpdateProfileForm({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg">Modifica profilo</CardTitle>
+        <CardTitle className="text-lg">{t.title}</CardTitle>
       </CardHeader>
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="full-name">Nome completo</Label>
+            <Label htmlFor="full-name">{t.fullName}</Label>
             <Input id="full-name" {...register("fullName")} />
             {errors.fullName && (
               <p className="text-sm text-destructive">{errors.fullName.message}</p>
             )}
           </div>
           <div className="space-y-2">
-            <Label htmlFor="username">Username</Label>
+            <Label htmlFor="username">{t.username}</Label>
             <Input
               id="username"
               {...register("username")}
@@ -83,18 +87,18 @@ export function UpdateProfileForm({
                   shouldValidate: true,
                 })
               }
-              placeholder="es. mario_rossi"
+              placeholder={t.usernamePlaceholder}
             />
             {errors.username && (
               <p className="text-sm text-destructive">{errors.username.message}</p>
             )}
             <p className="text-xs text-muted-foreground">
-              Solo lettere minuscole, numeri e underscore (3–30 caratteri)
+              {t.usernameHint}
             </p>
           </div>
           <Button type="submit" disabled={isSubmitting} className="w-full">
             {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Salva modifiche
+            {t.save}
           </Button>
         </CardContent>
       </form>

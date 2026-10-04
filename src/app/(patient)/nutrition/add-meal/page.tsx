@@ -22,6 +22,7 @@ import { MacroBar } from "@/components/nutrition/macro-bar";
 import { ChefHat, Clock, Search, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import type { MealSlot } from "@/types/nutrition";
+import { useI18n } from "@/lib/i18n/client";
 
 interface RecipeRow {
   id: string;
@@ -55,6 +56,7 @@ export default function AddMealPage() {
 }
 
 function AddMealPageContent() {
+  const { t } = useI18n();
   const router = useRouter();
   const searchParams = useSearchParams();
   const slot = (searchParams.get("slot") ?? "pranzo") as MealSlot;
@@ -127,7 +129,7 @@ function AddMealPageContent() {
         });
 
         if (error) {
-          toast.error("Errore nell'aggiunta del pasto");
+          toast.error(t.nutrition.addError);
           setSaving(false);
           return;
         }
@@ -135,7 +137,7 @@ function AddMealPageContent() {
 
       router.push("/nutrition");
     },
-    [slot, router]
+    [slot, router, t]
   );
 
   const handleManualAdd = useCallback(
@@ -165,7 +167,7 @@ function AddMealPageContent() {
         });
 
         if (error) {
-          toast.error("Errore nell'aggiunta del pasto");
+          toast.error(t.nutrition.addError);
           setSaving(false);
           return;
         }
@@ -173,29 +175,22 @@ function AddMealPageContent() {
 
       router.push("/nutrition");
     },
-    [slot, router]
+    [slot, router, t]
   );
 
-  const slotLabel =
-    {
-      colazione: "Colazione",
-      spuntino: "Spuntino",
-      pranzo: "Pranzo",
-      merenda: "Merenda",
-      cena: "Cena",
-    }[slot] ?? slot;
+  const slotLabel = t.nutrition.mealSlots[slot] ?? slot;
 
   return (
     <div>
-      <Header title={`Aggiungi - ${slotLabel}`} backHref="/nutrition" />
+      <Header title={t.nutrition.addTitle(slotLabel)} backHref="/nutrition" />
       <div className="px-4 pt-4 space-y-4">
         <Tabs defaultValue="recipes">
           <TabsList className="w-full">
             <TabsTrigger value="recipes" className="flex-1">
-              Ricette
+              {t.nutrition.tabRecipes}
             </TabsTrigger>
             <TabsTrigger value="manual" className="flex-1">
-              Manuale
+              {t.nutrition.tabManual}
             </TabsTrigger>
           </TabsList>
 
@@ -203,7 +198,7 @@ function AddMealPageContent() {
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="Cerca ricetta..."
+                placeholder={t.nutrition.searchRecipe}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="pl-9"
@@ -217,8 +212,8 @@ function AddMealPageContent() {
             ) : filteredRecipes.length === 0 ? (
               <p className="text-center py-8 text-muted-foreground">
                 {search
-                  ? "Nessuna ricetta trovata"
-                  : "Nessuna ricetta disponibile per questo pasto"}
+                  ? t.nutrition.noRecipesFound
+                  : t.nutrition.noRecipesForMeal}
               </p>
             ) : (
               filteredRecipes.map((recipe) => (
@@ -246,8 +241,11 @@ function AddMealPageContent() {
                       </span>
                     </div>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      P:{Number(recipe.protein_grams)}g C:{Number(recipe.carbs_grams)}g F:
-                      {Number(recipe.fats_grams)}g
+                      {t.nutrition.macros.compact(
+                        Number(recipe.protein_grams),
+                        Number(recipe.carbs_grams),
+                        Number(recipe.fats_grams)
+                      )}
                     </p>
                   </CardContent>
                 </Card>
@@ -304,7 +302,7 @@ function AddMealPageContent() {
                       <div>
                         <h3 className="font-semibold mb-2 flex items-center gap-1">
                           <ChefHat className="h-4 w-4" />
-                          Ingredienti
+                          {t.nutrition.ingredients}
                         </h3>
                         <ul className="space-y-1">
                           {selectedRecipe.ingredients.map((ing, i) => (
@@ -323,7 +321,7 @@ function AddMealPageContent() {
 
                       {/* Preparazione */}
                       <div>
-                        <h3 className="font-semibold mb-2">Preparazione</h3>
+                        <h3 className="font-semibold mb-2">{t.nutrition.preparation}</h3>
                         <ol className="space-y-3">
                           {selectedRecipe.steps.map((step, i) => (
                             <li key={i} className="flex gap-3 text-sm">
@@ -353,7 +351,7 @@ function AddMealPageContent() {
                         {saving && (
                           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         )}
-                        Aggiungi
+                        {t.nutrition.add}
                       </Button>
                     </SheetFooter>
                   </>

@@ -1,10 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
+import { getI18n } from "@/lib/i18n/server";
 import { redirect } from "next/navigation";
 import { Header } from "@/components/layout/header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getPainColor } from "@/lib/utils/constants";
-import { formatDuration } from "@/lib/utils/format-time";
 import { Calendar, Clock, Dumbbell } from "lucide-react";
 
 export default async function HistoryPage() {
@@ -14,6 +14,8 @@ export default async function HistoryPage() {
   } = await supabase.auth.getUser();
 
   if (!user) redirect("/login");
+
+  const { t: { history: t }, tag } = await getI18n();
 
   const { data: logs } = await supabase
     .from("workout_logs")
@@ -37,14 +39,14 @@ export default async function HistoryPage() {
 
   return (
     <div>
-      <Header title="Storico sessioni" />
+      <Header title={t.title} />
       <div className="px-4 pt-4 space-y-3">
         {!logs?.length ? (
           <div className="flex flex-col items-center gap-3 py-20">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-muted">
               <Clock className="h-8 w-8 text-muted-foreground" />
             </div>
-            <p className="text-muted-foreground">Nessuna sessione completata..</p>
+            <p className="text-muted-foreground">{t.empty}</p>
           </div>
         ) : (
           logs.map((log) => {
@@ -59,11 +61,11 @@ export default async function HistoryPage() {
                   <div className="flex items-start justify-between">
                     <div className="space-y-1">
                       <p className="font-semibold">
-                        {(log.workout_plans as unknown as { name: string } | null)?.name ?? "Sessione"}
+                        {(log.workout_plans as unknown as { name: string } | null)?.name ?? t.session}
                       </p>
                       <div className="flex items-center gap-1 text-sm text-muted-foreground">
                         <Calendar className="h-3.5 w-3.5" />
-                        {date.toLocaleDateString("it-IT", {
+                        {date.toLocaleDateString(tag, {
                           weekday: "short",
                           day: "numeric",
                           month: "short",
@@ -72,7 +74,7 @@ export default async function HistoryPage() {
                     </div>
                     {log.feedback_score && (
                       <Badge className={painColor} variant="secondary">
-                        Dolore: {log.feedback_score}/10
+                        {t.pain(log.feedback_score)}
                       </Badge>
                     )}
                   </div>
@@ -81,13 +83,13 @@ export default async function HistoryPage() {
                     {log.duration_seconds && (
                       <div className="flex items-center gap-1">
                         <Clock className="h-3.5 w-3.5" />
-                        {formatDuration(log.duration_seconds)}
+                        {formatDuration(log.duration_seconds, tag)}
                       </div>
                     )}
                     {log.exercises_completed && (
                       <div className="flex items-center gap-1">
                         <Dumbbell className="h-3.5 w-3.5" />
-                        {log.exercises_completed} esercizi
+                        {t.exercises(log.exercises_completed)}
                       </div>
                     )}
                   </div>
@@ -105,4 +107,14 @@ export default async function HistoryPage() {
       </div>
     </div>
   );
+}
+
+function formatDuration(totalSeconds: number, tag: string): string {
+  const fmt = (value: number, unit: "minute" | "second") =>
+    new Intl.NumberFormat(tag, { style: "unit", unit, unitDisplay: "narrow" }).format(value);
+  if (totalSeconds < 60) return fmt(totalSeconds, "second");
+  const mins = Math.floor(totalSeconds / 60);
+  const secs = totalSeconds % 60;
+  if (secs === 0) return fmt(mins, "minute");
+  return `${fmt(mins, "minute")} ${fmt(secs, "second")}`;
 }

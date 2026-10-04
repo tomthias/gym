@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Check, Pause, Play, SkipForward } from "lucide-react";
+import { useI18n } from "@/lib/i18n/client";
 
 interface PlayerControlsProps {
   exerciseType: "timed" | "reps";
@@ -24,6 +25,8 @@ export function PlayerControls({
   onComplete,
   onSkip,
 }: PlayerControlsProps) {
+  const { t } = useI18n();
+  const m = t.workout.controls;
   return (
     <div className="flex flex-col items-stretch w-full gap-4">
       {exerciseType === "timed" ? (
@@ -35,7 +38,7 @@ export function PlayerControls({
               className="h-20 w-full rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground text-2xl font-bold tracking-wide shadow-xl shadow-primary/20"
             >
               <Play className="h-8 w-8 mr-3 fill-current" />
-              Avvia Timer
+              {m.startTimer}
             </Button>
           )}
           {isTimerRunning && (
@@ -46,7 +49,7 @@ export function PlayerControls({
                 className="h-20 flex-1 rounded-2xl bg-amber-500 hover:bg-amber-400 text-neutral-950 text-2xl font-bold tracking-wide shadow-xl shadow-amber-900/20"
               >
                 <Pause className="h-8 w-8 mr-3 fill-current" />
-                Pausa
+                {m.pause}
               </Button>
               <Button
                 size="lg"
@@ -65,7 +68,7 @@ export function PlayerControls({
                 className="h-20 flex-1 rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground text-2xl font-bold tracking-wide shadow-xl shadow-primary/20"
               >
                 <Play className="h-8 w-8 mr-3 fill-current" />
-                Riprendi
+                {m.resume}
               </Button>
               <Button
                 size="lg"
@@ -84,7 +87,7 @@ export function PlayerControls({
           className="h-20 w-full rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground text-2xl font-bold tracking-wide shadow-xl shadow-primary/20"
         >
           <Check className="h-8 w-8 mr-3" />
-          Fatto
+          {m.done}
         </Button>
       )}
 
@@ -95,7 +98,7 @@ export function PlayerControls({
         className="h-14 w-full rounded-2xl text-muted-foreground hover:bg-muted hover:text-foreground text-lg font-bold"
       >
         <SkipForward className="h-5 w-5 mr-2" />
-        Salta
+        {m.skip}
       </Button>
     </div>
   );

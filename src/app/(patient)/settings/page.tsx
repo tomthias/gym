@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { getI18n } from "@/lib/i18n/server";
 import { redirect } from "next/navigation";
 import {
   Card,
@@ -10,6 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import { User, AtSign, Mail, Stethoscope, FileText, ChevronRight } from "lucide-react";
 import { LogoutButton } from "./logout-button";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { LanguageSelect } from "@/components/language-select";
 import { UpdateProfileForm } from "@/app/settings/update-profile-form";
 import { UpdateEmailForm } from "@/app/settings/update-email-form";
 import { UpdatePasswordForm } from "./update-password-form";
@@ -23,6 +25,8 @@ export default async function SettingsPage() {
   } = await supabase.auth.getUser();
 
   if (!user) redirect("/login");
+
+  const { t: { settings: t } } = await getI18n();
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -44,13 +48,13 @@ export default async function SettingsPage() {
   return (
     <div className="px-4 pt-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Profilo</h1>
-        <p className="text-muted-foreground">Le tue informazioni personali</p>
+        <h1 className="text-2xl font-bold">{t.title}</h1>
+        <p className="text-muted-foreground">{t.subtitle}</p>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Informazioni account</CardTitle>
+          <CardTitle className="text-lg">{t.accountInfo}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center gap-3">
@@ -58,9 +62,9 @@ export default async function SettingsPage() {
               <User className="h-5 w-5 text-teal-600" />
             </div>
             <div className="min-w-0">
-              <p className="text-sm text-muted-foreground">Nome</p>
+              <p className="text-sm text-muted-foreground">{t.name}</p>
               <p className="font-medium truncate">
-                {profile?.full_name || "Non impostato"}
+                {profile?.full_name || t.notSet}
               </p>
             </div>
           </div>
@@ -72,9 +76,9 @@ export default async function SettingsPage() {
               <AtSign className="h-5 w-5 text-teal-600" />
             </div>
             <div className="min-w-0">
-              <p className="text-sm text-muted-foreground">Nome utente</p>
+              <p className="text-sm text-muted-foreground">{t.username}</p>
               <p className="font-medium truncate">
-                {profile?.username ? `@${profile.username}` : "Non impostato"}
+                {profile?.username ? `@${profile.username}` : t.notSet}
               </p>
             </div>
           </div>
@@ -86,7 +90,7 @@ export default async function SettingsPage() {
               <Mail className="h-5 w-5 text-teal-600" />
             </div>
             <div className="min-w-0">
-              <p className="text-sm text-muted-foreground">Email</p>
+              <p className="text-sm text-muted-foreground">{t.email}</p>
               <p className="font-medium truncate">
                 {profile?.email || user.email}
               </p>
@@ -100,9 +104,9 @@ export default async function SettingsPage() {
               <Stethoscope className="h-5 w-5 text-golden-600" />
             </div>
             <div className="min-w-0">
-              <p className="text-sm text-muted-foreground">Fisioterapista</p>
+              <p className="text-sm text-muted-foreground">{t.physio}</p>
               <p className="font-medium truncate">
-                {physioName || "Non collegato"}
+                {physioName || t.notLinked}
               </p>
             </div>
           </div>
@@ -123,7 +127,7 @@ export default async function SettingsPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Documenti</CardTitle>
+          <CardTitle className="text-lg">{t.documents}</CardTitle>
         </CardHeader>
         <CardContent>
           <Link
@@ -135,9 +139,9 @@ export default async function SettingsPage() {
                 <FileText className="h-5 w-5 text-teal-600" />
               </div>
               <div>
-                <p className="font-medium">Le mie fatture</p>
+                <p className="font-medium">{t.myInvoices}</p>
                 <p className="text-sm text-muted-foreground">
-                  Visualizza e scarica le fatture
+                  {t.invoicesDescription}
                 </p>
               </div>
             </div>
@@ -145,6 +149,8 @@ export default async function SettingsPage() {
           </Link>
         </CardContent>
       </Card>
+
+      <LanguageSelect />
 
       <ThemeToggle />
 

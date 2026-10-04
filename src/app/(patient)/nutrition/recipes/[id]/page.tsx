@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MacroBar } from "@/components/nutrition/macro-bar";
 import { Clock, ChefHat } from "lucide-react";
+import { getI18n } from "@/lib/i18n/server";
 
 export default async function RecipeDetailPage({
   params,
@@ -12,6 +13,7 @@ export default async function RecipeDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const { t } = await getI18n();
   const supabase = await createClient();
 
   // Redirect if user has no calorie budget (nutrition not enabled)
@@ -69,7 +71,7 @@ export default async function RecipeDetailPage({
           <CardContent className="p-4">
             <h3 className="font-semibold mb-2 flex items-center gap-1">
               <ChefHat className="h-4 w-4" />
-              Ingredienti
+              {t.nutrition.ingredients}
             </h3>
             <ul className="space-y-1">
               {recipe.ingredients.map((ing: string, i: number) => (
@@ -85,7 +87,7 @@ export default async function RecipeDetailPage({
         {/* Steps */}
         <Card>
           <CardContent className="p-4">
-            <h3 className="font-semibold mb-2">Preparazione</h3>
+            <h3 className="font-semibold mb-2">{t.nutrition.preparation}</h3>
             <ol className="space-y-3">
               {recipe.steps.map((step: string, i: number) => (
                 <li key={i} className="flex gap-3 text-sm">

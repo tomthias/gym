@@ -1,6 +1,9 @@
+"use client";
+
 import type { PlanItemWithExercise } from "@/types/workout";
 import { cn } from "@/lib/utils";
 import { Zap } from "lucide-react";
+import { useI18n } from "@/lib/i18n/client";
 
 interface SupersetIndicatorProps {
   items: PlanItemWithExercise[];
@@ -15,15 +18,16 @@ export function SupersetIndicator({
   round,
   totalRounds,
 }: SupersetIndicatorProps) {
+  const { t } = useI18n();
   return (
     <div className="rounded-2xl bg-neutral-900 border border-neutral-800 p-4 shadow-sm">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2 text-indigo-400 font-bold uppercase tracking-wider text-sm">
           <Zap className="h-4 w-4" />
-          <span>Superserie</span>
+          <span>{t.workout.superset.title}</span>
         </div>
         <span className="text-sm font-bold text-neutral-400">
-          Round {round}/{totalRounds}
+          {t.workout.superset.round(round, totalRounds)}
         </span>
       </div>
       <div className="flex gap-2">

@@ -5,9 +5,11 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { LogOut, Loader2 } from "lucide-react";
+import { useI18n } from "@/lib/i18n/client";
 
 export function LogoutButton() {
   const router = useRouter();
+  const { t } = useI18n();
   const [loading, setLoading] = useState(false);
 
   async function handleLogout() {
@@ -30,7 +32,7 @@ export function LogoutButton() {
       ) : (
         <LogOut className="h-4 w-4" />
       )}
-      Esci dall&apos;account
+      {t.settings.logout}
     </Button>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { Progress } from "@/components/ui/progress";
+import { useI18n } from "@/lib/i18n/client";
 
 interface WorkoutProgressBarProps {
   currentExercise: number;
@@ -15,6 +16,7 @@ export function WorkoutProgressBar({
   currentSet,
   totalSets,
 }: WorkoutProgressBarProps) {
+  const { t } = useI18n();
   const totalSteps = totalExercises;
   const progress = ((currentExercise - 1) / totalSteps) * 100 + (1 / totalSteps) * ((currentSet - 1) / totalSets) * 100;
 
@@ -22,10 +24,10 @@ export function WorkoutProgressBar({
     <div className="space-y-1.5">
       <div className="flex items-center justify-between text-sm">
         <span className="font-medium text-foreground">
-          Esercizio {currentExercise}/{totalExercises}
+          {t.workout.progress.exerciseOf(currentExercise, totalExercises)}
         </span>
         <span className="text-muted-foreground">
-          Serie {currentSet}/{totalSets}
+          {t.workout.progress.setOf(currentSet, totalSets)}
         </span>
       </div>
       <Progress value={Math.min(progress, 100)} className="h-2" />

@@ -10,9 +10,12 @@ import { Button } from "@/components/ui/button";
 import { formatDuration } from "@/lib/utils/format-time";
 import { CheckCircle2, Clock, Dumbbell, Layers } from "lucide-react";
 import { toast } from "sonner";
+import { useI18n } from "@/lib/i18n/client";
 
 export default function WorkoutCompletePage() {
   const router = useRouter();
+  const { t } = useI18n();
+  const m = t.workout.complete;
 
   // Individual selectors
   const startedAt = useWorkoutStore((s) => s.startedAt);
@@ -42,7 +45,7 @@ export default function WorkoutCompletePage() {
       } = await supabase.auth.getUser();
 
       if (!user || !storePlanId || !startedAt) {
-        toast.error("Errore: sessione non valida, riprova il workout");
+        toast.error(m.invalidSession);
         setSaving(false);
         return;
       }
@@ -61,7 +64,7 @@ export default function WorkoutCompletePage() {
 
       if (error) {
         console.error("workout_logs insert error:", error);
-        toast.error("Errore nel salvataggio della sessione");
+        toast.error(m.saveError);
         setSaving(false);
         return;
       }
@@ -70,7 +73,7 @@ export default function WorkoutCompletePage() {
       setSaving(false);
       setSaved(true);
     },
-    [storePlanId, startedAt, completedAt, durationSeconds, items.length, totalSetsCompleted, resetStore]
+    [storePlanId, startedAt, completedAt, durationSeconds, items.length, totalSetsCompleted, resetStore, m]
   );
 
   if (saved) {
@@ -79,12 +82,12 @@ export default function WorkoutCompletePage() {
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-golden-100">
           <CheckCircle2 className="h-10 w-10 text-golden-600" />
         </div>
-        <h1 className="text-2xl font-bold">Sessione salvata!</h1>
+        <h1 className="text-2xl font-bold">{m.savedTitle}</h1>
         <p className="text-muted-foreground text-center">
-          Ottimo lavoro. Continua cosi.
+          {m.savedBody}
         </p>
         <Button onClick={() => router.push("/dashboard")} size="lg">
-          Torna alla dashboard
+          {m.backToDashboard}
         </Button>
       </div>
     );
@@ -96,7 +99,7 @@ export default function WorkoutCompletePage() {
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-golden-100">
           <CheckCircle2 className="h-8 w-8 text-golden-600" />
         </div>
-        <h1 className="text-2xl font-bold">Workout completato!</h1>
+        <h1 className="text-2xl font-bold">{m.title}</h1>
         <p className="text-muted-foreground">{planName}</p>
       </div>
 
@@ -106,21 +109,21 @@ export default function WorkoutCompletePage() {
           <CardContent className="flex flex-col items-center p-3">
             <Clock className="h-5 w-5 text-teal-500 mb-1" />
             <span className="text-lg font-bold">{formatDuration(durationSeconds)}</span>
-            <span className="text-xs text-muted-foreground">Durata</span>
+            <span className="text-xs text-muted-foreground">{m.duration}</span>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="flex flex-col items-center p-3">
             <Dumbbell className="h-5 w-5 text-teal-500 mb-1" />
             <span className="text-lg font-bold">{items.length}</span>
-            <span className="text-xs text-muted-foreground">Esercizi</span>
+            <span className="text-xs text-muted-foreground">{m.exercises}</span>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="flex flex-col items-center p-3">
             <Layers className="h-5 w-5 text-teal-500 mb-1" />
             <span className="text-lg font-bold">{totalSetsCompleted}</span>
-            <span className="text-xs text-muted-foreground">Serie</span>
+            <span className="text-xs text-muted-foreground">{m.sets}</span>
           </CardContent>
         </Card>
       </div>
@@ -128,7 +131,7 @@ export default function WorkoutCompletePage() {
       {/* Pain feedback */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Come ti senti?</CardTitle>
+          <CardTitle className="text-lg">{m.howDoYouFeel}</CardTitle>
         </CardHeader>
         <CardContent>
           <PainFeedback onSubmit={handleSaveFeedback} loading={saving} />

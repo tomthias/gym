@@ -2,6 +2,7 @@
 
 import { formatTime } from "@/lib/utils/format-time";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n/client";
 
 interface TimerDisplayProps {
   seconds: number;
@@ -16,6 +17,7 @@ export function TimerDisplay({
   mode,
   size = "normal",
 }: TimerDisplayProps) {
+  const { t } = useI18n();
   const radius = size === "large" ? 150 : 80;
   const stroke = size === "large" ? 12 : 8;
   const circumference = 2 * Math.PI * radius;
@@ -76,7 +78,7 @@ export function TimerDisplay({
           {formatTime(seconds)}
         </span>
         <span className="text-xs text-muted-foreground mt-1">
-          {mode === "countdown" ? "Rimanente" : "Tempo"}
+          {mode === "countdown" ? t.workout.timer.remaining : t.workout.timer.elapsed}
         </span>
       </div>
     </div>

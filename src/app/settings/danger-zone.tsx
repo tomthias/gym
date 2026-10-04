@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -6,16 +8,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { DeleteAccountDialog } from "./delete-account-dialog";
+import { useI18n } from "@/lib/i18n/client";
 
 export function DangerZone({ fullName }: { fullName: string }) {
+  const { t } = useI18n();
   return (
     <Card className="border-destructive/40">
       <CardHeader>
         <CardTitle className="text-lg text-destructive">
-          Zona pericolosa
+          {t.settings.dangerZone.title}
         </CardTitle>
         <CardDescription>
-          Le azioni qui sotto sono irreversibili. Procedi con cautela.
+          {t.settings.dangerZone.description}
         </CardDescription>
       </CardHeader>
       <CardContent>

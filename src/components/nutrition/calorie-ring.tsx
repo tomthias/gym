@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n/client";
 
 interface CalorieRingProps {
   consumed: number;
@@ -8,6 +9,7 @@ interface CalorieRingProps {
 }
 
 export function CalorieRing({ consumed, budget }: CalorieRingProps) {
+  const { t } = useI18n();
   const radius = 60;
   const stroke = 10;
   const circumference = 2 * Math.PI * radius;
@@ -19,7 +21,7 @@ export function CalorieRing({ consumed, budget }: CalorieRingProps) {
 
   return (
     <div className="relative flex items-center justify-center">
-      <svg width={svgSize} height={svgSize} className="-rotate-90" role="img" aria-label={`${consumed} di ${budget} calorie consumate`}>
+      <svg width={svgSize} height={svgSize} className="-rotate-90" role="img" aria-label={t.nutrition.caloriesConsumed(consumed, budget)}>
         <circle
           cx={radius + stroke}
           cy={radius + stroke}

@@ -2,6 +2,7 @@
 
 import { ExternalLink } from "lucide-react";
 import { getYouTubeEmbedUrl } from "@/lib/utils/youtube";
+import { useI18n } from "@/lib/i18n/client";
 
 interface VideoEmbedProps {
   url: string;
@@ -15,7 +16,8 @@ interface VideoEmbedProps {
  * 16:9 player so the patient never leaves the app. Any other URL falls back to
  * a plain "open in new tab" link.
  */
-export function VideoEmbed({ url, title = "Video tutorial", className }: VideoEmbedProps) {
+export function VideoEmbed({ url, title, className }: VideoEmbedProps) {
+  const { t } = useI18n();
   const embedUrl = getYouTubeEmbedUrl(url);
 
   if (embedUrl) {
@@ -28,7 +30,7 @@ export function VideoEmbed({ url, title = "Video tutorial", className }: VideoEm
       >
         <iframe
           src={embedUrl}
-          title={title}
+          title={title ?? t.workout.video.defaultTitle}
           loading="lazy"
           className="absolute inset-0 h-full w-full"
           allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -50,7 +52,7 @@ export function VideoEmbed({ url, title = "Video tutorial", className }: VideoEm
       }
     >
       <ExternalLink className="h-5 w-5" />
-      Guarda il video tutorial
+      {t.workout.video.watch}
     </a>
   );
 }
