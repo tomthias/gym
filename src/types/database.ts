@@ -57,6 +57,7 @@ export type Database = {
           category: string;
           video_url: string | null;
           image_urls: string[];
+          translations: Record<string, Record<string, string>>;
           created_by: string | null;
           is_global: boolean;
           created_at: string;
@@ -68,6 +69,7 @@ export type Database = {
           category?: string;
           video_url?: string | null;
           image_urls?: string[];
+          translations?: Record<string, Record<string, string>>;
           created_by?: string | null;
           is_global?: boolean;
           created_at?: string;
@@ -78,6 +80,7 @@ export type Database = {
           category?: string;
           video_url?: string | null;
           image_urls?: string[];
+          translations?: Record<string, Record<string, string>>;
           is_global?: boolean;
         };
       };
@@ -88,6 +91,7 @@ export type Database = {
           physio_id: string;
           name: string;
           description: string | null;
+          translations: Record<string, Record<string, string>>;
           active: boolean;
           created_at: string;
           updated_at: string;
@@ -98,6 +102,7 @@ export type Database = {
           physio_id: string;
           name?: string;
           description?: string | null;
+          translations?: Record<string, Record<string, string>>;
           active?: boolean;
           created_at?: string;
           updated_at?: string;
@@ -105,6 +110,7 @@ export type Database = {
         Update: {
           name?: string;
           description?: string | null;
+          translations?: Record<string, Record<string, string>>;
           active?: boolean;
           updated_at?: string;
         };
@@ -124,6 +130,7 @@ export type Database = {
           superset_group: number | null;
           transition_rest: number | null;
           per_lato: boolean;
+          translations: Record<string, Record<string, string>>;
           created_at: string;
         };
         Insert: {
@@ -140,6 +147,7 @@ export type Database = {
           superset_group?: number | null;
           transition_rest?: number | null;
           per_lato?: boolean;
+          translations?: Record<string, Record<string, string>>;
           created_at?: string;
         };
         Update: {
@@ -153,6 +161,7 @@ export type Database = {
           superset_group?: number | null;
           transition_rest?: number | null;
           per_lato?: boolean;
+          translations?: Record<string, Record<string, string>>;
         };
       };
       workout_logs: {

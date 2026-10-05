@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { getI18n } from "@/lib/i18n/server";
+import { localize } from "@/lib/i18n/content";
 import { redirect } from "next/navigation";
 import { Header } from "@/components/layout/header";
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,7 +16,7 @@ export default async function HistoryPage() {
 
   if (!user) redirect("/login");
 
-  const { t: { history: t }, tag } = await getI18n();
+  const { t: { history: t }, tag, locale } = await getI18n();
 
   const { data: logs } = await supabase
     .from("workout_logs")
@@ -30,12 +31,18 @@ export default async function HistoryPage() {
       feedback_score,
       feedback_notes,
       workout_plans (
-        name
+        name,
+        translations
       )
     `
     )
     .eq("patient_id", user.id)
     .order("completed_at", { ascending: false });
+
+  const planName = (plan: unknown) => {
+    const row = plan as { name: string; translations: unknown } | null;
+    return row ? localize(row, locale, ["name"]).name : null;
+  };
 
   return (
     <div>
@@ -61,7 +68,7 @@ export default async function HistoryPage() {
                   <div className="flex items-start justify-between">
                     <div className="space-y-1">
                       <p className="font-semibold">
-                        {(log.workout_plans as unknown as { name: string } | null)?.name ?? t.session}
+                        {planName(log.workout_plans) ?? t.session}
                       </p>
                       <div className="flex items-center gap-1 text-sm text-muted-foreground">
                         <Calendar className="h-3.5 w-3.5" />

@@ -9,6 +9,7 @@ import type { PlanItemWithExercise } from "@/types/workout";
 import { Loader2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n/client";
+import { localize } from "@/lib/i18n/content";
 
 export default function WorkoutPage() {
   return (
@@ -26,7 +27,7 @@ export default function WorkoutPage() {
 
 function WorkoutPageContent() {
   const router = useRouter();
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const searchParams = useSearchParams();
 
   // Individual selectors — avoid subscribing to the entire store
@@ -79,6 +80,7 @@ function WorkoutPageContent() {
           `
           id,
           name,
+          translations,
           plan_items (
             id,
             order,
@@ -91,13 +93,15 @@ function WorkoutPageContent() {
             superset_group,
             transition_rest,
             per_lato,
+            translations,
             exercises (
               id,
               name,
               description,
               category,
               video_url,
-              image_urls
+              image_urls,
+              translations
             )
           )
         `
@@ -128,12 +132,13 @@ function WorkoutPageContent() {
         return;
       }
 
-      type ExerciseRow = { id: string; name: string; description: string | null; category: string; video_url: string | null; image_urls: string[] };
+      type ExerciseRow = { id: string; name: string; description: string | null; category: string; video_url: string | null; image_urls: string[]; translations: unknown };
       const items: PlanItemWithExercise[] = plan.plan_items
         .filter((pi) => pi.exercises != null)
+        .map((rawPi) => localize(rawPi, locale, ["notes"]))
         .map((pi) => ({
           id: pi.id,
-          exercise: pi.exercises as unknown as ExerciseRow,
+          exercise: localize(pi.exercises as unknown as ExerciseRow, locale, ["name", "description"]),
           sets: pi.sets,
           reps: pi.reps,
           duration: pi.duration,
@@ -152,13 +157,13 @@ function WorkoutPageContent() {
         return;
       }
 
-      loadPlanAction(plan.id, plan.name, items);
+      loadPlanAction(plan.id, localize(plan, locale, ["name"]).name, items);
       loadingRef.current = false;
       setLoading(false);
     }
 
     fetchAndLoadPlan();
-  }, [phase, storePlanId, planIdParam, router, loadPlanAction, reset, retry]);
+  }, [phase, storePlanId, planIdParam, router, loadPlanAction, reset, retry, locale]);
 
   if (loadError) {
     return (

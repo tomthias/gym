@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { getI18n } from "@/lib/i18n/server";
+import { localize } from "@/lib/i18n/content";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import {
@@ -27,7 +28,7 @@ export default async function DashboardPage() {
 
   if (!user) redirect("/login");
 
-  const { t: { dashboard: t }, tag } = await getI18n();
+  const { t: { dashboard: t }, tag, locale } = await getI18n();
 
   // Fetch profile, active plans, and recent logs in parallel
   const [
@@ -47,6 +48,7 @@ export default async function DashboardPage() {
           id,
           name,
           description,
+          translations,
           created_at,
           plan_items (
             id,
@@ -59,7 +61,8 @@ export default async function DashboardPage() {
             exercises (
               id,
               name,
-              category
+              category,
+              translations
             )
           )
         `
@@ -158,7 +161,7 @@ export default async function DashboardPage() {
                   <div>
                     <CardTitle className="flex items-center gap-2">
                       <Activity className="h-5 w-5 text-teal-600" />
-                      {plan.name}
+                      {localize(plan, locale, ["name"]).name}
                     </CardTitle>
                     <CardDescription>
                       {t.exercises(plan.plan_items?.length ?? 0)}
@@ -179,7 +182,8 @@ export default async function DashboardPage() {
                     ?.sort((a, b) => a.order - b.order)
                     .slice(0, 4)
                     .map((item) => {
-                      const exercise = item.exercises as unknown as { id: string; name: string; category: string } | null;
+                      const rawExercise = item.exercises as unknown as { id: string; name: string; category: string; translations: unknown } | null;
+                      const exercise = rawExercise && localize(rawExercise, locale, ["name"]);
                       return (
                         <div
                           key={item.id}
